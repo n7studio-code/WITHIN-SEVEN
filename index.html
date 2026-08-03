@@ -113,17 +113,16 @@
             animation: scanBeam 1.2s ease-in-out infinite;
         }
 
-        /* 跑马灯滚动 */
-        @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
+        /* 提交动画撕裂 Glitch */
+        @keyframes cardGlitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); filter: hue-rotate(90deg); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); filter: hue-rotate(180deg); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); filter: none; }
         }
-        .animate-marquee {
-            display: flex;
-            width: 200%;
-            animation: marquee 25s linear infinite;
-        }
-        .animate-marquee:hover { animation-play-state: paused; }
+        .glitch-anim { animation: cardGlitch 0.4s ease-out; }
 
         .typewriter-cursor::after {
             content: '|';
@@ -140,34 +139,74 @@
 </head>
 <body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white relative overflow-x-hidden pb-32">
 
-    <!-- 1. 顶栏：左上角人脸 LOGO 100% 纯白硬朗化 -->
+    <!-- 1. 顶栏：战术防挤压结构 (隐藏移动端冗余字标，增加 Hamburger Menu) -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/80">
         <div class="flex items-center space-x-3">
             <button id="nav-back-btn" onclick="goBack()" class="hidden font-mono text-xs tracking-widest px-2.5 py-1.5 border border-current rounded hover:opacity-70 transition min-h-[32px]">
                 ← BACK
             </button>
             <div class="flex items-center space-x-2.5 cursor-pointer" onclick="showView('landing')">
-                <!-- 左上角人脸 Logo 纯白极简渲染 -->
                 <img id="nav-logo" src="LOGO.png" alt="WITHIN SEVEN Logo" class="h-6 md:h-7 w-auto object-contain transition-all white-logo-render">
-                <span id="nav-brand-text" class="font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap">WITHIN SEVEN</span>
+                <!-- 移动端自动隐藏字标，避免碰撞撞字 -->
+                <span id="nav-brand-text" class="hidden sm:inline-block font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap">WITHIN SEVEN</span>
             </div>
         </div>
-        <div class="flex items-center space-x-3 md:space-x-6 font-mono text-xs">
-            <!-- 移动端自动战术瘦身为 [ ARCHIVE ] -->
-            <button onclick="showView('archive')" class="tracking-widest text-amber-500 hover:text-white border border-amber-500/50 hover:border-white transition px-2.5 py-1.5 rounded text-[10px] md:text-[11px] whitespace-nowrap">
-                <span class="hidden md:inline">PUBLIC ARCHIVE // 777</span>
-                <span class="md:hidden">[ ARCHIVE ]</span>
+        
+        <div class="flex items-center space-x-2 md:space-x-4 font-mono text-xs">
+            <!-- 桌面端显示 PUBLIC ARCHIVE 直达按键 -->
+            <button onclick="showView('archive')" class="hidden md:inline-block tracking-widest text-amber-500 hover:text-white border border-amber-500/50 hover:border-white transition px-3 py-1.5 rounded text-[11px] whitespace-nowrap">
+                PUBLIC ARCHIVE // 777
             </button>
+            
+            <!-- 移动端专属：抽屉菜单唤起图标 ☰ -->
+            <button onclick="toggleMenu()" class="inline-block p-2 text-stone-300 hover:text-white border border-stone-800 rounded min-h-[36px] min-w-[36px]">
+                ☰
+            </button>
+
             <button class="snipcart-checkout tracking-widest hover:text-amber-500 transition border border-current px-3 md:px-4 py-1.5 md:py-2 rounded-full backdrop-blur-sm min-h-[36px] whitespace-nowrap text-[11px] md:text-xs">
                 INVENTORY [ <span class="snipcart-items-count text-amber-500 font-bold">0</span> ]
             </button>
         </div>
     </nav>
 
-    <!-- 2. LANDING PAGE HERO (手机端 Option A 横向滑卡 + 桌面端三联画) -->
+    <!-- 2. 全屏抽屉目录 MENU DRAWER (手机端导航解决方案) -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-black/98 backdrop-blur-2xl flex flex-col justify-between p-8 fade-in font-mono">
+        <div class="flex justify-between items-center border-b border-stone-800 pb-6">
+            <div class="flex items-center space-x-3">
+                <img src="LOGO.png" alt="Logo" class="h-6 w-auto white-logo-render">
+                <span class="font-brand text-xs tracking-widest text-white uppercase">WITHIN SEVEN</span>
+            </div>
+            <button onclick="toggleMenu()" class="text-stone-400 hover:text-white text-xl p-2">✕</button>
+        </div>
+
+        <div class="flex flex-col space-y-6 my-auto text-sm tracking-[0.2em]">
+            <button onclick="toggleMenu(); showView('landing'); scrollToTriptych();" class="text-left py-2 border-b border-stone-900 text-stone-300 hover:text-white flex justify-between">
+                <span>01 // EXPLORE DROP 01</span> <span>➔</span>
+            </button>
+            <button onclick="toggleMenu(); showView('archive');" class="text-left py-2 border-b border-stone-900 text-amber-400 font-bold flex justify-between">
+                <span>02 // PUBLIC ARCHIVE (留言库)</span> <span>➔</span>
+            </button>
+            <button onclick="toggleMenu(); showView('landing'); scrollToHowItWorks();" class="text-left py-2 border-b border-stone-900 text-stone-300 hover:text-white flex justify-between">
+                <span>03 // HOW SYSTEM WORKS</span> <span>➔</span>
+            </button>
+            <button onclick="toggleMenu(); openManifesto();" class="text-left py-2 border-b border-stone-900 text-stone-300 hover:text-white flex justify-between">
+                <span>04 // BRAND MANIFESTO</span> <span>➔</span>
+            </button>
+            <button onclick="toggleMenu(); startQuiz();" class="text-left py-2 border-b border-stone-900 text-stone-300 hover:text-white flex justify-between">
+                <span>05 // FACTION ALIGNMENT TEST</span> <span>➔</span>
+            </button>
+        </div>
+
+        <div class="border-t border-stone-800 pt-6 text-[10px] text-stone-500 tracking-widest space-y-2">
+            <div>STATUS: ONLINE // DROP 01 PRE-ORDER</div>
+            <div>© 2026 WITHIN SEVEN OPERATING SYSTEM.</div>
+        </div>
+    </div>
+
+    <!-- 3. LANDING PAGE HERO (极致干练首屏，无视觉干扰) -->
     <section id="view-landing" class="relative w-full min-h-screen bg-black">
         
-        <div class="relative w-full h-[100dvh] min-h-[680px] flex flex-col justify-between items-center overflow-hidden border-b border-stone-800">
+        <div class="relative w-full h-[100dvh] min-h-[620px] flex flex-col justify-between items-center overflow-hidden border-b border-stone-800">
             
             <!-- 手机端 Option A (CSS Snap 横向滑卡) / 桌面端 (三联画拉伸) -->
             <div id="triptych-sector" class="absolute inset-0 z-0 flex flex-row overflow-x-auto md:overflow-hidden snap-x snap-mandatory no-scrollbar">
@@ -215,13 +254,13 @@
                 </div>
             </div>
 
-            <!-- Hero 中间内容浮层 -->
+            <!-- Hero 中间内容浮层：清爽高定布局 -->
             <div class="z-20 flex flex-col items-center pt-24 md:pt-28 text-center px-4 relative max-w-4xl pointer-events-none">
                 <div class="font-mono text-[9px] md:text-[10px] text-amber-500 mb-2 tracking-widest uppercase typewriter-cursor">
-                    > WEARABLE IDENTITY SYSTEM // EDITION CAPACITY: 777 GARMENTS
+                    > WEARABLE IDENTITY SYSTEM // 777 GARMENTS
                 </div>
                 
-                <!-- 主页中心纯白人脸雕塑 LOGO -->
+                <!-- 纯白 3D 雕塑人脸 LOGO -->
                 <div class="relative flex items-center justify-center my-2 pointer-events-auto">
                     <div class="absolute w-52 h-52 md:w-72 md:h-72 bg-white/20 rounded-full blur-3xl pointer-events-none -z-10 nebula-pulse"></div>
                     <img src="LOGO.png" alt="WITHIN SEVEN Emblem" class="w-32 md:w-64 h-auto object-contain white-logo-render hover:scale-105 transition duration-500">
@@ -229,37 +268,29 @@
                 
                 <h1 class="text-2xl md:text-5xl font-brand font-light tracking-[0.28em] md:tracking-[0.32em] uppercase text-white mt-1 pointer-events-auto glitch-text">WITHIN SEVEN</h1>
                 
-                <!-- 品牌核心表达公式 -->
+                <!-- 单行硬核表达公式 -->
                 <p class="text-[11px] md:text-sm font-mono tracking-[0.2em] md:tracking-[0.25em] text-stone-200 mt-2 md:mt-3 uppercase font-bold max-w-2xl leading-relaxed pointer-events-auto">
                     A NUMBERED GARMENT. A MEANING ONLY YOU CAN ASSIGN. HELD FOR SEVEN DAYS.
                 </p>
-                <p class="text-[9px] md:text-xs font-mono tracking-[0.15em] md:tracking-[0.2em] text-stone-400 mt-1 uppercase pointer-events-auto">
-                    DROP 01 — 777 INDIVIDUALLY NUMBERED PIECES ACROSS THREE WORLDS.
-                </p>
 
-                <!-- 倒计时面板与 Manifesto 入口 -->
-                <div class="mt-4 flex flex-wrap items-center justify-center gap-2.5 pointer-events-auto">
-                    <div class="px-4 py-1.5 md:py-2 bg-black/90 border border-stone-800 rounded-lg font-mono text-[11px] md:text-xs text-amber-500 tracking-widest backdrop-blur-md shadow-2xl">
-                        DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-1">LOADING...</span>
-                    </div>
-                    <button onclick="openManifesto()" class="px-3.5 py-1.5 md:py-2 bg-stone-900/80 hover:bg-stone-800 border border-stone-700 text-stone-300 font-mono text-[11px] md:text-xs tracking-widest rounded transition backdrop-blur-md">
-                        [ READ MANIFESTO ]
-                    </button>
+                <!-- 战术倒计时标 -->
+                <div class="mt-4 px-4 py-1.5 bg-black/90 border border-stone-800 rounded-lg font-mono text-[11px] md:text-xs text-amber-500 tracking-widest backdrop-blur-md shadow-2xl pointer-events-auto">
+                    DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-1">LOADING...</span>
                 </div>
 
-                <!-- 动态按钮区 -->
-                <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mt-5 md:mt-6 w-full max-w-md pointer-events-auto pb-6">
-                    <button onclick="scrollToTriptych()" class="flex-1 py-3.5 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 hover:-translate-y-0.5 transition-all duration-200 font-bold shadow-2xl min-h-[44px]">
+                <!-- 两个核心战术主按钮 -->
+                <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 w-full max-w-md pointer-events-auto pb-6">
+                    <button onclick="scrollToTriptych()" class="flex-1 py-3.5 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition font-bold shadow-2xl min-h-[44px]">
                         EXPLORE DROP 01
                     </button>
-                    <button onclick="scrollToHowItWorks()" class="flex-1 py-3.5 bg-black/80 text-white border border-white/40 font-mono text-xs tracking-widest uppercase hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-200 backdrop-blur-md min-h-[44px]">
-                        HOW IT WORKS ➔
+                    <button onclick="showView('archive')" class="flex-1 py-3.5 bg-black/80 text-white border border-white/40 font-mono text-xs tracking-widest uppercase hover:bg-white/10 transition backdrop-blur-md min-h-[44px]">
+                        PUBLIC ARCHIVE ➔
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- 📡 实时信号跑马灯字幕 Ticker 📡 -->
+        <!-- 📡 跑马灯字幕 Ticker 📡 -->
         <div onclick="showView('archive')" class="w-full bg-stone-950 border-b border-stone-800 py-2.5 overflow-hidden cursor-pointer group">
             <div class="animate-marquee font-mono text-[10px] md:text-xs text-stone-400 tracking-widest whitespace-nowrap flex gap-12">
                 <span>✦ #0042 [RED]: "SILENCE IS A CALCULATED DECISION." — 3D REMAINING</span>
@@ -270,7 +301,7 @@
             </div>
         </div>
 
-        <!-- 3. HOW THE NUMBER WORKS (纯黑独立容器，绝无重叠) -->
+        <!-- 4. HOW THE NUMBER WORKS (系统三步解密) -->
         <div id="how-it-works" class="relative z-10 w-full bg-black py-20 border-b border-stone-800">
             <div class="max-w-5xl mx-auto px-6 font-mono">
                 <div class="text-center mb-10">
@@ -306,10 +337,8 @@
                     <p class="text-xs text-stone-400 mb-4">Type a sentence and choose an alignment color to test the live archive generator:</p>
                     
                     <div class="space-y-4">
-                        <!-- 锁定 16px 防止 iOS 自动缩放视角 -->
                         <input type="text" id="custom-statement" oninput="updateLiveCard()" placeholder="TYPE YOUR 1-SENTENCE STATEMENT HERE..." maxlength="80" value="I stopped explaining myself to systems built to misunderstand me." class="w-full bg-black border border-stone-700 px-4 py-3 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono text-center">
                         
-                        <!-- 颜色选择器 -->
                         <div class="flex justify-center items-center gap-4 py-1">
                             <span class="text-[10px] text-stone-500">ALIGNMENT COLOR:</span>
                             <button onclick="setCardTheme('CYBER BLUE', 'text-blue-400', 'border-blue-500/40')" class="w-6 h-6 rounded-full bg-blue-500 hover:scale-125 transition border-2 border-white/20"></button>
@@ -319,7 +348,6 @@
                         </div>
                     </div>
 
-                    <!-- 动态生成预览卡片 -->
                     <div id="live-demo-card" class="mt-6 p-6 bg-black border border-blue-500/40 rounded-xl transition-all duration-300 relative">
                         <div class="text-[10px] text-stone-500 uppercase tracking-widest mb-1">ASSIGNED PUBLIC ARCHIVE ENTRY</div>
                         <div id="live-card-code" class="text-2xl font-bold text-blue-400 transition-colors">#0777 // CYBER BLUE</div>
@@ -376,7 +404,7 @@
         </div>
     </section>
 
-    <!-- 3. 全网 PUBLIC ARCHIVE 专属视图 VIEW -->
+    <!-- 5. 全网 PUBLIC ARCHIVE 独立沉浸页面 VIEW -->
     <section id="view-archive" class="hidden min-h-screen bg-black text-stone-200 pt-28 pb-20 px-6 md:px-12 fade-in font-mono">
         <div class="max-w-6xl mx-auto">
             <div class="border-b border-stone-800 pb-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
@@ -388,7 +416,6 @@
                     </p>
                 </div>
                 
-                <!-- 搜号框 + 阵营过滤器 (16px 防放大) -->
                 <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                     <input type="text" id="archive-search-input" oninput="filterArchive()" placeholder="SEARCH #001 - #777..." class="bg-stone-900 border border-stone-700 px-3 py-2 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono">
                     
@@ -402,13 +429,12 @@
                 </div>
             </div>
 
-            <!-- 全网匿名信号卡片瀑布流列表 Grid -->
             <div id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
             </div>
         </div>
     </section>
 
-    <!-- 4. MANIFESTO 品牌宣言 Modal -->
+    <!-- 6. MANIFESTO 品牌宣言 Modal -->
     <div id="modal-manifesto" class="hidden fixed inset-0 z-[140] bg-black/95 backdrop-blur-xl flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl relative text-stone-300 space-y-6 max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4">
@@ -432,7 +458,7 @@
         </div>
     </div>
 
-    <!-- 5. TRINITY QUIZ ENGINE -->
+    <!-- 7. TRINITY QUIZ ENGINE -->
     <section id="view-quiz" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-6">
         <div class="max-w-xl w-full bg-stone-900/90 border border-stone-800 p-8 rounded-xl shadow-2xl relative fade-in">
             <div class="w-full bg-stone-800 h-1 mb-8 rounded-full overflow-hidden">
@@ -459,13 +485,13 @@
         </div>
     </section>
 
-    <!-- 6. SCANNING LOADING SCREEN -->
+    <!-- 8. SCANNING LOADING SCREEN -->
     <section id="view-loading" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center font-mono">
         <div class="w-16 h-16 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mb-6"></div>
         <p id="loading-msg" class="text-xs tracking-[0.25em] text-stone-400 animate-pulse">ANALYZING SUBCONSCIOUS ALIGNMENT...</p>
     </section>
 
-    <!-- 7. UTOPIA STORE (LIGHT ZONE - 50/50 宽幅旗舰版式) -->
+    <!-- 9. UTOPIA STORE (LIGHT ZONE - 50/50 宽幅旗舰版式) -->
     <section id="view-utopia" class="hidden min-h-screen bg-slate-50 text-slate-900 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-slate-200 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -559,7 +585,7 @@
         </div>
     </section>
 
-    <!-- 8. LOST PARADISE STORE (50/50 宽幅旗舰版式) -->
+    <!-- 10. LOST PARADISE STORE (50/50 宽幅旗舰版式) -->
     <section id="view-paradise" class="hidden min-h-screen bg-paradise text-stone-200 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-stone-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -653,7 +679,7 @@
         </div>
     </section>
 
-    <!-- 9. DYSTOPIA STORE (50/50 宽幅旗舰版式) -->
+    <!-- 11. DYSTOPIA STORE (50/50 宽幅旗舰版式) -->
     <section id="view-dystopia" class="hidden min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-zinc-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -747,7 +773,7 @@
         </div>
     </section>
 
-    <!-- 10. 真实政策与规则 Modal 界面 -->
+    <!-- 12. 真实政策与规则 Modal 界面 -->
     <div id="modal-info" class="hidden fixed inset-0 z-[130] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-xl w-full bg-stone-950 border border-stone-800 p-8 rounded-xl shadow-2xl relative text-stone-300 space-y-4">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4">
@@ -832,7 +858,7 @@
         </div>
     </section>
 
-    <!-- 11. T恤与针织衫独立尺码测量对照 Modal -->
+    <!-- 13. T恤与针织衫独立尺码测量对照 Modal -->
     <div id="modal-size-guide" class="hidden fixed inset-0 z-[120] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-xl shadow-2xl relative text-stone-300">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-4">
@@ -924,11 +950,17 @@
             document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' });
         }
 
+        // 抽屉菜单开关 toggleMenu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
         // Manifesto 品牌宣言 Modal
         function openManifesto() { document.getElementById('modal-manifesto').classList.remove('hidden'); }
         function closeManifesto() { document.getElementById('modal-manifesto').classList.add('hidden'); }
 
-        // --- 2. PUBLIC ARCHIVE 全网公共信号数据库 (核心护城河) ---
+        // --- 2. PUBLIC ARCHIVE 全网公共信号数据库 ---
         let archiveEntries = [
             { code: "#0042", color: "DYSTOPIA RED", text: "“Silence is not weakness. It is a calculated decision.”", time: "3D 14H REMAINING", colorClass: "text-red-500", borderClass: "border-red-500/30" },
             { code: "#0188", color: "UTOPIA WHITE", text: "“Order is the only architecture that survives chaos.”", time: "6D 22H REMAINING", colorClass: "text-white", borderClass: "border-white/30" },
@@ -1040,11 +1072,11 @@
             
             if (viewId === 'utopia') {
                 nav.className = "fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-slate-300 backdrop-blur-md bg-white/90 text-slate-900";
-                brandText.className = "font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-slate-900 uppercase transition-colors whitespace-nowrap";
+                if (brandText) brandText.className = "hidden sm:inline-block font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-slate-900 uppercase transition-colors whitespace-nowrap";
                 if (navLogo) navLogo.className = "h-6 md:h-7 w-auto object-contain mix-blend-multiply transition-all";
             } else {
                 nav.className = "fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/80 text-white";
-                brandText.className = "font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap";
+                if (brandText) brandText.className = "hidden sm:inline-block font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap";
                 if (navLogo) navLogo.className = "h-6 md:h-7 w-auto object-contain transition-all white-logo-render";
             }
         }
@@ -1199,8 +1231,8 @@
                     <tr><td class="py-2 font-bold text-white">01</td><td>XS</td><td>108</td><td>54</td><td>68</td></tr>
                     <tr><td class="py-2 font-bold text-white">02</td><td>S</td><td>114</td><td>57</td><td>70</td></tr>
                     <tr class="bg-stone-900/40"><td class="py-2 font-bold text-amber-400">03</td><td class="text-amber-400">M (STANDARD)</td><td class="text-amber-400">120</td><td class="text-amber-400">60</td><td class="text-amber-400">73</td></tr>
-                    <tr><td class="py-2 font-bold text-white">04</td><td>L</td><td>126</td><td>63</td><td>76</td></tr>
-                    <tr><td class="py-2 font-bold text-white">05</td><td>XL</td><td>132</td><td>66</td><td>79</td></tr>
+                    <tr><td class="py-2 font-bold text-white">04</td><td>L</td><td>132</td><td>66</td><td>74</td></tr>
+                    <tr><td class="py-2 font-bold text-white">05</td><td>XL</td><td>138</td><td>69</td><td>79</td></tr>
                     <tr><td class="py-2 font-bold text-white">06</td><td>XXL</td><td>138</td><td>69</td><td>81</td></tr>
                     <tr><td class="py-2 font-bold text-white">07</td><td>XXXL</td><td>144</td><td>72</td><td>83</td></tr>
                 `;
