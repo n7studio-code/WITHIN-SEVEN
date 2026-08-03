@@ -44,18 +44,6 @@
        (function(){ emailjs.init({ publicKey: "KJOBMZTZ7SCJuXcQ8" }); })();
     </script>
 
-    <!-- Structured Data (JSON-LD Product Schema) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ClothingStore",
-      "name": "WITHIN SEVEN",
-      "url": "https://withinseven.com",
-      "description": "Wearable Identity System featuring 777 individually numbered garments.",
-      "priceRange": "$$"
-    }
-    </script>
-
     <style>
         .font-sans { font-family: 'Inter', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
@@ -65,7 +53,8 @@
         .fade-in { animation: fadeIn 0.18s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Snipcart 暗黑高定重写 */
+        /* Snipcart 结账绝绝对绝对压制层级 z-999 */
+        #snipcart { z-index: 9999 !important; }
         :root {
             --snipcart-bg-color: #0a0a0a;
             --snipcart-modal-bg: #0a0a0a;
@@ -81,7 +70,7 @@
             font-family: 'JetBrains Mono', monospace !important;
         }
 
-        /* 💥 彻底解决 iOS Safari 隐形 Bug 的 CSS Mask 阿尔法纯白遮罩 💥 */
+        /* 全全设备兼容：CSS Mask 阿尔法纯白 / 纯黑遮罩 */
         .white-logo-mask {
             background-color: #ffffff;
             -webkit-mask: url('LOGO.png') no-repeat center / contain;
@@ -95,14 +84,14 @@
             mask: url('LOGO.png') no-repeat center / contain;
         }
 
-        /* Logo 核心背光星云呼吸动画 */
+        /* 核心呼吸背光 */
         @keyframes nebulaPulse {
             0%, 100% { transform: scale(1); opacity: 0.18; }
             50% { transform: scale(1.25); opacity: 0.35; }
         }
         .nebula-pulse { animation: nebulaPulse 6s ease-in-out infinite; }
 
-        /* 极光激光扫描动画 */
+        /* 极光扫描线 */
         @keyframes scanBeam {
             0% { top: -10%; opacity: 0; }
             50% { opacity: 1; }
@@ -116,7 +105,7 @@
             animation: scanBeam 1.2s ease-in-out infinite;
         }
 
-        /* 专属卡片呼吸边框 */
+        /* 个人专属卡片呼吸边框 */
         @keyframes userCardGlow {
             0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); border-color: rgba(245, 158, 11, 0.8); }
             50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); border-color: rgba(255, 255, 255, 0.9); }
@@ -137,14 +126,13 @@
 </head>
 <body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white relative overflow-x-hidden pb-32">
 
-    <!-- 1. 顶栏：战术防挤压结构 (CSS Mask 纯白人脸，全设备可见) -->
+    <!-- 1. 顶栏：战术防挤压结构 (智能 BACK 按键 + CSS Mask 纯白 Logo) -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-3.5 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/85">
         <div class="flex items-center space-x-3">
             <button id="nav-back-btn" onclick="goBack()" class="hidden font-mono text-xs tracking-widest px-2.5 py-1.5 border border-current rounded hover:opacity-70 transition min-h-[32px]">
                 ← BACK
             </button>
             <div class="flex items-center space-x-2.5 cursor-pointer" onclick="showView('landing')">
-                <!-- 纯白 100% 遮罩 Logo -->
                 <div id="nav-logo" class="h-6 md:h-7 w-6 md:w-7 white-logo-mask transition-all"></div>
                 <span id="nav-brand-text" class="hidden sm:inline-block font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap">WITHIN SEVEN</span>
             </div>
@@ -165,7 +153,7 @@
         </div>
     </nav>
 
-    <!-- 2. 全屏抽屉目录 MENU DRAWER -->
+    <!-- 2. 全屏抽屉目录 MENU DRAWER (z-50) -->
     <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-black/98 backdrop-blur-2xl flex flex-col justify-between p-8 fade-in font-mono">
         <div class="flex justify-between items-center border-b border-stone-800 pb-6">
             <div class="flex items-center space-x-3">
@@ -199,27 +187,27 @@
         </div>
     </div>
 
-    <!-- 3. LANDING PAGE HERO (极致留白减法) -->
+    <!-- 3. LANDING PAGE HERO (抽象能量场背景 + 极致留白) -->
     <section id="view-landing" class="relative w-full min-h-screen bg-black">
         
         <div class="relative w-full h-[100dvh] min-h-[580px] flex flex-col justify-between items-center overflow-hidden border-b border-stone-800">
             
             <div id="triptych-sector" class="absolute inset-0 z-0 flex flex-row overflow-x-auto md:overflow-hidden snap-x snap-mandatory no-scrollbar">
                 
-                <!-- 01 UTOPIA -->
+                <!-- 01 UTOPIA (纯白几何液态抽象背景) -->
                 <div onclick="enterFaction('utopia')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-r border-stone-800/80 bg-slate-950">
-                    <img src="cover-utopia.webp" onerror="this.src='utopia-1.png'" alt="Utopia Order" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                    <img src="cover-utopia.webp" onerror="this.src='utopia-1.png'" alt="Utopia Sector" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
                     <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300">
                         <div class="text-slate-400 text-[10px] mb-1">SECTOR 01 // CITADEL OF ORDER</div>
                         <div class="font-bold text-sm md:text-base">WORLD 01 / UTOPIA — ORDER</div>
-                        <div class="text-[10px] text-amber-500 mt-1">EXPLORE ARCHIVE ➔</div>
+                        <div class="text-[10px] text-amber-500 mt-1">EXPLORE SECTOR ➔</div>
                     </div>
                 </div>
 
-                <!-- 02 LOST PARADISE -->
+                <!-- 02 LOST PARADISE (琥珀风化噪点抽象背景) -->
                 <div onclick="enterFaction('paradise')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-r border-stone-800/80 bg-stone-950">
-                    <img src="cover-paradise.webp" onerror="this.src='paradise-1.png'" alt="Lost Paradise Memory" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                    <img src="cover-paradise.webp" onerror="this.src='paradise-1.png'" alt="Lost Paradise Sector" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
                     <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300">
                         <div class="text-amber-500/70 text-[10px] mb-1">SECTOR 00 // FORGOTTEN ASHES</div>
@@ -228,9 +216,9 @@
                     </div>
                 </div>
 
-                <!-- 03 DYSTOPIA -->
+                <!-- 03 DYSTOPIA (战术撕裂暗红抽象背景) -->
                 <div onclick="enterFaction('dystopia')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden bg-zinc-950">
-                    <img src="cover-dystopia.webp" onerror="this.src='dystopia-1.png'" alt="Dystopia Resistance" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                    <img src="cover-dystopia.webp" onerror="this.src='dystopia-1.png'" alt="Dystopia Sector" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
                     <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300">
                         <div class="text-red-500/80 text-[10px] mb-1">SECTOR 09 // REBEL UNDERGROUND</div>
@@ -243,7 +231,6 @@
             <!-- Hero 中间极简减法浮层 -->
             <div class="z-20 flex flex-col items-center pt-20 md:pt-28 text-center px-4 relative max-w-4xl pointer-events-none">
                 
-                <!-- 纯白 3D 雕塑人脸 LOGO (CSS Mask 绝对显示) -->
                 <div class="relative flex items-center justify-center my-2 pointer-events-auto">
                     <div class="absolute w-44 h-44 md:w-64 md:h-64 bg-white/20 rounded-full blur-3xl pointer-events-none -z-10 nebula-pulse"></div>
                     <div class="w-28 h-28 md:w-56 md:h-56 white-logo-mask hover:scale-105 transition duration-500"></div>
@@ -270,7 +257,7 @@
             </div>
         </div>
 
-        <!-- 4. HOW THE NUMBER WORKS (系统解密) -->
+        <!-- 4. HOW THE NUMBER WORKS (系统三步解密) -->
         <div id="how-it-works" class="relative z-10 w-full bg-black py-20 border-b border-stone-800">
             <div class="max-w-5xl mx-auto px-6 font-mono">
                 <div class="text-center mb-10">
@@ -404,7 +391,7 @@
         </div>
     </section>
 
-    <!-- 💥 居中全屏接入弹窗 CEREMONY MODAL 💥 -->
+    <!-- 💥 居中全屏接入弹窗 CEREMONY MODAL (z-[150]) 💥 -->
     <div id="modal-ceremony" class="hidden fixed inset-0 z-[150] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-md w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl text-center space-y-6 relative overflow-hidden">
             <div id="ceremony-beam" class="laser-beam"></div>
@@ -433,7 +420,7 @@
         </div>
     </div>
 
-    <!-- 6. MANIFESTO 品牌宣言 Modal -->
+    <!-- 6. MANIFESTO 品牌宣言 Modal (z-[140]) -->
     <div id="modal-manifesto" class="hidden fixed inset-0 z-[140] bg-black/95 backdrop-blur-xl flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl relative text-stone-300 space-y-6 max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4">
@@ -455,12 +442,12 @@
                 ACKNOWLEDGE MANIFESTO
             </button>
         </div>
-    </div>
+    </div >
 
-    <!-- 💥 彻底解锁 iOS 固顶关闭按键的宽幅双栏高定 Modal 💥 -->
+    <!-- 💥 彻底解锁 iOS 固顶关闭按键的宽幅双栏高定 Modal (z-[100]) 💥 -->
     <div id="modal-product" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl overflow-y-auto p-4 md:p-8 fade-in flex justify-center items-start">
         <div class="max-w-4xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-2xl shadow-2xl relative font-mono text-stone-300 my-12">
-            <!-- 手机端固顶 ✕ 关闭按钮，随时可退出 -->
+            <!-- 手机端固顶 ✕ 关闭按钮，随时退出 -->
             <button onclick="closeProductModal()" class="sticky top-2 float-right -mt-2 -mr-2 bg-stone-900 border border-stone-700 hover:bg-white hover:text-black text-stone-300 rounded-full w-9 h-9 flex items-center justify-center text-sm z-50 transition">✕</button>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 clear-both">
@@ -509,9 +496,9 @@
                             <div>
                                 <label class="text-[10px] text-stone-300 tracking-widest uppercase block mb-1">QUANTITY:</label>
                                 <div class="flex items-center border border-stone-700 rounded w-fit">
-                                    <button onclick="changeModalQty(-1)" class="px-3 py-1.5 text-stone-400 hover:text-white font-bold min-h-[36px]">-</button>
+                                    <button onclick="changeModalQty(-1)" class="px-3 py-1.5 text-stone-400 hover:text-white transition font-bold min-h-[36px]">-</button>
                                     <span id="modal-qty" class="px-3 py-1.5 font-mono text-xs text-white">1</span>
-                                    <button onclick="changeModalQty(1)" class="px-3 py-1.5 text-stone-400 hover:text-white font-bold min-h-[36px]">+</button>
+                                    <button onclick="changeModalQty(1)" class="px-3 py-1.5 text-stone-400 hover:text-white transition font-bold min-h-[36px]">+</button>
                                 </div>
                             </div>
                         </div>
@@ -840,7 +827,7 @@
         </div>
     </section>
 
-    <!-- 12. 真实政策与规则 Modal 界面 -->
+    <!-- 12. 真实政策与规则 Modal 界面 (z-[130]) -->
     <div id="modal-info" class="hidden fixed inset-0 z-[130] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-xl w-full bg-stone-950 border border-stone-800 p-8 rounded-xl shadow-2xl relative text-stone-300 space-y-4">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4">
@@ -854,7 +841,7 @@
         </div>
     </div>
 
-    <!-- 13. T恤与针织衫独立尺码测量对照 Modal -->
+    <!-- 13. T恤与针织衫独立尺码测量对照 Modal (z-[120]) -->
     <div id="modal-size-guide" class="hidden fixed inset-0 z-[120] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-xl shadow-2xl relative text-stone-300">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-4">
@@ -886,7 +873,7 @@
         </div>
     </div>
 
-    <!-- Cookie Settings Modal -->
+    <!-- Cookie Settings Modal (z-[110]) -->
     <div id="modal-cookie-settings" class="hidden fixed inset-0 z-[110] bg-black/90 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-xl w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl relative text-stone-300">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-6">
@@ -1125,8 +1112,21 @@
             showView('archive');
         }
 
-        // --- 5. 顶栏 Logo & 主题动态切换 (CSS Mask 纯白 100% 反转) ---
+        // --- 5. 顶栏 Logo & 主题与智能后退路由逻辑 ---
         let currentView = 'landing';
+
+        function closeAllModals() {
+            let closedAny = false;
+            ['modal-product', 'modal-ceremony', 'modal-manifesto', 'modal-info', 'modal-size-guide', 'modal-cookie-settings', 'mobile-menu'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el && !el.classList.contains('hidden')) {
+                    el.classList.add('hidden');
+                    closedAny = true;
+                }
+            });
+            return closedAny;
+        }
+
         function setNavbarTheme(viewId) {
             const nav = document.getElementById('navbar');
             const brandText = document.getElementById('nav-brand-text');
@@ -1144,6 +1144,8 @@
         }
 
         function showView(viewId, pushHistory = true) {
+            closeAllModals();
+
             ['landing', 'utopia', 'paradise', 'dystopia', 'archive'].forEach(v => {
                 const el = document.getElementById(`view-${v}`);
                 if (el) el.classList.add('hidden');
@@ -1165,11 +1167,20 @@
             window.scrollTo(0, 0);
         }
         
+        // 智能后退路由监听
         window.onpopstate = function(event) {
+            if (closeAllModals()) {
+                history.pushState({ view: currentView }, '', '#' + currentView);
+                return;
+            }
             if (event.state && event.state.view) showView(event.state.view, false);
             else showView('landing', false);
         };
-        function goBack() { window.history.length > 1 ? window.history.back() : showView('landing'); }
+
+        function goBack() { 
+            if (closeAllModals()) return;
+            window.history.length > 1 ? window.history.back() : showView('landing'); 
+        }
         function enterFaction(faction) { showView(faction); }
 
         // --- 6. 答题引擎 ---
