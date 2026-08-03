@@ -92,7 +92,7 @@
         </div>
     </nav>
 
-    <!-- 2. LANDING PAGE (主页核心标徽 + 品牌系统主张) -->
+    <!-- 2. LANDING PAGE -->
     <section id="view-landing" class="relative w-full min-h-screen flex flex-col items-center justify-between overflow-x-hidden bg-black pt-28 pb-12">
         <div class="absolute inset-0 flex z-0 overflow-hidden opacity-25 pointer-events-none">
             <div class="relative flex-1 bg-slate-200 border-r border-white/10"></div>
@@ -105,12 +105,10 @@
                 > SYSTEM INITIALIZED // EDITION CAPACITY: 777 GARMENTS
             </div>
             
-            <!-- 首页正中间核心品牌图形 LOGO -->
             <img src="LOGO.png" alt="WITHIN SEVEN Emblem" class="w-20 md:w-28 h-auto mb-4 invert mix-blend-screen drop-shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:scale-105 transition duration-500">
             
             <h1 class="text-3xl md:text-5xl font-brand font-light tracking-[0.4em] uppercase text-white">WITHIN SEVEN</h1>
             
-            <!-- 品牌灵魂 Slogan -->
             <p class="text-xs md:text-sm font-mono tracking-[0.3em] text-stone-300 mt-4 uppercase font-bold">
                 THREE WORLDS. ONE NUMBER. YOUR MEANING.
             </p>
@@ -118,12 +116,10 @@
                 DROP 01 — 777 INDIVIDUALLY NUMBERED GARMENTS.
             </p>
 
-            <!-- 锁定硬编码倒计时 (Nov 11, 2026) -->
             <div class="mt-8 px-5 py-2.5 bg-stone-900/90 border border-stone-800 rounded-lg font-mono text-xs text-amber-500 tracking-widest backdrop-blur-sm">
                 DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-2">LOADING...</span>
             </div>
 
-            <!-- 双通路线路：直接看商品 vs 阵营测验 -->
             <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full max-w-md">
                 <button onclick="enterFaction('utopia')" class="flex-1 py-3.5 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition font-bold shadow-lg">
                     EXPLORE DROP 01
@@ -134,10 +130,7 @@
             </div>
         </div>
 
-        <!-- 极简社媒与 Balenciaga 同款矩阵 -->
         <div class="z-20 w-full max-w-6xl px-6 mt-20 flex flex-col items-center">
-            
-            <!-- Email Subscribe Engine -->
             <div class="p-5 bg-stone-900/50 border border-stone-800 rounded-xl backdrop-blur-md w-full max-w-md text-center mb-16">
                 <p class="text-[10px] text-stone-400 mb-3 font-mono tracking-widest uppercase">ENTER THE SYSTEM // RECEIVE DROP ACCESS</p>
                 <form id="subscribe-form" onsubmit="handleSubscribe(event)" class="flex gap-2">
@@ -147,14 +140,12 @@
                 <div id="subscribe-status" class="hidden text-[10px] mt-2 font-mono"></div>
             </div>
 
-            <!-- 社交媒体图标 -->
             <div class="flex gap-6 mb-8 text-stone-400">
                 <a href="#" class="hover:text-white transition"><svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
                 <a href="#" class="hover:text-white transition"><svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
                 <a href="#" class="hover:text-white transition"><svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.325V1.325C24 .597 23.403 0 22.675 0z"/></svg></a>
             </div>
 
-            <!-- 商业与合规信息矩阵 -->
             <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 max-w-4xl text-[11px] font-mono text-stone-500 mb-8 px-4">
                 <a href="#" class="hover:text-stone-300 transition">Newsletter</a>
                 <a href="#" class="hover:text-stone-300 transition">Boutiques</a>
@@ -179,7 +170,7 @@
         </div>
     </section>
 
-    <!-- 3. TRINITY QUIZ ENGINE (Sequence 01/03 - 03/03) -->
+    <!-- 3. TRINITY QUIZ ENGINE -->
     <section id="view-quiz" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-6">
         <div class="max-w-xl w-full bg-stone-900/90 border border-stone-800 p-8 rounded-xl shadow-2xl relative fade-in">
             <div class="w-full bg-stone-800 h-1 mb-8 rounded-full overflow-hidden">
@@ -228,12 +219,13 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border border-slate-200/60 flex flex-col justify-between">
                     <div>
-                        <div onclick="openProductModal('WS-01U', 'Seamless Liquid TENCEL™ Tee', 77, 'Zero-friction fit crafted from 300gsm liquid organic cotton.', 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop', '100% TENCEL™ Organic Cotton', '300 GSM', 'Boxy Architectural Fit')" 
+                        <div onclick="openProductModal('WS-01U', 'Seamless Precision Sculpted Tee', 77, 'Architectural zero-friction silhouette crafted from 300gsm liquid cotton.', ['utopia-1.png', 'utopia-2.png', 'utopia-3.png'], '100% Liquid TENCEL™ Organic Cotton', '300 GSM Heavy Structure')" 
                              class="w-full h-80 bg-slate-100 rounded-xl mb-4 overflow-hidden cursor-pointer group relative">
-                            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                            <img src="utopia-1.png" alt="Utopia Heavy Tee" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
                             <div class="absolute top-3 left-3 bg-slate-900 text-white font-mono text-[10px] px-2.5 py-1 rounded">EDITION 001 / 777</div>
+                            <div class="absolute bottom-3 right-3 bg-black/60 text-white font-mono text-[9px] px-2 py-0.5 rounded backdrop-blur-sm">3 VIEWS ➔</div>
                         </div>
-                        <h3 class="text-lg font-bold mt-1 text-slate-900">Seamless Liquid TENCEL™ Tee</h3>
+                        <h3 class="text-lg font-bold mt-1 text-slate-900">Seamless Precision Sculpted Tee</h3>
                         
                         <div class="mt-4 flex flex-col gap-3">
                             <div class="flex justify-between items-center">
@@ -259,7 +251,7 @@
                     <div class="mt-6 flex justify-between items-center border-t border-slate-100 pt-4">
                         <span class="font-mono text-sm font-bold text-slate-900">$77 CAD</span>
                         <button id="btn-WS-01U" class="snipcart-add-item px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-mono hover:bg-slate-700 transition"
-                            data-item-id="WS-01U" data-item-name="Seamless Liquid TENCEL™ Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03" data-item-quantity="1">
+                            data-item-id="WS-01U" data-item-name="Seamless Precision Sculpted Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03" data-item-quantity="1">
                             ADD TO INVENTORY
                         </button>
                     </div>
@@ -288,12 +280,13 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-stone-900/60 border border-stone-800 p-6 rounded-xl hover:border-amber-600/60 transition flex flex-col justify-between">
                     <div>
-                        <div onclick="openProductModal('WS-01P', 'Sun-Faded Distressed Knit Sweater', 77, 'Raw cotton yarn with manual edge erosion.', 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=1000&auto=format&fit=crop', 'Raw Distressed Cotton', '480 GSM', 'Oversized Fit')"
+                        <div onclick="openProductModal('WS-01P', 'Sun-Faded Distressed Knit Relic', 77, 'Raw cotton yarn with hand-done edge erosion & mended patch detail.', ['paradise-1.png', 'paradise-2.png', 'paradise-3.png'], '100% Raw Mended Cotton Knit', '480 GSM Heavy Structure')"
                              class="w-full h-80 bg-stone-950 border border-stone-800 mb-4 overflow-hidden cursor-pointer group relative rounded-lg">
-                            <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                            <img src="paradise-1.png" alt="Paradise Sweater" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
                             <div class="absolute top-3 left-3 bg-amber-600 text-black font-mono text-[10px] font-bold px-2.5 py-1 rounded">EDITION 001 / 777</div>
+                            <div class="absolute bottom-3 right-3 bg-black/70 text-amber-400 font-mono text-[9px] px-2 py-0.5 rounded backdrop-blur-sm border border-amber-500/20">3 VIEWS ➔</div>
                         </div>
-                        <h3 class="text-lg font-bold mt-1 text-stone-100">Sun-Faded Distressed Knit Sweater</h3>
+                        <h3 class="text-lg font-bold mt-1 text-stone-100">Sun-Faded Distressed Knit Relic</h3>
                         <div class="mt-4 flex flex-col gap-3">
                             <div class="flex justify-between items-center">
                                 <label class="text-[10px] font-mono text-stone-400 uppercase">Size (01-07):</label>
@@ -318,7 +311,7 @@
                     <div class="mt-6 flex justify-between items-center font-mono text-sm border-t border-stone-800/80 pt-4">
                         <span class="text-amber-400 font-bold">$77 CAD</span>
                         <button id="btn-WS-01P" class="snipcart-add-item px-4 py-2 bg-amber-600 text-black font-bold text-xs font-mono hover:bg-amber-500 transition rounded"
-                            data-item-id="WS-01P" data-item-name="Sun-Faded Distressed Knit Sweater" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03" data-item-quantity="1">
+                            data-item-id="WS-01P" data-item-name="Sun-Faded Distressed Knit Relic" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03" data-item-quantity="1">
                             CLAIM RELIC
                         </button>
                     </div>
@@ -347,12 +340,13 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-zinc-900 border border-zinc-800 p-6 hover:border-red-600 transition flex flex-col justify-between">
                     <div>
-                        <div onclick="openProductModal('WS-01D', 'Acid-Washed Heavyweight Tactical Tee', 77, '280gsm raw cotton with snow-acid wash treatment.', 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1000&auto=format&fit=crop', 'Acid-Washed Cotton', '280 GSM', 'Drop-Shoulder Fit')"
+                        <div onclick="openProductModal('WS-01D', 'Acid-Washed Raw Edge Tactical Tee', 77, '280gsm raw cotton with snow-acid wash treatment & asymmetrical raw hem.', ['dystopia-1.png', 'dystopia-2.png', 'dystopia-3.png'], '100% Acid-Washed Raw Cotton', '280 GSM Heavy Duty')"
                              class="w-full h-80 bg-zinc-950 border border-zinc-800 mb-4 overflow-hidden cursor-pointer group relative">
-                            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                            <img src="dystopia-1.png" alt="Dystopia Tee" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
                             <div class="absolute top-3 left-3 bg-red-600 text-white font-mono text-[10px] font-bold px-2.5 py-1 rounded">EDITION 001 / 777</div>
+                            <div class="absolute bottom-3 right-3 bg-black/80 text-red-400 font-mono text-[9px] px-2 py-0.5 rounded backdrop-blur-sm border border-red-800/40">3 VIEWS ➔</div>
                         </div>
-                        <h3 class="text-lg font-bold mt-1">Acid-Washed Distressed Heavyweight Tee</h3>
+                        <h3 class="text-lg font-bold mt-1">Acid-Washed Raw Edge Tactical Tee</h3>
                         <div class="mt-4 flex flex-col gap-3">
                             <div class="flex justify-between items-center">
                                 <label class="text-[10px] font-mono text-zinc-400 uppercase">Size (01-07):</label>
@@ -377,7 +371,7 @@
                     <div class="mt-6 flex justify-between items-center font-mono text-sm border-t border-zinc-800 pt-4">
                         <span class="text-red-500 font-bold">$77 CAD</span>
                         <button id="btn-WS-01D" class="snipcart-add-item px-4 py-2 bg-red-600 text-white text-xs font-mono hover:bg-red-700 transition"
-                            data-item-id="WS-01D" data-item-name="Acid-Washed Distressed Heavyweight Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03" data-item-quantity="1">
+                            data-item-id="WS-01D" data-item-name="Acid-Washed Raw Edge Tactical Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03" data-item-quantity="1">
                             CLAIM GEAR
                         </button>
                     </div>
@@ -391,21 +385,28 @@
         </div>
     </section>
 
-    <!-- 宽幅双栏 Modal -->
+    <!-- 宽幅双栏高定 Modal (支持 3 视角相册切图) -->
     <div id="modal-product" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 fade-in overflow-y-auto">
         <div class="max-w-5xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-2xl shadow-2xl relative font-mono text-stone-300 grid grid-cols-1 md:grid-cols-2 gap-8 my-auto mt-20 md:mt-auto">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 text-stone-500 hover:text-white text-lg z-10">✕</button>
             
-            <div class="w-full h-80 md:h-full min-h-[360px] bg-stone-900 rounded-xl overflow-hidden relative border border-stone-800">
-                <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover">
-                <div class="absolute top-3 left-3 bg-amber-600 text-black font-bold px-3 py-1 text-[10px] rounded">
-                    EDITION 001 / 777
+            <!-- 左栏：相册展示与 3 视角按钮 -->
+            <div class="flex flex-col gap-3">
+                <div class="w-full h-80 md:h-[400px] bg-stone-900 rounded-xl overflow-hidden relative border border-stone-800">
+                    <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover transition-all duration-300">
+                    <div class="absolute top-3 left-3 bg-amber-600 text-black font-bold px-3 py-1 text-[10px] rounded">
+                        EDITION 001 / 777
+                    </div>
                 </div>
-                <div class="absolute bottom-3 left-3 bg-black/80 px-3 py-1 text-[10px] text-stone-400 border border-white/10 rounded">
-                    HIGH-RES ARCHIVE PREVIEW
+                <!-- 3 视角切图 Selector -->
+                <div class="flex gap-2">
+                    <button onclick="switchModalImage(0)" class="modal-thumb-btn flex-1 py-1.5 text-[10px] font-mono border border-white bg-white text-black font-bold rounded text-center">01 LOOK</button>
+                    <button onclick="switchModalImage(1)" class="modal-thumb-btn flex-1 py-1.5 text-[10px] font-mono border border-stone-800 bg-stone-900 text-stone-400 hover:text-white rounded text-center">02 FIT</button>
+                    <button onclick="switchModalImage(2)" class="modal-thumb-btn flex-1 py-1.5 text-[10px] font-mono border border-stone-800 bg-stone-900 text-stone-400 hover:text-white rounded text-center">03 MACRO</button>
                 </div>
             </div>
 
+            <!-- 右栏：完整参数与购买通道 -->
             <div class="flex flex-col justify-between space-y-4">
                 <div>
                     <span id="modal-code" class="text-xs text-amber-500 uppercase tracking-widest">WS-01-2026</span>
@@ -541,7 +542,7 @@
         }
         setInterval(updateTimer, 1000); updateTimer();
 
-        // --- 2. 顶栏 Logo & 主题颜色动态翻转逻辑 ---
+        // --- 2. 顶栏主题与 Logo 动态切换 ---
         let currentView = 'landing';
         function setNavbarTheme(viewId) {
             const nav = document.getElementById('navbar');
@@ -549,12 +550,10 @@
             const navLogo = document.getElementById('nav-logo');
             
             if (viewId === 'utopia') {
-                // Utopia 亮白阵营适配：顶栏改白底，Logo 及文字翻转为纯黑
                 nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-slate-300 backdrop-blur-md bg-white/90 text-slate-900";
                 brandText.className = "font-brand font-light text-sm md:text-base tracking-[0.45em] text-slate-900 uppercase transition-colors";
                 if (navLogo) navLogo.className = "h-6 w-auto object-contain mix-blend-multiply transition-all";
             } else {
-                // 暗黑阵营适配：顶栏改黑底，Logo 及文字保持反白
                 nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/80 text-white";
                 brandText.className = "font-brand font-light text-sm md:text-base tracking-[0.45em] text-white uppercase transition-colors";
                 if (navLogo) navLogo.className = "h-6 w-auto object-contain invert mix-blend-screen transition-all";
@@ -583,7 +582,7 @@
         function goBack() { window.history.length > 1 ? window.history.back() : showView('landing'); }
         function enterFaction(faction) { showView(faction); }
 
-        // --- 3. 答题引擎 (Sequence 01/03, 02/03, 03/03) ---
+        // --- 3. 答题引擎 ---
         let quizStep = 0;
         let scores = { utopia: 0, paradise: 0, dystopia: 0 };
         const questions = [
@@ -627,7 +626,7 @@
             }
         }
 
-        // --- 4. 数量与 7 尺码选择逻辑 ---
+        // --- 4. 数量与 7 尺码逻辑 ---
         function changeCardQty(id, delta) {
             let span = document.getElementById(`qty-${id}`);
             let current = parseInt(span.innerText);
@@ -646,21 +645,25 @@
             if (cartBtn) cartBtn.setAttribute('data-item-custom1-value', size);
         }
 
-        // --- 5. Modal & Size Guide ---
+        // --- 5. 多视角相册切图与 Modal ---
         function openSizeGuide() { document.getElementById('modal-size-guide').classList.remove('hidden'); }
         function closeSizeGuide() { document.getElementById('modal-size-guide').classList.add('hidden'); }
         
+        let currentModalImgs = [];
         let modalQty = 1;
-        function openProductModal(id, title, price, desc, imgUrl, fabric, weight, fit) {
+
+        function openProductModal(id, title, price, desc, imgArray, fabric, weight) {
+            currentModalImgs = imgArray;
             document.getElementById('modal-code').innerText = `${id}-2026 ARCHIVE`;
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-price').innerText = `$${price}.00 CAD`;
             document.getElementById('modal-desc').innerText = desc;
-            document.getElementById('modal-img').src = imgUrl;
             document.getElementById('modal-spec-fabric').innerText = fabric;
             document.getElementById('modal-spec-weight').innerText = weight;
             modalQty = 1;
             document.getElementById('modal-qty').innerText = modalQty;
+
+            switchModalImage(0); // 默认放大人台正面图
 
             const buyBtn = document.getElementById('modal-buy-btn');
             buyBtn.setAttribute('data-item-id', id);
@@ -674,6 +677,17 @@
             selectModalSize('03');
             document.getElementById('modal-product').classList.remove('hidden');
         }
+
+        function switchModalImage(index) {
+            if (currentModalImgs && currentModalImgs[index]) {
+                document.getElementById('modal-img').src = currentModalImgs[index];
+                document.querySelectorAll('.modal-thumb-btn').forEach((btn, i) => {
+                    if (i === index) btn.className = "modal-thumb-btn flex-1 py-1.5 text-[10px] font-mono border border-white bg-white text-black font-bold rounded text-center cursor-pointer";
+                    else btn.className = "modal-thumb-btn flex-1 py-1.5 text-[10px] font-mono border border-stone-800 bg-stone-900 text-stone-400 hover:text-white rounded text-center cursor-pointer";
+                });
+            }
+        }
+
         function closeProductModal() { document.getElementById('modal-product').classList.add('hidden'); }
         function selectModalSize(size) {
             document.querySelectorAll('.modal-size-btn').forEach(b => {
@@ -689,7 +703,7 @@
             document.getElementById('modal-buy-btn').setAttribute('data-item-quantity', modalQty);
         }
 
-        // --- 6. EmailJS 真实错误捕获 ---
+        // --- 6. EmailJS Engine ---
         function handleSubscribe(e) {
             e.preventDefault();
             const emailInput = document.getElementById('subscriber-email');
@@ -706,7 +720,7 @@
                 emailInput.value = "";
             })
             .catch(err => {
-                console.error("EmailJS Error Direct Output:", err);
+                console.error("EmailJS Error:", err);
                 btn.innerText = "RETRY";
                 btn.disabled = false;
                 status.className = "text-[10px] mt-2 font-mono text-red-400 block";
@@ -714,7 +728,7 @@
             });
         }
 
-        // --- 7. Cookie Settings ---
+        // --- 7. Cookie Management ---
         document.addEventListener("DOMContentLoaded", () => {
             if (!localStorage.getItem('ws_cookie_consent')) setTimeout(() => document.getElementById('cookie-banner').classList.remove('translate-y-full'), 2500);
         });
