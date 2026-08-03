@@ -10,6 +10,9 @@
     <meta name="keywords" content="Within Seven, Conceptual Fashion, High Fashion, Numbered Garments, Darkwear, Cyberpunk Luxury">
     <link rel="canonical" href="https://withinseven.com/">
     
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="LOGO.png">
+
     <!-- Open Graph / Social SEO -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://withinseven.com/">
@@ -71,13 +74,14 @@
     <!-- Scanline Overlay -->
     <div id="scanline-overlay" class="fixed inset-0 scanlines z-30 opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
 
-    <!-- 动态自适应顶栏 (Light Zone 黑字 / Dark Zone 白字) -->
+    <!-- 1. 顶栏：自适应颜色 + 图标与文字结合 -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/80">
         <div class="flex items-center space-x-4">
             <button id="nav-back-btn" onclick="goBack()" class="hidden font-mono text-xs tracking-widest px-2.5 py-1 border border-current rounded hover:opacity-70 transition">
                 ← BACK
             </button>
-            <div class="flex items-center cursor-pointer" onclick="showView('landing')">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('landing')">
+                <img id="nav-logo" src="LOGO.png" alt="WITHIN SEVEN Logo" class="h-6 w-auto object-contain invert mix-blend-screen transition-all">
                 <span id="nav-brand-text" class="font-brand font-light text-sm md:text-base tracking-[0.45em] text-white uppercase transition-colors">WITHIN SEVEN</span>
             </div>
         </div>
@@ -88,7 +92,7 @@
         </div>
     </nav>
 
-    <!-- 1. LANDING PAGE (THREE WORLDS. ONE NUMBER. YOUR MEANING.) -->
+    <!-- 2. LANDING PAGE (主页核心标徽 + 品牌系统主张) -->
     <section id="view-landing" class="relative w-full min-h-screen flex flex-col items-center justify-between overflow-x-hidden bg-black pt-28 pb-12">
         <div class="absolute inset-0 flex z-0 overflow-hidden opacity-25 pointer-events-none">
             <div class="relative flex-1 bg-slate-200 border-r border-white/10"></div>
@@ -96,14 +100,17 @@
             <div class="relative flex-1 bg-red-700"></div>
         </div>
 
-        <div class="z-20 flex flex-col items-center mt-8 text-center px-4 relative max-w-4xl">
+        <div class="z-20 flex flex-col items-center mt-4 text-center px-4 relative max-w-4xl">
             <div class="font-mono text-[10px] text-amber-500 mb-4 tracking-widest uppercase">
                 > SYSTEM INITIALIZED // EDITION CAPACITY: 777 GARMENTS
             </div>
             
+            <!-- 首页正中间核心品牌图形 LOGO -->
+            <img src="LOGO.png" alt="WITHIN SEVEN Emblem" class="w-20 md:w-28 h-auto mb-4 invert mix-blend-screen drop-shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:scale-105 transition duration-500">
+            
             <h1 class="text-3xl md:text-5xl font-brand font-light tracking-[0.4em] uppercase text-white">WITHIN SEVEN</h1>
             
-            <!-- 核心品牌主张 -->
+            <!-- 品牌灵魂 Slogan -->
             <p class="text-xs md:text-sm font-mono tracking-[0.3em] text-stone-300 mt-4 uppercase font-bold">
                 THREE WORLDS. ONE NUMBER. YOUR MEANING.
             </p>
@@ -128,9 +135,9 @@
         </div>
 
         <!-- 极简社媒与 Balenciaga 同款矩阵 -->
-        <div class="z-20 w-full max-w-6xl px-6 mt-24 flex flex-col items-center">
+        <div class="z-20 w-full max-w-6xl px-6 mt-20 flex flex-col items-center">
             
-            <!-- Email Subscribe (与 Dystopia 解耦，回归系统表达) -->
+            <!-- Email Subscribe Engine -->
             <div class="p-5 bg-stone-900/50 border border-stone-800 rounded-xl backdrop-blur-md w-full max-w-md text-center mb-16">
                 <p class="text-[10px] text-stone-400 mb-3 font-mono tracking-widest uppercase">ENTER THE SYSTEM // RECEIVE DROP ACCESS</p>
                 <form id="subscribe-form" onsubmit="handleSubscribe(event)" class="flex gap-2">
@@ -172,14 +179,13 @@
         </div>
     </section>
 
-    <!-- 2. TRINITY QUIZ ENGINE (修复 Sequence 计数 01/02/03) -->
+    <!-- 3. TRINITY QUIZ ENGINE (Sequence 01/03 - 03/03) -->
     <section id="view-quiz" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-6">
         <div class="max-w-xl w-full bg-stone-900/90 border border-stone-800 p-8 rounded-xl shadow-2xl relative fade-in">
             <div class="w-full bg-stone-800 h-1 mb-8 rounded-full overflow-hidden">
                 <div id="quiz-progress" class="bg-amber-500 h-full w-1/3 transition-all duration-300"></div>
             </div>
             
-            <!-- 动态更新 01 // 03, 02 // 03, 03 // 03 -->
             <span id="quiz-step" class="text-xs font-mono text-amber-500 uppercase tracking-widest">TRINITY SEQUENCE 01 // 03</span>
             <h2 id="quiz-question" class="text-lg md:text-xl font-light mt-2 mb-8 text-stone-200">Loading question...</h2>
 
@@ -200,13 +206,13 @@
         </div>
     </section>
 
-    <!-- 3. SCANNING LOADING SCREEN (ALIGNMENT IDENTIFIED) -->
+    <!-- 4. SCANNING LOADING SCREEN -->
     <section id="view-loading" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center font-mono">
         <div class="w-16 h-16 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mb-6"></div>
         <p id="loading-msg" class="text-xs tracking-[0.25em] text-stone-400 animate-pulse">ANALYZING SUBCONSCIOUS ALIGNMENT...</p>
     </section>
 
-    <!-- 4. UTOPIA STORE (LIGHT ZONE) -->
+    <!-- 5. UTOPIA STORE (LIGHT ZONE) -->
     <section id="view-utopia" class="hidden min-h-screen bg-slate-50 text-slate-900 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-slate-200 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -214,7 +220,6 @@
                     <span class="text-xs font-mono tracking-widest text-slate-400 uppercase">SECTOR 01 // CITADEL OF ORDER</span>
                     <h1 class="text-4xl md:text-6xl font-extralight tracking-widest mt-2 text-slate-950">LIGHT ZONE</h1>
                 </div>
-                <!-- 品牌验证结果修改为 ALIGNMENT IDENTIFIED -->
                 <div class="mt-4 md:mt-0 text-xs font-mono bg-slate-200 px-3 py-1.5 rounded-full text-slate-700 font-bold">
                     ALIGNMENT IDENTIFIED // UTOPIA
                 </div>
@@ -235,7 +240,6 @@
                                 <label class="text-[10px] font-mono text-slate-400 uppercase">Size (01-07):</label>
                                 <button onclick="openSizeGuide()" class="text-[10px] font-mono text-slate-400 hover:text-slate-900 underline">Size Guide</button>
                             </div>
-                            <!-- 7个尺码矩阵 -->
                             <div class="grid grid-cols-7 gap-1">
                                 <button onclick="selectCardSize('WS-01U', '01', this)" class="py-1 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">01</button>
                                 <button onclick="selectCardSize('WS-01U', '02', this)" class="py-1 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">02</button>
@@ -269,7 +273,7 @@
         </div>
     </section>
 
-    <!-- 5. LOST PARADISE STORE -->
+    <!-- 6. LOST PARADISE STORE -->
     <section id="view-paradise" class="hidden min-h-screen bg-paradise text-stone-200 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-stone-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -328,7 +332,7 @@
         </div>
     </section>
 
-    <!-- 6. DYSTOPIA STORE -->
+    <!-- 7. DYSTOPIA STORE -->
     <section id="view-dystopia" class="hidden min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-zinc-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -387,12 +391,11 @@
         </div>
     </section>
 
-    <!-- 宽幅双栏高定 Modal (左图右文字 + 7个尺码 + VERIFY YOUR NUMBER) -->
+    <!-- 宽幅双栏 Modal -->
     <div id="modal-product" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 fade-in overflow-y-auto">
         <div class="max-w-5xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-2xl shadow-2xl relative font-mono text-stone-300 grid grid-cols-1 md:grid-cols-2 gap-8 my-auto mt-20 md:mt-auto">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 text-stone-500 hover:text-white text-lg z-10">✕</button>
             
-            <!-- 左栏：大图与 Edition 编号 -->
             <div class="w-full h-80 md:h-full min-h-[360px] bg-stone-900 rounded-xl overflow-hidden relative border border-stone-800">
                 <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover">
                 <div class="absolute top-3 left-3 bg-amber-600 text-black font-bold px-3 py-1 text-[10px] rounded">
@@ -403,7 +406,6 @@
                 </div>
             </div>
 
-            <!-- 右栏：完整参数、7尺码、数量、购买与验证通道 -->
             <div class="flex flex-col justify-between space-y-4">
                 <div>
                     <span id="modal-code" class="text-xs text-amber-500 uppercase tracking-widest">WS-01-2026</span>
@@ -417,7 +419,6 @@
                         <div class="flex justify-between"><span>DISPATCH:</span> <span class="text-stone-200">SHIPS WITHIN 7 DAYS</span></div>
                     </div>
                     
-                    <!-- 7个尺码与数量选择 -->
                     <div class="mt-4 flex flex-col gap-3">
                         <div>
                             <div class="flex justify-between items-center mb-1.5">
@@ -446,7 +447,6 @@
                     </div>
                 </div>
 
-                <!-- 核心品牌价值说明 -->
                 <div class="bg-stone-900/60 p-3 rounded border border-stone-800 text-[10px] text-stone-400">
                     🔒 <strong class="text-white">POST-PURCHASE PROTOCOL:</strong> Every piece includes a unique NFC/Code. Verify your number upon arrival to unlock your 7-day personal statement cycle.
                 </div>
@@ -458,7 +458,7 @@
         </div>
     </div>
 
-    <!-- 7个尺码的厘米对照表 Modal -->
+    <!-- 7尺码测量对照 Modal -->
     <div id="modal-size-guide" class="hidden fixed inset-0 z-[120] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-xl shadow-2xl relative text-stone-300">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-6">
@@ -491,7 +491,7 @@
         </div>
     </div>
 
-    <!-- Cookie Preference Modal -->
+    <!-- Cookie Settings Modal -->
     <div id="modal-cookie-settings" class="hidden fixed inset-0 z-[110] bg-black/90 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-xl w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl relative text-stone-300">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-6">
@@ -509,7 +509,7 @@
         </div>
     </div>
 
-    <!-- 避免挡底部的绝对置底 Cookie 条 -->
+    <!-- Cookie Banner -->
     <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-black/95 border-t border-stone-800 backdrop-blur-xl z-[45] p-4 flex flex-col md:flex-row justify-between items-center transition-transform duration-700 translate-y-full font-mono">
         <div class="text-[10px] md:text-xs text-stone-400 mb-3 md:mb-0 max-w-4xl">
             <span class="text-amber-500 font-bold">SYS.NOTICE //</span> We utilize cookies for system memory & inventory checkout security.
@@ -541,20 +541,23 @@
         }
         setInterval(updateTimer, 1000); updateTimer();
 
-        // --- 2. 顶栏主题颜色自适应逻辑 ---
+        // --- 2. 顶栏 Logo & 主题颜色动态翻转逻辑 ---
         let currentView = 'landing';
         function setNavbarTheme(viewId) {
             const nav = document.getElementById('navbar');
             const brandText = document.getElementById('nav-brand-text');
+            const navLogo = document.getElementById('nav-logo');
             
             if (viewId === 'utopia') {
-                // Light Zone 亮色适配 (黑字)
+                // Utopia 亮白阵营适配：顶栏改白底，Logo 及文字翻转为纯黑
                 nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-slate-300 backdrop-blur-md bg-white/90 text-slate-900";
                 brandText.className = "font-brand font-light text-sm md:text-base tracking-[0.45em] text-slate-900 uppercase transition-colors";
+                if (navLogo) navLogo.className = "h-6 w-auto object-contain mix-blend-multiply transition-all";
             } else {
-                // Dark Zone 适配 (白字)
+                // 暗黑阵营适配：顶栏改黑底，Logo 及文字保持反白
                 nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/80 text-white";
                 brandText.className = "font-brand font-light text-sm md:text-base tracking-[0.45em] text-white uppercase transition-colors";
+                if (navLogo) navLogo.className = "h-6 w-auto object-contain invert mix-blend-screen transition-all";
             }
         }
 
@@ -580,7 +583,7 @@
         function goBack() { window.history.length > 1 ? window.history.back() : showView('landing'); }
         function enterFaction(faction) { showView(faction); }
 
-        // --- 3. 答题引擎 (01/03, 02/03, 03/03 序列修复) ---
+        // --- 3. 答题引擎 (Sequence 01/03, 02/03, 03/03) ---
         let quizStep = 0;
         let scores = { utopia: 0, paradise: 0, dystopia: 0 };
         const questions = [
@@ -599,7 +602,6 @@
 
         function updateQuizUI() {
             document.getElementById('quiz-progress').style.width = `${((quizStep + 1) / 3) * 100}%`;
-            // 修正序号
             document.getElementById('quiz-step').innerText = `TRINITY SEQUENCE 0${quizStep + 1} // 03`;
             document.getElementById('quiz-question').innerText = questions[quizStep].q;
             document.getElementById('opt-a').innerText = "A. " + questions[quizStep].a;
@@ -625,7 +627,7 @@
             }
         }
 
-        // --- 4. 数量与 7 尺码逻辑 ---
+        // --- 4. 数量与 7 尺码选择逻辑 ---
         function changeCardQty(id, delta) {
             let span = document.getElementById(`qty-${id}`);
             let current = parseInt(span.innerText);
@@ -687,7 +689,7 @@
             document.getElementById('modal-buy-btn').setAttribute('data-item-quantity', modalQty);
         }
 
-        // --- 6. EmailJS 带真实错误捕获逻辑 (绝无假的 JOINED) ---
+        // --- 6. EmailJS 真实错误捕获 ---
         function handleSubscribe(e) {
             e.preventDefault();
             const emailInput = document.getElementById('subscriber-email');
