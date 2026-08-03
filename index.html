@@ -80,10 +80,10 @@
         }
     </style>
 </head>
-<body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white">
+<body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white relative overflow-x-hidden">
 
     <!-- Scanline Overlay -->
-    <div id="scanline-overlay" class="fixed inset-0 scanlines z-30 opacity-100 transition-opacity duration-1000"></div>
+    <div id="scanline-overlay" class="fixed inset-0 scanlines z-30 opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
 
     <!-- TOP NAVIGATION BAR -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/60">
@@ -167,7 +167,6 @@
             </div>
             <p class="text-[9px] text-stone-600 mt-3 tracking-widest">© 2026 WITHIN SEVEN OPERATING SYSTEM. ALL RIGHTS RESERVED.</p>
         </div>
-
     </section>
 
     <!-- MANIFESTO POPUP MODAL -->
@@ -194,31 +193,23 @@
     <div id="modal-product" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 fade-in overflow-y-auto">
         <div class="max-w-4xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-2xl shadow-2xl relative font-mono text-stone-300 grid grid-cols-1 md:grid-cols-2 gap-8 my-auto">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 text-stone-500 hover:text-white text-lg z-10">✕</button>
-
-            <!-- Product High-Res Image -->
             <div class="w-full h-80 md:h-full min-h-[320px] bg-stone-900 rounded-xl overflow-hidden relative border border-stone-800">
                 <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover">
                 <div class="absolute bottom-3 left-3 bg-black/70 px-3 py-1 text-[10px] text-amber-500 border border-white/10 rounded">
                     HIGH-RES ARCHIVE PREVIEW
                 </div>
             </div>
-
-            <!-- Product Specs & Selector -->
             <div class="flex flex-col justify-between space-y-4">
                 <div>
                     <span id="modal-code" class="text-xs text-amber-500 uppercase tracking-widest">WS-01-2026</span>
                     <h2 id="modal-title" class="text-2xl font-bold text-white mt-1">Product Title</h2>
                     <p id="modal-price" class="text-lg font-bold text-amber-400 mt-2">$0.00 CAD</p>
                     <p id="modal-desc" class="text-xs text-stone-400 mt-4 leading-relaxed">Product Description</p>
-
-                    <!-- Tactical Fabric Specs -->
                     <div class="mt-6 border-t border-b border-stone-800 py-4 space-y-2 text-[11px] text-stone-400">
                         <div class="flex justify-between"><span>COMPOSITION:</span> <span id="modal-spec-fabric" class="text-stone-200">100% Organic Raw Cotton</span></div>
                         <div class="flex justify-between"><span>WEIGHT:</span> <span id="modal-spec-weight" class="text-stone-200">300 GSM Heavyweight</span></div>
                         <div class="flex justify-between"><span>FIT PROFILE:</span> <span id="modal-spec-fit" class="text-stone-200">Boxy Architectural Fit</span></div>
                     </div>
-
-                    <!-- Size Selection -->
                     <div class="mt-6">
                         <label class="text-xs text-stone-300 mb-2 block tracking-widest uppercase">SELECT ARCHIVAL SIZE:</label>
                         <div class="grid grid-cols-4 gap-2">
@@ -229,8 +220,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Add to Cart Trigger -->
                 <button id="modal-buy-btn" class="snipcart-add-item w-full py-4 bg-white text-black text-xs font-bold tracking-widest hover:bg-stone-300 transition rounded-lg uppercase mt-4">
                     CLAIM ITEM NOW
                 </button>
@@ -238,16 +227,30 @@
         </div>
     </div>
 
+    <!-- SYSTEM COOKIE BANNER -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-black/95 border-t border-stone-800 backdrop-blur-xl z-[100] p-4 md:p-6 flex flex-col md:flex-row justify-between items-center transition-transform duration-700 translate-y-full font-mono shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
+        <div class="text-[10px] md:text-xs text-stone-400 mb-4 md:mb-0 max-w-4xl leading-relaxed">
+            <span class="text-amber-500 font-bold">SYS.NOTICE //</span> We utilize cookies to calibrate your mainframe experience, analyze signal traffic, and optimize tactical dispatch. By remaining in this sector, you authorize this protocol. <a href="#" class="underline hover:text-white transition">Cookie Policy</a>.
+        </div>
+        <div class="flex gap-3 w-full md:w-auto">
+            <button onclick="acceptCookies()" class="flex-1 md:flex-none px-4 md:px-6 py-2 border border-stone-700 hover:border-white text-stone-300 hover:text-white transition text-[10px] md:text-xs tracking-widest uppercase rounded">
+                SETTINGS
+            </button>
+            <button onclick="acceptCookies()" class="flex-1 md:flex-none px-4 md:px-8 py-2 bg-white text-black font-bold hover:bg-stone-300 transition text-[10px] md:text-xs tracking-widest uppercase rounded">
+                ACKNOWLEDGE
+            </button>
+        </div>
+    </div>
+
     <!-- 2. TRINITY QUIZ ENGINE -->
     <section id="view-quiz" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-6">
+        <!-- ... [Quiz section code remains identical] ... -->
         <div class="max-w-xl w-full bg-stone-900/90 border border-stone-800 p-8 rounded-xl shadow-2xl relative fade-in">
             <div class="w-full bg-stone-800 h-1 mb-8 rounded-full overflow-hidden">
                 <div id="quiz-progress" class="bg-amber-500 h-full w-1/3 transition-all duration-300"></div>
             </div>
-
             <span id="quiz-step" class="text-xs font-mono text-stone-500 uppercase tracking-widest">TRINITY SEQUENCE 01 // 03</span>
             <h2 id="quiz-question" class="text-lg md:text-xl font-light mt-2 mb-8 text-stone-200">Loading question...</h2>
-
             <div class="space-y-3">
                 <button onclick="answerQuiz('utopia')" class="w-full p-4 border border-stone-700 hover:border-white hover:bg-white hover:text-black transition text-left text-xs md:text-sm font-mono flex justify-between items-center group rounded-lg">
                     <span id="opt-a">A. Option A</span>
@@ -273,6 +276,7 @@
 
     <!-- 4. UTOPIA STORE (LIGHT ZONE) -->
     <section id="view-utopia" class="hidden min-h-screen bg-slate-50 text-slate-900 pt-28 pb-16 px-6 md:px-12 fade-in">
+        <!-- ... [Utopia section code remains identical] ... -->
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-slate-200 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
                 <div>
@@ -284,9 +288,7 @@
                     STATUS: CITIZEN VERIFIED
                 </div>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Product Card 1 -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border border-slate-200/60 flex flex-col justify-between">
                     <div>
                         <div onclick="openProductModal('WS-01U', 'Seamless Liquid TENCEL™ Tee', 85, 'Zero-friction fit crafted from 300gsm liquid organic cotton.', 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop', '100% TENCEL™ Organic Cotton', '300 GSM Liquid Weave', 'Boxy Architectural Fit')" 
@@ -299,8 +301,6 @@
                         <span class="text-xs font-mono text-slate-400">WS-01U-2026</span>
                         <h3 class="text-lg font-bold mt-1 text-slate-900">Seamless Liquid TENCEL™ Tee</h3>
                         <p class="text-xs text-slate-500 mt-1">Zero-friction fit crafted from 300gsm liquid cotton.</p>
-                        
-                        <!-- Size Selector -->
                         <div class="mt-4">
                             <label class="text-[10px] font-mono text-slate-400 block mb-1 uppercase">Select Size:</label>
                             <div class="flex gap-2">
@@ -311,7 +311,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="mt-6 flex justify-between items-center border-t border-slate-100 pt-4">
                         <span class="font-mono text-sm font-bold text-slate-900">$85 CAD</span>
                         <button id="btn-WS-01U" class="snipcart-add-item px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-mono hover:bg-slate-700 transition"
@@ -323,7 +322,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="mt-20 border-t border-slate-200 pt-8 flex justify-between text-xs font-mono text-slate-500">
                 <button onclick="enterFaction('paradise')" class="hover:text-amber-600 transition">➔ CROSS BOUNDARY: LOST PARADISE</button>
                 <button onclick="enterFaction('dystopia')" class="hover:text-red-600 transition">⚠ INFILTRATE DARK ZONE</button>
@@ -333,6 +331,7 @@
 
     <!-- 5. LOST PARADISE STORE -->
     <section id="view-paradise" class="hidden min-h-screen bg-paradise text-stone-200 pt-28 pb-16 px-6 md:px-12 fade-in">
+        <!-- ... [Paradise section code remains identical] ... -->
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-stone-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
                 <div>
@@ -344,9 +343,7 @@
                     STATUS: WANDERER UNBOUND
                 </div>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Product Card Paradise -->
                 <div class="bg-stone-900/60 border border-stone-800 p-6 rounded-xl hover:border-amber-600/60 transition flex flex-col justify-between">
                     <div>
                         <div onclick="openProductModal('WS-01P', 'Sun-Faded Distressed Knit Sweater', 165, 'Raw cotton yarn with manual edge erosion and hand-done distressing.', 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=1000&auto=format&fit=crop', '100% Raw Distressed Cotton', '480 GSM Heavy Knit', 'Relaxed Oversized Fit')"
@@ -359,8 +356,6 @@
                         <span class="text-xs font-mono text-amber-500/80">WS-01P-2026</span>
                         <h3 class="text-lg font-bold mt-1 text-stone-100">Sun-Faded Distressed Knit Sweater</h3>
                         <p class="text-xs text-stone-400 mt-1">Raw cotton yarn with manual edge erosion and distressing.</p>
-
-                        <!-- Size Selector -->
                         <div class="mt-4">
                             <label class="text-[10px] font-mono text-stone-400 block mb-1 uppercase">Select Size:</label>
                             <div class="flex gap-2">
@@ -371,7 +366,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="mt-6 flex justify-between items-center font-mono text-sm border-t border-stone-800/80 pt-4">
                         <span class="text-amber-400 font-bold">$165 CAD</span>
                         <button id="btn-WS-01P" class="snipcart-add-item px-4 py-2 bg-amber-600 text-black font-bold text-xs font-mono hover:bg-amber-500 transition rounded"
@@ -383,7 +377,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="mt-20 border-t border-stone-800 pt-8 flex justify-between text-xs font-mono text-stone-500">
                 <button onclick="enterFaction('utopia')" class="hover:text-white transition">↺ ASCEND TO LIGHT ZONE</button>
                 <button onclick="enterFaction('dystopia')" class="hover:text-red-500 transition">➔ DESCEND TO DARK ZONE</button>
@@ -393,6 +386,7 @@
 
     <!-- 6. DYSTOPIA STORE -->
     <section id="view-dystopia" class="hidden min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-16 px-6 md:px-12 fade-in">
+        <!-- ... [Dystopia section code remains identical] ... -->
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-zinc-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
                 <div>
@@ -404,9 +398,7 @@
                     STATUS: REBEL SIGNAL DETECTED
                 </div>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Product Card Dystopia -->
                 <div class="bg-zinc-900 border border-zinc-800 p-6 hover:border-red-600 transition flex flex-col justify-between">
                     <div>
                         <div onclick="openProductModal('WS-01D', 'Acid-Washed Heavyweight Tactical Tee', 85, '280gsm raw cotton with snow-acid wash treatment and reinforced structural seams.', 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1000&auto=format&fit=crop', '100% Acid-Washed Cotton', '280 GSM Heavy Structure', 'Drop-Shoulder Tactical Fit')"
@@ -419,8 +411,6 @@
                         <span class="text-xs font-mono text-red-500">WS-01D-2026</span>
                         <h3 class="text-lg font-bold mt-1">Acid-Washed Distressed Heavyweight Tee</h3>
                         <p class="text-xs text-zinc-400 mt-1">280gsm raw cotton with acid snow-wash treatment.</p>
-
-                        <!-- Size Selector -->
                         <div class="mt-4">
                             <label class="text-[10px] font-mono text-zinc-400 block mb-1 uppercase">Select Size:</label>
                             <div class="flex gap-2">
@@ -431,7 +421,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="mt-6 flex justify-between items-center font-mono text-sm border-t border-zinc-800 pt-4">
                         <span class="text-red-500 font-bold">$85 CAD</span>
                         <button id="btn-WS-01D" class="snipcart-add-item px-4 py-2 bg-red-600 text-white text-xs font-mono hover:bg-red-700 transition"
@@ -443,7 +432,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="mt-20 border-t border-zinc-800 pt-8 flex justify-between text-xs font-mono text-zinc-500">
                 <button onclick="enterFaction('utopia')" class="hover:text-white transition">↺ RETURN TO LIGHT ZONE</button>
                 <button onclick="enterFaction('paradise')" class="hover:text-amber-400 transition">➔ ESCAPE TO LOST PARADISE</button>
@@ -454,43 +442,32 @@
     <div id="snipcart" hidden></div>
 
     <script>
-        // ----------------------------------------------------
         // 1. Dynamic Countdown Timer
-        // ----------------------------------------------------
         const dropDate = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
-
         function updateTimer() {
             const now = new Date().getTime();
             const diff = dropDate - now;
-
             if (diff <= 0) {
                 document.getElementById('countdown-timer').innerText = "DROP 01 IS LIVE";
                 return;
             }
-
             const d = Math.floor(diff / (1000 * 60 * 60 * 24));
             const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((diff % (1000 * 60)) / 1000);
-
             const pad = (n) => String(n).padStart(2, '0');
             document.getElementById('countdown-timer').innerText = `${pad(d)}D ${pad(h)}H ${pad(m)}M ${pad(s)}S`;
         }
-
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // ----------------------------------------------------
         // 2. Size Selection Logic
-        // ----------------------------------------------------
         function selectCardSize(productId, size, btnElement) {
             const container = btnElement.parentElement;
             const buttons = container.querySelectorAll('button');
-            
             buttons.forEach(b => {
                 b.className = "px-3 py-1 text-xs font-mono border border-stone-700/60 rounded text-stone-400 hover:border-white transition";
             });
-
             if (productId.includes('U')) {
                 btnElement.className = "px-3 py-1 text-xs font-mono border border-slate-900 bg-slate-900 text-white rounded font-bold";
             } else if (productId.includes('P')) {
@@ -498,27 +475,19 @@
             } else {
                 btnElement.className = "px-3 py-1 text-xs font-mono border border-red-600 bg-red-600 text-white font-bold rounded";
             }
-
             const cartBtn = document.getElementById(`btn-${productId}`);
-            if (cartBtn) {
-                cartBtn.setAttribute('data-item-custom1-value', size);
-            }
+            if (cartBtn) cartBtn.setAttribute('data-item-custom1-value', size);
         }
 
-        // ----------------------------------------------------
         // 3. Product Modal Lightbox Logic
-        // ----------------------------------------------------
         let currentModalProduct = {};
-
         function openProductModal(id, title, price, desc, imgUrl, fabric, weight, fit) {
             currentModalProduct = { id, title, price, desc, imgUrl, selectedSize: 'M' };
-
             document.getElementById('modal-code').innerText = `${id}-2026 ARCHIVE`;
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-price').innerText = `$${price}.00 CAD`;
             document.getElementById('modal-desc').innerText = desc;
             document.getElementById('modal-img').src = imgUrl;
-
             document.getElementById('modal-spec-fabric').innerText = fabric;
             document.getElementById('modal-spec-weight').innerText = weight;
             document.getElementById('modal-spec-fit').innerText = fit;
@@ -535,11 +504,9 @@
             selectModalSize('M');
             document.getElementById('modal-product').classList.remove('hidden');
         }
-
         function closeProductModal() {
             document.getElementById('modal-product').classList.add('hidden');
         }
-
         function selectModalSize(size) {
             currentModalProduct.selectedSize = size;
             const buttons = document.querySelectorAll('.modal-size-btn');
@@ -550,14 +517,11 @@
                     b.className = "modal-size-btn border border-stone-800 py-2 text-xs font-bold text-stone-400 hover:border-stone-500 rounded";
                 }
             });
-
             const buyBtn = document.getElementById('modal-buy-btn');
             buyBtn.setAttribute('data-item-custom1-value', size);
         }
 
-        // ----------------------------------------------------
         // 4. EmailJS Direct Dispatch Engine
-        // ----------------------------------------------------
         function handleSubscribe(e) {
             e.preventDefault();
             const emailInput = document.getElementById('subscriber-email');
@@ -585,31 +549,13 @@
             });
         }
 
-        // ----------------------------------------------------
         // 5. System Navigation Logic
-        // ----------------------------------------------------
         let quizStep = 0;
         let scores = { utopia: 0, paradise: 0, dystopia: 0 };
-
         const questions = [
-            { 
-                q: "When civilization collapses under its own weight, what do you reach for?", 
-                a: "An automated, rational system to restore absolute order.", 
-                b: "Relics of the past, seeking beauty in the crumbling ruins.", 
-                c: "Tactical gear to survive in the underground resistance." 
-            },
-            { 
-                q: "How do you define the true purpose of garments?", 
-                a: "A seamless second skin: weightless, pure, and friction-free.", 
-                b: "An organic canvas: weathered by time, raw, and layered.", 
-                c: "Armor for battle: heavy-duty, multi-pocketed, and protective." 
-            },
-            { 
-                q: "What is your stance towards constant surveillance?", 
-                a: "Blend in gracefully as a perfect, immaculate component.", 
-                b: "Wander unnoticed through forgotten grey sectors.", 
-                c: "Conceal identity, disrupt signals, and dismantle the network." 
-            }
+            { q: "When civilization collapses under its own weight, what do you reach for?", a: "An automated, rational system to restore absolute order.", b: "Relics of the past, seeking beauty in the crumbling ruins.", c: "Tactical gear to survive in the underground resistance." },
+            { q: "How do you define the true purpose of garments?", a: "A seamless second skin: weightless, pure, and friction-free.", b: "An organic canvas: weathered by time, raw, and layered.", c: "Armor for battle: heavy-duty, multi-pocketed, and protective." },
+            { q: "What is your stance towards constant surveillance?", a: "Blend in gracefully as a perfect, immaculate component.", b: "Wander unnoticed through forgotten grey sectors.", c: "Conceal identity, disrupt signals, and dismantle the network." }
         ];
 
         function toggleManifesto(show) {
@@ -647,7 +593,6 @@
                 document.getElementById(`view-${v}`).classList.add('hidden');
             });
             document.getElementById(`view-${viewId}`).classList.remove('hidden');
-            
             if (['utopia', 'paradise', 'dystopia', 'landing'].includes(viewId)) {
                 setLogoStyle(viewId);
             }
@@ -689,6 +634,26 @@
 
         function enterFaction(faction) { 
             showView(faction); 
+        }
+
+        // ----------------------------------------------------
+        // 6. Cookie Consent Protocol (System Memory)
+        // ----------------------------------------------------
+        document.addEventListener("DOMContentLoaded", () => {
+            // 检查本地是否已经同意过 Cookie
+            if (!localStorage.getItem('ws_cookie_consent')) {
+                // 延迟 2.5 秒弹出，增加赛博科幻感和视觉焦点
+                setTimeout(() => {
+                    document.getElementById('cookie-banner').classList.remove('translate-y-full');
+                }, 2500);
+            }
+        });
+
+        function acceptCookies() {
+            // 记录到本地存储，下次刷新不再弹出
+            localStorage.setItem('ws_cookie_consent', 'true');
+            // 滑动隐藏弹窗
+            document.getElementById('cookie-banner').classList.add('translate-y-full');
         }
     </script>
 </body>
