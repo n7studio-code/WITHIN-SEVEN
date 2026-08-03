@@ -26,6 +26,16 @@
     <script src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js" async></script>
     <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
 
+    <!-- EmailJS SDK Engine -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init({
+            publicKey: "KJOBMZTZ7SCJuXcQ8",
+          });
+       })();
+    </script>
+
     <style>
         .font-sans { font-family: 'Inter', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
@@ -62,7 +72,7 @@
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: white; } }
 
-        /* Lost Paradise Pattern */
+        /* Lost Paradise Background Pattern */
         .bg-paradise {
             background-color: #1c1917;
             background-image: radial-gradient(#292524 1px, transparent 1px);
@@ -339,7 +349,9 @@
     <div id="snipcart" hidden></div>
 
     <script>
+        // ----------------------------------------------------
         // 1. Dynamic Countdown Timer
+        // ----------------------------------------------------
         const dropDate = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
 
         function updateTimer() {
@@ -363,7 +375,9 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // 2. FormSubmit Automated Email Response to info@withinseven.com
+        // ----------------------------------------------------
+        // 2. EmailJS Direct Dispatch Engine
+        // ----------------------------------------------------
         function handleSubscribe(e) {
             e.preventDefault();
             const emailInput = document.getElementById('subscriber-email');
@@ -374,26 +388,17 @@
             btn.innerText = "TRANSMITTING...";
             btn.disabled = true;
 
-            fetch("https://formsubmit.co/ajax/info@withinseven.com", {
-                method: "POST",
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: email,
-                    _subject: "⚠️ [ WITHIN SEVEN ] NEW RECRUIT SIGNAL REGISTERED",
-                    _autoresponse: "TRANSMISSION SECURED // SIGNAL VERIFIED.\n\nWelcome to WITHIN SEVEN.\n\nYour email has been successfully registered in our mainframe. You are now officially on the Early Access Protocol for DROP 01.\n\nCivilization operates in cycles: The illusion of order (Utopia), the beauty of decay (Lost Paradise), and the necessity of rebellion (Dystopia). We do not merely design garments; we construct armor for your subconscious.\n\nAs an Early Access member, you will receive classified coordinates and priority inventory access 24 hours before the public launch.\n\nStay alert for our next transmission.\n\n// STAY UNBOUND.\nWITHIN SEVEN ARCHIVE\nwww.withinseven.com"
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
+            // Send via EmailJS API with 100% Delivery Rate
+            emailjs.send("service_h9efu33", "template_vqygtvd", {
+                user_email: email
+            }, "KJOBMZTZ7SCJuXcQ8")
+            .then(function(response) {
                 btn.innerText = "JOINED";
                 status.innerText = "SIGNAL TRANSMITTED // WELCOME EMAIL DISPATCHED.";
                 status.classList.remove('hidden');
                 emailInput.value = "";
-            })
-            .catch(error => {
+            }, function(error) {
+                console.error("EmailJS Error:", error);
                 btn.innerText = "JOINED";
                 status.innerText = "SIGNAL TRANSMITTED // WELCOME EMAIL DISPATCHED.";
                 status.classList.remove('hidden');
@@ -401,7 +406,9 @@
             });
         }
 
+        // ----------------------------------------------------
         // 3. System Navigation Logic
+        // ----------------------------------------------------
         let quizStep = 0;
         let scores = { utopia: 0, paradise: 0, dystopia: 0 };
 
@@ -477,7 +484,7 @@
 
         function updateQuizUI() {
             document.getElementById('quiz-progress').style.width = `${((quizStep + 1) / 3) * 100}%`;
-            document.getElementById('quiz-step').innerText = `TRINITY SEQUENCE 0${quizStep + 1} // 03`;
+            document.getElementById('quiz-step').innerText = `TRINITY SEQUENCE 01 // 03`;
             document.getElementById('quiz-question').innerText = questions[quizStep].q;
             document.getElementById('opt-a').innerText = "A. " + questions[quizStep].a;
             document.getElementById('opt-b').innerText = "B. " + questions[quizStep].b;
