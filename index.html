@@ -11,7 +11,7 @@
     <!-- Snipcart E-Commerce Integration -->
     <script>
       window.SnipcartSettings = {
-        publicApiKey: 'ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz', // <-- 替换为你的 Snipcart Public Key
+        publicApiKey: 'ZDJmZTZIY2ItNzEwZS00NzQxLWFHNWUtOGFhNDQxMzMyZjNhNjM5M2EzMTg0MzQyNDc4NzMz',
         loadStrategy: 'on-user-interaction',
       };
     </script>
@@ -30,71 +30,86 @@
             animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Theme Backgrounds */
+        .bg-paradise {
+            background-color: #1c1917;
+            background-image: radial-gradient(#292524 1px, transparent 1px);
+            background-size: 16px 16px;
         }
     </style>
 </head>
-<body class="bg-black text-white font-sans antialiased selection:bg-red-600 selection:text-white">
+<body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white">
 
-    <!-- TOP NAVIGATION -->
-    <nav class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center mix-blend-difference border-b border-white/10 backdrop-blur-md">
+    <!-- TOP NAVIGATION BAR -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/60">
         <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('landing')">
-            <!-- Navbar Logo: invert & mix-blend-screen for dark background -->
-            <img src="logo.png" alt="WITHIN SEVEN" class="h-8 w-auto object-contain invert mix-blend-screen">
-            <span class="font-black text-lg tracking-[0.25em] text-white">WITHIN SEVEN</span>
+            <!-- Dynamic Logo -->
+            <img id="nav-logo" src="logo.png" alt="WITHIN SEVEN" class="h-8 w-auto object-contain invert mix-blend-screen transition-all">
+            <span class="font-black text-base md:text-lg tracking-[0.25em] text-white">WITHIN SEVEN</span>
         </div>
         <div class="flex items-center space-x-6 font-mono text-xs">
-            <button class="snipcart-checkout tracking-widest hover:text-red-500 transition">
-                INVENTORY [ <span class="snipcart-items-count text-red-500 font-bold">0</span> ]
+            <button class="snipcart-checkout tracking-widest hover:text-amber-500 transition border border-white/20 px-3 py-1.5 rounded-full backdrop-blur-sm">
+                INVENTORY [ <span class="snipcart-items-count text-amber-500 font-bold">0</span> ]
             </button>
         </div>
     </nav>
 
-    <!-- 1. LANDING PAGE / ARCHWAY GATEWAY -->
+    <!-- 1. LANDING PAGE / TRINITY GATEWAY -->
     <section id="view-landing" class="relative w-screen h-screen flex flex-col items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 flex pointer-events-none opacity-15">
-            <div class="w-1/2 bg-slate-100"></div>
-            <div class="w-1/2 bg-zinc-900 border-l border-zinc-700"></div>
+        <!-- Ambient Tri-Fold Background Preview -->
+        <div class="absolute inset-0 flex pointer-events-none opacity-20">
+            <div class="w-1/3 bg-slate-100 border-r border-slate-300"></div>
+            <div class="w-1/3 bg-stone-800 border-r border-stone-600"></div>
+            <div class="w-1/3 bg-zinc-950"></div>
         </div>
 
-        <div class="z-10 flex flex-col items-center mb-8 fade-in">
-            <!-- Landing Logo: invert & mix-blend-screen auto converts black logo to white transparent -->
-            <img src="logo.png" alt="WITHIN SEVEN Logo" class="w-36 md:w-48 h-auto mb-6 invert mix-blend-screen">
-            <h1 class="text-3xl md:text-5xl font-extralight tracking-[0.35em] uppercase text-center">WITHIN SEVEN</h1>
-            <p class="text-xs font-mono tracking-[0.25em] text-zinc-400 mt-3 uppercase">Which side of the gate are you on?</p>
+        <div class="z-10 flex flex-col items-center mb-8 fade-in text-center px-4">
+            <img src="logo.png" alt="WITHIN SEVEN Logo" class="w-36 md:w-44 h-auto mb-6 invert mix-blend-screen">
+            <h1 class="text-3xl md:text-6xl font-extralight tracking-[0.4em] uppercase">WITHIN SEVEN</h1>
+            <p class="text-xs font-mono tracking-[0.3em] text-stone-400 mt-4 uppercase">TRINITY ALIGNMENT // ORDER • ASHES • REBELLION</p>
         </div>
 
         <div class="z-10 flex flex-col sm:flex-row gap-4 fade-in">
-            <button onclick="startQuiz()" class="px-8 py-4 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-zinc-200 transition shadow-2xl hover:scale-105">
-                ✦ Start Faction Verification
+            <button onclick="startQuiz()" class="px-8 py-4 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition shadow-2xl hover:scale-105 font-bold">
+                ✦ START FACTION VERIFICATION
             </button>
         </div>
 
-        <div class="z-10 absolute bottom-8 flex space-x-8 text-xs font-mono text-zinc-500">
-            <button onclick="enterFaction('utopia')" class="hover:text-white transition">DIRECT: LIGHT ZONE</button>
+        <!-- DIRECT SECTOR ACCESS -->
+        <div class="z-10 absolute bottom-8 flex flex-wrap justify-center gap-4 text-xs font-mono text-stone-400 px-4">
+            <button onclick="enterFaction('utopia')" class="hover:text-white transition">01: LIGHT ZONE</button>
             <span>//</span>
-            <button onclick="enterFaction('dystopia')" class="hover:text-red-500 transition">DIRECT: DARK ZONE</button>
+            <button onclick="enterFaction('paradise')" class="hover:text-amber-400 transition">00: LOST PARADISE</button>
+            <span>//</span>
+            <button onclick="enterFaction('dystopia')" class="hover:text-red-500 transition">09: DARK ZONE</button>
         </div>
     </section>
 
-    <!-- 2. INTERACTIVE QUIZ ENGINE -->
+    <!-- 2. TRINITY QUIZ ENGINE -->
     <section id="view-quiz" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-6">
-        <div class="max-w-xl w-full bg-zinc-900 border border-zinc-800 p-8 rounded-xl shadow-2xl relative fade-in">
-            <div class="w-full bg-zinc-800 h-1 mb-8 rounded-full overflow-hidden">
-                <div id="quiz-progress" class="bg-white h-full w-1/3 transition-all duration-300"></div>
+        <div class="max-w-xl w-full bg-stone-900/90 border border-stone-800 p-8 rounded-xl shadow-2xl relative fade-in">
+            <div class="w-full bg-stone-800 h-1 mb-8 rounded-full overflow-hidden">
+                <div id="quiz-progress" class="bg-amber-500 h-full w-1/3 transition-all duration-300"></div>
             </div>
 
-            <span id="quiz-step" class="text-xs font-mono text-zinc-500 uppercase tracking-widest">GATEWAY SEQUENCE 01 // 03</span>
-            <h2 id="quiz-question" class="text-xl md:text-2xl font-light mt-2 mb-8">Loading question...</h2>
+            <span id="quiz-step" class="text-xs font-mono text-stone-500 uppercase tracking-widest">TRINITY SEQUENCE 01 // 03</span>
+            <h2 id="quiz-question" class="text-lg md:text-xl font-light mt-2 mb-8 text-stone-200">Loading question...</h2>
 
-            <div class="space-y-4">
-                <button onclick="answerQuiz('utopia')" class="w-full p-4 border border-zinc-700 hover:border-white hover:bg-white hover:text-black transition text-left text-sm font-mono flex justify-between items-center group">
+            <div class="space-y-3">
+                <button onclick="answerQuiz('utopia')" class="w-full p-4 border border-stone-700 hover:border-white hover:bg-white hover:text-black transition text-left text-xs md:text-sm font-mono flex justify-between items-center group rounded-lg">
                     <span id="opt-a">A. Option A</span>
                     <span class="opacity-0 group-hover:opacity-100 transition">➔</span>
                 </button>
-                <button onclick="answerQuiz('dystopia')" class="w-full p-4 border border-zinc-700 hover:border-red-500 hover:bg-red-500 hover:text-white transition text-left text-sm font-mono flex justify-between items-center group">
+                <button onclick="answerQuiz('paradise')" class="w-full p-4 border border-stone-700 hover:border-amber-500 hover:bg-amber-900/30 hover:text-amber-300 transition text-left text-xs md:text-sm font-mono flex justify-between items-center group rounded-lg">
                     <span id="opt-b">B. Option B</span>
+                    <span class="opacity-0 group-hover:opacity-100 transition">➔</span>
+                </button>
+                <button onclick="answerQuiz('dystopia')" class="w-full p-4 border border-stone-700 hover:border-red-500 hover:bg-red-950/40 hover:text-red-400 transition text-left text-xs md:text-sm font-mono flex justify-between items-center group rounded-lg">
+                    <span id="opt-c">C. Option C</span>
                     <span class="opacity-0 group-hover:opacity-100 transition">➔</span>
                 </button>
             </div>
@@ -103,8 +118,8 @@
 
     <!-- 3. SCANNING LOADING SCREEN -->
     <section id="view-loading" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center font-mono">
-        <div class="w-16 h-16 border-2 border-white border-t-transparent rounded-full animate-spin mb-6"></div>
-        <p class="text-xs tracking-[0.2em] text-zinc-400 animate-pulse">ANALYZING SUBCONSCIOUS ALIGNMENT...</p>
+        <div class="w-16 h-16 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mb-6"></div>
+        <p id="loading-msg" class="text-xs tracking-[0.25em] text-stone-400 animate-pulse">ANALYZING SUBCONSCIOUS ALIGNMENT...</p>
     </section>
 
     <!-- 4. UTOPIA STORE (LIGHT ZONE) -->
@@ -112,9 +127,9 @@
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-slate-200 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
                 <div>
-                    <span class="text-xs font-mono tracking-widest text-slate-400 uppercase">LOCATION // UTOPIA SECTOR 07</span>
-                    <h1 class="text-4xl md:text-6xl font-extralight tracking-widest mt-2">LIGHT ZONE</h1>
-                    <p class="text-sm text-slate-500 mt-2">Order, purity, and second-skin minimalism.</p>
+                    <span class="text-xs font-mono tracking-widest text-slate-400 uppercase">SECTOR 01 // CITADEL OF ORDER</span>
+                    <h1 class="text-4xl md:text-6xl font-extralight tracking-widest mt-2 text-slate-950">LIGHT ZONE</h1>
+                    <p class="text-sm text-slate-500 mt-2">Zero-friction minimalism and liquid precision.</p>
                 </div>
                 <div class="mt-4 md:mt-0 text-xs font-mono bg-slate-200 px-3 py-1.5 rounded-full text-slate-700">
                     STATUS: CITIZEN VERIFIED
@@ -123,93 +138,160 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Product 01-U -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100">
                     <div class="w-full h-80 bg-slate-100 rounded-xl mb-4 flex items-center justify-center font-mono text-xs text-slate-300">
                         [ VISUAL: WS-01U ]
                     </div>
                     <span class="text-xs font-mono text-slate-400">WS-01U-2026</span>
-                    <h3 class="text-lg font-bold mt-1">Seamless Liquid TENCEL™ Tee</h3>
+                    <h3 class="text-lg font-bold mt-1 text-slate-900">Seamless Liquid TENCEL™ Tee</h3>
                     <p class="text-xs text-slate-500 mt-1">Zero-friction fit crafted from 300gsm liquid cotton.</p>
                     <div class="mt-6 flex justify-between items-center">
                         <span class="font-mono text-sm">$85 CAD</span>
                         <button class="snipcart-add-item px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-mono hover:bg-slate-700 transition"
-                            data-item-id="WS-01U"
-                            data-item-name="Seamless Liquid TENCEL™ Tee"
-                            data-item-price="85.00"
-                            data-item-url="https://n7studio-code.github.io/WITHIN-SEVEN/"
-                            data-item-description="Zero-friction fit crafted from 300gsm liquid cotton."
-                            data-item-custom1-name="Size"
-                            data-item-custom1-options="S|M|L|XL">
+                            data-item-id="WS-01U" data-item-name="Seamless Liquid TENCEL™ Tee" data-item-price="85.00"
+                            data-item-url="https://withinseven.com/" data-item-description="Zero-friction liquid cotton fit."
+                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
                             ADD TO INVENTORY
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 02-U -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100">
                     <div class="w-full h-80 bg-slate-100 rounded-xl mb-4 flex items-center justify-center font-mono text-xs text-slate-300">
                         [ VISUAL: WS-02U ]
                     </div>
                     <span class="text-xs font-mono text-slate-400">WS-02U-2026</span>
-                    <h3 class="text-lg font-bold mt-1">Zero-Seam Stealth Pocket Hoodie</h3>
+                    <h3 class="text-lg font-bold mt-1 text-slate-900">Zero-Seam Stealth Pocket Hoodie</h3>
                     <p class="text-xs text-slate-500 mt-1">Matte cool-touch composite fleece with magnetic closures.</p>
                     <div class="mt-6 flex justify-between items-center">
                         <span class="font-mono text-sm">$185 CAD</span>
                         <button class="snipcart-add-item px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-mono hover:bg-slate-700 transition"
-                            data-item-id="WS-02U"
-                            data-item-name="Zero-Seam Stealth Pocket Hoodie"
-                            data-item-price="185.00"
-                            data-item-url="https://n7studio-code.github.io/WITHIN-SEVEN/"
-                            data-item-description="Matte cool-touch composite fleece with magnetic closures."
-                            data-item-custom1-name="Size"
-                            data-item-custom1-options="S|M|L|XL">
+                            data-item-id="WS-02U" data-item-name="Zero-Seam Stealth Pocket Hoodie" data-item-price="185.00"
+                            data-item-url="https://withinseven.com/" data-item-description="Matte cool-touch hoodie with magnetic closures."
+                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
                             ADD TO INVENTORY
                         </button>
                     </div>
                 </div>
 
-                <!-- Product 07-GATE -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                <!-- Product 03-U -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100">
                     <div class="w-full h-80 bg-slate-100 rounded-xl mb-4 flex items-center justify-center font-mono text-xs text-slate-300">
-                        [ VISUAL: WS-07G ]
+                        [ VISUAL: WS-03U ]
                     </div>
-                    <span class="text-xs font-mono text-slate-400">WS-07G-2026</span>
-                    <h3 class="text-lg font-bold mt-1">Dual-Arch Reversible Balaclava</h3>
-                    <p class="text-xs text-slate-500 mt-1">3D engineered knit with active thermal regulation.</p>
+                    <span class="text-xs font-mono text-slate-400">WS-03U-2026</span>
+                    <h3 class="text-lg font-bold mt-1 text-slate-900">Architectural Fluid Parachute Trousers</h3>
+                    <p class="text-xs text-slate-500 mt-1">Titanium white water-repellent tech silk pants.</p>
                     <div class="mt-6 flex justify-between items-center">
-                        <span class="font-mono text-sm">$65 CAD</span>
+                        <span class="font-mono text-sm">$195 CAD</span>
                         <button class="snipcart-add-item px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-mono hover:bg-slate-700 transition"
-                            data-item-id="WS-07G"
-                            data-item-name="Dual-Arch Reversible Balaclava"
-                            data-item-price="65.00"
-                            data-item-url="https://n7studio-code.github.io/WITHIN-SEVEN/"
-                            data-item-description="3D engineered knit with active thermal regulation."
-                            data-item-custom1-name="Size"
-                            data-item-custom1-options="One Size">
+                            data-item-id="WS-03U" data-item-name="Architectural Fluid Parachute Trousers" data-item-price="195.00"
+                            data-item-url="https://withinseven.com/" data-item-description="Titanium white water-repellent tech silk pants."
+                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
                             ADD TO INVENTORY
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-20 border-t border-slate-200 pt-8 text-center">
-                <button onclick="enterFaction('dystopia')" class="font-mono text-xs text-slate-400 hover:text-red-600 transition tracking-widest">
-                    ⚠ SYSTEM WARNING: INFILTRATE DARK ZONE (REBEL BLACK MARKET) ➔
-                </button>
+            <div class="mt-20 border-t border-slate-200 pt-8 flex justify-between text-xs font-mono text-slate-500">
+                <button onclick="enterFaction('paradise')" class="hover:text-amber-600 transition">➔ CROSS BOUNDARY: LOST PARADISE</button>
+                <button onclick="enterFaction('dystopia')" class="hover:text-red-600 transition">⚠ INFILTRATE DARK ZONE</button>
             </div>
         </div>
     </section>
 
-    <!-- 5. DYSTOPIA STORE (DARK ZONE) -->
+    <!-- 5. LOST PARADISE STORE (DUST SECTOR / WASTELAND ARCHIVE) -->
+    <section id="view-paradise" class="hidden min-h-screen bg-paradise text-stone-200 pt-28 pb-16 px-6 md:px-12 fade-in">
+        <div class="max-w-7xl mx-auto">
+            <div class="border-b border-stone-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
+                <div>
+                    <span class="text-xs font-mono tracking-widest text-amber-500/80 uppercase">// SECTOR 00 // THE FORGOTTEN ASHES</span>
+                    <h1 class="text-4xl md:text-6xl font-serif tracking-widest mt-2 text-stone-100 italic">LOST PARADISE</h1>
+                    <p class="text-sm text-stone-400 mt-2 font-mono">Decay, raw textures, and distressed archival garments.</p>
+                </div>
+                <div class="mt-4 md:mt-0 text-xs font-mono bg-amber-950/40 border border-amber-800/50 px-3 py-1.5 rounded text-amber-400">
+                    STATUS: WANDERER UNBOUND
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Product 01-P -->
+                <div class="bg-stone-900/60 border border-stone-800 p-6 rounded-xl hover:border-amber-600/60 transition">
+                    <div class="w-full h-80 bg-stone-950 border border-stone-800 mb-4 flex items-center justify-center font-mono text-xs text-stone-600">
+                        [ ARCHIVE_IMG: WS-01P ]
+                    </div>
+                    <span class="text-xs font-mono text-amber-500/80">WS-01P-2026</span>
+                    <h3 class="text-lg font-bold mt-1 text-stone-100">Sun-Faded Distressed Knit Sweater</h3>
+                    <p class="text-xs text-stone-400 mt-1">Raw cotton yarn with manual edge erosion and distressing.</p>
+                    <div class="mt-6 flex justify-between items-center font-mono text-sm">
+                        <span>$165 CAD</span>
+                        <button class="snipcart-add-item px-4 py-2 bg-amber-600 text-black font-bold text-xs font-mono hover:bg-amber-500 transition rounded"
+                            data-item-id="WS-01P" data-item-name="Sun-Faded Distressed Knit Sweater" data-item-price="165.00"
+                            data-item-url="https://withinseven.com/" data-item-description="Raw yarn distressed knit sweater."
+                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
+                            CLAIM RELIC
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 02-P -->
+                <div class="bg-stone-900/60 border border-stone-800 p-6 rounded-xl hover:border-amber-600/60 transition">
+                    <div class="w-full h-80 bg-stone-950 border border-stone-800 mb-4 flex items-center justify-center font-mono text-xs text-stone-600">
+                        [ ARCHIVE_IMG: WS-02P ]
+                    </div>
+                    <span class="text-xs font-mono text-amber-500/80">WS-02P-2026</span>
+                    <h3 class="text-lg font-bold mt-1 text-stone-100">Mud-Dyed Earth Tone Cargo Trousers</h3>
+                    <p class="text-xs text-stone-400 mt-1">Heavy mineral wash canvas with wide-leg relaxed drape.</p>
+                    <div class="mt-6 flex justify-between items-center font-mono text-sm">
+                        <span>$210 CAD</span>
+                        <button class="snipcart-add-item px-4 py-2 bg-amber-600 text-black font-bold text-xs font-mono hover:bg-amber-500 transition rounded"
+                            data-item-id="WS-02P" data-item-name="Mud-Dyed Earth Tone Cargo Trousers" data-item-price="210.00"
+                            data-item-url="https://withinseven.com/" data-item-description="Mineral wash canvas cargo pants."
+                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
+                            CLAIM RELIC
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 03-P -->
+                <div class="bg-stone-900/60 border border-stone-800 p-6 rounded-xl hover:border-amber-600/60 transition">
+                    <div class="w-full h-80 bg-stone-950 border border-stone-800 mb-4 flex items-center justify-center font-mono text-xs text-stone-600">
+                        [ ARCHIVE_IMG: WS-03P ]
+                    </div>
+                    <span class="text-xs font-mono text-amber-500/80">WS-03P-2026</span>
+                    <h3 class="text-lg font-bold mt-1 text-stone-100">Faded Crackle Logo Overlayer Shirt</h3>
+                    <p class="text-xs text-stone-400 mt-1">Vintage washed linen-blend shirt with cracked archway print.</p>
+                    <div class="mt-6 flex justify-between items-center font-mono text-sm">
+                        <span>$140 CAD</span>
+                        <button class="snipcart-add-item px-4 py-2 bg-amber-600 text-black font-bold text-xs font-mono hover:bg-amber-500 transition rounded"
+                            data-item-id="WS-03P" data-item-name="Faded Crackle Logo Overlayer Shirt" data-item-price="140.00"
+                            data-item-url="https://withinseven.com/" data-item-description="Vintage washed linen shirt with cracked print."
+                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
+                            CLAIM RELIC
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 border-t border-stone-800 pt-8 flex justify-between text-xs font-mono text-stone-500">
+                <button onclick="enterFaction('utopia')" class="hover:text-white transition">↺ ASCEND TO LIGHT ZONE</button>
+                <button onclick="enterFaction('dystopia')" class="hover:text-red-500 transition">➔ DESCEND TO DARK ZONE</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. DYSTOPIA STORE (DARK ZONE) -->
     <section id="view-dystopia" class="hidden min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-zinc-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
                 <div>
-                    <span class="text-xs font-mono tracking-widest text-red-500 uppercase">// UNAUTHORIZED ACCESS // SECTOR 07</span>
+                    <span class="text-xs font-mono tracking-widest text-red-500 uppercase">// SECTOR 09 // UNAUTHORIZED REBEL ZONE</span>
                     <h1 class="text-4xl md:text-6xl font-black tracking-tighter mt-2 glitch-text">DARK ZONE</h1>
                     <p class="text-sm text-zinc-400 mt-2 font-mono">Tactical utility, deconstruction, and resistance gear.</p>
                 </div>
-                <div class="mt-4 md:mt-0 text-xs font-mono bg-red-950 border border-red-800 px-3 py-1.5 text-red-400">
+                <div class="mt-4 md:mt-0 text-xs font-mono bg-red-950/60 border border-red-800 px-3 py-1.5 text-red-400">
                     STATUS: REBEL SIGNAL DETECTED
                 </div>
             </div>
@@ -226,13 +308,9 @@
                     <div class="mt-6 flex justify-between items-center font-mono text-sm">
                         <span>$85 CAD</span>
                         <button class="snipcart-add-item px-4 py-2 bg-red-600 text-white text-xs font-mono hover:bg-red-700 transition"
-                            data-item-id="WS-01D"
-                            data-item-name="Acid-Washed Distressed Heavyweight Tee"
-                            data-item-price="85.00"
-                            data-item-url="https://n7studio-code.github.io/WITHIN-SEVEN/"
-                            data-item-description="280gsm raw cotton with acid snow-wash treatment."
-                            data-item-custom1-name="Size"
-                            data-item-custom1-options="S|M|L|XL">
+                            data-item-id="WS-01D" data-item-name="Acid-Washed Distressed Heavyweight Tee" data-item-price="85.00"
+                            data-item-url="https://withinseven.com/" data-item-description="280gsm raw cotton with acid wash."
+                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
                             CLAIM GEAR
                         </button>
                     </div>
@@ -249,13 +327,9 @@
                     <div class="mt-6 flex justify-between items-center font-mono text-sm">
                         <span>$185 CAD</span>
                         <button class="snipcart-add-item px-4 py-2 bg-red-600 text-white text-xs font-mono hover:bg-red-700 transition"
-                            data-item-id="WS-02D"
-                            data-item-name="Multi-Pocket Modular Tactical Hoodie"
-                            data-item-price="185.00"
-                            data-item-url="https://n7studio-code.github.io/WITHIN-SEVEN/"
-                            data-item-description="Equipped with signal-shielding inner pocket."
-                            data-item-custom1-name="Size"
-                            data-item-custom1-options="S|M|L|XL">
+                            data-item-id="WS-02D" data-item-name="Multi-Pocket Modular Tactical Hoodie" data-item-price="185.00"
+                            data-item-url="https://withinseven.com/" data-item-description="Tactical hoodie with signal shield pocket."
+                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
                             CLAIM GEAR
                         </button>
                     </div>
@@ -272,23 +346,18 @@
                     <div class="mt-6 flex justify-between items-center font-mono text-sm">
                         <span>$210 CAD</span>
                         <button class="snipcart-add-item px-4 py-2 bg-red-600 text-white text-xs font-mono hover:bg-red-700 transition"
-                            data-item-id="WS-03D"
-                            data-item-name="Ripstop Gridweave Modular Cargo Pants"
-                            data-item-price="210.00"
-                            data-item-url="https://n7studio-code.github.io/WITHIN-SEVEN/"
-                            data-item-description="Durable tear-resistant gridweave with webbing."
-                            data-item-custom1-name="Size"
-                            data-item-custom1-options="S|M|L|XL">
+                            data-item-id="WS-03D" data-item-name="Ripstop Gridweave Modular Cargo Pants" data-item-price="210.00"
+                            data-item-url="https://withinseven.com/" data-item-description="Tear-resistant gridweave tactical pants."
+                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
                             CLAIM GEAR
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-20 border-t border-zinc-800 pt-8 text-center">
-                <button onclick="enterFaction('utopia')" class="font-mono text-xs text-zinc-500 hover:text-white transition tracking-widest">
-                    ↺ SWITCH FREQUENCY: ACCESS LIGHT ZONE (UTOPIA ORDER)
-                </button>
+            <div class="mt-20 border-t border-zinc-800 pt-8 flex justify-between text-xs font-mono text-zinc-500">
+                <button onclick="enterFaction('utopia')" class="hover:text-white transition">↺ RETURN TO LIGHT ZONE</button>
+                <button onclick="enterFaction('paradise')" class="hover:text-amber-400 transition">➔ ESCAPE TO LOST PARADISE</button>
             </div>
         </div>
     </section>
@@ -298,48 +367,95 @@
 
     <script>
         let quizStep = 0;
-        let scores = { utopia: 0, dystopia: 0 };
+        let scores = { utopia: 0, paradise: 0, dystopia: 0 };
 
         const questions = [
-            { q: "When the old system collapses, what do you establish first?", a: "An automated, rational network to preserve absolute purity and order.", b: "A subterranean shelter equipped with modular tactical survival gear." },
-            { q: "How do you define the true purpose of your garments?", a: "A second skin: seamless, weightless, eliminating all unnecessary friction.", b: "Tactical armor: durable, multi-pocketed, built for utility and concealment." },
-            { q: "How do you respond to the constant gaze of external surveillance?", a: "Blend seamlessly through immaculate elegance as a perfect component.", b: "Conceal your identity, disrupt signals, and resist through deconstruction." }
+            { 
+                q: "When civilization collapses under its own weight, what do you reach for?", 
+                a: "An automated, rational system to restore absolute order.", 
+                b: "Relics of the past, seeking beauty in the crumbling ruins.", 
+                c: "Tactical gear to survive in the underground resistance." 
+            },
+            { 
+                q: "How do you define the true purpose of garments?", 
+                a: "A seamless second skin: weightless, pure, and friction-free.", 
+                b: "An organic canvas: weathered by time, raw, and layered.", 
+                c: "Armor for battle: heavy-duty, multi-pocketed, and protective." 
+            },
+            { 
+                q: "What is your stance towards constant surveillance?", 
+                a: "Blend in gracefully as a perfect, immaculate component.", 
+                b: "Wander unnoticed through forgotten grey sectors.", 
+                c: "Conceal identity, disrupt signals, and dismantle the network." 
+            }
         ];
 
+        function setLogoStyle(faction) {
+            const logo = document.getElementById('nav-logo');
+            const nav = document.getElementById('navbar');
+
+            if (faction === 'utopia') {
+                logo.className = "h-8 w-auto object-contain mix-blend-multiply transition-all";
+                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-slate-300 backdrop-blur-md bg-white/80 text-slate-900";
+            } else if (faction === 'paradise') {
+                logo.className = "h-8 w-auto object-contain invert mix-blend-screen opacity-90 transition-all";
+                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-stone-800 backdrop-blur-md bg-stone-900/80 text-stone-200";
+            } else {
+                logo.className = "h-8 w-auto object-contain invert mix-blend-screen transition-all";
+                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/80 text-white";
+            }
+        }
+
         function showView(viewId) {
-            ['landing', 'quiz', 'loading', 'utopia', 'dystopia'].forEach(v => {
+            ['landing', 'quiz', 'loading', 'utopia', 'paradise', 'dystopia'].forEach(v => {
                 document.getElementById(`view-${v}`).classList.add('hidden');
             });
             document.getElementById(`view-${viewId}`).classList.remove('hidden');
-            window.scrollTo(0,0);
+            
+            if (['utopia', 'paradise', 'dystopia'].includes(viewId)) {
+                setLogoStyle(viewId);
+            } else {
+                setLogoStyle('dystopia'); // Default dark
+            }
+            window.scrollTo(0, 0);
         }
 
         function startQuiz() {
             quizStep = 0;
-            scores = { utopia: 0, dystopia: 0 };
+            scores = { utopia: 0, paradise: 0, dystopia: 0 };
             updateQuizUI();
             showView('quiz');
         }
 
         function updateQuizUI() {
             document.getElementById('quiz-progress').style.width = `${((quizStep + 1) / 3) * 100}%`;
-            document.getElementById('quiz-step').innerText = `GATEWAY SEQUENCE 0${quizStep + 1} // 03`;
+            document.getElementById('quiz-step').innerText = `TRINITY SEQUENCE 0${quizStep + 1} // 03`;
             document.getElementById('quiz-question').innerText = questions[quizStep].q;
             document.getElementById('opt-a').innerText = "A. " + questions[quizStep].a;
             document.getElementById('opt-b').innerText = "B. " + questions[quizStep].b;
+            document.getElementById('opt-c').innerText = "C. " + questions[quizStep].c;
         }
 
         function answerQuiz(faction) {
             scores[faction]++;
             quizStep++;
-            if (quizStep < 3) updateQuizUI();
-            else {
+            if (quizStep < 3) {
+                updateQuizUI();
+            } else {
                 showView('loading');
-                setTimeout(() => enterFaction(scores.utopia >= scores.dystopia ? 'utopia' : 'dystopia'), 1500);
+                let target = 'utopia';
+                if (scores.paradise >= scores.utopia && scores.paradise >= scores.dystopia) {
+                    target = 'paradise';
+                } else if (scores.dystopia >= scores.utopia && scores.dystopia >= scores.paradise) {
+                    target = 'dystopia';
+                }
+                setTimeout(() => enterFaction(target), 1400);
             }
         }
 
-        function enterFaction(faction) { showView(faction); }
+        function enterFaction(faction) { 
+            showView(faction); 
+        }
     </script>
 </body>
 </html>
