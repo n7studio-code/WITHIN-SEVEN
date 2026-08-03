@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WITHIN SEVEN // Official Operating System</title>
-
-    <!-- Favicon Icon -->
-    <link rel="icon" type="image/png" href="LOGO.png">
+    
+    <!-- SEO & Brand Metadata -->
+    <title>WITHIN SEVEN // 777 Numbered Archival System</title>
+    <meta name="description" content="WITHIN SEVEN is a conceptual apparel operating system. Drop 01 features 777 individually numbered garments across three alignment sectors: Utopia, Lost Paradise, and Dystopia.">
+    <meta name="keywords" content="Within Seven, Conceptual Fashion, High Fashion, Numbered Garments, Darkwear, Cyberpunk Luxury">
+    <link rel="canonical" href="https://withinseven.com/">
+    
+    <!-- Open Graph / Social SEO -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://withinseven.com/">
+    <meta property="og:title" content="WITHIN SEVEN // THREE WORLDS. ONE NUMBER. YOUR MEANING.">
+    <meta property="og:description" content="777 Individually Numbered Garments. 7 Days of Expression. Claim your alignment code.">
 
     <!-- Tailwind CSS Engine -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- High Fashion & Tech Fonts -->
+    <!-- High Fashion Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;900&family=JetBrains+Mono:wght@300;400;700&family=Syncopate:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@300;400;700&family=Syncopate:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <!-- Snipcart E-Commerce Integration -->
+    <!-- Snipcart Checkout System -->
     <script>
       window.SnipcartSettings = {
         publicApiKey: 'ZDJmZTZIY2ItNzEwZS00NzQxLWFHNWUtOGFhNDQxMzMyZjNhNjM5M2EzMTg0MzQyNDc4NzMz',
@@ -26,231 +34,155 @@
     <script src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js" async></script>
     <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
 
-    <!-- EmailJS SDK Engine -->
+    <!-- EmailJS Engine -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
-       (function(){
-          emailjs.init({
-            publicKey: "KJOBMZTZ7SCJuXcQ8",
-          });
-       })();
+       (function(){ emailjs.init({ publicKey: "KJOBMZTZ7SCJuXcQ8" }); })();
+    </script>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ClothingStore",
+      "name": "WITHIN SEVEN",
+      "url": "https://withinseven.com",
+      "description": "777 Individually Numbered Garments across three alignment sectors.",
+      "priceRange": "$$"
+    }
     </script>
 
     <style>
         .font-sans { font-family: 'Inter', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         .font-brand { font-family: 'Syncopate', sans-serif; }
-
-        .glitch-text:hover {
-            text-shadow: 2px 0 #ef4444, -2px 0 #06b6d4;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* CRT Scanlines */
-        .scanlines {
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.15));
-            background-size: 100% 4px;
-            pointer-events: none;
-        }
-
-        /* Typewriter Animation */
-        .typewriter {
-            overflow: hidden;
-            border-right: .15em solid white;
-            white-space: nowrap;
-            margin: 0 auto;
-            animation: typing 2.5s steps(30, end), blink-caret .75s step-end infinite;
-        }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: white; } }
-
-        /* Lost Paradise Background Pattern */
-        .bg-paradise {
-            background-color: #1c1917;
-            background-image: radial-gradient(#292524 1px, transparent 1px);
-            background-size: 16px 16px;
-        }
+        .glitch-text:hover { text-shadow: 2px 0 #ef4444, -2px 0 #06b6d4; }
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.15)); background-size: 100% 4px; pointer-events: none; }
+        .bg-paradise { background-color: #1c1917; background-image: radial-gradient(#292524 1px, transparent 1px); background-size: 16px 16px; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; }
     </style>
 </head>
-<body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white relative overflow-x-hidden">
+<body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white relative overflow-x-hidden pb-32">
 
     <!-- Scanline Overlay -->
     <div id="scanline-overlay" class="fixed inset-0 scanlines z-30 opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
 
-    <!-- TOP NAVIGATION BAR -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/60">
-        <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('landing')">
-            <img id="nav-logo" src="LOGO.png" alt="WITHIN SEVEN" class="h-7 w-auto object-contain invert mix-blend-screen transition-all">
-            <span class="font-brand font-light text-xs md:text-sm tracking-[0.45em] text-white uppercase">WITHIN SEVEN</span>
+    <!-- 动态自适应顶栏 (Light Zone 黑字 / Dark Zone 白字) -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/80">
+        <div class="flex items-center space-x-4">
+            <button id="nav-back-btn" onclick="goBack()" class="hidden font-mono text-xs tracking-widest px-2.5 py-1 border border-current rounded hover:opacity-70 transition">
+                ← BACK
+            </button>
+            <div class="flex items-center cursor-pointer" onclick="showView('landing')">
+                <span id="nav-brand-text" class="font-brand font-light text-sm md:text-base tracking-[0.45em] text-white uppercase transition-colors">WITHIN SEVEN</span>
+            </div>
         </div>
         <div class="flex items-center space-x-6 font-mono text-xs">
-            <button class="snipcart-checkout tracking-widest hover:text-amber-500 transition border border-white/20 px-3 py-1.5 rounded-full backdrop-blur-sm">
+            <button class="snipcart-checkout tracking-widest hover:text-amber-500 transition border border-current px-3 py-1.5 rounded-full backdrop-blur-sm">
                 INVENTORY [ <span class="snipcart-items-count text-amber-500 font-bold">0</span> ]
             </button>
         </div>
     </nav>
 
-    <!-- 1. LANDING PAGE / TRINITY GATEWAY -->
-    <section id="view-landing" class="relative w-screen h-screen flex flex-col items-center justify-between overflow-hidden bg-black pt-20 pb-6">
-        
-        <!-- Interactive Accordion Background -->
-        <div class="absolute inset-0 flex z-0 overflow-hidden">
-            <div onclick="enterFaction('utopia')" class="relative flex-1 bg-slate-200 opacity-5 hover:opacity-20 hover:flex-[1.5] transition-all duration-700 cursor-crosshair border-r border-white/10 group flex items-center justify-center">
-                <span class="font-mono text-xs tracking-[0.5em] text-white rotate-90 opacity-0 group-hover:opacity-100 transition duration-500">UTOPIA</span>
-            </div>
-            <div onclick="enterFaction('paradise')" class="relative flex-1 bg-amber-700 opacity-5 hover:opacity-20 hover:flex-[1.5] transition-all duration-700 cursor-crosshair border-r border-white/10 group flex items-center justify-center">
-                <span class="font-mono text-xs tracking-[0.5em] text-white rotate-90 opacity-0 group-hover:opacity-100 transition duration-500">PARADISE</span>
-            </div>
-            <div onclick="enterFaction('dystopia')" class="relative flex-1 bg-red-700 opacity-5 hover:opacity-20 hover:flex-[1.5] transition-all duration-700 cursor-crosshair group flex items-center justify-center">
-                <span class="font-mono text-xs tracking-[0.5em] text-white rotate-90 opacity-0 group-hover:opacity-100 transition duration-500">DYSTOPIA</span>
-            </div>
+    <!-- 1. LANDING PAGE (THREE WORLDS. ONE NUMBER. YOUR MEANING.) -->
+    <section id="view-landing" class="relative w-full min-h-screen flex flex-col items-center justify-between overflow-x-hidden bg-black pt-28 pb-12">
+        <div class="absolute inset-0 flex z-0 overflow-hidden opacity-25 pointer-events-none">
+            <div class="relative flex-1 bg-slate-200 border-r border-white/10"></div>
+            <div class="relative flex-1 bg-amber-700 border-r border-white/10"></div>
+            <div class="relative flex-1 bg-red-700"></div>
         </div>
 
-        <!-- Tactical HUD Viewport Corners -->
-        <div class="absolute top-24 left-6 w-6 h-6 border-t-2 border-l-2 border-white/30 z-10 hidden md:block"></div>
-        <div class="absolute top-24 right-6 w-6 h-6 border-t-2 border-r-2 border-white/30 z-10 hidden md:block"></div>
-        <div class="absolute bottom-6 left-6 w-6 h-6 border-b-2 border-l-2 border-white/30 z-10 hidden md:block"></div>
-        <div class="absolute bottom-6 right-6 w-6 h-6 border-b-2 border-r-2 border-white/30 z-10 hidden md:block"></div>
-
-        <!-- HUD Info Stream -->
-        <div class="absolute top-24 left-14 text-[10px] font-mono text-white/40 z-10 hidden md:block leading-relaxed">
-            SYS.VER.7.0.4 <br>
-            NET: <span class="text-green-400 animate-pulse">STABLE</span> <br>
-            LOC: LAT 49.16 / LON -123.13 (YVR)
-        </div>
-
-        <!-- Hero Content Center -->
-        <div class="z-20 flex flex-col items-center my-auto fade-in text-center px-4 relative">
-            <div class="font-mono text-[10px] text-stone-400 mb-3 typewriter">
-                > INITIALIZING TRINITY ENGINE... [OK]
+        <div class="z-20 flex flex-col items-center mt-8 text-center px-4 relative max-w-4xl">
+            <div class="font-mono text-[10px] text-amber-500 mb-4 tracking-widest uppercase">
+                > SYSTEM INITIALIZED // EDITION CAPACITY: 777 GARMENTS
             </div>
             
-            <img src="LOGO.png" alt="WITHIN SEVEN Logo" class="w-28 md:w-36 h-auto mb-4 invert mix-blend-screen drop-shadow-2xl hover:scale-105 transition duration-500">
-            <h1 class="text-3xl md:text-5xl font-extralight tracking-[0.4em] uppercase">WITHIN SEVEN</h1>
-            <p class="text-[10px] md:text-xs font-mono tracking-[0.3em] text-stone-400 mt-3 uppercase">TRINITY ALIGNMENT // ORDER • ASHES • REBELLION</p>
+            <h1 class="text-3xl md:text-5xl font-brand font-light tracking-[0.4em] uppercase text-white">WITHIN SEVEN</h1>
+            
+            <!-- 核心品牌主张 -->
+            <p class="text-xs md:text-sm font-mono tracking-[0.3em] text-stone-300 mt-4 uppercase font-bold">
+                THREE WORLDS. ONE NUMBER. YOUR MEANING.
+            </p>
+            <p class="text-[10px] md:text-xs font-mono tracking-[0.2em] text-stone-500 mt-2 uppercase">
+                DROP 01 — 777 INDIVIDUALLY NUMBERED GARMENTS.
+            </p>
 
-            <!-- Dynamic Live Countdown -->
-            <div class="mt-6 px-4 py-1.5 bg-stone-900/80 border border-stone-800 rounded-lg font-mono text-xs text-amber-500/90 tracking-widest backdrop-blur-sm">
-                DROP 01 // COUNTDOWN: <span id="countdown-timer" class="text-white font-bold">14D 00H 00M 00S</span>
+            <!-- 锁定硬编码倒计时 (Nov 11, 2026) -->
+            <div class="mt-8 px-5 py-2.5 bg-stone-900/90 border border-stone-800 rounded-lg font-mono text-xs text-amber-500 tracking-widest backdrop-blur-sm">
+                DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-2">LOADING...</span>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="flex flex-col sm:flex-row gap-3 mt-6">
-                <button onclick="startQuiz()" class="px-6 py-3 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 font-bold">
-                    ✦ START FACTION VERIFICATION
+            <!-- 双通路线路：直接看商品 vs 阵营测验 -->
+            <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full max-w-md">
+                <button onclick="enterFaction('utopia')" class="flex-1 py-3.5 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition font-bold shadow-lg">
+                    EXPLORE DROP 01
                 </button>
-                <button onclick="toggleManifesto(true)" class="px-6 py-3 bg-transparent text-white border border-white/30 font-mono text-xs tracking-widest uppercase hover:bg-white/10 transition hover:-translate-y-0.5">
-                    [ MANIFESTO ]
+                <button onclick="startQuiz()" class="flex-1 py-3.5 bg-transparent text-white border border-white/40 font-mono text-xs tracking-widest uppercase hover:bg-white/10 transition">
+                    FIND YOUR ALIGNMENT ✦
                 </button>
             </div>
         </div>
 
-        <!-- Cyber Footer & Auto Email Engine -->
-        <div class="z-20 w-full max-w-lg px-6 text-center font-mono">
-            <div class="p-3 bg-stone-900/60 border border-stone-800/80 rounded-xl backdrop-blur-md">
-                <p class="text-[10px] text-stone-400 mb-2 tracking-widest uppercase">JOIN THE RESISTANCE // RECEIVE EARLY ACCESS</p>
-                
+        <!-- 极简社媒与 Balenciaga 同款矩阵 -->
+        <div class="z-20 w-full max-w-6xl px-6 mt-24 flex flex-col items-center">
+            
+            <!-- Email Subscribe (与 Dystopia 解耦，回归系统表达) -->
+            <div class="p-5 bg-stone-900/50 border border-stone-800 rounded-xl backdrop-blur-md w-full max-w-md text-center mb-16">
+                <p class="text-[10px] text-stone-400 mb-3 font-mono tracking-widest uppercase">ENTER THE SYSTEM // RECEIVE DROP ACCESS</p>
                 <form id="subscribe-form" onsubmit="handleSubscribe(event)" class="flex gap-2">
-                    <input type="email" id="subscriber-email" required placeholder="ENTER YOUR EMAIL..." class="flex-1 bg-black/80 border border-stone-700 px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500 rounded">
-                    <button type="submit" id="subscribe-btn" class="px-4 py-1.5 bg-amber-600 text-black text-xs font-bold hover:bg-amber-500 transition rounded">JOIN</button>
+                    <input type="email" id="subscriber-email" required placeholder="ENTER YOUR EMAIL..." class="flex-1 bg-black/80 border border-stone-700 px-3 py-2 text-xs text-white focus:outline-none focus:border-white rounded font-mono">
+                    <button type="submit" id="subscribe-btn" class="px-5 py-2 bg-white text-black text-xs font-bold font-mono hover:bg-stone-300 transition rounded">JOIN</button>
                 </form>
-                
-                <div id="subscribe-status" class="hidden text-[10px] text-green-400 mt-2 font-mono"></div>
+                <div id="subscribe-status" class="hidden text-[10px] mt-2 font-mono"></div>
             </div>
-            <p class="text-[9px] text-stone-600 mt-3 tracking-widest">© 2026 WITHIN SEVEN OPERATING SYSTEM. ALL RIGHTS RESERVED.</p>
+
+            <!-- 社交媒体图标 -->
+            <div class="flex gap-6 mb-8 text-stone-400">
+                <a href="#" class="hover:text-white transition"><svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                <a href="#" class="hover:text-white transition"><svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                <a href="#" class="hover:text-white transition"><svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.325V1.325C24 .597 23.403 0 22.675 0z"/></svg></a>
+            </div>
+
+            <!-- 商业与合规信息矩阵 -->
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 max-w-4xl text-[11px] font-mono text-stone-500 mb-8 px-4">
+                <a href="#" class="hover:text-stone-300 transition">Newsletter</a>
+                <a href="#" class="hover:text-stone-300 transition">Boutiques</a>
+                <a href="#" class="hover:text-stone-300 transition">Track Your Order</a>
+                <a href="#" class="hover:text-stone-300 transition">Returns & Exchanges</a>
+                <a href="#" class="hover:text-stone-300 transition">Shipping Policy</a>
+                <a href="#" class="hover:text-stone-300 transition">Careers ↗</a>
+                <a href="#" class="hover:text-stone-300 transition">Legal Notice</a>
+                <a href="#" class="hover:text-stone-300 transition">Privacy Policy</a>
+                <button onclick="openCookieSettings()" class="hover:text-stone-300 transition">Cookies Center</button>
+                <a href="#" class="hover:text-stone-300 transition">Contact Us</a>
+                <a href="#" class="hover:text-stone-300 transition">Care Instructions</a>
+            </div>
+
+            <div class="w-full border-t border-stone-800 pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] font-mono text-stone-600 tracking-widest px-4 gap-4">
+                <div>© 2026 WITHIN SEVEN OPERATING SYSTEM. ALL RIGHTS RESERVED.</div>
+                <div class="flex gap-6">
+                    <span>SHIPPING TO: <a href="#" class="underline hover:text-stone-300">CANADA (C$)</a></span>
+                    <span>LANGUAGE: <a href="#" class="underline hover:text-stone-300">ENGLISH</a></span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- MANIFESTO POPUP MODAL -->
-    <div id="modal-manifesto" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-6 fade-in">
-        <div class="max-w-2xl w-full bg-stone-900 border border-stone-700 p-8 rounded-xl shadow-2xl relative font-mono text-stone-300">
-            <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-6">
-                <span class="text-xs text-amber-500 tracking-widest">// TRANSMISSION 000 // SYSTEM MANIFESTO</span>
-                <button onclick="toggleManifesto(false)" class="text-stone-500 hover:text-white text-sm">✕ [CLOSE]</button>
-            </div>
-            <div class="space-y-4 text-xs md:text-sm leading-relaxed text-stone-300">
-                <p class="text-white font-bold">Civilization is not a straight line, but a cycle of three states.</p>
-                <p><strong class="text-slate-200">01 // UTOPIA:</strong> The Citadel of Order. Sterile perfection, seamless liquid fabrics, and absolute precision. A second skin for those who seek control.</p>
-                <p><strong class="text-amber-400">00 // LOST PARADISE:</strong> The Forgotten Ashes. Distressed yarns, sun-faded canvases, and raw textures worn by time. Clothing for wanderers who find beauty in decay.</p>
-                <p><strong class="text-red-500">09 // DYSTOPIA:</strong> The Rebel Underground. Multi-pocket utility, tactical armor, and signal-shielding structures forged for resistance.</p>
-                <p class="pt-2 text-stone-400 italic">"WITHIN SEVEN does not manufacture garments; we construct armor for your subconscious."</p>
-            </div>
-            <button onclick="toggleManifesto(false)" class="mt-8 w-full py-3 bg-white text-black text-xs font-bold tracking-widest hover:bg-stone-300 transition">
-                ACKNOWLEDGE & CLOSE TRANSMISSION
-            </button>
-        </div>
-    </div>
-
-    <!-- PRODUCT DETAIL LIGHTBOX MODAL -->
-    <div id="modal-product" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 fade-in overflow-y-auto">
-        <div class="max-w-4xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-2xl shadow-2xl relative font-mono text-stone-300 grid grid-cols-1 md:grid-cols-2 gap-8 my-auto">
-            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-stone-500 hover:text-white text-lg z-10">✕</button>
-            <div class="w-full h-80 md:h-full min-h-[320px] bg-stone-900 rounded-xl overflow-hidden relative border border-stone-800">
-                <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover">
-                <div class="absolute bottom-3 left-3 bg-black/70 px-3 py-1 text-[10px] text-amber-500 border border-white/10 rounded">
-                    HIGH-RES ARCHIVE PREVIEW
-                </div>
-            </div>
-            <div class="flex flex-col justify-between space-y-4">
-                <div>
-                    <span id="modal-code" class="text-xs text-amber-500 uppercase tracking-widest">WS-01-2026</span>
-                    <h2 id="modal-title" class="text-2xl font-bold text-white mt-1">Product Title</h2>
-                    <p id="modal-price" class="text-lg font-bold text-amber-400 mt-2">$0.00 CAD</p>
-                    <p id="modal-desc" class="text-xs text-stone-400 mt-4 leading-relaxed">Product Description</p>
-                    <div class="mt-6 border-t border-b border-stone-800 py-4 space-y-2 text-[11px] text-stone-400">
-                        <div class="flex justify-between"><span>COMPOSITION:</span> <span id="modal-spec-fabric" class="text-stone-200">100% Organic Raw Cotton</span></div>
-                        <div class="flex justify-between"><span>WEIGHT:</span> <span id="modal-spec-weight" class="text-stone-200">300 GSM Heavyweight</span></div>
-                        <div class="flex justify-between"><span>FIT PROFILE:</span> <span id="modal-spec-fit" class="text-stone-200">Boxy Architectural Fit</span></div>
-                    </div>
-                    <div class="mt-6">
-                        <label class="text-xs text-stone-300 mb-2 block tracking-widest uppercase">SELECT ARCHIVAL SIZE:</label>
-                        <div class="grid grid-cols-4 gap-2">
-                            <button onclick="selectModalSize('S')" class="modal-size-btn border border-stone-700 py-2 text-xs font-bold hover:border-white transition rounded" data-size="S">S</button>
-                            <button onclick="selectModalSize('M')" class="modal-size-btn border border-stone-700 py-2 text-xs font-bold hover:border-white transition rounded bg-white text-black" data-size="M">M</button>
-                            <button onclick="selectModalSize('L')" class="modal-size-btn border border-stone-700 py-2 text-xs font-bold hover:border-white transition rounded" data-size="L">L</button>
-                            <button onclick="selectModalSize('XL')" class="modal-size-btn border border-stone-700 py-2 text-xs font-bold hover:border-white transition rounded" data-size="XL">XL</button>
-                        </div>
-                    </div>
-                </div>
-                <button id="modal-buy-btn" class="snipcart-add-item w-full py-4 bg-white text-black text-xs font-bold tracking-widest hover:bg-stone-300 transition rounded-lg uppercase mt-4">
-                    CLAIM ITEM NOW
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SYSTEM COOKIE BANNER -->
-    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-black/95 border-t border-stone-800 backdrop-blur-xl z-[100] p-4 md:p-6 flex flex-col md:flex-row justify-between items-center transition-transform duration-700 translate-y-full font-mono shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
-        <div class="text-[10px] md:text-xs text-stone-400 mb-4 md:mb-0 max-w-4xl leading-relaxed">
-            <span class="text-amber-500 font-bold">SYS.NOTICE //</span> We utilize cookies to calibrate your mainframe experience, analyze signal traffic, and optimize tactical dispatch. By remaining in this sector, you authorize this protocol. <a href="#" class="underline hover:text-white transition">Cookie Policy</a>.
-        </div>
-        <div class="flex gap-3 w-full md:w-auto">
-            <button onclick="acceptCookies()" class="flex-1 md:flex-none px-4 md:px-6 py-2 border border-stone-700 hover:border-white text-stone-300 hover:text-white transition text-[10px] md:text-xs tracking-widest uppercase rounded">
-                SETTINGS
-            </button>
-            <button onclick="acceptCookies()" class="flex-1 md:flex-none px-4 md:px-8 py-2 bg-white text-black font-bold hover:bg-stone-300 transition text-[10px] md:text-xs tracking-widest uppercase rounded">
-                ACKNOWLEDGE
-            </button>
-        </div>
-    </div>
-
-    <!-- 2. TRINITY QUIZ ENGINE -->
+    <!-- 2. TRINITY QUIZ ENGINE (修复 Sequence 计数 01/02/03) -->
     <section id="view-quiz" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-6">
-        <!-- ... [Quiz section code remains identical] ... -->
         <div class="max-w-xl w-full bg-stone-900/90 border border-stone-800 p-8 rounded-xl shadow-2xl relative fade-in">
             <div class="w-full bg-stone-800 h-1 mb-8 rounded-full overflow-hidden">
                 <div id="quiz-progress" class="bg-amber-500 h-full w-1/3 transition-all duration-300"></div>
             </div>
-            <span id="quiz-step" class="text-xs font-mono text-stone-500 uppercase tracking-widest">TRINITY SEQUENCE 01 // 03</span>
+            
+            <!-- 动态更新 01 // 03, 02 // 03, 03 // 03 -->
+            <span id="quiz-step" class="text-xs font-mono text-amber-500 uppercase tracking-widest">TRINITY SEQUENCE 01 // 03</span>
             <h2 id="quiz-question" class="text-lg md:text-xl font-light mt-2 mb-8 text-stone-200">Loading question...</h2>
+
             <div class="space-y-3">
                 <button onclick="answerQuiz('utopia')" class="w-full p-4 border border-stone-700 hover:border-white hover:bg-white hover:text-black transition text-left text-xs md:text-sm font-mono flex justify-between items-center group rounded-lg">
                     <span id="opt-a">A. Option A</span>
@@ -268,7 +200,7 @@
         </div>
     </section>
 
-    <!-- 3. SCANNING LOADING SCREEN -->
+    <!-- 3. SCANNING LOADING SCREEN (ALIGNMENT IDENTIFIED) -->
     <section id="view-loading" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center font-mono">
         <div class="w-16 h-16 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mb-6"></div>
         <p id="loading-msg" class="text-xs tracking-[0.25em] text-stone-400 animate-pulse">ANALYZING SUBCONSCIOUS ALIGNMENT...</p>
@@ -276,52 +208,60 @@
 
     <!-- 4. UTOPIA STORE (LIGHT ZONE) -->
     <section id="view-utopia" class="hidden min-h-screen bg-slate-50 text-slate-900 pt-28 pb-16 px-6 md:px-12 fade-in">
-        <!-- ... [Utopia section code remains identical] ... -->
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-slate-200 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
                 <div>
                     <span class="text-xs font-mono tracking-widest text-slate-400 uppercase">SECTOR 01 // CITADEL OF ORDER</span>
                     <h1 class="text-4xl md:text-6xl font-extralight tracking-widest mt-2 text-slate-950">LIGHT ZONE</h1>
-                    <p class="text-sm text-slate-500 mt-2">Zero-friction minimalism and liquid precision.</p>
                 </div>
-                <div class="mt-4 md:mt-0 text-xs font-mono bg-slate-200 px-3 py-1.5 rounded-full text-slate-700">
-                    STATUS: CITIZEN VERIFIED
+                <!-- 品牌验证结果修改为 ALIGNMENT IDENTIFIED -->
+                <div class="mt-4 md:mt-0 text-xs font-mono bg-slate-200 px-3 py-1.5 rounded-full text-slate-700 font-bold">
+                    ALIGNMENT IDENTIFIED // UTOPIA
                 </div>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition border border-slate-200/60 flex flex-col justify-between">
                     <div>
-                        <div onclick="openProductModal('WS-01U', 'Seamless Liquid TENCEL™ Tee', 85, 'Zero-friction fit crafted from 300gsm liquid organic cotton.', 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop', '100% TENCEL™ Organic Cotton', '300 GSM Liquid Weave', 'Boxy Architectural Fit')" 
+                        <div onclick="openProductModal('WS-01U', 'Seamless Liquid TENCEL™ Tee', 77, 'Zero-friction fit crafted from 300gsm liquid organic cotton.', 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop', '100% TENCEL™ Organic Cotton', '300 GSM', 'Boxy Architectural Fit')" 
                              class="w-full h-80 bg-slate-100 rounded-xl mb-4 overflow-hidden cursor-pointer group relative">
-                            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop" alt="Utopia Tee" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center font-mono text-xs text-white">
-                                🔍 CLICK TO INSPECT
-                            </div>
+                            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                            <div class="absolute top-3 left-3 bg-slate-900 text-white font-mono text-[10px] px-2.5 py-1 rounded">EDITION 001 / 777</div>
                         </div>
-                        <span class="text-xs font-mono text-slate-400">WS-01U-2026</span>
                         <h3 class="text-lg font-bold mt-1 text-slate-900">Seamless Liquid TENCEL™ Tee</h3>
-                        <p class="text-xs text-slate-500 mt-1">Zero-friction fit crafted from 300gsm liquid cotton.</p>
-                        <div class="mt-4">
-                            <label class="text-[10px] font-mono text-slate-400 block mb-1 uppercase">Select Size:</label>
-                            <div class="flex gap-2">
-                                <button onclick="selectCardSize('WS-01U', 'S', this)" class="px-3 py-1 text-xs font-mono border border-slate-300 rounded hover:border-slate-900 transition">S</button>
-                                <button onclick="selectCardSize('WS-01U', 'M', this)" class="px-3 py-1 text-xs font-mono border border-slate-900 bg-slate-900 text-white rounded">M</button>
-                                <button onclick="selectCardSize('WS-01U', 'L', this)" class="px-3 py-1 text-xs font-mono border border-slate-300 rounded hover:border-slate-900 transition">L</button>
-                                <button onclick="selectCardSize('WS-01U', 'XL', this)" class="px-3 py-1 text-xs font-mono border border-slate-300 rounded hover:border-slate-900 transition">XL</button>
+                        
+                        <div class="mt-4 flex flex-col gap-3">
+                            <div class="flex justify-between items-center">
+                                <label class="text-[10px] font-mono text-slate-400 uppercase">Size (01-07):</label>
+                                <button onclick="openSizeGuide()" class="text-[10px] font-mono text-slate-400 hover:text-slate-900 underline">Size Guide</button>
+                            </div>
+                            <!-- 7个尺码矩阵 -->
+                            <div class="grid grid-cols-7 gap-1">
+                                <button onclick="selectCardSize('WS-01U', '01', this)" class="py-1 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">01</button>
+                                <button onclick="selectCardSize('WS-01U', '02', this)" class="py-1 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">02</button>
+                                <button onclick="selectCardSize('WS-01U', '03', this)" class="py-1 text-[11px] font-mono border border-slate-900 bg-slate-900 text-white rounded font-bold">03</button>
+                                <button onclick="selectCardSize('WS-01U', '04', this)" class="py-1 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">04</button>
+                                <button onclick="selectCardSize('WS-01U', '05', this)" class="py-1 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">05</button>
+                                <button onclick="selectCardSize('WS-01U', '06', this)" class="py-1 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">06</button>
+                                <button onclick="selectCardSize('WS-01U', '07', this)" class="py-1 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">07</button>
+                            </div>
+                            <div class="flex items-center border border-slate-300 rounded w-fit mt-1">
+                                <button onclick="changeCardQty('WS-01U', -1)" class="px-3 py-1 text-slate-500 hover:text-slate-900">-</button>
+                                <span id="qty-WS-01U" class="px-3 py-1 font-mono text-xs">1</span>
+                                <button onclick="changeCardQty('WS-01U', 1)" class="px-3 py-1 text-slate-500 hover:text-slate-900">+</button>
                             </div>
                         </div>
                     </div>
                     <div class="mt-6 flex justify-between items-center border-t border-slate-100 pt-4">
-                        <span class="font-mono text-sm font-bold text-slate-900">$85 CAD</span>
+                        <span class="font-mono text-sm font-bold text-slate-900">$77 CAD</span>
                         <button id="btn-WS-01U" class="snipcart-add-item px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-mono hover:bg-slate-700 transition"
-                            data-item-id="WS-01U" data-item-name="Seamless Liquid TENCEL™ Tee" data-item-price="85.00"
-                            data-item-url="https://withinseven.com/" data-item-description="Zero-friction liquid cotton fit."
-                            data-item-custom1-name="Size" data-item-custom1-value="M">
+                            data-item-id="WS-01U" data-item-name="Seamless Liquid TENCEL™ Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03" data-item-quantity="1">
                             ADD TO INVENTORY
                         </button>
                     </div>
                 </div>
             </div>
+            
             <div class="mt-20 border-t border-slate-200 pt-8 flex justify-between text-xs font-mono text-slate-500">
                 <button onclick="enterFaction('paradise')" class="hover:text-amber-600 transition">➔ CROSS BOUNDARY: LOST PARADISE</button>
                 <button onclick="enterFaction('dystopia')" class="hover:text-red-600 transition">⚠ INFILTRATE DARK ZONE</button>
@@ -331,52 +271,56 @@
 
     <!-- 5. LOST PARADISE STORE -->
     <section id="view-paradise" class="hidden min-h-screen bg-paradise text-stone-200 pt-28 pb-16 px-6 md:px-12 fade-in">
-        <!-- ... [Paradise section code remains identical] ... -->
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-stone-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
                 <div>
                     <span class="text-xs font-mono tracking-widest text-amber-500/80 uppercase">// SECTOR 00 // THE FORGOTTEN ASHES</span>
                     <h1 class="text-4xl md:text-6xl font-serif tracking-widest mt-2 text-stone-100 italic">LOST PARADISE</h1>
-                    <p class="text-sm text-stone-400 mt-2 font-mono">Decay, raw textures, and distressed archival garments.</p>
                 </div>
-                <div class="mt-4 md:mt-0 text-xs font-mono bg-amber-950/40 border border-amber-800/50 px-3 py-1.5 rounded text-amber-400">
-                    STATUS: WANDERER UNBOUND
+                <div class="mt-4 md:mt-0 text-xs font-mono bg-amber-950/40 border border-amber-800/50 px-3 py-1.5 rounded text-amber-400 font-bold">
+                    ALIGNMENT IDENTIFIED // PARADISE
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-stone-900/60 border border-stone-800 p-6 rounded-xl hover:border-amber-600/60 transition flex flex-col justify-between">
                     <div>
-                        <div onclick="openProductModal('WS-01P', 'Sun-Faded Distressed Knit Sweater', 165, 'Raw cotton yarn with manual edge erosion and hand-done distressing.', 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=1000&auto=format&fit=crop', '100% Raw Distressed Cotton', '480 GSM Heavy Knit', 'Relaxed Oversized Fit')"
+                        <div onclick="openProductModal('WS-01P', 'Sun-Faded Distressed Knit Sweater', 77, 'Raw cotton yarn with manual edge erosion.', 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=1000&auto=format&fit=crop', 'Raw Distressed Cotton', '480 GSM', 'Oversized Fit')"
                              class="w-full h-80 bg-stone-950 border border-stone-800 mb-4 overflow-hidden cursor-pointer group relative rounded-lg">
-                            <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=1000&auto=format&fit=crop" alt="Paradise Sweater" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center font-mono text-xs text-amber-400">
-                                🔍 INSPECT RELIC
-                            </div>
+                            <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                            <div class="absolute top-3 left-3 bg-amber-600 text-black font-mono text-[10px] font-bold px-2.5 py-1 rounded">EDITION 001 / 777</div>
                         </div>
-                        <span class="text-xs font-mono text-amber-500/80">WS-01P-2026</span>
                         <h3 class="text-lg font-bold mt-1 text-stone-100">Sun-Faded Distressed Knit Sweater</h3>
-                        <p class="text-xs text-stone-400 mt-1">Raw cotton yarn with manual edge erosion and distressing.</p>
-                        <div class="mt-4">
-                            <label class="text-[10px] font-mono text-stone-400 block mb-1 uppercase">Select Size:</label>
-                            <div class="flex gap-2">
-                                <button onclick="selectCardSize('WS-01P', 'S', this)" class="px-3 py-1 text-xs font-mono border border-stone-700 rounded hover:border-amber-500 transition">S</button>
-                                <button onclick="selectCardSize('WS-01P', 'M', this)" class="px-3 py-1 text-xs font-mono border border-amber-500 bg-amber-600 text-black font-bold rounded">M</button>
-                                <button onclick="selectCardSize('WS-01P', 'L', this)" class="px-3 py-1 text-xs font-mono border border-stone-700 rounded hover:border-amber-500 transition">L</button>
-                                <button onclick="selectCardSize('WS-01P', 'XL', this)" class="px-3 py-1 text-xs font-mono border border-stone-700 rounded hover:border-amber-500 transition">XL</button>
+                        <div class="mt-4 flex flex-col gap-3">
+                            <div class="flex justify-between items-center">
+                                <label class="text-[10px] font-mono text-stone-400 uppercase">Size (01-07):</label>
+                                <button onclick="openSizeGuide()" class="text-[10px] font-mono text-stone-400 hover:text-white underline">Size Guide</button>
+                            </div>
+                            <div class="grid grid-cols-7 gap-1">
+                                <button onclick="selectCardSize('WS-01P', '01', this)" class="py-1 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">01</button>
+                                <button onclick="selectCardSize('WS-01P', '02', this)" class="py-1 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">02</button>
+                                <button onclick="selectCardSize('WS-01P', '03', this)" class="py-1 text-[11px] font-mono border border-amber-500 bg-amber-600 text-black font-bold rounded">03</button>
+                                <button onclick="selectCardSize('WS-01P', '04', this)" class="py-1 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">04</button>
+                                <button onclick="selectCardSize('WS-01P', '05', this)" class="py-1 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">05</button>
+                                <button onclick="selectCardSize('WS-01P', '06', this)" class="py-1 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">06</button>
+                                <button onclick="selectCardSize('WS-01P', '07', this)" class="py-1 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">07</button>
+                            </div>
+                            <div class="flex items-center border border-stone-700 rounded w-fit mt-1">
+                                <button onclick="changeCardQty('WS-01P', -1)" class="px-3 py-1 text-stone-500 hover:text-white">-</button>
+                                <span id="qty-WS-01P" class="px-3 py-1 font-mono text-xs">1</span>
+                                <button onclick="changeCardQty('WS-01P', 1)" class="px-3 py-1 text-stone-500 hover:text-white">+</button>
                             </div>
                         </div>
                     </div>
                     <div class="mt-6 flex justify-between items-center font-mono text-sm border-t border-stone-800/80 pt-4">
-                        <span class="text-amber-400 font-bold">$165 CAD</span>
+                        <span class="text-amber-400 font-bold">$77 CAD</span>
                         <button id="btn-WS-01P" class="snipcart-add-item px-4 py-2 bg-amber-600 text-black font-bold text-xs font-mono hover:bg-amber-500 transition rounded"
-                            data-item-id="WS-01P" data-item-name="Sun-Faded Distressed Knit Sweater" data-item-price="165.00"
-                            data-item-url="https://withinseven.com/" data-item-description="Raw yarn distressed knit sweater."
-                            data-item-custom1-name="Size" data-item-custom1-value="M">
+                            data-item-id="WS-01P" data-item-name="Sun-Faded Distressed Knit Sweater" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03" data-item-quantity="1">
                             CLAIM RELIC
                         </button>
                     </div>
                 </div>
             </div>
+            
             <div class="mt-20 border-t border-stone-800 pt-8 flex justify-between text-xs font-mono text-stone-500">
                 <button onclick="enterFaction('utopia')" class="hover:text-white transition">↺ ASCEND TO LIGHT ZONE</button>
                 <button onclick="enterFaction('dystopia')" class="hover:text-red-500 transition">➔ DESCEND TO DARK ZONE</button>
@@ -386,52 +330,56 @@
 
     <!-- 6. DYSTOPIA STORE -->
     <section id="view-dystopia" class="hidden min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-16 px-6 md:px-12 fade-in">
-        <!-- ... [Dystopia section code remains identical] ... -->
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-zinc-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
                 <div>
                     <span class="text-xs font-mono tracking-widest text-red-500 uppercase">// SECTOR 09 // UNAUTHORIZED REBEL ZONE</span>
                     <h1 class="text-4xl md:text-6xl font-black tracking-tighter mt-2 glitch-text">DARK ZONE</h1>
-                    <p class="text-sm text-zinc-400 mt-2 font-mono">Tactical utility, deconstruction, and resistance gear.</p>
                 </div>
-                <div class="mt-4 md:mt-0 text-xs font-mono bg-red-950/60 border border-red-800 px-3 py-1.5 text-red-400">
-                    STATUS: REBEL SIGNAL DETECTED
+                <div class="mt-4 md:mt-0 text-xs font-mono bg-red-950/60 border border-red-800 px-3 py-1.5 text-red-400 font-bold">
+                    ALIGNMENT IDENTIFIED // DYSTOPIA
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-zinc-900 border border-zinc-800 p-6 hover:border-red-600 transition flex flex-col justify-between">
                     <div>
-                        <div onclick="openProductModal('WS-01D', 'Acid-Washed Heavyweight Tactical Tee', 85, '280gsm raw cotton with snow-acid wash treatment and reinforced structural seams.', 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1000&auto=format&fit=crop', '100% Acid-Washed Cotton', '280 GSM Heavy Structure', 'Drop-Shoulder Tactical Fit')"
+                        <div onclick="openProductModal('WS-01D', 'Acid-Washed Heavyweight Tactical Tee', 77, '280gsm raw cotton with snow-acid wash treatment.', 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1000&auto=format&fit=crop', 'Acid-Washed Cotton', '280 GSM', 'Drop-Shoulder Fit')"
                              class="w-full h-80 bg-zinc-950 border border-zinc-800 mb-4 overflow-hidden cursor-pointer group relative">
-                            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1000&auto=format&fit=crop" alt="Dystopia Tee" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-                            <div class="absolute inset-0 bg-red-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center font-mono text-xs text-red-400">
-                                ⚠️ SCAN GEAR SPECIFICATIONS
-                            </div>
+                            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                            <div class="absolute top-3 left-3 bg-red-600 text-white font-mono text-[10px] font-bold px-2.5 py-1 rounded">EDITION 001 / 777</div>
                         </div>
-                        <span class="text-xs font-mono text-red-500">WS-01D-2026</span>
                         <h3 class="text-lg font-bold mt-1">Acid-Washed Distressed Heavyweight Tee</h3>
-                        <p class="text-xs text-zinc-400 mt-1">280gsm raw cotton with acid snow-wash treatment.</p>
-                        <div class="mt-4">
-                            <label class="text-[10px] font-mono text-zinc-400 block mb-1 uppercase">Select Size:</label>
-                            <div class="flex gap-2">
-                                <button onclick="selectCardSize('WS-01D', 'S', this)" class="px-3 py-1 text-xs font-mono border border-zinc-700 rounded hover:border-red-500 transition">S</button>
-                                <button onclick="selectCardSize('WS-01D', 'M', this)" class="px-3 py-1 text-xs font-mono border border-red-600 bg-red-600 text-white font-bold rounded">M</button>
-                                <button onclick="selectCardSize('WS-01D', 'L', this)" class="px-3 py-1 text-xs font-mono border border-zinc-700 rounded hover:border-red-500 transition">L</button>
-                                <button onclick="selectCardSize('WS-01D', 'XL', this)" class="px-3 py-1 text-xs font-mono border border-zinc-700 rounded hover:border-red-500 transition">XL</button>
+                        <div class="mt-4 flex flex-col gap-3">
+                            <div class="flex justify-between items-center">
+                                <label class="text-[10px] font-mono text-zinc-400 uppercase">Size (01-07):</label>
+                                <button onclick="openSizeGuide()" class="text-[10px] font-mono text-zinc-400 hover:text-white underline">Size Guide</button>
+                            </div>
+                            <div class="grid grid-cols-7 gap-1">
+                                <button onclick="selectCardSize('WS-01D', '01', this)" class="py-1 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">01</button>
+                                <button onclick="selectCardSize('WS-01D', '02', this)" class="py-1 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">02</button>
+                                <button onclick="selectCardSize('WS-01D', '03', this)" class="py-1 text-[11px] font-mono border border-red-600 bg-red-600 text-white font-bold rounded">03</button>
+                                <button onclick="selectCardSize('WS-01D', '04', this)" class="py-1 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">04</button>
+                                <button onclick="selectCardSize('WS-01D', '05', this)" class="py-1 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">05</button>
+                                <button onclick="selectCardSize('WS-01D', '06', this)" class="py-1 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">06</button>
+                                <button onclick="selectCardSize('WS-01D', '07', this)" class="py-1 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">07</button>
+                            </div>
+                            <div class="flex items-center border border-zinc-700 rounded w-fit mt-1">
+                                <button onclick="changeCardQty('WS-01D', -1)" class="px-3 py-1 text-zinc-500 hover:text-white">-</button>
+                                <span id="qty-WS-01D" class="px-3 py-1 font-mono text-xs">1</span>
+                                <button onclick="changeCardQty('WS-01D', 1)" class="px-3 py-1 text-zinc-500 hover:text-white">+</button>
                             </div>
                         </div>
                     </div>
                     <div class="mt-6 flex justify-between items-center font-mono text-sm border-t border-zinc-800 pt-4">
-                        <span class="text-red-500 font-bold">$85 CAD</span>
+                        <span class="text-red-500 font-bold">$77 CAD</span>
                         <button id="btn-WS-01D" class="snipcart-add-item px-4 py-2 bg-red-600 text-white text-xs font-mono hover:bg-red-700 transition"
-                            data-item-id="WS-01D" data-item-name="Acid-Washed Distressed Heavyweight Tee" data-item-price="85.00"
-                            data-item-url="https://withinseven.com/" data-item-description="280gsm raw cotton with acid wash."
-                            data-item-custom1-name="Size" data-item-custom1-value="M">
+                            data-item-id="WS-01D" data-item-name="Acid-Washed Distressed Heavyweight Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03" data-item-quantity="1">
                             CLAIM GEAR
                         </button>
                     </div>
                 </div>
             </div>
+            
             <div class="mt-20 border-t border-zinc-800 pt-8 flex justify-between text-xs font-mono text-zinc-500">
                 <button onclick="enterFaction('utopia')" class="hover:text-white transition">↺ RETURN TO LIGHT ZONE</button>
                 <button onclick="enterFaction('paradise')" class="hover:text-amber-400 transition">➔ ESCAPE TO LOST PARADISE</button>
@@ -439,11 +387,144 @@
         </div>
     </section>
 
+    <!-- 宽幅双栏高定 Modal (左图右文字 + 7个尺码 + VERIFY YOUR NUMBER) -->
+    <div id="modal-product" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 fade-in overflow-y-auto">
+        <div class="max-w-5xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-2xl shadow-2xl relative font-mono text-stone-300 grid grid-cols-1 md:grid-cols-2 gap-8 my-auto mt-20 md:mt-auto">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-stone-500 hover:text-white text-lg z-10">✕</button>
+            
+            <!-- 左栏：大图与 Edition 编号 -->
+            <div class="w-full h-80 md:h-full min-h-[360px] bg-stone-900 rounded-xl overflow-hidden relative border border-stone-800">
+                <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover">
+                <div class="absolute top-3 left-3 bg-amber-600 text-black font-bold px-3 py-1 text-[10px] rounded">
+                    EDITION 001 / 777
+                </div>
+                <div class="absolute bottom-3 left-3 bg-black/80 px-3 py-1 text-[10px] text-stone-400 border border-white/10 rounded">
+                    HIGH-RES ARCHIVE PREVIEW
+                </div>
+            </div>
+
+            <!-- 右栏：完整参数、7尺码、数量、购买与验证通道 -->
+            <div class="flex flex-col justify-between space-y-4">
+                <div>
+                    <span id="modal-code" class="text-xs text-amber-500 uppercase tracking-widest">WS-01-2026</span>
+                    <h2 id="modal-title" class="text-2xl font-bold text-white mt-1">Product Title</h2>
+                    <p id="modal-price" class="text-lg font-bold text-amber-400 mt-2">$77.00 CAD</p>
+                    <p id="modal-desc" class="text-xs text-stone-400 mt-3 leading-relaxed">Product Description</p>
+                    
+                    <div class="mt-4 border-t border-b border-stone-800 py-3 space-y-1.5 text-[11px] text-stone-400">
+                        <div class="flex justify-between"><span>COMPOSITION:</span> <span id="modal-spec-fabric" class="text-stone-200">Raw Cotton</span></div>
+                        <div class="flex justify-between"><span>WEIGHT:</span> <span id="modal-spec-weight" class="text-stone-200">300 GSM</span></div>
+                        <div class="flex justify-between"><span>DISPATCH:</span> <span class="text-stone-200">SHIPS WITHIN 7 DAYS</span></div>
+                    </div>
+                    
+                    <!-- 7个尺码与数量选择 -->
+                    <div class="mt-4 flex flex-col gap-3">
+                        <div>
+                            <div class="flex justify-between items-center mb-1.5">
+                                <label class="text-[10px] text-stone-300 tracking-widest uppercase">SELECT ARCHIVAL SIZE (01-07):</label>
+                                <button onclick="openSizeGuide()" class="text-[10px] text-amber-500 hover:text-white underline">SIZE GUIDE</button>
+                            </div>
+                            <div class="grid grid-cols-7 gap-1">
+                                <button onclick="selectModalSize('01')" class="modal-size-btn border border-stone-800 py-1.5 text-xs font-bold rounded" data-size="01">01</button>
+                                <button onclick="selectModalSize('02')" class="modal-size-btn border border-stone-800 py-1.5 text-xs font-bold rounded" data-size="02">02</button>
+                                <button onclick="selectModalSize('03')" class="modal-size-btn border border-white py-1.5 text-xs font-bold bg-white text-black rounded" data-size="03">03</button>
+                                <button onclick="selectModalSize('04')" class="modal-size-btn border border-stone-800 py-1.5 text-xs font-bold rounded" data-size="04">04</button>
+                                <button onclick="selectModalSize('05')" class="modal-size-btn border border-stone-800 py-1.5 text-xs font-bold rounded" data-size="05">05</button>
+                                <button onclick="selectModalSize('06')" class="modal-size-btn border border-stone-800 py-1.5 text-xs font-bold rounded" data-size="06">06</button>
+                                <button onclick="selectModalSize('07')" class="modal-size-btn border border-stone-800 py-1.5 text-xs font-bold rounded" data-size="07">07</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-[10px] text-stone-300 tracking-widest uppercase block mb-1">QUANTITY:</label>
+                            <div class="flex items-center border border-stone-700 rounded w-fit">
+                                <button onclick="changeModalQty(-1)" class="px-3 py-1 text-stone-400 hover:text-white transition font-bold">-</button>
+                                <span id="modal-qty" class="px-3 py-1 font-mono text-xs text-white">1</span>
+                                <button onclick="changeModalQty(1)" class="px-3 py-1 text-stone-400 hover:text-white transition font-bold">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 核心品牌价值说明 -->
+                <div class="bg-stone-900/60 p-3 rounded border border-stone-800 text-[10px] text-stone-400">
+                    🔒 <strong class="text-white">POST-PURCHASE PROTOCOL:</strong> Every piece includes a unique NFC/Code. Verify your number upon arrival to unlock your 7-day personal statement cycle.
+                </div>
+
+                <button id="modal-buy-btn" class="snipcart-add-item w-full py-3.5 bg-white text-black text-xs font-bold tracking-widest hover:bg-stone-300 transition rounded-lg uppercase">
+                    CLAIM ITEM NOW
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7个尺码的厘米对照表 Modal -->
+    <div id="modal-size-guide" class="hidden fixed inset-0 z-[120] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
+        <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-xl shadow-2xl relative text-stone-300">
+            <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-6">
+                <span class="text-xs text-amber-500 tracking-widest uppercase">// ARCHIVAL SIZE MEASUREMENTS (01 - 07)</span>
+                <button onclick="closeSizeGuide()" class="text-stone-500 hover:text-white text-lg">✕</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs whitespace-nowrap">
+                    <thead>
+                        <tr class="text-stone-500 border-b border-stone-800">
+                            <th class="py-2.5">CODE</th>
+                            <th class="py-2.5">FIT EQUIVALENT</th>
+                            <th class="py-2.5">CHEST (cm)</th>
+                            <th class="py-2.5">SHOULDER (cm)</th>
+                            <th class="py-2.5">LENGTH (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-900">
+                        <tr><td class="py-2 font-bold text-white">01</td><td>XS</td><td>108</td><td>52</td><td>68</td></tr>
+                        <tr><td class="py-2 font-bold text-white">02</td><td>S</td><td>114</td><td>54</td><td>70</td></tr>
+                        <tr class="bg-stone-900/40"><td class="py-2 font-bold text-amber-400">03</td><td class="text-amber-400">M (STANDARD)</td><td class="text-amber-400">120</td><td class="text-amber-400">56</td><td class="text-amber-400">73</td></tr>
+                        <tr><td class="py-2 font-bold text-white">04</td><td>L</td><td>126</td><td>58</td><td>76</td></tr>
+                        <tr><td class="py-2 font-bold text-white">05</td><td>XL</td><td>132</td><td>60</td><td>79</td></tr>
+                        <tr><td class="py-2 font-bold text-white">06</td><td>XXL</td><td>138</td><td>62</td><td>81</td></tr>
+                        <tr><td class="py-2 font-bold text-white">07</td><td>XXXL</td><td>144</td><td>64</td><td>83</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-[10px] text-stone-500 mt-5">* Measured flat. Tailored for wide boxy proportions with distressed finish tolerance.</p>
+        </div>
+    </div>
+
+    <!-- Cookie Preference Modal -->
+    <div id="modal-cookie-settings" class="hidden fixed inset-0 z-[110] bg-black/90 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
+        <div class="max-w-xl w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl relative text-stone-300">
+            <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-6">
+                <span class="text-xs text-amber-500 tracking-widest uppercase">// SYS.PREFERENCES // COOKIE PROTOCOLS</span>
+                <button onclick="closeCookieSettings()" class="text-stone-500 hover:text-white text-lg">✕</button>
+            </div>
+            <div class="space-y-4 text-xs mb-6">
+                <div class="p-4 bg-stone-900/60 border border-stone-800 rounded-lg flex justify-between"><span class="font-bold text-white uppercase">01 // Essential Inventory & Cart</span><span class="text-[10px] text-amber-500 font-bold">REQUIRED</span></div>
+                <div class="p-4 bg-stone-900/60 border border-stone-800 rounded-lg flex justify-between"><span class="font-bold text-white uppercase">02 // Traffic Signals & Analytics</span><input type="checkbox" id="cookie-analytics" checked class="accent-amber-500 w-4 h-4 cursor-pointer"></div>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="saveCookiePreferences(false)" class="flex-1 py-3 border border-stone-700 text-stone-300 text-xs font-bold rounded">SAVE PREFERENCES</button>
+                <button onclick="saveCookiePreferences(true)" class="flex-1 py-3 bg-white text-black font-bold text-xs rounded">ACCEPT ALL</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 避免挡底部的绝对置底 Cookie 条 -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-black/95 border-t border-stone-800 backdrop-blur-xl z-[45] p-4 flex flex-col md:flex-row justify-between items-center transition-transform duration-700 translate-y-full font-mono">
+        <div class="text-[10px] md:text-xs text-stone-400 mb-3 md:mb-0 max-w-4xl">
+            <span class="text-amber-500 font-bold">SYS.NOTICE //</span> We utilize cookies for system memory & inventory checkout security.
+        </div>
+        <div class="flex gap-3 w-full md:w-auto">
+            <button onclick="openCookieSettings()" class="flex-1 md:flex-none px-4 py-1.5 border border-stone-700 text-stone-300 text-[10px] rounded">SETTINGS</button>
+            <button onclick="saveCookiePreferences(true)" class="flex-1 md:flex-none px-6 py-1.5 bg-white text-black font-bold text-[10px] rounded">ACKNOWLEDGE</button>
+        </div>
+    </div>
+
     <div id="snipcart" hidden></div>
 
     <script>
-        // 1. Dynamic Countdown Timer
-        const dropDate = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
+        // --- 1. 倒计时硬编码固定 (Nov 11, 2026 UTC) ---
+        const dropDate = new Date("2026-11-11T00:00:00Z").getTime();
         function updateTimer() {
             const now = new Date().getTime();
             const diff = dropDate - now;
@@ -458,98 +539,48 @@
             const pad = (n) => String(n).padStart(2, '0');
             document.getElementById('countdown-timer').innerText = `${pad(d)}D ${pad(h)}H ${pad(m)}M ${pad(s)}S`;
         }
-        setInterval(updateTimer, 1000);
-        updateTimer();
+        setInterval(updateTimer, 1000); updateTimer();
 
-        // 2. Size Selection Logic
-        function selectCardSize(productId, size, btnElement) {
-            const container = btnElement.parentElement;
-            const buttons = container.querySelectorAll('button');
-            buttons.forEach(b => {
-                b.className = "px-3 py-1 text-xs font-mono border border-stone-700/60 rounded text-stone-400 hover:border-white transition";
-            });
-            if (productId.includes('U')) {
-                btnElement.className = "px-3 py-1 text-xs font-mono border border-slate-900 bg-slate-900 text-white rounded font-bold";
-            } else if (productId.includes('P')) {
-                btnElement.className = "px-3 py-1 text-xs font-mono border border-amber-500 bg-amber-600 text-black font-bold rounded";
+        // --- 2. 顶栏主题颜色自适应逻辑 ---
+        let currentView = 'landing';
+        function setNavbarTheme(viewId) {
+            const nav = document.getElementById('navbar');
+            const brandText = document.getElementById('nav-brand-text');
+            
+            if (viewId === 'utopia') {
+                // Light Zone 亮色适配 (黑字)
+                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-slate-300 backdrop-blur-md bg-white/90 text-slate-900";
+                brandText.className = "font-brand font-light text-sm md:text-base tracking-[0.45em] text-slate-900 uppercase transition-colors";
             } else {
-                btnElement.className = "px-3 py-1 text-xs font-mono border border-red-600 bg-red-600 text-white font-bold rounded";
+                // Dark Zone 适配 (白字)
+                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/80 text-white";
+                brandText.className = "font-brand font-light text-sm md:text-base tracking-[0.45em] text-white uppercase transition-colors";
             }
-            const cartBtn = document.getElementById(`btn-${productId}`);
-            if (cartBtn) cartBtn.setAttribute('data-item-custom1-value', size);
         }
 
-        // 3. Product Modal Lightbox Logic
-        let currentModalProduct = {};
-        function openProductModal(id, title, price, desc, imgUrl, fabric, weight, fit) {
-            currentModalProduct = { id, title, price, desc, imgUrl, selectedSize: 'M' };
-            document.getElementById('modal-code').innerText = `${id}-2026 ARCHIVE`;
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-price').innerText = `$${price}.00 CAD`;
-            document.getElementById('modal-desc').innerText = desc;
-            document.getElementById('modal-img').src = imgUrl;
-            document.getElementById('modal-spec-fabric').innerText = fabric;
-            document.getElementById('modal-spec-weight').innerText = weight;
-            document.getElementById('modal-spec-fit').innerText = fit;
+        function showView(viewId, pushHistory = true) {
+            ['landing', 'utopia', 'paradise', 'dystopia'].forEach(v => document.getElementById(`view-${v}`).classList.add('hidden'));
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+            if (pushHistory && viewId !== currentView) history.pushState({ view: viewId }, '', '#' + viewId);
+            currentView = viewId;
 
-            const buyBtn = document.getElementById('modal-buy-btn');
-            buyBtn.setAttribute('data-item-id', id);
-            buyBtn.setAttribute('data-item-name', title);
-            buyBtn.setAttribute('data-item-price', price.toFixed(2));
-            buyBtn.setAttribute('data-item-url', 'https://withinseven.com/');
-            buyBtn.setAttribute('data-item-description', desc);
-            buyBtn.setAttribute('data-item-custom1-name', 'Size');
-            buyBtn.setAttribute('data-item-custom1-value', 'M');
-
-            selectModalSize('M');
-            document.getElementById('modal-product').classList.remove('hidden');
+            const backBtn = document.getElementById('nav-back-btn');
+            if (backBtn) {
+                if (viewId === 'landing') backBtn.classList.add('hidden');
+                else backBtn.classList.remove('hidden');
+            }
+            setNavbarTheme(viewId);
+            window.scrollTo(0, 0);
         }
-        function closeProductModal() {
-            document.getElementById('modal-product').classList.add('hidden');
-        }
-        function selectModalSize(size) {
-            currentModalProduct.selectedSize = size;
-            const buttons = document.querySelectorAll('.modal-size-btn');
-            buttons.forEach(b => {
-                if (b.getAttribute('data-size') === size) {
-                    b.className = "modal-size-btn border border-white py-2 text-xs font-bold bg-white text-black rounded";
-                } else {
-                    b.className = "modal-size-btn border border-stone-800 py-2 text-xs font-bold text-stone-400 hover:border-stone-500 rounded";
-                }
-            });
-            const buyBtn = document.getElementById('modal-buy-btn');
-            buyBtn.setAttribute('data-item-custom1-value', size);
-        }
+        
+        window.onpopstate = function(event) {
+            if (event.state && event.state.view) showView(event.state.view, false);
+            else showView('landing', false);
+        };
+        function goBack() { window.history.length > 1 ? window.history.back() : showView('landing'); }
+        function enterFaction(faction) { showView(faction); }
 
-        // 4. EmailJS Direct Dispatch Engine
-        function handleSubscribe(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('subscriber-email');
-            const btn = document.getElementById('subscribe-btn');
-            const status = document.getElementById('subscribe-status');
-            const email = emailInput.value;
-
-            btn.innerText = "TRANSMITTING...";
-            btn.disabled = true;
-
-            emailjs.send("service_h9efu33", "template_vqygtvd", {
-                user_email: email
-            }, "KJOBMZTZ7SCJuXcQ8")
-            .then(function(response) {
-                btn.innerText = "JOINED";
-                status.innerText = "SIGNAL TRANSMITTED // WELCOME EMAIL DISPATCHED.";
-                status.classList.remove('hidden');
-                emailInput.value = "";
-            }, function(error) {
-                console.error("EmailJS Error:", error);
-                btn.innerText = "JOINED";
-                status.innerText = "SIGNAL TRANSMITTED // WELCOME EMAIL DISPATCHED.";
-                status.classList.remove('hidden');
-                emailInput.value = "";
-            });
-        }
-
-        // 5. System Navigation Logic
+        // --- 3. 答题引擎 (01/03, 02/03, 03/03 序列修复) ---
         let quizStep = 0;
         let scores = { utopia: 0, paradise: 0, dystopia: 0 };
         const questions = [
@@ -558,57 +589,18 @@
             { q: "What is your stance towards constant surveillance?", a: "Blend in gracefully as a perfect, immaculate component.", b: "Wander unnoticed through forgotten grey sectors.", c: "Conceal identity, disrupt signals, and dismantle the network." }
         ];
 
-        function toggleManifesto(show) {
-            const modal = document.getElementById('modal-manifesto');
-            if (show) modal.classList.remove('hidden');
-            else modal.classList.add('hidden');
-        }
-
-        function setLogoStyle(faction) {
-            const logo = document.getElementById('nav-logo');
-            const nav = document.getElementById('navbar');
-            const scanline = document.getElementById('scanline-overlay');
-
-            if (faction === 'landing') {
-                logo.className = "h-7 w-auto object-contain invert mix-blend-screen transition-all";
-                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/60 text-white";
-                scanline.style.opacity = '1';
-            } else if (faction === 'utopia') {
-                logo.className = "h-7 w-auto object-contain mix-blend-multiply transition-all";
-                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-slate-300 backdrop-blur-md bg-white/80 text-slate-900";
-                scanline.style.opacity = '0';
-            } else if (faction === 'paradise') {
-                logo.className = "h-7 w-auto object-contain invert mix-blend-screen opacity-90 transition-all";
-                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-stone-800 backdrop-blur-md bg-stone-900/80 text-stone-200";
-                scanline.style.opacity = '0.5';
-            } else {
-                logo.className = "h-7 w-auto object-contain invert mix-blend-screen transition-all";
-                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-red-900/30 backdrop-blur-md bg-black/80 text-white";
-                scanline.style.opacity = '1';
-            }
-        }
-
-        function showView(viewId) {
-            ['landing', 'quiz', 'loading', 'utopia', 'paradise', 'dystopia'].forEach(v => {
-                document.getElementById(`view-${v}`).classList.add('hidden');
-            });
-            document.getElementById(`view-${viewId}`).classList.remove('hidden');
-            if (['utopia', 'paradise', 'dystopia', 'landing'].includes(viewId)) {
-                setLogoStyle(viewId);
-            }
-            window.scrollTo(0, 0);
-        }
-
         function startQuiz() {
             quizStep = 0;
             scores = { utopia: 0, paradise: 0, dystopia: 0 };
             updateQuizUI();
-            showView('quiz');
+            ['landing', 'utopia', 'paradise', 'dystopia'].forEach(v => document.getElementById(`view-${v}`).classList.add('hidden'));
+            document.getElementById('view-quiz').classList.remove('hidden');
         }
 
         function updateQuizUI() {
             document.getElementById('quiz-progress').style.width = `${((quizStep + 1) / 3) * 100}%`;
-            document.getElementById('quiz-step').innerText = `TRINITY SEQUENCE 01 // 03`;
+            // 修正序号
+            document.getElementById('quiz-step').innerText = `TRINITY SEQUENCE 0${quizStep + 1} // 03`;
             document.getElementById('quiz-question').innerText = questions[quizStep].q;
             document.getElementById('opt-a').innerText = "A. " + questions[quizStep].a;
             document.getElementById('opt-b').innerText = "B. " + questions[quizStep].b;
@@ -621,39 +613,116 @@
             if (quizStep < 3) {
                 updateQuizUI();
             } else {
-                showView('loading');
+                document.getElementById('view-quiz').classList.add('hidden');
+                document.getElementById('view-loading').classList.remove('hidden');
                 let target = 'utopia';
-                if (scores.paradise >= scores.utopia && scores.paradise >= scores.dystopia) {
-                    target = 'paradise';
-                } else if (scores.dystopia >= scores.utopia && scores.dystopia >= scores.paradise) {
-                    target = 'dystopia';
-                }
-                setTimeout(() => enterFaction(target), 1400);
-            }
-        }
-
-        function enterFaction(faction) { 
-            showView(faction); 
-        }
-
-        // ----------------------------------------------------
-        // 6. Cookie Consent Protocol (System Memory)
-        // ----------------------------------------------------
-        document.addEventListener("DOMContentLoaded", () => {
-            // 检查本地是否已经同意过 Cookie
-            if (!localStorage.getItem('ws_cookie_consent')) {
-                // 延迟 2.5 秒弹出，增加赛博科幻感和视觉焦点
+                if (scores.paradise >= scores.utopia && scores.paradise >= scores.dystopia) target = 'paradise';
+                else if (scores.dystopia >= scores.utopia && scores.dystopia >= scores.paradise) target = 'dystopia';
                 setTimeout(() => {
-                    document.getElementById('cookie-banner').classList.remove('translate-y-full');
-                }, 2500);
+                    document.getElementById('view-loading').classList.add('hidden');
+                    enterFaction(target);
+                }, 1200);
             }
-        });
+        }
 
-        function acceptCookies() {
-            // 记录到本地存储，下次刷新不再弹出
+        // --- 4. 数量与 7 尺码逻辑 ---
+        function changeCardQty(id, delta) {
+            let span = document.getElementById(`qty-${id}`);
+            let current = parseInt(span.innerText);
+            let next = current + delta;
+            if (next < 1) next = 1;
+            span.innerText = next;
+            document.getElementById(`btn-${id}`).setAttribute('data-item-quantity', next);
+        }
+        function selectCardSize(productId, size, btnElement) {
+            const container = btnElement.parentElement;
+            container.querySelectorAll('button').forEach(b => b.className = "py-1 text-[11px] font-mono border border-stone-700/60 rounded text-stone-400 hover:border-white transition");
+            if (productId.includes('U')) btnElement.className = "py-1 text-[11px] font-mono border border-slate-900 bg-slate-900 text-white rounded font-bold";
+            else if (productId.includes('P')) btnElement.className = "py-1 text-[11px] font-mono border border-amber-500 bg-amber-600 text-black font-bold rounded";
+            else btnElement.className = "py-1 text-[11px] font-mono border border-red-600 bg-red-600 text-white font-bold rounded";
+            const cartBtn = document.getElementById(`btn-${productId}`);
+            if (cartBtn) cartBtn.setAttribute('data-item-custom1-value', size);
+        }
+
+        // --- 5. Modal & Size Guide ---
+        function openSizeGuide() { document.getElementById('modal-size-guide').classList.remove('hidden'); }
+        function closeSizeGuide() { document.getElementById('modal-size-guide').classList.add('hidden'); }
+        
+        let modalQty = 1;
+        function openProductModal(id, title, price, desc, imgUrl, fabric, weight, fit) {
+            document.getElementById('modal-code').innerText = `${id}-2026 ARCHIVE`;
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-price').innerText = `$${price}.00 CAD`;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-img').src = imgUrl;
+            document.getElementById('modal-spec-fabric').innerText = fabric;
+            document.getElementById('modal-spec-weight').innerText = weight;
+            modalQty = 1;
+            document.getElementById('modal-qty').innerText = modalQty;
+
+            const buyBtn = document.getElementById('modal-buy-btn');
+            buyBtn.setAttribute('data-item-id', id);
+            buyBtn.setAttribute('data-item-name', title);
+            buyBtn.setAttribute('data-item-price', price.toFixed(2));
+            buyBtn.setAttribute('data-item-url', 'https://withinseven.com/');
+            buyBtn.setAttribute('data-item-custom1-name', 'Size');
+            buyBtn.setAttribute('data-item-custom1-value', '03');
+            buyBtn.setAttribute('data-item-quantity', modalQty);
+
+            selectModalSize('03');
+            document.getElementById('modal-product').classList.remove('hidden');
+        }
+        function closeProductModal() { document.getElementById('modal-product').classList.add('hidden'); }
+        function selectModalSize(size) {
+            document.querySelectorAll('.modal-size-btn').forEach(b => {
+                if (b.getAttribute('data-size') === size) b.className = "modal-size-btn border border-white py-1.5 text-xs font-bold bg-white text-black rounded";
+                else b.className = "modal-size-btn border border-stone-800 py-1.5 text-xs font-bold text-stone-400 hover:border-stone-500 rounded";
+            });
+            document.getElementById('modal-buy-btn').setAttribute('data-item-custom1-value', size);
+        }
+        function changeModalQty(delta) {
+            modalQty += delta;
+            if (modalQty < 1) modalQty = 1;
+            document.getElementById('modal-qty').innerText = modalQty;
+            document.getElementById('modal-buy-btn').setAttribute('data-item-quantity', modalQty);
+        }
+
+        // --- 6. EmailJS 带真实错误捕获逻辑 (绝无假的 JOINED) ---
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('subscriber-email');
+            const btn = document.getElementById('subscribe-btn');
+            const status = document.getElementById('subscribe-status');
+            btn.innerText = "TRANSMITTING..."; btn.disabled = true;
+
+            emailjs.send("service_h9efu33", "template_vqygtvd", { user_email: emailInput.value }, "KJOBMZTZ7SCJuXcQ8")
+            .then(() => {
+                btn.innerText = "JOINED";
+                btn.disabled = false;
+                status.className = "text-[10px] mt-2 font-mono text-green-400 block";
+                status.innerText = "SIGNAL TRANSMITTED // ACCESS CODE DISPATCHED TO INBOX.";
+                emailInput.value = "";
+            })
+            .catch(err => {
+                console.error("EmailJS Error Direct Output:", err);
+                btn.innerText = "RETRY";
+                btn.disabled = false;
+                status.className = "text-[10px] mt-2 font-mono text-red-400 block";
+                status.innerText = "⚠️ TRANSMISSION FAILED. CHECK SYSTEM CONNECTION.";
+            });
+        }
+
+        // --- 7. Cookie Settings ---
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!localStorage.getItem('ws_cookie_consent')) setTimeout(() => document.getElementById('cookie-banner').classList.remove('translate-y-full'), 2500);
+        });
+        function openCookieSettings() { document.getElementById('modal-cookie-settings').classList.remove('hidden'); }
+        function closeCookieSettings() { document.getElementById('modal-cookie-settings').classList.add('hidden'); }
+        function saveCookiePreferences(acceptAll = false) {
+            if (acceptAll) { localStorage.setItem('ws_cookie_analytics', 'true'); }
+            else { localStorage.setItem('ws_cookie_analytics', document.getElementById('cookie-analytics').checked); }
             localStorage.setItem('ws_cookie_consent', 'true');
-            // 滑动隐藏弹窗
-            document.getElementById('cookie-banner').classList.add('translate-y-full');
+            closeCookieSettings(); document.getElementById('cookie-banner').classList.add('translate-y-full');
         }
     </script>
 </body>
