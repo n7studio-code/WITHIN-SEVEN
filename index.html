@@ -65,7 +65,7 @@
         .fade-in { animation: fadeIn 0.18s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Snipcart 侧边栏暗黑高定定制变量 Overrides */
+        /* Snipcart 暗黑高定重写 */
         :root {
             --snipcart-bg-color: #0a0a0a;
             --snipcart-modal-bg: #0a0a0a;
@@ -85,6 +85,11 @@
             background-color: #121212 !important;
         }
 
+        /* 纯白人脸雕塑过滤渲染 */
+        .white-logo-render {
+            filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+        }
+
         /* Logo 核心背光星云呼吸动画 */
         @keyframes nebulaPulse {
             0%, 100% { transform: scale(1); opacity: 0.18; }
@@ -92,7 +97,7 @@
         }
         .nebula-pulse { animation: nebulaPulse 6s ease-in-out infinite; }
 
-        /* 极光激光扫描扫过动画 */
+        /* 极光激光扫描动画 */
         @keyframes scanBeam {
             0% { top: -10%; opacity: 0; }
             50% { opacity: 1; }
@@ -108,16 +113,17 @@
             animation: scanBeam 1.2s ease-in-out infinite;
         }
 
-        /* 提交动画撕裂 Glitch */
-        @keyframes cardGlitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-3px, 3px); filter: hue-rotate(90deg); }
-            40% { transform: translate(-3px, -3px); }
-            60% { transform: translate(3px, 3px); filter: hue-rotate(180deg); }
-            80% { transform: translate(3px, -3px); }
-            100% { transform: translate(0); filter: none; }
+        /* 跑马灯滚动 */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
         }
-        .glitch-anim { animation: cardGlitch 0.4s ease-out; }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover { animation-play-state: paused; }
 
         .typewriter-cursor::after {
             content: '|';
@@ -125,121 +131,124 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
 
+        /* 隐藏滚动条 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
         .bg-paradise { background-color: #1c1917; background-image: radial-gradient(#292524 1px, transparent 1px); background-size: 16px 16px; }
-        
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #333; }
     </style>
 </head>
 <body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white relative overflow-x-hidden pb-32">
 
-    <!-- 1. 顶栏：自适应颜色 + 公开档案库直达按钮 -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/80">
-        <div class="flex items-center space-x-4">
-            <button id="nav-back-btn" onclick="goBack()" class="hidden font-mono text-xs tracking-widest px-3 py-1.5 border border-current rounded hover:opacity-70 transition min-h-[32px]">
+    <!-- 1. 顶栏：左上角人脸 LOGO 100% 纯白硬朗化 -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/80">
+        <div class="flex items-center space-x-3">
+            <button id="nav-back-btn" onclick="goBack()" class="hidden font-mono text-xs tracking-widest px-2.5 py-1.5 border border-current rounded hover:opacity-70 transition min-h-[32px]">
                 ← BACK
             </button>
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('landing')">
-                <img id="nav-logo" src="LOGO.png" alt="WITHIN SEVEN Logo" class="h-7 w-auto object-contain transition-all mix-blend-screen drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
-                <span id="nav-brand-text" class="font-brand font-light text-sm md:text-base tracking-[0.32em] text-white uppercase transition-colors">WITHIN SEVEN</span>
+            <div class="flex items-center space-x-2.5 cursor-pointer" onclick="showView('landing')">
+                <!-- 左上角人脸 Logo 纯白极简渲染 -->
+                <img id="nav-logo" src="LOGO.png" alt="WITHIN SEVEN Logo" class="h-6 md:h-7 w-auto object-contain transition-all white-logo-render">
+                <span id="nav-brand-text" class="font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap">WITHIN SEVEN</span>
             </div>
         </div>
-        <div class="flex items-center space-x-4 md:space-x-6 font-mono text-xs">
-            <!-- 全网公共信号档案库直达通道 -->
-            <button onclick="showView('archive')" class="tracking-widest text-amber-500 hover:text-white border border-amber-500/50 hover:border-white transition px-3 py-1.5 rounded text-[11px]">
-                PUBLIC ARCHIVE // 777
+        <div class="flex items-center space-x-3 md:space-x-6 font-mono text-xs">
+            <!-- 移动端自动战术瘦身为 [ ARCHIVE ] -->
+            <button onclick="showView('archive')" class="tracking-widest text-amber-500 hover:text-white border border-amber-500/50 hover:border-white transition px-2.5 py-1.5 rounded text-[10px] md:text-[11px] whitespace-nowrap">
+                <span class="hidden md:inline">PUBLIC ARCHIVE // 777</span>
+                <span class="md:hidden">[ ARCHIVE ]</span>
             </button>
-            <button class="snipcart-checkout tracking-widest hover:text-amber-500 transition border border-current px-4 py-2 rounded-full backdrop-blur-sm min-h-[36px]">
+            <button class="snipcart-checkout tracking-widest hover:text-amber-500 transition border border-current px-3 md:px-4 py-1.5 md:py-2 rounded-full backdrop-blur-sm min-h-[36px] whitespace-nowrap text-[11px] md:text-xs">
                 INVENTORY [ <span class="snipcart-items-count text-amber-500 font-bold">0</span> ]
             </button>
         </div>
     </nav>
 
-    <!-- 2. LANDING PAGE HERO (首屏锁定 100vh) -->
+    <!-- 2. LANDING PAGE HERO (手机端 Option A 横向滑卡 + 桌面端三联画) -->
     <section id="view-landing" class="relative w-full min-h-screen bg-black">
         
         <div class="relative w-full h-[100dvh] min-h-[680px] flex flex-col justify-between items-center overflow-hidden border-b border-stone-800">
             
-            <!-- 首屏背景三联画 -->
-            <div id="triptych-sector" class="absolute inset-0 z-0 flex flex-col md:flex-row overflow-hidden">
+            <!-- 手机端 Option A (CSS Snap 横向滑卡) / 桌面端 (三联画拉伸) -->
+            <div id="triptych-sector" class="absolute inset-0 z-0 flex flex-row overflow-x-auto md:overflow-hidden snap-x snap-mandatory no-scrollbar">
+                
                 <!-- 01 UTOPIA -->
-                <div onclick="enterFaction('utopia')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-stone-800/80 bg-slate-950">
-                    <img src="cover-utopia.webp" onerror="this.src='utopia-1.png'" alt="Utopia Order" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                <div onclick="enterFaction('utopia')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-r border-stone-800/80 bg-slate-950">
+                    <img src="cover-utopia.webp" onerror="this.src='utopia-1.png'" alt="Utopia Order" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
                     <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     
-                    <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
                         <div class="text-slate-400 text-[10px] mb-1">SECTOR 01 // CITADEL OF ORDER</div>
                         <div class="font-bold text-sm md:text-base">WORLD 01 / UTOPIA — ORDER</div>
-                        <div class="text-[10px] text-amber-500 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE ARCHIVE ➔</div>
+                        <div class="text-[10px] text-amber-500 mt-1">EXPLORE ARCHIVE ➔</div>
                     </div>
                 </div>
 
                 <!-- 02 LOST PARADISE -->
-                <div onclick="enterFaction('paradise')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-stone-800/80 bg-stone-950">
-                    <img src="cover-paradise.webp" onerror="this.src='paradise-1.png'" alt="Lost Paradise Memory" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                <div onclick="enterFaction('paradise')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-r border-stone-800/80 bg-stone-950">
+                    <img src="cover-paradise.webp" onerror="this.src='paradise-1.png'" alt="Lost Paradise Memory" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
                     <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-amber-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-amber-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                    <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
                         <div class="text-amber-500/70 text-[10px] mb-1">SECTOR 00 // FORGOTTEN ASHES</div>
                         <div class="font-bold text-sm md:text-base text-stone-200">WORLD 02 / LOST PARADISE — MEMORY</div>
-                        <div class="text-[10px] text-amber-500 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE RELIC ➔</div>
+                        <div class="text-[10px] text-amber-500 mt-1">EXPLORE RELIC ➔</div>
                     </div>
                 </div>
 
                 <!-- 03 DYSTOPIA -->
-                <div onclick="enterFaction('dystopia')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden bg-zinc-950">
-                    <img src="cover-dystopia.webp" onerror="this.src='dystopia-1.png'" alt="Dystopia Resistance" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                <div onclick="enterFaction('dystopia')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden bg-zinc-950">
+                    <img src="cover-dystopia.webp" onerror="this.src='dystopia-1.png'" alt="Dystopia Resistance" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
                     <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-red-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-red-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                    <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
                         <div class="text-red-500/80 text-[10px] mb-1">SECTOR 09 // REBEL UNDERGROUND</div>
                         <div class="font-bold text-sm md:text-base text-red-500">WORLD 03 / DYSTOPIA — RESISTANCE</div>
-                        <div class="text-[10px] text-red-400 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE GEAR ➔</div>
+                        <div class="text-[10px] text-red-400 mt-1">EXPLORE GEAR ➔</div>
                     </div>
                 </div>
             </div>
 
             <!-- Hero 中间内容浮层 -->
-            <div class="z-20 flex flex-col items-center pt-28 text-center px-4 relative max-w-4xl pointer-events-none">
-                <div class="font-mono text-[10px] text-amber-500 mb-2 tracking-widest uppercase typewriter-cursor">
+            <div class="z-20 flex flex-col items-center pt-24 md:pt-28 text-center px-4 relative max-w-4xl pointer-events-none">
+                <div class="font-mono text-[9px] md:text-[10px] text-amber-500 mb-2 tracking-widest uppercase typewriter-cursor">
                     > WEARABLE IDENTITY SYSTEM // EDITION CAPACITY: 777 GARMENTS
                 </div>
                 
-                <!-- 3D 雕塑面部与肌肉线条完整展现 LOGO -->
+                <!-- 主页中心纯白人脸雕塑 LOGO -->
                 <div class="relative flex items-center justify-center my-2 pointer-events-auto">
-                    <div class="absolute w-56 h-56 md:w-72 md:h-72 bg-white/20 rounded-full blur-3xl pointer-events-none -z-10 nebula-pulse"></div>
-                    <img src="LOGO.png" alt="WITHIN SEVEN Emblem" class="w-36 md:w-64 h-auto object-contain mix-blend-screen drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] hover:scale-105 transition duration-500">
+                    <div class="absolute w-52 h-52 md:w-72 md:h-72 bg-white/20 rounded-full blur-3xl pointer-events-none -z-10 nebula-pulse"></div>
+                    <img src="LOGO.png" alt="WITHIN SEVEN Emblem" class="w-32 md:w-64 h-auto object-contain white-logo-render hover:scale-105 transition duration-500">
                 </div>
                 
-                <h1 class="text-3xl md:text-5xl font-brand font-light tracking-[0.32em] uppercase text-white mt-1 pointer-events-auto glitch-text">WITHIN SEVEN</h1>
+                <h1 class="text-2xl md:text-5xl font-brand font-light tracking-[0.28em] md:tracking-[0.32em] uppercase text-white mt-1 pointer-events-auto glitch-text">WITHIN SEVEN</h1>
                 
                 <!-- 品牌核心表达公式 -->
-                <p class="text-xs md:text-sm font-mono tracking-[0.25em] text-stone-200 mt-3 uppercase font-bold max-w-2xl leading-relaxed pointer-events-auto">
+                <p class="text-[11px] md:text-sm font-mono tracking-[0.2em] md:tracking-[0.25em] text-stone-200 mt-2 md:mt-3 uppercase font-bold max-w-2xl leading-relaxed pointer-events-auto">
                     A NUMBERED GARMENT. A MEANING ONLY YOU CAN ASSIGN. HELD FOR SEVEN DAYS.
                 </p>
-                <p class="text-[10px] md:text-xs font-mono tracking-[0.2em] text-stone-400 mt-1 uppercase pointer-events-auto">
+                <p class="text-[9px] md:text-xs font-mono tracking-[0.15em] md:tracking-[0.2em] text-stone-400 mt-1 uppercase pointer-events-auto">
                     DROP 01 — 777 INDIVIDUALLY NUMBERED PIECES ACROSS THREE WORLDS.
                 </p>
 
                 <!-- 倒计时面板与 Manifesto 入口 -->
-                <div class="mt-4 flex flex-wrap items-center justify-center gap-3 pointer-events-auto">
-                    <div class="px-5 py-2 bg-black/90 border border-stone-800 rounded-lg font-mono text-xs text-amber-500 tracking-widest backdrop-blur-md shadow-2xl">
+                <div class="mt-4 flex flex-wrap items-center justify-center gap-2.5 pointer-events-auto">
+                    <div class="px-4 py-1.5 md:py-2 bg-black/90 border border-stone-800 rounded-lg font-mono text-[11px] md:text-xs text-amber-500 tracking-widest backdrop-blur-md shadow-2xl">
                         DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-1">LOADING...</span>
                     </div>
-                    <button onclick="openManifesto()" class="px-4 py-2 bg-stone-900/80 hover:bg-stone-800 border border-stone-700 text-stone-300 font-mono text-xs tracking-widest rounded transition backdrop-blur-md">
+                    <button onclick="openManifesto()" class="px-3.5 py-1.5 md:py-2 bg-stone-900/80 hover:bg-stone-800 border border-stone-700 text-stone-300 font-mono text-[11px] md:text-xs tracking-widest rounded transition backdrop-blur-md">
                         [ READ MANIFESTO ]
                     </button>
                 </div>
 
                 <!-- 动态按钮区 -->
-                <div class="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-md pointer-events-auto pb-6">
+                <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mt-5 md:mt-6 w-full max-w-md pointer-events-auto pb-6">
                     <button onclick="scrollToTriptych()" class="flex-1 py-3.5 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 hover:-translate-y-0.5 transition-all duration-200 font-bold shadow-2xl min-h-[44px]">
                         EXPLORE DROP 01
                     </button>
@@ -247,6 +256,17 @@
                         HOW IT WORKS ➔
                     </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- 📡 实时信号跑马灯字幕 Ticker 📡 -->
+        <div onclick="showView('archive')" class="w-full bg-stone-950 border-b border-stone-800 py-2.5 overflow-hidden cursor-pointer group">
+            <div class="animate-marquee font-mono text-[10px] md:text-xs text-stone-400 tracking-widest whitespace-nowrap flex gap-12">
+                <span>✦ #0042 [RED]: "SILENCE IS A CALCULATED DECISION." — 3D REMAINING</span>
+                <span>✦ #0188 [WHITE]: "ORDER IS THE ONLY ARCHITECTURE THAT SURVIVES CHAOS." — 6D REMAINING</span>
+                <span>✦ #0241 [BLUE]: "I STOPPED EXPLAINING MYSELF TO SYSTEMS BUILT TO MISUNDERSTAND ME." — 4D REMAINING</span>
+                <span>✦ #0312 [AMBER]: "BEAUTY BELONGS TO THOSE WHO WANDER THROUGH DECAYING RUINS." — 1D REMAINING</span>
+                <span>✦ [ CLICK TO OPEN PUBLIC ARCHIVE STREAM // 777 ]</span>
             </div>
         </div>
 
@@ -278,7 +298,7 @@
                     </div>
                 </div>
 
-                <!-- 💥 创新互动：带激光扫描波束的“匿名表达终端” (iOS Auto-zoom 16px 防放大修复) 💥 -->
+                <!-- 💥 “匿名表达终端” (iOS Auto-zoom 16px 防放大) 💥 -->
                 <div class="mt-12 p-6 md:p-8 bg-stone-950 border border-stone-800 hover:border-amber-500/80 rounded-2xl max-w-xl mx-auto text-center relative shadow-2xl transition duration-500 overflow-hidden">
                     <div id="scan-beam" class="hidden laser-beam"></div>
                     
@@ -356,7 +376,7 @@
         </div>
     </section>
 
-    <!-- 3. 全网 PUBLIC ARCHIVE 专属视图 VIEW (核心护城河) -->
+    <!-- 3. 全网 PUBLIC ARCHIVE 专属视图 VIEW -->
     <section id="view-archive" class="hidden min-h-screen bg-black text-stone-200 pt-28 pb-20 px-6 md:px-12 fade-in font-mono">
         <div class="max-w-6xl mx-auto">
             <div class="border-b border-stone-800 pb-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
@@ -368,9 +388,8 @@
                     </p>
                 </div>
                 
-                <!-- 搜号框 + 阵营过滤器 -->
+                <!-- 搜号框 + 阵营过滤器 (16px 防放大) -->
                 <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                    <!-- 锁定 16px 阻止 iOS Safari Auto-Zoom -->
                     <input type="text" id="archive-search-input" oninput="filterArchive()" placeholder="SEARCH #001 - #777..." class="bg-stone-900 border border-stone-700 px-3 py-2 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono">
                     
                     <select id="archive-color-filter" onchange="filterArchive()" class="bg-stone-900 border border-stone-700 px-3 py-2 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono">
@@ -385,7 +404,6 @@
 
             <!-- 全网匿名信号卡片瀑布流列表 Grid -->
             <div id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- JS 动态卡片列表渲染区域 -->
             </div>
         </div>
     </section>
@@ -994,7 +1012,6 @@
             beam.classList.remove('hidden');
             cardEl.classList.add('glitch-anim');
 
-            // 实时插入公共档案库最上方！
             const newEntry = {
                 code: "#0777",
                 color: currentThemeName,
@@ -1022,13 +1039,13 @@
             const navLogo = document.getElementById('nav-logo');
             
             if (viewId === 'utopia') {
-                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-slate-300 backdrop-blur-md bg-white/90 text-slate-900";
-                brandText.className = "font-brand font-light text-sm md:text-base tracking-[0.32em] text-slate-900 uppercase transition-colors";
-                if (navLogo) navLogo.className = "h-7 w-auto object-contain mix-blend-multiply transition-all";
+                nav.className = "fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-slate-300 backdrop-blur-md bg-white/90 text-slate-900";
+                brandText.className = "font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-slate-900 uppercase transition-colors whitespace-nowrap";
+                if (navLogo) navLogo.className = "h-6 md:h-7 w-auto object-contain mix-blend-multiply transition-all";
             } else {
-                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/80 text-white";
-                brandText.className = "font-brand font-light text-sm md:text-base tracking-[0.32em] text-white uppercase transition-colors";
-                if (navLogo) navLogo.className = "h-7 w-auto object-contain transition-all mix-blend-screen drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]";
+                nav.className = "fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/80 text-white";
+                brandText.className = "font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap";
+                if (navLogo) navLogo.className = "h-6 md:h-7 w-auto object-contain transition-all white-logo-render";
             }
         }
 
