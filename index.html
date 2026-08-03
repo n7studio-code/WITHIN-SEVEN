@@ -62,18 +62,16 @@
         .font-brand { font-family: 'Syncopate', sans-serif; }
         .glitch-text:hover { text-shadow: 2px 0 #ef4444, -2px 0 #06b6d4; }
         
-        /* 极速平滑动画 */
         .fade-in { animation: fadeIn 0.18s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* Logo 核心背光星云呼吸动画 */
         @keyframes nebulaPulse {
-            0%, 100% { transform: scale(1); opacity: 0.12; }
-            50% { transform: scale(1.15); opacity: 0.25; }
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.2); opacity: 0.3; }
         }
         .nebula-pulse { animation: nebulaPulse 6s ease-in-out infinite; }
 
-        /* 战术微闪打字动画 */
         .typewriter-cursor::after {
             content: '|';
             animation: blink 1s step-start infinite;
@@ -89,154 +87,175 @@
 </head>
 <body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white relative overflow-x-hidden pb-32">
 
-    <!-- 1. 顶栏：自适应颜色 + 导航图标与文字 -->
+    <!-- 1. 顶栏：自适应颜色 + 声音控制与导航 -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/80">
         <div class="flex items-center space-x-4">
             <button id="nav-back-btn" onclick="goBack()" class="hidden font-mono text-xs tracking-widest px-3 py-1.5 border border-current rounded hover:opacity-70 transition min-h-[32px]">
                 ← BACK
             </button>
             <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('landing')">
-                <img id="nav-logo" src="LOGO.png" alt="WITHIN SEVEN Logo" class="h-7 w-auto object-contain transition-all">
+                <img id="nav-logo" src="LOGO.png" alt="WITHIN SEVEN Logo" class="h-7 w-auto object-contain transition-all brightness-0 invert filter">
                 <span id="nav-brand-text" class="font-brand font-light text-sm md:text-base tracking-[0.32em] text-white uppercase transition-colors">WITHIN SEVEN</span>
             </div>
         </div>
-        <div class="flex items-center space-x-6 font-mono text-xs">
+        <div class="flex items-center space-x-4 md:space-x-6 font-mono text-xs">
+            <!-- 音频微反馈开关按钮 -->
+            <button id="audio-toggle-btn" onclick="toggleAudio()" class="hidden md:inline-block tracking-widest text-stone-400 hover:text-white transition px-2 py-1 border border-stone-800 rounded">
+                AUDIO: OFF 🔇
+            </button>
             <button class="snipcart-checkout tracking-widest hover:text-amber-500 transition border border-current px-4 py-2 rounded-full backdrop-blur-sm min-h-[36px]">
                 INVENTORY [ <span class="snipcart-items-count text-amber-500 font-bold">0</span> ]
             </button>
         </div>
     </nav>
 
-    <!-- 2. LANDING PAGE HERO (首屏战术微动效三联画) -->
-    <section id="view-landing" class="relative w-full min-h-screen flex flex-col items-center justify-between overflow-x-hidden bg-black pt-28 pb-12">
+    <!-- 2. LANDING PAGE HERO (首屏锁定 100vh，彻底解决图片与文字重叠问题) -->
+    <section id="view-landing" class="relative w-full min-h-screen bg-black">
         
-        <!-- 桌面端/手机端自适应首屏三联画 (Interactive HUD Triptych) -->
-        <div id="triptych-sector" class="absolute inset-0 z-0 flex flex-col md:flex-row overflow-hidden border-b border-stone-800">
-            <!-- 01 UTOPIA -->
-            <div onclick="enterFaction('utopia')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-stone-800/80 bg-slate-950">
-                <img src="cover-utopia.webp" onerror="this.src='utopia-1.png'" alt="Utopia Order" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                <!-- 战术 HUD 悬浮框 (Hover 时出现的角标) -->
-                <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <!-- 首屏 HERO 独占块 (Strict 100dvh Lock) -->
+        <div class="relative w-full h-[100dvh] min-h-[680px] flex flex-col justify-between items-center overflow-hidden border-b border-stone-800">
+            
+            <!-- 首屏背景三联画 (Triptych Background - 仅限首屏) -->
+            <div id="triptych-sector" class="absolute inset-0 z-0 flex flex-col md:flex-row overflow-hidden">
+                <!-- 01 UTOPIA -->
+                <div onclick="enterFaction('utopia')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-stone-800/80 bg-slate-950">
+                    <img src="cover-utopia.webp" onerror="this.src='utopia-1.png'" alt="Utopia Order" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                    <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                        <div class="text-slate-400 text-[10px] mb-1">SECTOR 01 // CITADEL OF ORDER</div>
+                        <div class="font-bold text-sm md:text-base">WORLD 01 / UTOPIA — ORDER</div>
+                        <div class="text-[10px] text-amber-500 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE ARCHIVE ➔</div>
+                    </div>
+                </div>
+
+                <!-- 02 LOST PARADISE -->
+                <div onclick="enterFaction('paradise')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-stone-800/80 bg-stone-950">
+                    <img src="cover-paradise.webp" onerror="this.src='paradise-1.png'" alt="Lost Paradise Memory" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                    <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-amber-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-amber-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                    <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                        <div class="text-amber-500/70 text-[10px] mb-1">SECTOR 00 // FORGOTTEN ASHES</div>
+                        <div class="font-bold text-sm md:text-base text-stone-200">WORLD 02 / LOST PARADISE — MEMORY</div>
+                        <div class="text-[10px] text-amber-500 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE RELIC ➔</div>
+                    </div>
+                </div>
+
+                <!-- 03 DYSTOPIA -->
+                <div onclick="enterFaction('dystopia')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden bg-zinc-950">
+                    <img src="cover-dystopia.webp" onerror="this.src='dystopia-1.png'" alt="Dystopia Resistance" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                    <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-red-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-red-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                    <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                        <div class="text-red-500/80 text-[10px] mb-1">SECTOR 09 // REBEL UNDERGROUND</div>
+                        <div class="font-bold text-sm md:text-base text-red-500">WORLD 03 / DYSTOPIA — RESISTANCE</div>
+                        <div class="text-[10px] text-red-400 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE GEAR ➔</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero 中间内容浮层 -->
+            <div class="z-20 flex flex-col items-center pt-28 text-center px-4 relative max-w-4xl pointer-events-none">
+                <div class="font-mono text-[10px] text-amber-500 mb-2 tracking-widest uppercase typewriter-cursor">
+                    > WEARABLE IDENTITY SYSTEM // EDITION CAPACITY: 777 GARMENTS
+                </div>
                 
-                <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
-                    <div class="text-slate-400 text-[10px] mb-1">SECTOR 01 // CITADEL OF ORDER</div>
-                    <div class="font-bold text-sm md:text-base">WORLD 01 / UTOPIA — ORDER</div>
-                    <div class="text-[10px] text-amber-500 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE ARCHIVE ➔</div>
+                <!-- 纯白中心 LOGO + 柔和呼吸星云暗晕 -->
+                <div class="relative flex items-center justify-center my-2 pointer-events-auto">
+                    <div class="absolute w-56 h-56 md:w-72 md:h-72 bg-white/20 rounded-full blur-3xl pointer-events-none -z-10 nebula-pulse"></div>
+                    <img src="LOGO.png" alt="WITHIN SEVEN Emblem" class="w-36 md:w-64 h-auto object-contain brightness-0 invert filter drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 transition duration-500">
                 </div>
-            </div>
+                
+                <h1 class="text-3xl md:text-5xl font-brand font-light tracking-[0.32em] uppercase text-white mt-1 pointer-events-auto glitch-text">WITHIN SEVEN</h1>
+                
+                <!-- 品牌核心表达公式 -->
+                <p class="text-xs md:text-sm font-mono tracking-[0.25em] text-stone-200 mt-3 uppercase font-bold max-w-2xl leading-relaxed pointer-events-auto">
+                    A NUMBERED GARMENT. A MEANING ONLY YOU CAN ASSIGN. HELD FOR SEVEN DAYS.
+                </p>
+                <p class="text-[10px] md:text-xs font-mono tracking-[0.2em] text-stone-400 mt-1 uppercase pointer-events-auto">
+                    DROP 01 — 777 INDIVIDUALLY NUMBERED PIECES ACROSS THREE WORLDS.
+                </p>
 
-            <!-- 02 LOST PARADISE -->
-            <div onclick="enterFaction('paradise')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-stone-800/80 bg-stone-950">
-                <img src="cover-paradise.webp" onerror="this.src='paradise-1.png'" alt="Lost Paradise Memory" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-amber-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-amber-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
-                    <div class="text-amber-500/70 text-[10px] mb-1">SECTOR 00 // FORGOTTEN ASHES</div>
-                    <div class="font-bold text-sm md:text-base text-stone-200">WORLD 02 / LOST PARADISE — MEMORY</div>
-                    <div class="text-[10px] text-amber-500 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE RELIC ➔</div>
+                <!-- 倒计时面板 -->
+                <div class="mt-5 px-5 py-2 bg-black/90 border border-stone-800 rounded-lg font-mono text-xs text-amber-500 tracking-widest backdrop-blur-md pointer-events-auto shadow-2xl">
+                    DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-2">LOADING...</span>
                 </div>
-            </div>
 
-            <!-- 03 DYSTOPIA -->
-            <div onclick="enterFaction('dystopia')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden bg-zinc-950">
-                <img src="cover-dystopia.webp" onerror="this.src='dystopia-1.png'" alt="Dystopia Resistance" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-red-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-red-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
-                    <div class="text-red-500/80 text-[10px] mb-1">SECTOR 09 // REBEL UNDERGROUND</div>
-                    <div class="font-bold text-sm md:text-base text-red-500">WORLD 03 / DYSTOPIA — RESISTANCE</div>
-                    <div class="text-[10px] text-red-400 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE GEAR ➔</div>
+                <!-- 动态按钮区 -->
+                <div class="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-md pointer-events-auto pb-6">
+                    <button onclick="scrollToTriptych()" class="flex-1 py-3.5 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 hover:-translate-y-0.5 transition-all duration-200 font-bold shadow-2xl min-h-[44px]">
+                        EXPLORE DROP 01
+                    </button>
+                    <button onclick="scrollToHowItWorks()" class="flex-1 py-3.5 bg-black/80 text-white border border-white/40 font-mono text-xs tracking-widest uppercase hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-200 backdrop-blur-md min-h-[44px]">
+                        HOW IT WORKS ➔
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- Hero 文字浮层内容 -->
-        <div class="z-20 flex flex-col items-center mt-2 text-center px-4 relative max-w-4xl pointer-events-none">
-            <div class="font-mono text-[10px] text-amber-500 mb-2 tracking-widest uppercase typewriter-cursor">
-                > WEARABLE IDENTITY SYSTEM // EDITION CAPACITY: 777 GARMENTS
-            </div>
-            
-            <!-- Logo 容器：224px 黄金尺寸 + 动态星云呼吸背光 -->
-            <div class="relative flex items-center justify-center my-2 pointer-events-auto">
-                <div class="absolute w-56 h-56 md:w-72 md:h-72 bg-white/20 rounded-full blur-3xl pointer-events-none -z-10 nebula-pulse"></div>
-                <img src="LOGO.png" alt="WITHIN SEVEN Emblem" class="w-36 md:w-64 h-auto object-contain scale-110 hover:scale-115 transition duration-500">
-            </div>
-            
-            <h1 class="text-3xl md:text-5xl font-brand font-light tracking-[0.32em] uppercase text-white mt-1 pointer-events-auto glitch-text">WITHIN SEVEN</h1>
-            
-            <!-- 品牌底层核心公式 -->
-            <p class="text-xs md:text-sm font-mono tracking-[0.25em] text-stone-200 mt-4 uppercase font-bold max-w-2xl leading-relaxed pointer-events-auto">
-                A NUMBERED GARMENT. A MEANING ONLY YOU CAN ASSIGN. HELD FOR SEVEN DAYS.
-            </p>
-            <p class="text-[10px] md:text-xs font-mono tracking-[0.2em] text-stone-400 mt-2 uppercase pointer-events-auto">
-                DROP 01 — 777 INDIVIDUALLY NUMBERED PIECES ACROSS THREE WORLDS.
-            </p>
-
-            <!-- 锁定硬编码倒计时 (Nov 11, 2026) -->
-            <div class="mt-6 px-5 py-2.5 bg-black/90 border border-stone-800 rounded-lg font-mono text-xs text-amber-500 tracking-widest backdrop-blur-md pointer-events-auto shadow-2xl">
-                DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-2">LOADING...</span>
-            </div>
-
-            <!-- 主按钮：磁吸微动效 -->
-            <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full max-w-md pointer-events-auto">
-                <button onclick="scrollToTriptych()" class="flex-1 py-4 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 hover:-translate-y-0.5 transition-all duration-200 font-bold shadow-2xl min-h-[44px]">
-                    EXPLORE DROP 01
-                </button>
-                <button onclick="scrollToHowItWorks()" class="flex-1 py-4 bg-black/80 text-white border border-white/40 font-mono text-xs tracking-widest uppercase hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-200 backdrop-blur-md min-h-[44px]">
-                    HOW THE NUMBER WORKS ➔
-                </button>
-            </div>
-        </div>
-
-        <!-- 3. HOW THE NUMBER WORKS (纯黑背景 + 交互式 NFC 模拟卡) -->
-        <div id="how-it-works" class="z-20 w-full max-w-5xl px-6 my-24 font-mono relative bg-black">
-            <div class="border-t border-b border-stone-800 py-12">
+        <!-- 3. HOW THE NUMBER WORKS (纯黑独立容器，绝无重叠) -->
+        <div id="how-it-works" class="relative z-10 w-full bg-black py-20 border-b border-stone-800">
+            <div class="max-w-5xl mx-auto px-6 font-mono">
                 <div class="text-center mb-10">
                     <span class="text-xs text-amber-500 tracking-widest uppercase">// SYSTEM PROTOCOL //</span>
                     <h2 class="text-xl md:text-2xl font-bold text-white mt-1 uppercase">HOW THE WEARABLE IDENTITY SYSTEM WORKS</h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-xs leading-relaxed">
-                    <div class="bg-stone-900/50 p-6 border border-stone-800 rounded-xl hover:border-amber-500/50 transition">
+                    <div class="bg-stone-950 p-6 border border-stone-800 rounded-xl hover:border-amber-500/50 transition">
                         <div class="text-amber-500 font-bold mb-2 text-sm">01 // CLAIM</div>
                         <p class="text-stone-300 font-bold mb-1">Garment & Unique Serial</p>
                         <p class="text-stone-500 text-[11px]">Choose your garment from Drop 01. A unique number (001–777) is randomly assigned to your physical piece upon dispatch confirmation.</p>
                     </div>
 
-                    <div class="bg-stone-900/50 p-6 border border-stone-800 rounded-xl hover:border-amber-500/50 transition">
+                    <div class="bg-stone-950 p-6 border border-stone-800 rounded-xl hover:border-amber-500/50 transition">
                         <div class="text-amber-500 font-bold mb-2 text-sm">02 // ACTIVATE</div>
                         <p class="text-stone-300 font-bold mb-1">NFC Tag & Private Verification</p>
                         <p class="text-stone-500 text-[11px]">Scan the embedded NFC chip inside your garment upon arrival to verify ownership and unlock your private statement portal.</p>
                     </div>
 
-                    <div class="bg-stone-900/50 p-6 border border-stone-800 rounded-xl hover:border-amber-500/50 transition">
+                    <div class="bg-stone-950 p-6 border border-stone-800 rounded-xl hover:border-amber-500/50 transition">
                         <div class="text-amber-500 font-bold mb-2 text-sm">03 // DEFINE</div>
                         <p class="text-stone-300 font-bold mb-1">Color, Sentence & 7-Day Cycle</p>
                         <p class="text-stone-500 text-[11px]">Select a color and submit one sentence. Your number, color, and message publish to the public archive for a 7-day immutable cycle.</p>
                     </div>
                 </div>
 
-                <!-- 💥 创新亮点：全交互式 NFC 模拟档案卡 (#0241) 💥 -->
-                <div id="demo-nfc-card" onclick="cycleDemoColor()" class="mt-12 p-6 bg-stone-950 border border-stone-800 hover:border-amber-500 rounded-xl max-w-lg mx-auto text-center relative overflow-hidden cursor-pointer group transition-all duration-300 shadow-2xl">
-                    <div class="absolute top-2 right-3 text-[9px] text-amber-500/80 font-mono">✦ CLICK TO SIMULATE NFC COLOR CYCLE</div>
-                    <div class="text-[10px] text-stone-500 uppercase tracking-widest mb-1">LIVE ARCHIVE DEMO ENTRY</div>
+                <!-- 💥 创新互动：实机“匿名表达终端”生成器 💥 -->
+                <div class="mt-12 p-6 md:p-8 bg-stone-950 border border-stone-800 hover:border-amber-500/80 rounded-2xl max-w-xl mx-auto text-center relative shadow-2xl transition duration-500">
+                    <div class="text-[10px] text-amber-500 uppercase tracking-widest mb-1">// INTERACTIVE TERMINAL // SIMULATE YOUR STATEMENT</div>
+                    <p class="text-xs text-stone-400 mb-4">Type a sentence and choose an alignment color to test the live archive generator:</p>
                     
-                    <div id="demo-card-title" class="text-2xl font-bold text-blue-400 mb-1 transition-colors duration-300">
-                        #0241 // BLUE ALIGNMENT
+                    <div class="space-y-4">
+                        <input type="text" id="custom-statement" oninput="updateLiveCard()" placeholder="TYPE YOUR 1-SENTENCE STATEMENT HERE..." maxlength="80" value="I stopped explaining myself to systems built to misunderstand me." class="w-full bg-black border border-stone-700 px-4 py-3 text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono text-center">
+                        
+                        <!-- 颜色选择器 -->
+                        <div class="flex justify-center items-center gap-4 py-1">
+                            <span class="text-[10px] text-stone-500">ALIGNMENT COLOR:</span>
+                            <button onclick="setCardTheme('CYBER BLUE', 'text-blue-400', 'border-blue-500/40')" class="w-6 h-6 rounded-full bg-blue-500 hover:scale-125 transition border-2 border-white/20"></button>
+                            <button onclick="setCardTheme('PARADISE AMBER', 'text-amber-500', 'border-amber-500/40')" class="w-6 h-6 rounded-full bg-amber-500 hover:scale-125 transition border-2 border-white/20"></button>
+                            <button onclick="setCardTheme('DYSTOPIA RED', 'text-red-500', 'border-red-500/40')" class="w-6 h-6 rounded-full bg-red-500 hover:scale-125 transition border-2 border-white/20"></button>
+                            <button onclick="setCardTheme('UTOPIA WHITE', 'text-white', 'border-white/40')" class="w-6 h-6 rounded-full bg-white hover:scale-125 transition border-2 border-white/20"></button>
+                        </div>
                     </div>
-                    
-                    <blockquote id="demo-card-quote" class="text-sm italic text-stone-200 my-3 leading-relaxed transition-all">
-                        “I stopped explaining myself to systems built to misunderstand me.”
-                    </blockquote>
-                    
-                    <div class="text-[10px] text-stone-500 uppercase tracking-widest">
-                        CYCLE EXPIRATION: <span class="text-white font-bold animate-pulse">4D 08H 12M REMAINING</span>
+
+                    <!-- 动态生成预览卡片 -->
+                    <div id="live-demo-card" class="mt-6 p-6 bg-black border border-blue-500/40 rounded-xl transition-all duration-300">
+                        <div class="text-[10px] text-stone-500 uppercase tracking-widest mb-1">ASSIGNED PUBLIC ARCHIVE ENTRY</div>
+                        <div id="live-card-code" class="text-2xl font-bold text-blue-400 transition-colors">#0777 // CYBER BLUE</div>
+                        <blockquote id="live-card-text" class="text-sm italic text-stone-200 my-3 leading-relaxed">“I stopped explaining myself to systems built to misunderstand me.”</blockquote>
+                        <div class="text-[10px] text-stone-500 uppercase tracking-widest">CYCLE EXPIRATION: <span class="text-white font-bold animate-pulse">6D 23H 59M REMAINING</span></div>
+                        
+                        <button onclick="transmitSignal()" class="mt-4 px-6 py-2.5 bg-stone-900 border border-stone-700 hover:border-amber-500 text-amber-500 text-xs font-bold uppercase transition rounded hover:-translate-y-0.5 min-h-[38px]">
+                            TRANSMIT TO PUBLIC ARCHIVE
+                        </button>
+                        <div id="transmit-status" class="hidden text-[10px] text-emerald-400 mt-3 font-mono">✦ SIGNAL BROADCASTED TO 777 MAINFRAME.</div>
                     </div>
                 </div>
 
@@ -248,12 +267,12 @@
             </div>
         </div>
 
-        <!-- 极简社媒与 Balenciaga 同款矩阵 (纯黑背景) -->
-        <div class="z-20 w-full max-w-6xl px-6 flex flex-col items-center bg-black">
-            <div class="p-5 bg-stone-900/50 border border-stone-800 rounded-xl backdrop-blur-md w-full max-w-md text-center mb-16">
+        <!-- 极简社媒与 Balenciaga 同款页脚 (纯黑独立容器) -->
+        <div class="relative z-10 w-full bg-black py-16 flex flex-col items-center">
+            <div class="p-5 bg-stone-950 border border-stone-800 rounded-xl backdrop-blur-md w-full max-w-md text-center mb-16">
                 <p class="text-[10px] text-stone-400 mb-3 font-mono tracking-widest uppercase">ENTER THE SYSTEM // RECEIVE DROP ACCESS</p>
                 <form id="subscribe-form" onsubmit="handleSubscribe(event)" class="flex gap-2">
-                    <input type="email" id="subscriber-email" required placeholder="ENTER YOUR EMAIL..." class="flex-1 bg-black/80 border border-stone-700 px-3 py-2 text-xs text-white focus:outline-none focus:border-white rounded font-mono">
+                    <input type="email" id="subscriber-email" required placeholder="ENTER YOUR EMAIL..." class="flex-1 bg-black border border-stone-700 px-3 py-2 text-xs text-white focus:outline-none focus:border-white rounded font-mono">
                     <button type="submit" id="subscribe-btn" class="px-5 py-2 bg-white text-black text-xs font-bold font-mono hover:bg-stone-300 transition rounded min-h-[36px]">JOIN</button>
                 </form>
                 <div id="subscribe-status" class="hidden text-[10px] mt-2 font-mono"></div>
@@ -264,7 +283,6 @@
                 <a href="https://x.com" target="_blank" rel="noopener" class="hover:text-white transition p-1"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
             </div>
 
-            <!-- 真实政策与帮助弹窗触发链接 -->
             <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 max-w-4xl text-[11px] font-mono text-stone-500 mb-8 px-4">
                 <button onclick="openShippingModal()" class="hover:text-stone-300 transition py-1">Shipping Policy</button>
                 <button onclick="openReturnsModal()" class="hover:text-stone-300 transition py-1">Returns & Exchanges</button>
@@ -273,7 +291,7 @@
                 <button onclick="openInfoModal('CONTACT US', 'Direct system dispatch: info@withinseven.com // Richmond, BC Headquarters. Response timeframe: Within 24 hours.')" class="hover:text-stone-300 transition py-1">Contact Us</button>
             </div>
 
-            <div class="w-full border-t border-stone-800 pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] font-mono text-stone-600 tracking-widest px-4 gap-4">
+            <div class="w-full max-w-6xl border-t border-stone-800 pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] font-mono text-stone-600 tracking-widest px-6 gap-4">
                 <div>© 2026 WITHIN SEVEN OPERATING SYSTEM. ALL RIGHTS RESERVED.</div>
                 <div class="flex gap-6">
                     <span>SHIPPING TO: <span class="text-stone-400 font-bold">CANADA (C$)</span></span>
@@ -342,9 +360,9 @@
                         </div>
                     </div>
                     <div class="flex gap-2">
-                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-1.png'" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">01 LOOK</button>
-                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-2.png'" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">02 FIT</button>
-                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-3.png'" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">03 MACRO</button>
+                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-1.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">01 LOOK</button>
+                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-2.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">02 FIT</button>
+                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-3.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">03 MACRO</button>
                     </div>
                 </div>
 
@@ -395,7 +413,7 @@
                     </div>
 
                     <div class="mt-8">
-                        <button id="btn-WS-01U" class="snipcart-add-item w-full py-4 bg-slate-900 text-white font-mono text-xs font-bold tracking-widest hover:bg-slate-700 transition rounded-lg uppercase min-h-[48px]"
+                        <button id="btn-WS-01U" onclick="playCyberSound('transmit')" class="snipcart-add-item w-full py-4 bg-slate-900 text-white font-mono text-xs font-bold tracking-widest hover:bg-slate-700 transition rounded-lg uppercase min-h-[48px]"
                             data-item-id="WS-01U" data-item-name="UTOPIA 01 // Seamless Precision Sculpted Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03 / M" data-item-quantity="1">
                             ADD TO INVENTORY — C$77 CAD
                         </button>
@@ -436,9 +454,9 @@
                         </div>
                     </div>
                     <div class="flex gap-2">
-                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-1.png'" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">01 LOOK</button>
-                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-2.png'" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">02 FIT</button>
-                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-3.png'" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">03 MACRO</button>
+                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-1.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">01 LOOK</button>
+                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-2.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">02 FIT</button>
+                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-3.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">03 MACRO</button>
                     </div>
                 </div>
 
@@ -489,7 +507,7 @@
                     </div>
 
                     <div class="mt-8">
-                        <button id="btn-WS-01P" class="snipcart-add-item w-full py-4 bg-amber-600 text-black font-mono text-xs font-bold tracking-widest hover:bg-amber-500 transition rounded-lg uppercase min-h-[48px]"
+                        <button id="btn-WS-01P" onclick="playCyberSound('transmit')" class="snipcart-add-item w-full py-4 bg-amber-600 text-black font-mono text-xs font-bold tracking-widest hover:bg-amber-500 transition rounded-lg uppercase min-h-[48px]"
                             data-item-id="WS-01P" data-item-name="PARADISE 01 // Sun-Faded Distressed Knit Relic" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03 / M" data-item-quantity="1">
                             CLAIM RELIC — C$77 CAD
                         </button>
@@ -530,9 +548,9 @@
                         </div>
                     </div>
                     <div class="flex gap-2">
-                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-1.png'" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">01 LOOK</button>
-                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-2.png'" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">02 FIT</button>
-                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-3.png'" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">03 MACRO</button>
+                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-1.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">01 LOOK</button>
+                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-2.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">02 FIT</button>
+                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-3.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">03 MACRO</button>
                     </div>
                 </div>
 
@@ -583,7 +601,7 @@
                     </div>
 
                     <div class="mt-8">
-                        <button id="btn-WS-01D" class="snipcart-add-item w-full py-4 bg-red-600 text-white font-mono text-xs font-bold tracking-widest hover:bg-red-700 transition rounded-lg uppercase min-h-[48px]"
+                        <button id="btn-WS-01D" onclick="playCyberSound('transmit')" class="snipcart-add-item w-full py-4 bg-red-600 text-white font-mono text-xs font-bold tracking-widest hover:bg-red-700 transition rounded-lg uppercase min-h-[48px]"
                             data-item-id="WS-01D" data-item-name="DYSTOPIA 01 // Acid-Washed Raw Edge Tactical Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03 / M" data-item-quantity="1">
                             CLAIM GEAR — C$77 CAD
                         </button>
@@ -676,12 +694,12 @@
                     🔒 <strong class="text-white">POST-PURCHASE PROTOCOL:</strong> Every piece includes an embedded NFC tag. Verify ownership upon delivery to activate your 7-day personal statement cycle.
                 </div>
 
-                <button id="modal-buy-btn" class="snipcart-add-item w-full py-4 bg-white text-black text-xs font-bold tracking-widest hover:bg-stone-300 transition rounded-lg uppercase min-h-[48px]">
+                <button id="modal-buy-btn" onclick="playCyberSound('transmit')" class="snipcart-add-item w-full py-4 bg-white text-black text-xs font-bold tracking-widest hover:bg-stone-300 transition rounded-lg uppercase min-h-[48px]">
                     ADD TO INVENTORY — C$77 CAD
                 </button>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- 10. T恤与针织衫独立尺码测量对照 Modal -->
     <div id="modal-size-guide" class="hidden fixed inset-0 z-[120] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
@@ -768,34 +786,94 @@
         }
         setInterval(updateTimer, 1000); updateTimer();
 
-        // 平滑滚动定位
         function scrollToTriptych() {
+            playCyberSound('click');
             document.getElementById('triptych-sector').scrollIntoView({ behavior: 'smooth' });
         }
         function scrollToHowItWorks() {
+            playCyberSound('click');
             document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // --- 2. 交互式 NFC 动态卡片颜色循环 ---
-        const demoColors = [
-            { code: "#0241 // BLUE ALIGNMENT", colorClass: "text-blue-400", quote: "“I stopped explaining myself to systems built to misunderstand me.”" },
-            { code: "#0241 // AMBER ALIGNMENT", colorClass: "text-amber-500", quote: "“Beauty belongs to those who wander through decaying ruins.”" },
-            { code: "#0241 // RED ALIGNMENT", colorClass: "text-red-500", quote: "“Resistance is not loud noise; it is refusing to be tracked.”" },
-            { code: "#0241 // CYAN ALIGNMENT", colorClass: "text-cyan-400", quote: "“Order is an illusion constructed by those terrified of raw chaos.”" }
-        ];
-        let demoIndex = 0;
+        // --- 2. 网页原生 Web Audio 赛博音浪合成器 (Zero MP3 Dependencies) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let audioEnabled = false;
 
-        function cycleDemoColor() {
-            demoIndex = (demoIndex + 1) % demoColors.length;
-            const titleEl = document.getElementById('demo-card-title');
-            const quoteEl = document.getElementById('demo-card-quote');
-            
-            titleEl.className = `text-2xl font-bold mb-1 transition-colors duration-300 ${demoColors[demoIndex].colorClass}`;
-            titleEl.innerText = demoColors[demoIndex].code;
-            quoteEl.innerText = demoColors[demoIndex].quote;
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const btn = document.getElementById('audio-toggle-btn');
+            btn.innerText = audioEnabled ? 'AUDIO: ON 🔊' : 'AUDIO: OFF 🔇';
+            btn.className = audioEnabled ? 'hidden md:inline-block tracking-widest text-amber-500 font-bold transition px-2 py-1 border border-amber-500/50 rounded' : 'hidden md:inline-block tracking-widest text-stone-400 hover:text-white transition px-2 py-1 border border-stone-800 rounded';
+            if (audioEnabled) playCyberSound('click');
         }
 
-        // --- 3. 顶栏 Logo & 主题颜色动态翻转 ---
+        function playCyberSound(type) {
+            if (!audioEnabled) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.05);
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.05);
+                } else if (type === 'transmit') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.25);
+                    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.25);
+                }
+            } catch(e) { console.log(e); }
+        }
+
+        // --- 3. 实机“表达生成器”互动逻辑 ---
+        let currentThemeColorClass = "text-blue-400";
+        let currentThemeBorderClass = "border-blue-500/40";
+        let currentThemeName = "CYBER BLUE";
+
+        function setCardTheme(name, colorClass, borderClass) {
+            playCyberSound('click');
+            currentThemeName = name;
+            currentThemeColorClass = colorClass;
+            currentThemeBorderClass = borderClass;
+            updateLiveCard();
+        }
+
+        function updateLiveCard() {
+            const inputVal = document.getElementById('custom-statement').value.trim();
+            const textEl = document.getElementById('live-card-text');
+            const codeEl = document.getElementById('live-card-code');
+            const cardEl = document.getElementById('live-demo-card');
+
+            cardEl.className = `mt-6 p-6 bg-black border ${currentThemeBorderClass} rounded-xl transition-all duration-300`;
+            codeEl.className = `text-2xl font-bold transition-colors ${currentThemeColorClass}`;
+            codeEl.innerText = `#0777 // ${currentThemeName}`;
+            
+            if (inputVal.length > 0) {
+                textEl.innerText = `“${inputVal}”`;
+            } else {
+                textEl.innerText = `“Your 1-sentence statement will publish here.”`;
+            }
+        }
+
+        function transmitSignal() {
+            playCyberSound('transmit');
+            const status = document.getElementById('transmit-status');
+            status.classList.remove('hidden');
+            setTimeout(() => { status.classList.add('hidden'); }, 3500);
+        }
+
+        // --- 4. 顶栏 Logo & 主题动态切换 ---
         let currentView = 'landing';
         function setNavbarTheme(viewId) {
             const nav = document.getElementById('navbar');
@@ -809,11 +887,12 @@
             } else {
                 nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/80 text-white";
                 brandText.className = "font-brand font-light text-sm md:text-base tracking-[0.32em] text-white uppercase transition-colors";
-                if (navLogo) navLogo.className = "h-7 w-auto object-contain transition-all";
+                if (navLogo) navLogo.className = "h-7 w-auto object-contain transition-all brightness-0 invert filter";
             }
         }
 
         function showView(viewId, pushHistory = true) {
+            playCyberSound('click');
             ['landing', 'utopia', 'paradise', 'dystopia'].forEach(v => document.getElementById(`view-${v}`).classList.add('hidden'));
             document.getElementById(`view-${viewId}`).classList.remove('hidden');
             if (pushHistory && viewId !== currentView) history.pushState({ view: viewId }, '', '#' + viewId);
@@ -835,7 +914,7 @@
         function goBack() { window.history.length > 1 ? window.history.back() : showView('landing'); }
         function enterFaction(faction) { showView(faction); }
 
-        // --- 4. 答题引擎 ---
+        // --- 5. 答题引擎 ---
         let quizStep = 0;
         let scores = { utopia: 0, paradise: 0, dystopia: 0 };
         const questions = [
@@ -845,6 +924,7 @@
         ];
 
         function startQuiz() {
+            playCyberSound('click');
             quizStep = 0;
             scores = { utopia: 0, paradise: 0, dystopia: 0 };
             updateQuizUI();
@@ -862,6 +942,7 @@
         }
 
         function answerQuiz(faction) {
+            playCyberSound('click');
             scores[faction]++;
             quizStep++;
             if (quizStep < 3) {
@@ -879,8 +960,9 @@
             }
         }
 
-        // --- 5. 数量与 7 尺码选择逻辑 ---
+        // --- 6. 数量与 7 尺码选择逻辑 ---
         function changeCardQty(id, delta) {
+            playCyberSound('click');
             let span = document.getElementById(`qty-${id}`);
             let current = parseInt(span.innerText);
             let next = current + delta;
@@ -889,6 +971,7 @@
             document.getElementById(`btn-${id}`).setAttribute('data-item-quantity', next);
         }
         function selectCardSize(productId, sizeLabel, btnElement) {
+            playCyberSound('click');
             const container = btnElement.parentElement;
             container.querySelectorAll('button').forEach(b => b.className = "h-10 text-[11px] font-mono border border-stone-700/60 rounded text-stone-400 hover:border-white transition");
             if (productId.includes('U')) btnElement.className = "h-10 text-[11px] font-mono border border-slate-900 bg-slate-900 text-white rounded font-bold";
@@ -898,8 +981,9 @@
             if (cartBtn) cartBtn.setAttribute('data-item-custom1-value', sizeLabel);
         }
 
-        // --- 6. 政策与合规弹窗内容触发 ---
+        // --- 7. 政策弹窗 ---
         function openShippingModal() {
+            playCyberSound('click');
             openInfoModal('SHIPPING POLICY & TIMELINE', 
                 `1. CANADA EXPRESS: C$9.77 flat rate tracked courier across all 10 provinces. Free shipping on orders over C$154.00.\n` +
                 `2. LOCAL PICKUP: Free self-pickup available at our Richmond, BC hub upon dispatch notification.\n` +
@@ -909,6 +993,7 @@
         }
 
         function openReturnsModal() {
+            playCyberSound('click');
             openInfoModal('RETURNS & EXCHANGES POLICY', 
                 `1. 14-DAY PROTOCOL: Complimentary return window begins on the exact date of carrier delivery confirmation.\n` +
                 `2. INTEGRITY REQUIREMENT: Items must remain unworn, unwashed, and with both embedded NFC chips and serialized archival tags completely intact.\n` +
@@ -917,6 +1002,7 @@
         }
 
         function openPrivacyModal() {
+            playCyberSound('click');
             openInfoModal('PIPEDA COMPLIANT PRIVACY POLICY', 
                 `1. DATA COLLECTION: WITHIN SEVEN collects email addresses and shipping information solely for order fulfillment, unique serial assignment, and essential drop notifications under Canadian PIPEDA regulations.\n` +
                 `2. ZERO THIRD-PARTY SIGNAL TRADING: We never sell, trade, or monetize your personal transmission signals or browsing behaviors.\n` +
@@ -929,10 +1015,11 @@
             document.getElementById('info-modal-body').innerText = text;
             document.getElementById('modal-info').classList.remove('hidden');
         }
-        function closeInfoModal() { document.getElementById('modal-info').classList.add('hidden'); }
+        function closeInfoModal() { playCyberSound('click'); document.getElementById('modal-info').classList.add('hidden'); }
 
-        // --- 7. 独立尺码表 ---
+        // --- 8. 独立尺码表 ---
         function openSizeGuide(type) {
+            playCyberSound('click');
             const tableBody = document.getElementById('size-table-body');
             const title = document.getElementById('size-guide-title');
             
@@ -961,13 +1048,14 @@
             }
             document.getElementById('modal-size-guide').classList.remove('hidden');
         }
-        function closeSizeGuide() { document.getElementById('modal-size-guide').classList.add('hidden'); }
+        function closeSizeGuide() { playCyberSound('click'); document.getElementById('modal-size-guide').classList.add('hidden'); }
 
-        // --- 8. Modal & Product 相册切图 ---
+        // --- 9. Modal & Product 相册切图 ---
         let currentModalImgs = [];
         let modalQty = 1;
 
         function openProductModal(id, title, price, desc, imgArray, fabric, weight, type) {
+            playCyberSound('click');
             currentModalImgs = imgArray;
             document.getElementById('modal-code').innerText = `${id}-2026 ARCHIVE`;
             document.getElementById('modal-title').innerText = title;
@@ -994,6 +1082,7 @@
         }
 
         function switchModalImage(index) {
+            playCyberSound('click');
             if (currentModalImgs && currentModalImgs[index]) {
                 document.getElementById('modal-img').src = currentModalImgs[index];
                 document.querySelectorAll('.modal-thumb-btn').forEach((btn, i) => {
@@ -1003,8 +1092,9 @@
             }
         }
 
-        function closeProductModal() { document.getElementById('modal-product').classList.add('hidden'); }
+        function closeProductModal() { playCyberSound('click'); document.getElementById('modal-product').classList.add('hidden'); }
         function selectModalSize(sizeLabel) {
+            playCyberSound('click');
             document.querySelectorAll('.modal-size-btn').forEach(b => {
                 if (b.getAttribute('data-size') === sizeLabel) b.className = "modal-size-btn border border-white py-2 text-xs font-bold bg-white text-black rounded min-h-[36px]";
                 else b.className = "modal-size-btn border border-stone-800 py-2 text-xs font-bold text-stone-400 hover:border-stone-500 rounded min-h-[36px]";
@@ -1012,15 +1102,17 @@
             document.getElementById('modal-buy-btn').setAttribute('data-item-custom1-value', sizeLabel);
         }
         function changeModalQty(delta) {
+            playCyberSound('click');
             modalQty += delta;
             if (modalQty < 1) modalQty = 1;
             document.getElementById('modal-qty').innerText = modalQty;
             document.getElementById('modal-buy-btn').setAttribute('data-item-quantity', modalQty);
         }
 
-        // --- 9. EmailJS Engine ---
+        // --- 10. EmailJS Engine ---
         function handleSubscribe(e) {
             e.preventDefault();
+            playCyberSound('transmit');
             const emailInput = document.getElementById('subscriber-email');
             const btn = document.getElementById('subscribe-btn');
             const status = document.getElementById('subscribe-status');
@@ -1043,13 +1135,14 @@
             });
         }
 
-        // --- 10. Cookie Management ---
+        // --- 11. Cookie Management ---
         document.addEventListener("DOMContentLoaded", () => {
             if (!localStorage.getItem('ws_cookie_consent')) setTimeout(() => document.getElementById('cookie-banner').classList.remove('translate-y-full'), 2000);
         });
-        function openCookieSettings() { document.getElementById('modal-cookie-settings').classList.remove('hidden'); }
-        function closeCookieSettings() { document.getElementById('modal-cookie-settings').classList.add('hidden'); }
+        function openCookieSettings() { playCyberSound('click'); document.getElementById('modal-cookie-settings').classList.remove('hidden'); }
+        function closeCookieSettings() { playCyberSound('click'); document.getElementById('modal-cookie-settings').classList.add('hidden'); }
         function saveCookiePreferences(acceptAll = false) {
+            playCyberSound('click');
             if (acceptAll) { localStorage.setItem('ws_cookie_analytics', 'true'); }
             else { localStorage.setItem('ws_cookie_analytics', document.getElementById('cookie-analytics').checked); }
             localStorage.setItem('ws_cookie_consent', 'true');
