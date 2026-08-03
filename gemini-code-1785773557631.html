@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WITHIN SEVEN // Which Side of the Gate Are You On?</title>
+    <!-- Tailwind CSS CDN for instant modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+        
+        .font-sans { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Custom Glitch & Glass Effects */
+        .glitch-hover:hover {
+            text-shadow: 2px 0 #ef4444, -2px 0 #06b6d4;
+        }
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans antialiased selection:bg-red-500 selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 px-6 py-5 flex justify-between items-center mix-blend-difference">
+        <div class="flex items-center space-x-2 cursor-pointer" onclick="showView('landing')">
+            <span class="font-black text-xl tracking-[0.2em] text-white">WITHIN SEVEN</span>
+        </div>
+        <div id="nav-cart" class="text-xs font-mono tracking-widest uppercase cursor-pointer hover:opacity-70 transition">
+            INVENTORY [ <span id="cart-count">0</span> ]
+        </div>
+    </nav>
+
+    <!-- 1. LANDING PAGE / ARCHWAY GATEWAY -->
+    <section id="view-landing" class="relative w-screen h-screen flex flex-col items-center justify-center overflow-hidden">
+        
+        <!-- Background Split Aesthetics -->
+        <div class="absolute inset-0 flex pointer-events-none opacity-20">
+            <div class="w-1/2 bg-slate-200"></div>
+            <div class="w-1/2 bg-zinc-950 border-l border-zinc-800"></div>
+        </div>
+
+        <!-- Archway Logo Representation -->
+        <div class="z-10 flex flex-col items-center mb-8 fade-in">
+            <div class="w-24 h-36 border-t-8 border-x-8 border-white rounded-t-full flex items-center justify-center relative mb-6">
+                <span class="font-black text-5xl tracking-tighter text-white italic">7</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-extralight tracking-[0.35em] uppercase text-center">WITHIN SEVEN</h1>
+            <p class="text-xs font-mono tracking-[0.25em] text-zinc-400 mt-3 uppercase">Which side of the gate are you on?</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="z-10 flex flex-col sm:flex-row gap-4 fade-in" style="animation-delay: 0.2s;">
+            <button onclick="startQuiz()" class="px-8 py-4 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-2xl hover:scale-105">
+                ✦ Start Faction Verification
+            </button>
+        </div>
+
+        <!-- Direct Portal Short-cuts -->
+        <div class="z-10 absolute bottom-8 flex space-x-8 text-xs font-mono text-zinc-500">
+            <button onclick="enterFaction('utopia')" class="hover:text-white transition">DIRECT: LIGHT ZONE</button>
+            <span>//</span>
+            <button onclick="enterFaction('dystopia')" class="hover:text-red-500 transition">DIRECT: DARK ZONE</button>
+        </div>
+    </section>
+
+    <!-- 2. INTERACTIVE QUIZ MODAL -->
+    <section id="view-quiz" class="hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex items-center justify-center p-6">
+        <div class="max-w-xl w-full bg-zinc-900 border border-zinc-800 p-8 rounded-2xl shadow-2xl relative fade-in">
+            <!-- Progress Bar -->
+            <div class="w-full bg-zinc-800 h-1 mb-8 rounded-full overflow-hidden">
+                <div id="quiz-progress" class="bg-white h-full w-1/3 transition-all duration-300"></div>
+            </div>
+
+            <span id="quiz-step" class="text-xs font-mono text-zinc-500 uppercase tracking-widest">GATEWAY SEQUENCE 01 // 03</span>
+            <h2 id="quiz-question" class="text-xl md:text-2xl font-light mt-2 mb-8">When the old system collapses, what do you establish first?</h2>
+
+            <div class="space-y-4">
+                <button onclick="answerQuiz('utopia')" class="w-full p-4 border border-zinc-700 hover:border-white hover:bg-white hover:text-black transition text-left text-sm font-mono flex justify-between items-center group">
+                    <span id="opt-a">A. An automated, rational network to preserve absolute purity and order.</span>
+                    <span class="opacity-0 group-hover:opacity-100 transition">➔</span>
+                </button>
+                <button onclick="answerQuiz('dystopia')" class="w-full p-4 border border-zinc-700 hover:border-red-500 hover:bg-red-500 hover:text-white transition text-left text-sm font-mono flex justify-between items-center group">
+                    <span id="opt-b">B. A subterranean shelter equipped with modular tactical survival gear.</span>
+                    <span class="opacity-0 group-hover:opacity-100 transition">➔</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SCANNING LOADING SCREEN -->
+    <section id="view-loading" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center font-mono">
+        <div class="w-16 h-16 border-2 border-white border-t-transparent rounded-full animate-spin mb-6"></div>
+        <p class="text-xs tracking-[0.2em] text-zinc-400 animate-pulse">ANALYZING SUBCONSCIOUS ALIGNMENT...</p>
+    </section>
+
+    <!-- 4. UTOPIA STORE VIEW (LIGHT ZONE) -->
+    <section id="view-utopia" class="hidden min-h-screen bg-slate-50 text-slate-900 pt-28 pb-16 px-6 md:px-12 fade-in">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="border-b border-slate-200 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
+                <div>
+                    <span class="text-xs font-mono tracking-widest text-slate-400 uppercase">LOCATION // UTOPIA SECTOR 07</span>
+                    <h1 class="text-4xl md:text-6xl font-extralight tracking-widest mt-2">LIGHT ZONE</h1>
+                    <p class="text-sm text-slate-500 mt-2">Order, purity, and second-skin minimalism.</p>
+                </div>
+                <div class="mt-4 md:mt-0 text-xs font-mono bg-slate-200 px-3 py-1.5 rounded-full text-slate-700">
+                    STATUS: CITIZEN VERIFIED
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Product 01-U -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-full h-80 bg-slate-100 rounded-xl mb-4 flex items-center justify-center text-slate-300 font-mono text-xs">
+                        [ 3D PREVIEW: LIQUID TEE ]
+                    </div>
+                    <span class="text-xs font-mono text-slate-400">01-U // CAPSULE 01</span>
+                    <h3 class="text-lg font-normal mt-1">Seamless Liquid TENCEL™ Tee</h3>
+                    <p class="text-xs text-slate-500 mt-1">Zero-friction fit / Concealed bonded branding</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="font-mono text-sm">$85 CAD</span>
+                        <button onclick="addToCart()" class="px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-mono hover:bg-slate-700 transition">ADD TO INVENTORY</button>
+                    </div>
+                </div>
+
+                <!-- Product 02-U -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-full h-80 bg-slate-100 rounded-xl mb-4 flex items-center justify-center text-slate-300 font-mono text-xs">
+                        [ 3D PREVIEW: ZERO-SEAM HOODIE ]
+                    </div>
+                    <span class="text-xs font-mono text-slate-400">02-U // CAPSULE 01</span>
+                    <h3 class="text-lg font-normal mt-1">Zero-Seam Stealth Pocket Hoodie</h3>
+                    <p class="text-xs text-slate-500 mt-1">Matte cool-touch composite / Magnetic closures</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="font-mono text-sm">$185 CAD</span>
+                        <button onclick="addToCart()" class="px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-mono hover:bg-slate-700 transition">ADD TO INVENTORY</button>
+                    </div>
+                </div>
+
+                <!-- Product 07-GATE -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-full h-80 bg-slate-100 rounded-xl mb-4 flex items-center justify-center text-slate-300 font-mono text-xs">
+                        [ 3D PREVIEW: ARCH BALACLAVA ]
+                    </div>
+                    <span class="text-xs font-mono text-slate-400">07-GATE // CROSS-FACTION</span>
+                    <h3 class="text-lg font-normal mt-1">Dual-Arch Reversible Balaclava</h3>
+                    <p class="text-xs text-slate-500 mt-1">3D engineered knit / Active thermal regulation</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="font-mono text-sm">$65 CAD</span>
+                        <button onclick="addToCart()" class="px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-mono hover:bg-slate-700 transition">ADD TO INVENTORY</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hacker Portal Switcher -->
+            <div class="mt-20 border-t border-slate-200 pt-8 text-center">
+                <button onclick="enterFaction('dystopia')" class="font-mono text-xs text-slate-400 hover:text-red-600 transition tracking-widest">
+                    ⚠ SYSTEM WARNING: INFILTRATE DARK ZONE (REBEL BLACK MARKET) ➔
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. DYSTOPIA STORE VIEW (DARK ZONE) -->
+    <section id="view-dystopia" class="hidden min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-16 px-6 md:px-12 fade-in">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="border-b border-zinc-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
+                <div>
+                    <span class="text-xs font-mono tracking-widest text-red-500 uppercase">// UNAUTHORIZED ACCESS // SECTOR 07</span>
+                    <h1 class="text-4xl md:text-6xl font-black tracking-tighter mt-2 glitch-hover">DARK ZONE</h1>
+                    <p class="text-sm text-zinc-400 mt-2 font-mono">Tactical utility, deconstruction, and resistance gear.</p>
+                </div>
+                <div class="mt-4 md:mt-0 text-xs font-mono bg-red-950 border border-red-800 px-3 py-1.5 text-red-400">
+                    STATUS: REBEL SIGNAL DETECTED
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Product 01-D -->
+                <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-none hover:border-red-600 transition">
+                    <div class="w-full h-80 bg-zinc-950 border border-zinc-800 mb-4 flex items-center justify-center text-zinc-600 font-mono text-xs">
+                        [ CCTV_FEED: ACID_TEE ]
+                    </div>
+                    <span class="text-xs font-mono text-red-500">01-D // RESISTANCE</span>
+                    <h3 class="text-lg font-bold mt-1">Acid-Washed Distressed Heavyweight Tee</h3>
+                    <p class="text-xs text-zinc-400 mt-1">280gsm raw cotton / Exposed seam structure</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="font-mono text-sm text-white">$85 CAD</span>
+                        <button onclick="addToCart()" class="px-4 py-2 bg-red-600 text-white text-xs font-mono hover:bg-red-700 transition">CLAIM GEAR</button>
+                    </div>
+                </div>
+
+                <!-- Product 02-D -->
+                <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-none hover:border-red-600 transition">
+                    <div class="w-full h-80 bg-zinc-950 border border-zinc-800 mb-4 flex items-center justify-center text-zinc-600 font-mono text-xs">
+                        [ CCTV_FEED: TACTICAL_HOODIE ]
+                    </div>
+                    <span class="text-xs font-mono text-red-500">02-D // RESISTANCE</span>
+                    <h3 class="text-lg font-bold mt-1">Multi-Pocket Modular Tactical Hoodie</h3>
+                    <p class="text-xs text-zinc-400 mt-1">Signal-shielding inner pocket / Thumbhole cuffs</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="font-mono text-sm text-white">$185 CAD</span>
+                        <button onclick="addToCart()" class="px-4 py-2 bg-red-600 text-white text-xs font-mono hover:bg-red-700 transition">CLAIM GEAR</button>
+                    </div>
+                </div>
+
+                <!-- Product 03-D -->
+                <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-none hover:border-red-600 transition">
+                    <div class="w-full h-80 bg-zinc-950 border border-zinc-800 mb-4 flex items-center justify-center text-zinc-600 font-mono text-xs">
+                        [ CCTV_FEED: CARGO_PANTS ]
+                    </div>
+                    <span class="text-xs font-mono text-red-500">03-D // RESISTANCE</span>
+                    <h3 class="text-lg font-bold mt-1">Ripstop Gridweave Modular Cargo Pants</h3>
+                    <p class="text-xs text-zinc-400 mt-1">Durable gridweave / Adjustable tactical webbing</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="font-mono text-sm text-white">$210 CAD</span>
+                        <button onclick="addToCart()" class="px-4 py-2 bg-red-600 text-white text-xs font-mono hover:bg-red-700 transition">CLAIM GEAR</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hacker Portal Switcher -->
+            <div class="mt-20 border-t border-zinc-800 pt-8 text-center">
+                <button onclick="enterFaction('utopia')" class="font-mono text-xs text-zinc-500 hover:text-white transition tracking-widest">
+                    ↺ SWITCH FREQUENCY: ACCESS LIGHT ZONE (UTOPIA ORDER)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <script>
+        let cartCount = 0;
+        let quizStep = 0;
+        let scores = { utopia: 0, dystopia: 0 };
+
+        const questions = [
+            {
+                q: "When the old system collapses, what do you establish first?",
+                a: "An automated, rational network to preserve absolute purity and order.",
+                b: "A subterranean shelter equipped with modular tactical survival gear."
+            },
+            {
+                q: "How do you define the true purpose of your garments?",
+                a: "A second skin: seamless, weightless, eliminating all unnecessary friction.",
+                b: "Tactical armor: durable, multi-pocketed, built for utility and concealment."
+            },
+            {
+                q: "How do you respond to the constant gaze of external surveillance?",
+                a: "Blend seamlessly through immaculate elegance as a perfect component.",
+                b: "Conceal your identity, disrupt signals, and resist through deconstruction."
+            }
+        ];
+
+        function showView(viewId) {
+            const views = ['landing', 'quiz', 'loading', 'utopia', 'dystopia'];
+            views.forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if (el) el.classList.add('hidden');
+            });
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function startQuiz() {
+            quizStep = 0;
+            scores = { utopia: 0, dystopia: 0 };
+            updateQuizUI();
+            showView('quiz');
+        }
+
+        function updateQuizUI() {
+            document.getElementById('quiz-progress').style.width = `${((quizStep + 1) / 3) * 100}%`;
+            document.getElementById('quiz-step').innerText = `GATEWAY SEQUENCE 0${quizStep + 1} // 03`;
+            document.getElementById('quiz-question').innerText = questions[quizStep].q;
+            document.getElementById('opt-a').innerText = "A. " + questions[quizStep].a;
+            document.getElementById('opt-b').innerText = "B. " + questions[quizStep].b;
+        }
+
+        function answerQuiz(faction) {
+            scores[faction]++;
+            quizStep++;
+            if (quizStep < 3) {
+                updateQuizUI();
+            } else {
+                showView('loading');
+                setTimeout(() => {
+                    if (scores.utopia >= scores.dystopia) {
+                        enterFaction('utopia');
+                    } else {
+                        enterFaction('dystopia');
+                    }
+                }, 1800);
+            }
+        }
+
+        function enterFaction(faction) {
+            showView(faction);
+        }
+
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+            alert('ITEM ADDED TO WITHIN SEVEN INVENTORY.');
+        }
+    </script>
+</body>
+</html>
