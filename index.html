@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@300;400;700&family=Syncopate:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <!-- Snipcart Integration -->
+    <!-- Snipcart Checkout Integration -->
     <script>
       window.SnipcartSettings = {
         publicApiKey: 'ZDJmZTZIY2ItNzEwZS00NzQxLWFHNWUtOGFhNDQxMzMyZjNhNjM5M2EzMTg0MzQyNDc4NzMz',
@@ -62,7 +62,7 @@
         .font-brand { font-family: 'Syncopate', sans-serif; }
         .glitch-text:hover { text-shadow: 2px 0 #ef4444, -2px 0 #06b6d4; }
         
-        /* 180ms 极速平滑动画，彻底消除残影与双重叠层 */
+        /* 180ms 极速平滑动画 */
         .fade-in { animation: fadeIn 0.18s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
@@ -93,56 +93,85 @@
         </div>
     </nav>
 
-    <!-- 2. LANDING PAGE (品牌核心本质 + 编号系统 + Drop 01 入口) -->
+    <!-- 2. LANDING PAGE HERO (首屏独占三联画背景) -->
     <section id="view-landing" class="relative w-full min-h-screen flex flex-col items-center justify-between overflow-x-hidden bg-black pt-28 pb-12">
         
-        <!-- 背景高定三分屏视觉 -->
-        <div class="absolute inset-0 flex z-0 overflow-hidden opacity-20 pointer-events-none">
-            <div class="relative flex-1 bg-slate-200 border-r border-white/10"></div>
-            <div class="relative flex-1 bg-amber-700 border-r border-white/10"></div>
-            <div class="relative flex-1 bg-red-700"></div>
+        <!-- 桌面端/手机端自适应首屏三联画 (Hero-Only Background Triptych) -->
+        <div id="triptych-sector" class="absolute inset-0 z-0 flex flex-col md:flex-row overflow-hidden border-b border-stone-800">
+            <!-- 01 UTOPIA -->
+            <div onclick="enterFaction('utopia')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-stone-800/80 bg-slate-950">
+                <img src="cover-utopia.webp" onerror="this.src='utopia-1.png'" alt="Utopia Order" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                    <div class="text-slate-400 text-[10px] mb-1">SECTOR 01 // CITADEL OF ORDER</div>
+                    <div class="font-bold text-sm md:text-base">WORLD 01 / UTOPIA — ORDER</div>
+                    <div class="text-[10px] text-amber-500 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE ARCHIVE ➔</div>
+                </div>
+            </div>
+
+            <!-- 02 LOST PARADISE -->
+            <div onclick="enterFaction('paradise')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-stone-800/80 bg-stone-950">
+                <img src="cover-paradise.webp" onerror="this.src='paradise-1.png'" alt="Lost Paradise Memory" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                    <div class="text-amber-500/70 text-[10px] mb-1">SECTOR 00 // FORGOTTEN ASHES</div>
+                    <div class="font-bold text-sm md:text-base text-stone-200">WORLD 02 / LOST PARADISE — MEMORY</div>
+                    <div class="text-[10px] text-amber-500 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE RELIC ➔</div>
+                </div>
+            </div>
+
+            <!-- 03 DYSTOPIA -->
+            <div onclick="enterFaction('dystopia')" class="group flex-1 hover:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden bg-zinc-950">
+                <img src="cover-dystopia.webp" onerror="this.src='dystopia-1.png'" alt="Dystopia Resistance" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                    <div class="text-red-500/80 text-[10px] mb-1">SECTOR 09 // REBEL UNDERGROUND</div>
+                    <div class="font-bold text-sm md:text-base text-red-500">WORLD 03 / DYSTOPIA — RESISTANCE</div>
+                    <div class="text-[10px] text-red-400 mt-1 opacity-0 group-hover:opacity-100 transition duration-300">EXPLORE GEAR ➔</div>
+                </div>
+            </div>
         </div>
 
-        <!-- Hero 内容 -->
-        <div class="z-20 flex flex-col items-center mt-2 text-center px-4 relative max-w-4xl">
-            <div class="font-mono text-[10px] text-amber-500 mb-4 tracking-widest uppercase">
+        <!-- Hero 文字浮层内容 -->
+        <div class="z-20 flex flex-col items-center mt-2 text-center px-4 relative max-w-4xl pointer-events-none">
+            <div class="font-mono text-[10px] text-amber-500 mb-2 tracking-widest uppercase">
                 > WEARABLE IDENTITY SYSTEM // EDITION CAPACITY: 777 GARMENTS
             </div>
             
-            <!-- Logo 容器：224px 黄金比例 + 淡雅暗晕，突出双脸线条 -->
-            <div class="relative flex items-center justify-center my-3">
-                <div class="absolute w-48 h-44 md:w-64 md:h-60 bg-white/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
-                <img src="LOGO.png" alt="WITHIN SEVEN Emblem" class="w-32 md:w-56 h-auto object-contain hover:scale-105 transition duration-300">
+            <!-- Logo 容器：224px (w-56 / w-64) 黄金尺寸 + 背光暗晕 -->
+            <div class="relative flex items-center justify-center my-2 pointer-events-auto">
+                <div class="absolute w-56 h-56 md:w-72 md:h-72 bg-white/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+                <img src="LOGO.png" alt="WITHIN SEVEN Emblem" class="w-36 md:w-64 h-auto object-contain scale-110 hover:scale-115 transition duration-300">
             </div>
             
-            <h1 class="text-3xl md:text-5xl font-brand font-light tracking-[0.32em] uppercase text-white mt-1">WITHIN SEVEN</h1>
+            <h1 class="text-3xl md:text-5xl font-brand font-light tracking-[0.32em] uppercase text-white mt-1 pointer-events-auto">WITHIN SEVEN</h1>
             
-            <!-- 品牌底层核心公式 (核心要义) -->
-            <p class="text-xs md:text-sm font-mono tracking-[0.25em] text-stone-200 mt-4 uppercase font-bold max-w-2xl leading-relaxed">
+            <!-- 品牌底层核心公式 -->
+            <p class="text-xs md:text-sm font-mono tracking-[0.25em] text-stone-200 mt-4 uppercase font-bold max-w-2xl leading-relaxed pointer-events-auto">
                 A NUMBERED GARMENT. A MEANING ONLY YOU CAN ASSIGN. HELD FOR SEVEN DAYS.
             </p>
-            <p class="text-[10px] md:text-xs font-mono tracking-[0.2em] text-stone-500 mt-2 uppercase">
+            <p class="text-[10px] md:text-xs font-mono tracking-[0.2em] text-stone-400 mt-2 uppercase pointer-events-auto">
                 DROP 01 — 777 INDIVIDUALLY NUMBERED PIECES ACROSS THREE WORLDS.
             </p>
 
             <!-- 锁定硬编码倒计时 (Nov 11, 2026) -->
-            <div class="mt-8 px-5 py-2.5 bg-stone-900/90 border border-stone-800 rounded-lg font-mono text-xs text-amber-500 tracking-widest backdrop-blur-sm">
+            <div class="mt-6 px-5 py-2.5 bg-black/90 border border-stone-800 rounded-lg font-mono text-xs text-amber-500 tracking-widest backdrop-blur-md pointer-events-auto">
                 DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-2">LOADING...</span>
             </div>
 
-            <!-- 主按钮：看商品 vs 了解编号如何运作 -->
-            <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full max-w-md">
-                <button onclick="enterFaction('utopia')" class="flex-1 py-4 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition font-bold shadow-lg min-h-[44px]">
+            <!-- 主按钮：Explore Drop 01 (下滚至三世界区) vs How The Number Works -->
+            <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full max-w-md pointer-events-auto">
+                <button onclick="scrollToTriptych()" class="flex-1 py-4 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition font-bold shadow-2xl min-h-[44px]">
                     EXPLORE DROP 01
                 </button>
-                <button onclick="scrollToHowItWorks()" class="flex-1 py-4 bg-transparent text-white border border-white/40 font-mono text-xs tracking-widest uppercase hover:bg-white/10 transition min-h-[44px]">
+                <button onclick="scrollToHowItWorks()" class="flex-1 py-4 bg-black/80 text-white border border-white/40 font-mono text-xs tracking-widest uppercase hover:bg-white/10 transition backdrop-blur-md min-h-[44px]">
                     HOW THE NUMBER WORKS ➔
                 </button>
             </div>
         </div>
 
-        <!-- 3. HOW THE NUMBER WORKS (编号与表达解密模块) -->
-        <div id="how-it-works" class="z-20 w-full max-w-5xl px-6 my-24 font-mono">
+        <!-- 3. HOW THE NUMBER WORKS (纯黑背景 + 3步解密与动态卡片) -->
+        <div id="how-it-works" class="z-20 w-full max-w-5xl px-6 my-24 font-mono relative bg-black">
             <div class="border-t border-b border-stone-800 py-12">
                 <div class="text-center mb-10">
                     <span class="text-xs text-amber-500 tracking-widest uppercase">// SYSTEM PROTOCOL //</span>
@@ -150,19 +179,19 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-xs leading-relaxed">
-                    <div class="bg-stone-900/40 p-6 border border-stone-800/80 rounded-xl">
+                    <div class="bg-stone-900/50 p-6 border border-stone-800 rounded-xl">
                         <div class="text-amber-500 font-bold mb-2 text-sm">01 // CLAIM</div>
                         <p class="text-stone-300 font-bold mb-1">Garment & Unique Serial</p>
                         <p class="text-stone-500 text-[11px]">Choose your garment from Drop 01. A unique number (001–777) is randomly assigned to your physical piece upon dispatch confirmation.</p>
                     </div>
 
-                    <div class="bg-stone-900/40 p-6 border border-stone-800/80 rounded-xl">
+                    <div class="bg-stone-900/50 p-6 border border-stone-800 rounded-xl">
                         <div class="text-amber-500 font-bold mb-2 text-sm">02 // ACTIVATE</div>
                         <p class="text-stone-300 font-bold mb-1">NFC Tag & Private Verification</p>
                         <p class="text-stone-500 text-[11px]">Scan the embedded NFC chip inside your garment upon arrival to verify ownership and unlock your private statement portal.</p>
                     </div>
 
-                    <div class="bg-stone-900/40 p-6 border border-stone-800/80 rounded-xl">
+                    <div class="bg-stone-900/50 p-6 border border-stone-800 rounded-xl">
                         <div class="text-amber-500 font-bold mb-2 text-sm">03 // DEFINE</div>
                         <p class="text-stone-300 font-bold mb-1">Color, Sentence & 7-Day Cycle</p>
                         <p class="text-stone-500 text-[11px]">Select a color and submit one sentence. Your number, color, and message publish to the public archive for a 7-day immutable cycle.</p>
@@ -170,7 +199,7 @@
                 </div>
 
                 <!-- 匿名公开档案模拟展示卡 (#0241) -->
-                <div class="mt-10 p-6 bg-black border border-stone-800 rounded-xl max-w-lg mx-auto text-center relative overflow-hidden">
+                <div class="mt-10 p-6 bg-stone-950 border border-stone-800 rounded-xl max-w-lg mx-auto text-center relative overflow-hidden">
                     <div class="text-[10px] text-stone-500 uppercase tracking-widest mb-2">LIVE ARCHIVE DEMO ENTRY</div>
                     <div class="text-2xl font-bold text-amber-500 mb-1">#0241 // BLUE ALIGNMENT</div>
                     <blockquote class="text-sm italic text-stone-200 my-3">“I stopped explaining myself to systems built to misunderstand me.”</blockquote>
@@ -185,9 +214,8 @@
             </div>
         </div>
 
-        <!-- 极简社媒与 Balenciaga 同款矩阵 -->
-        <div class="z-20 w-full max-w-6xl px-6 flex flex-col items-center">
-            
+        <!-- 极简社媒与 Balenciaga 同款矩阵 (纯黑背景) -->
+        <div class="z-20 w-full max-w-6xl px-6 flex flex-col items-center bg-black">
             <div class="p-5 bg-stone-900/50 border border-stone-800 rounded-xl backdrop-blur-md w-full max-w-md text-center mb-16">
                 <p class="text-[10px] text-stone-400 mb-3 font-mono tracking-widest uppercase">ENTER THE SYSTEM // RECEIVE DROP ACCESS</p>
                 <form id="subscribe-form" onsubmit="handleSubscribe(event)" class="flex gap-2">
@@ -268,7 +296,6 @@
             </div>
 
             <div class="bg-white p-6 md:p-10 rounded-2xl shadow-sm border border-slate-200/80 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-                <!-- 左栏：大图与相册切换 -->
                 <div class="md:col-span-6 flex flex-col gap-3">
                     <div class="w-full h-[420px] md:h-[540px] bg-slate-100 rounded-xl overflow-hidden relative border border-slate-200 cursor-pointer" 
                          onclick="openProductModal('WS-01U', 'UTOPIA 01 // Seamless Precision Sculpted Tee', 77, 'Architectural zero-friction silhouette crafted from organic cotton TENCEL™ blend.', ['utopia-1.png', 'utopia-2.png', 'utopia-3.png'], '60% Organic Cotton / 40% TENCEL™ Lyocell', '300 GSM Heavy Structure', 'Tee')">
@@ -287,14 +314,12 @@
                     </div>
                 </div>
 
-                <!-- 右栏：完整参数与购买控制 -->
                 <div class="md:col-span-6 flex flex-col justify-between space-y-6">
                     <div>
                         <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">WS-01U-2026 ARCHIVE</span>
                         <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mt-1">Seamless Precision Sculpted Tee</h2>
                         <p class="text-2xl font-mono font-bold text-slate-900 mt-3">C$77 CAD</p>
                         
-                        <!-- 运费提示 -->
                         <p class="text-[11px] font-mono text-emerald-700 mt-1 font-bold">
                             C$9.77 tracked Canada shipping · Free on C$154+ orders
                         </p>
@@ -309,7 +334,6 @@
                             <div class="flex justify-between"><span>SERIALIZATION:</span> <span class="text-slate-900 font-bold">UNIQUE NUMBER ASSIGNED AT DISPATCH</span></div>
                         </div>
 
-                        <!-- 7 个尺码选择器（显式 40px 高度触控区域） -->
                         <div class="mt-6">
                             <div class="flex justify-between items-center mb-2">
                                 <label class="text-xs font-mono font-bold text-slate-700 uppercase">SELECT ARCHIVAL SIZE:</label>
@@ -326,7 +350,6 @@
                             </div>
                         </div>
 
-                        <!-- 数量调节器 -->
                         <div class="mt-6">
                             <label class="text-xs font-mono font-bold text-slate-700 uppercase block mb-2">QUANTITY:</label>
                             <div class="flex items-center border border-slate-300 rounded w-fit">
@@ -455,7 +478,7 @@
                     <span class="text-xs font-mono tracking-widest text-red-500 uppercase">DROP 01 ART THEME // SECTOR 09</span>
                     <h1 class="text-4xl md:text-6xl font-black tracking-tighter mt-2 glitch-text">DYSTOPIA 01</h1>
                 </div>
-                <div class="mt-4 md:mt-0 text-xs font-mono bg-red-950/60 border border-red-800 px-3 py-1.5 text-red-400 font-bold">
+                <div class="mt-4 md:mt-0 text-xs font-mono bg-red-950/60 border border-red-800 px-3 py-1.5 rounded text-red-400 font-bold">
                     REBEL ALIGNMENT
                 </div>
             </div>
@@ -541,7 +564,7 @@
         </div>
     </section>
 
-    <!-- 9. 真实政策与规则 Modal 界面 ( Shipping / Returns / Privacy / General ) -->
+    <!-- 9. 真实政策与规则 Modal 界面 -->
     <div id="modal-info" class="hidden fixed inset-0 z-[130] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-xl w-full bg-stone-950 border border-stone-800 p-8 rounded-xl shadow-2xl relative text-stone-300 space-y-4">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4">
@@ -555,7 +578,7 @@
         </div>
     </div>
 
-    <!-- 宽幅双栏高定 Modal (支持 3 视角相册切图) -->
+    <!-- 宽幅双栏高定 Modal -->
     <div id="modal-product" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 fade-in overflow-y-auto">
         <div class="max-w-5xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-2xl shadow-2xl relative font-mono text-stone-300 grid grid-cols-1 md:grid-cols-2 gap-8 my-auto mt-20 md:mt-auto">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 text-stone-500 hover:text-white text-lg z-10 p-1">✕</button>
@@ -626,7 +649,7 @@
         </div>
     </section>
 
-    <!-- 10. T恤与针织衫独立尺码测量对照 Modal (包含平铺测量与模特参考) -->
+    <!-- 10. T恤与针织衫独立尺码测量对照 Modal -->
     <div id="modal-size-guide" class="hidden fixed inset-0 z-[120] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-xl shadow-2xl relative text-stone-300">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-4">
@@ -648,7 +671,6 @@
                         </tr>
                     </thead>
                     <tbody id="size-table-body" class="divide-y divide-stone-900">
-                        <!-- JS 自动动态渲染 T 恤或针织衫尺码 -->
                     </tbody>
                 </table>
             </div>
@@ -659,7 +681,7 @@
         </div>
     </div>
 
-    <!-- Cookie Settings Modal (Analytics 默认未勾选，符合 GDPR/PIPEDA) -->
+    <!-- Cookie Settings Modal -->
     <div id="modal-cookie-settings" class="hidden fixed inset-0 z-[110] bg-black/90 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-xl w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl relative text-stone-300">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-6">
@@ -670,7 +692,6 @@
                 <div class="p-4 bg-stone-900/60 border border-stone-800 rounded-lg flex justify-between"><span class="font-bold text-white uppercase">01 // Essential Inventory & Security</span><span class="text-[10px] text-amber-500 font-bold">REQUIRED</span></div>
                 <div class="p-4 bg-stone-900/60 border border-stone-800 rounded-lg flex justify-between items-center">
                     <span class="font-bold text-white uppercase">02 // Traffic Signals & Analytics</span>
-                    <!-- 默认未勾选 (Unchecked) -->
                     <input type="checkbox" id="cookie-analytics" class="accent-amber-500 w-5 h-5 cursor-pointer">
                 </div>
             </div>
@@ -681,7 +702,7 @@
         </div>
     </div>
 
-    <!-- Cookie Banner (保证触控区域大于 24px) -->
+    <!-- Cookie Banner -->
     <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-black/95 border-t border-stone-800 backdrop-blur-xl z-[45] p-4 flex flex-col md:flex-row justify-between items-center transition-transform duration-300 translate-y-full font-mono">
         <div class="text-[10px] md:text-xs text-stone-400 mb-3 md:mb-0 max-w-4xl">
             <span class="text-amber-500 font-bold">SYS.NOTICE //</span> We utilize necessary cookies for system cart state and inventory security.
@@ -713,6 +734,10 @@
         }
         setInterval(updateTimer, 1000); updateTimer();
 
+        // 平滑滚动定位
+        function scrollToTriptych() {
+            document.getElementById('triptych-sector').scrollIntoView({ behavior: 'smooth' });
+        }
         function scrollToHowItWorks() {
             document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' });
         }
