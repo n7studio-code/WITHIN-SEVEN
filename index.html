@@ -113,16 +113,24 @@
             animation: scanBeam 1.2s ease-in-out infinite;
         }
 
-        /* 提交动画撕裂 Glitch */
-        @keyframes cardGlitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-3px, 3px); filter: hue-rotate(90deg); }
-            40% { transform: translate(-3px, -3px); }
-            60% { transform: translate(3px, 3px); filter: hue-rotate(180deg); }
-            80% { transform: translate(3px, -3px); }
-            100% { transform: translate(0); filter: none; }
+        /* 个人专属卡片呼吸边框 */
+        @keyframes userCardGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); border-color: rgba(245, 158, 11, 0.8); }
+            50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); border-color: rgba(255, 255, 255, 0.9); }
         }
-        .glitch-anim { animation: cardGlitch 0.4s ease-out; }
+        .user-card-glow { animation: userCardGlow 3s ease-in-out infinite; }
+
+        /* 跑马灯滚动 */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover { animation-play-state: paused; }
 
         .typewriter-cursor::after {
             content: '|';
@@ -147,18 +155,15 @@
             </button>
             <div class="flex items-center space-x-2.5 cursor-pointer" onclick="showView('landing')">
                 <img id="nav-logo" src="LOGO.png" alt="WITHIN SEVEN Logo" class="h-6 md:h-7 w-auto object-contain transition-all white-logo-render">
-                <!-- 移动端自动隐藏字标，避免碰撞撞字 -->
                 <span id="nav-brand-text" class="hidden sm:inline-block font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap">WITHIN SEVEN</span>
             </div>
         </div>
         
         <div class="flex items-center space-x-2 md:space-x-4 font-mono text-xs">
-            <!-- 桌面端显示 PUBLIC ARCHIVE 直达按键 -->
             <button onclick="showView('archive')" class="hidden md:inline-block tracking-widest text-amber-500 hover:text-white border border-amber-500/50 hover:border-white transition px-3 py-1.5 rounded text-[11px] whitespace-nowrap">
                 PUBLIC ARCHIVE // 777
             </button>
             
-            <!-- 移动端专属：抽屉菜单唤起图标 ☰ -->
             <button onclick="toggleMenu()" class="inline-block p-2 text-stone-300 hover:text-white border border-stone-800 rounded min-h-[36px] min-w-[36px]">
                 ☰
             </button>
@@ -169,7 +174,7 @@
         </div>
     </nav>
 
-    <!-- 2. 全屏抽屉目录 MENU DRAWER (手机端导航解决方案) -->
+    <!-- 2. 全屏抽屉目录 MENU DRAWER -->
     <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-black/98 backdrop-blur-2xl flex flex-col justify-between p-8 fade-in font-mono">
         <div class="flex justify-between items-center border-b border-stone-800 pb-6">
             <div class="flex items-center space-x-3">
@@ -203,12 +208,11 @@
         </div>
     </div>
 
-    <!-- 3. LANDING PAGE HERO (极致干练首屏，无视觉干扰) -->
+    <!-- 3. LANDING PAGE HERO (极致干练首屏) -->
     <section id="view-landing" class="relative w-full min-h-screen bg-black">
         
         <div class="relative w-full h-[100dvh] min-h-[620px] flex flex-col justify-between items-center overflow-hidden border-b border-stone-800">
             
-            <!-- 手机端 Option A (CSS Snap 横向滑卡) / 桌面端 (三联画拉伸) -->
             <div id="triptych-sector" class="absolute inset-0 z-0 flex flex-row overflow-x-auto md:overflow-hidden snap-x snap-mandatory no-scrollbar">
                 
                 <!-- 01 UTOPIA -->
@@ -254,7 +258,7 @@
                 </div>
             </div>
 
-            <!-- Hero 中间内容浮层：清爽高定布局 -->
+            <!-- Hero 中间内容浮层 -->
             <div class="z-20 flex flex-col items-center pt-24 md:pt-28 text-center px-4 relative max-w-4xl pointer-events-none">
                 <div class="font-mono text-[9px] md:text-[10px] text-amber-500 mb-2 tracking-widest uppercase typewriter-cursor">
                     > WEARABLE IDENTITY SYSTEM // 777 GARMENTS
@@ -268,17 +272,14 @@
                 
                 <h1 class="text-2xl md:text-5xl font-brand font-light tracking-[0.28em] md:tracking-[0.32em] uppercase text-white mt-1 pointer-events-auto glitch-text">WITHIN SEVEN</h1>
                 
-                <!-- 单行硬核表达公式 -->
                 <p class="text-[11px] md:text-sm font-mono tracking-[0.2em] md:tracking-[0.25em] text-stone-200 mt-2 md:mt-3 uppercase font-bold max-w-2xl leading-relaxed pointer-events-auto">
                     A NUMBERED GARMENT. A MEANING ONLY YOU CAN ASSIGN. HELD FOR SEVEN DAYS.
                 </p>
 
-                <!-- 战术倒计时标 -->
                 <div class="mt-4 px-4 py-1.5 bg-black/90 border border-stone-800 rounded-lg font-mono text-[11px] md:text-xs text-amber-500 tracking-widest backdrop-blur-md shadow-2xl pointer-events-auto">
                     DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-1">LOADING...</span>
                 </div>
 
-                <!-- 两个核心战术主按钮 -->
                 <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 w-full max-w-md pointer-events-auto pb-6">
                     <button onclick="scrollToTriptych()" class="flex-1 py-3.5 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition font-bold shadow-2xl min-h-[44px]">
                         EXPLORE DROP 01
@@ -301,7 +302,7 @@
             </div>
         </div>
 
-        <!-- 4. HOW THE NUMBER WORKS (系统三步解密) -->
+        <!-- 4. HOW THE NUMBER WORKS (系统三步解密 + 专属配号终端) -->
         <div id="how-it-works" class="relative z-10 w-full bg-black py-20 border-b border-stone-800">
             <div class="max-w-5xl mx-auto px-6 font-mono">
                 <div class="text-center mb-10">
@@ -329,22 +330,25 @@
                     </div>
                 </div>
 
-                <!-- 💥 “匿名表达终端” (iOS Auto-zoom 16px 防放大) 💥 -->
+                <!-- 💥 仪式 01：自动滚码锁定专属编号终端 💥 -->
                 <div class="mt-12 p-6 md:p-8 bg-stone-950 border border-stone-800 hover:border-amber-500/80 rounded-2xl max-w-xl mx-auto text-center relative shadow-2xl transition duration-500 overflow-hidden">
                     <div id="scan-beam" class="hidden laser-beam"></div>
                     
                     <div class="text-[10px] text-amber-500 uppercase tracking-widest mb-1">// INTERACTIVE TERMINAL // SIMULATE YOUR STATEMENT</div>
-                    <p class="text-xs text-stone-400 mb-4">Type a sentence and choose an alignment color to test the live archive generator:</p>
+                    <div id="assigned-prompt-msg" class="text-[10px] text-stone-400 font-mono mb-4">
+                        [ SYSTEM INFO ]: Allocating ephemeral test protocol...
+                    </div>
                     
                     <div class="space-y-4">
                         <input type="text" id="custom-statement" oninput="updateLiveCard()" placeholder="TYPE YOUR 1-SENTENCE STATEMENT HERE..." maxlength="80" value="I stopped explaining myself to systems built to misunderstand me." class="w-full bg-black border border-stone-700 px-4 py-3 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono text-center">
                         
-                        <div class="flex justify-center items-center gap-4 py-1">
+                        <!-- 4 色扩容触控包靶 -->
+                        <div class="flex justify-center items-center gap-5 py-2">
                             <span class="text-[10px] text-stone-500">ALIGNMENT COLOR:</span>
-                            <button onclick="setCardTheme('CYBER BLUE', 'text-blue-400', 'border-blue-500/40')" class="w-6 h-6 rounded-full bg-blue-500 hover:scale-125 transition border-2 border-white/20"></button>
-                            <button onclick="setCardTheme('PARADISE AMBER', 'text-amber-500', 'border-amber-500/40')" class="w-6 h-6 rounded-full bg-amber-500 hover:scale-125 transition border-2 border-white/20"></button>
-                            <button onclick="setCardTheme('DYSTOPIA RED', 'text-red-500', 'border-red-500/40')" class="w-6 h-6 rounded-full bg-red-500 hover:scale-125 transition border-2 border-white/20"></button>
-                            <button onclick="setCardTheme('UTOPIA WHITE', 'text-white', 'border-white/40')" class="w-6 h-6 rounded-full bg-white hover:scale-125 transition border-2 border-white/20"></button>
+                            <button onclick="setCardTheme('CYBER BLUE', 'text-blue-400', 'border-blue-500/40')" class="w-7 h-7 rounded-full bg-blue-500 hover:scale-125 transition border-2 border-white/20 p-1 min-w-[28px] min-h-[28px]"></button>
+                            <button onclick="setCardTheme('PARADISE AMBER', 'text-amber-500', 'border-amber-500/40')" class="w-7 h-7 rounded-full bg-amber-500 hover:scale-125 transition border-2 border-white/20 p-1 min-w-[28px] min-h-[28px]"></button>
+                            <button onclick="setCardTheme('DYSTOPIA RED', 'text-red-500', 'border-red-500/40')" class="w-7 h-7 rounded-full bg-red-500 hover:scale-125 transition border-2 border-white/20 p-1 min-w-[28px] min-h-[28px]"></button>
+                            <button onclick="setCardTheme('UTOPIA WHITE', 'text-white', 'border-white/40')" class="w-7 h-7 rounded-full bg-white hover:scale-125 transition border-2 border-white/20 p-1 min-w-[28px] min-h-[28px]"></button>
                         </div>
                     </div>
 
@@ -357,7 +361,6 @@
                         <button onclick="transmitSignal()" class="mt-4 px-6 py-2.5 bg-stone-900 border border-stone-700 hover:border-amber-500 text-amber-500 text-xs font-bold uppercase transition rounded hover:-translate-y-0.5 min-h-[38px]">
                             TRANSMIT TO PUBLIC ARCHIVE
                         </button>
-                        <div id="transmit-status" class="hidden text-[10px] text-emerald-400 mt-3 font-mono">✦ SIGNAL BROADCASTED TO PUBLIC ARCHIVE STREAM.</div>
                     </div>
                 </div>
 
@@ -434,6 +437,35 @@
         </div>
     </section>
 
+    <!-- 💥 仪式 02：居中全屏暗黑接入弹窗 CERemony MODAL 💥 -->
+    <div id="modal-ceremony" class="hidden fixed inset-0 z-[150] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-6 fade-in font-mono">
+        <div class="max-w-md w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl text-center space-y-6 relative overflow-hidden">
+            <div id="ceremony-beam" class="laser-beam"></div>
+            
+            <div id="ceremony-step-1" class="space-y-3">
+                <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <div class="text-xs text-amber-500 tracking-widest uppercase animate-pulse">ENCRYPTING TRANSMISSION SIGNAL...</div>
+            </div>
+
+            <div id="ceremony-step-2" class="hidden space-y-4">
+                <div class="text-stone-500 text-[10px] tracking-widest uppercase">// IDENTITY SYSTEM CONFIRMATION //</div>
+                <h2 id="ceremony-code-title" class="text-3xl font-bold text-amber-500">SIGNAL LOCKED TO ARCHIVE #0000</h2>
+                <div class="p-4 bg-black border border-stone-800 rounded-lg text-xs italic text-stone-200" id="ceremony-quote-text">
+                    “...”
+                </div>
+                <div class="text-white font-bold text-sm tracking-widest pt-2">
+                    WELCOME TO WITHIN SEVEN.
+                </div>
+                <p class="text-[11px] text-stone-400 leading-relaxed">
+                    Your anonymous statement has been recorded and anchored to the global mainframe for a 7-day cycle.
+                </p>
+                <button onclick="goToArchiveAndHighlight()" class="w-full py-3.5 bg-white text-black font-bold text-xs uppercase rounded hover:bg-stone-300 transition mt-4 min-h-[44px]">
+                    VIEW YOUR SIGNAL IN PUBLIC ARCHIVE ➔
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- 6. MANIFESTO 品牌宣言 Modal -->
     <div id="modal-manifesto" class="hidden fixed inset-0 z-[140] bg-black/95 backdrop-blur-xl flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl relative text-stone-300 space-y-6 max-h-[85vh] overflow-y-auto">
@@ -491,7 +523,7 @@
         <p id="loading-msg" class="text-xs tracking-[0.25em] text-stone-400 animate-pulse">ANALYZING SUBCONSCIOUS ALIGNMENT...</p>
     </section>
 
-    <!-- 9. UTOPIA STORE (LIGHT ZONE - 50/50 宽幅旗舰版式) -->
+    <!-- 9. UTOPIA STORE (LIGHT ZONE) -->
     <section id="view-utopia" class="hidden min-h-screen bg-slate-50 text-slate-900 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-slate-200 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -585,7 +617,7 @@
         </div>
     </section>
 
-    <!-- 10. LOST PARADISE STORE (50/50 宽幅旗舰版式) -->
+    <!-- 10. LOST PARADISE STORE -->
     <section id="view-paradise" class="hidden min-h-screen bg-paradise text-stone-200 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-stone-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -679,7 +711,7 @@
         </div>
     </section>
 
-    <!-- 11. DYSTOPIA STORE (50/50 宽幅旗舰版式) -->
+    <!-- 11. DYSTOPIA STORE -->
     <section id="view-dystopia" class="hidden min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-zinc-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -950,17 +982,51 @@
             document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 抽屉菜单开关 toggleMenu
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
 
-        // Manifesto 品牌宣言 Modal
         function openManifesto() { document.getElementById('modal-manifesto').classList.remove('hidden'); }
         function closeManifesto() { document.getElementById('modal-manifesto').classList.add('hidden'); }
 
-        // --- 2. PUBLIC ARCHIVE 全网公共信号数据库 ---
+        // --- 2. 专属随机配号 + LocalStorage 逻辑 ---
+        let userAssignedCode = "";
+        let currentThemeColorClass = "text-blue-400";
+        let currentThemeBorderClass = "border-blue-500/40";
+        let currentThemeName = "CYBER BLUE";
+
+        function initUserCode() {
+            try {
+                const saved = localStorage.getItem('ws_user_code');
+                if (saved) {
+                    userAssignedCode = saved;
+                    document.getElementById('assigned-prompt-msg').innerText = `[ SYSTEM INFO ]: Session protocol re-anchored: ${userAssignedCode}`;
+                    updateLiveCard();
+                    return;
+                }
+            } catch(e) { console.warn(e); }
+
+            // 没有记号则运行破解滚码动画
+            let rollCount = 0;
+            const promptEl = document.getElementById('assigned-prompt-msg');
+            const codeEl = document.getElementById('live-card-code');
+            
+            const timer = setInterval(() => {
+                const randomNum = String(Math.floor(Math.random() * 777) + 1).padStart(4, '0');
+                codeEl.innerText = `#${randomNum} // ALLOCATING...`;
+                rollCount++;
+                if (rollCount > 10) {
+                    clearInterval(timer);
+                    userAssignedCode = `#${String(Math.floor(Math.random() * 770) + 10).padStart(4, '0')}`;
+                    try { localStorage.setItem('ws_user_code', userAssignedCode); } catch(e){}
+                    promptEl.innerText = `[ SYSTEM INFO ]: Ephemeral test protocol assigned: ${userAssignedCode}`;
+                    updateLiveCard();
+                }
+            }, 80);
+        }
+
+        // --- 3. PUBLIC ARCHIVE 数据引擎 ---
         let archiveEntries = [
             { code: "#0042", color: "DYSTOPIA RED", text: "“Silence is not weakness. It is a calculated decision.”", time: "3D 14H REMAINING", colorClass: "text-red-500", borderClass: "border-red-500/30" },
             { code: "#0188", color: "UTOPIA WHITE", text: "“Order is the only architecture that survives chaos.”", time: "6D 22H REMAINING", colorClass: "text-white", borderClass: "border-white/30" },
@@ -972,11 +1038,26 @@
 
         function renderArchive() {
             const grid = document.getElementById('archive-grid');
-            const searchVal = document.getElementById('archive-search-input').value.trim().toLowerCase();
-            const filterVal = document.getElementById('archive-color-filter').value;
+            const searchInput = document.getElementById('archive-search-input');
+            const colorFilter = document.getElementById('archive-color-filter');
+            
+            const searchVal = searchInput ? searchInput.value.trim().toLowerCase() : "";
+            const filterVal = colorFilter ? colorFilter.value : "ALL";
             
             grid.innerHTML = "";
-            let filtered = archiveEntries.filter(item => {
+
+            // 读取是否有用户的本地留言，强行置顶！
+            let fullList = [...archiveEntries];
+            try {
+                const userSavedSignal = localStorage.getItem('ws_user_signal');
+                if (userSavedSignal) {
+                    const parsed = JSON.parse(userSavedSignal);
+                    fullList = fullList.filter(item => item.code !== parsed.code);
+                    fullList.unshift(parsed);
+                }
+            } catch(e){}
+
+            let filtered = fullList.filter(item => {
                 const matchSearch = item.code.toLowerCase().includes(searchVal) || item.text.toLowerCase().includes(searchVal);
                 const matchColor = (filterVal === "ALL") || (item.color === filterVal);
                 return matchSearch && matchColor;
@@ -988,11 +1069,15 @@
             }
 
             filtered.forEach(item => {
+                const isUserCard = item.isUser;
+                const cardBorder = isUserCard ? "user-card-glow border-amber-500" : item.borderClass;
+                const userBadge = isUserCard ? `<span class="text-[9px] px-2 py-0.5 rounded border border-amber-500/50 bg-amber-950/60 text-amber-400 font-bold animate-pulse">✦ YOUR CURRENT SIGNAL</span>` : `<span class="text-[9px] px-2 py-0.5 rounded border border-stone-800 bg-stone-900 text-stone-400">VERIFIED VIA NFC</span>`;
+
                 grid.innerHTML += `
-                    <div class="p-6 bg-stone-950 border ${item.borderClass} rounded-xl relative overflow-hidden transition-all hover:scale-[1.01] shadow-xl">
+                    <div class="p-6 bg-stone-950 border ${cardBorder} rounded-xl relative overflow-hidden transition-all hover:scale-[1.01] shadow-xl">
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-2xl font-bold ${item.colorClass}">${item.code}</span>
-                            <span class="text-[9px] px-2 py-0.5 rounded border border-stone-800 bg-stone-900 text-stone-400">VERIFIED VIA NFC</span>
+                            ${userBadge}
                         </div>
                         <blockquote class="text-sm italic text-stone-200 my-3 leading-relaxed">${item.text}</blockquote>
                         <div class="flex justify-between items-center border-t border-stone-900 pt-3 mt-4 text-[10px] text-stone-500">
@@ -1006,11 +1091,7 @@
 
         function filterArchive() { renderArchive(); }
 
-        // --- 3. 实机“表达生成器”互动 + 激光扫描线 + 实时插入公共档案库 ---
-        let currentThemeColorClass = "text-blue-400";
-        let currentThemeBorderClass = "border-blue-500/40";
-        let currentThemeName = "CYBER BLUE";
-
+        // --- 4. 表达生成器 + TRANSMIT 接入仪式 ---
         function setCardTheme(name, colorClass, borderClass) {
             currentThemeName = name;
             currentThemeColorClass = colorClass;
@@ -1024,9 +1105,11 @@
             const codeEl = document.getElementById('live-card-code');
             const cardEl = document.getElementById('live-demo-card');
 
+            const codeDisplay = userAssignedCode || "#0777";
+
             cardEl.className = `mt-6 p-6 bg-black border ${currentThemeBorderClass} rounded-xl transition-all duration-300 relative`;
             codeEl.className = `text-2xl font-bold transition-colors ${currentThemeColorClass}`;
-            codeEl.innerText = `#0777 // ${currentThemeName}`;
+            codeEl.innerText = `${codeDisplay} // ${currentThemeName}`;
             
             if (inputVal.length > 0) {
                 textEl.innerText = `“${inputVal}”`;
@@ -1036,34 +1119,55 @@
         }
 
         function transmitSignal() {
-            const status = document.getElementById('transmit-status');
-            const beam = document.getElementById('scan-beam');
-            const cardEl = document.getElementById('live-demo-card');
-            const inputVal = document.getElementById('custom-statement').value.trim();
-            
-            beam.classList.remove('hidden');
-            cardEl.classList.add('glitch-anim');
+            // 自动收起 iOS 软键盘，避免挡住弹窗
+            if (document.activeElement) document.activeElement.blur();
 
-            const newEntry = {
-                code: "#0777",
-                color: currentThemeName,
-                text: inputVal.length > 0 ? `“${inputVal}”` : "“A new anonymous signal published to the system.”",
-                time: "6D 23H REMAINING",
-                colorClass: currentThemeColorClass,
-                borderClass: currentThemeBorderClass
-            };
-            archiveEntries.unshift(newEntry);
-            renderArchive();
+            const inputVal = document.getElementById('custom-statement').value.trim();
+            const statementText = inputVal.length > 0 ? `“${inputVal}”` : "“A new anonymous signal published to the system.”";
+            const codeDisplay = userAssignedCode || "#0777";
+
+            // 保存到 LocalStorage
+            try {
+                const userSignalObj = {
+                    code: codeDisplay,
+                    color: currentThemeName,
+                    text: statementText,
+                    time: "6D 23H REMAINING",
+                    colorClass: currentThemeColorClass,
+                    borderClass: currentThemeBorderClass,
+                    isUser: true
+                };
+                localStorage.setItem('ws_user_signal', JSON.stringify(userSignalObj));
+            } catch(e){}
+
+            // 触发全屏接入仪式 Modal
+            const ceremonyModal = document.getElementById('modal-ceremony');
+            const step1 = document.getElementById('ceremony-step-1');
+            const step2 = document.getElementById('ceremony-step-2');
+            
+            document.getElementById('ceremony-code-title').innerText = `SIGNAL LOCKED TO ${codeDisplay}`;
+            document.getElementById('ceremony-quote-text').innerText = statementText;
+
+            step1.classList.remove('hidden');
+            step2.classList.add('hidden');
+            ceremonyModal.classList.remove('hidden');
 
             setTimeout(() => {
-                beam.classList.add('hidden');
-                cardEl.classList.remove('glitch-anim');
-                status.classList.remove('hidden');
-                setTimeout(() => { status.classList.add('hidden'); }, 3000);
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
             }, 1200);
         }
 
-        // --- 4. 顶栏 Logo & 主题动态切换 ---
+        function goToArchiveAndHighlight() {
+            document.getElementById('modal-ceremony').classList.add('hidden');
+            // 重置筛选
+            if (document.getElementById('archive-search-input')) document.getElementById('archive-search-input').value = "";
+            if (document.getElementById('archive-color-filter')) document.getElementById('archive-color-filter').value = "ALL";
+            
+            showView('archive');
+        }
+
+        // --- 5. 顶栏 Logo & 主题动态切换 ---
         let currentView = 'landing';
         function setNavbarTheme(viewId) {
             const nav = document.getElementById('navbar');
@@ -1110,7 +1214,7 @@
         function goBack() { window.history.length > 1 ? window.history.back() : showView('landing'); }
         function enterFaction(faction) { showView(faction); }
 
-        // --- 5. 答题引擎 ---
+        // --- 6. 答题引擎 ---
         let quizStep = 0;
         let scores = { utopia: 0, paradise: 0, dystopia: 0 };
         const questions = [
@@ -1157,7 +1261,7 @@
             }
         }
 
-        // --- 6. 数量与 7 尺码选择逻辑 ---
+        // --- 7. 数量与 7 尺码选择逻辑 ---
         function changeCardQty(id, delta) {
             let span = document.getElementById(`qty-${id}`);
             let current = parseInt(span.innerText);
@@ -1176,7 +1280,7 @@
             if (cartBtn) cartBtn.setAttribute('data-item-custom1-value', sizeLabel);
         }
 
-        // --- 7. 政策弹窗 ---
+        // --- 8. 政策弹窗 ---
         function openShippingModal() {
             openInfoModal('SHIPPING POLICY & TIMELINE', 
                 `1. CANADA EXPRESS: C$9.77 flat rate tracked courier across all 10 provinces. Free shipping on orders over C$154.00.\n` +
@@ -1209,7 +1313,7 @@
         }
         function closeInfoModal() { document.getElementById('modal-info').classList.add('hidden'); }
 
-        // --- 8. 独立尺码表 ---
+        // --- 9. 独立尺码表 ---
         function openSizeGuide(type) {
             const tableBody = document.getElementById('size-table-body');
             const title = document.getElementById('size-guide-title');
@@ -1231,8 +1335,8 @@
                     <tr><td class="py-2 font-bold text-white">01</td><td>XS</td><td>108</td><td>54</td><td>68</td></tr>
                     <tr><td class="py-2 font-bold text-white">02</td><td>S</td><td>114</td><td>57</td><td>70</td></tr>
                     <tr class="bg-stone-900/40"><td class="py-2 font-bold text-amber-400">03</td><td class="text-amber-400">M (STANDARD)</td><td class="text-amber-400">120</td><td class="text-amber-400">60</td><td class="text-amber-400">73</td></tr>
-                    <tr><td class="py-2 font-bold text-white">04</td><td>L</td><td>132</td><td>66</td><td>74</td></tr>
-                    <tr><td class="py-2 font-bold text-white">05</td><td>XL</td><td>138</td><td>69</td><td>79</td></tr>
+                    <tr><td class="py-2 font-bold text-white">04</td><td>L</td><td>126</td><td>63</td><td>76</td></tr>
+                    <tr><td class="py-2 font-bold text-white">05</td><td>XL</td><td>132</td><td>66</td><td>79</td></tr>
                     <tr><td class="py-2 font-bold text-white">06</td><td>XXL</td><td>138</td><td>69</td><td>81</td></tr>
                     <tr><td class="py-2 font-bold text-white">07</td><td>XXXL</td><td>144</td><td>72</td><td>83</td></tr>
                 `;
@@ -1241,7 +1345,7 @@
         }
         function closeSizeGuide() { document.getElementById('modal-size-guide').classList.add('hidden'); }
 
-        // --- 9. Modal & Product 相册切图 ---
+        // --- 10. Modal & Product 相册切图 ---
         let currentModalImgs = [];
         let modalQty = 1;
 
@@ -1296,7 +1400,7 @@
             document.getElementById('modal-buy-btn').setAttribute('data-item-quantity', modalQty);
         }
 
-        // --- 10. EmailJS Engine ---
+        // --- 11. EmailJS Engine ---
         function handleSubscribe(e) {
             e.preventDefault();
             const emailInput = document.getElementById('subscriber-email');
@@ -1321,9 +1425,10 @@
             });
         }
 
-        // --- 11. Cookie Management & Initialization ---
+        // --- 12. Cookie Management & Initialization ---
         document.addEventListener("DOMContentLoaded", () => {
             if (!localStorage.getItem('ws_cookie_consent')) setTimeout(() => document.getElementById('cookie-banner').classList.remove('translate-y-full'), 2000);
+            initUserCode();
             renderArchive();
         });
         function openCookieSettings() { document.getElementById('modal-cookie-settings').classList.remove('hidden'); }
