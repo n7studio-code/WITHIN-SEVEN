@@ -80,14 +80,19 @@
             color: #f5f5f5 !important;
             font-family: 'JetBrains Mono', monospace !important;
         }
-        #snipcart .snipcart-item-line {
-            border-bottom: 1px solid #262626 !important;
-            background-color: #121212 !important;
+
+        /* 💥 彻底解决 iOS Safari 隐形 Bug 的 CSS Mask 阿尔法纯白遮罩 💥 */
+        .white-logo-mask {
+            background-color: #ffffff;
+            -webkit-mask: url('LOGO.png') no-repeat center / contain;
+            mask: url('LOGO.png') no-repeat center / contain;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
         }
 
-        /* 纯白人脸雕塑过滤渲染 */
-        .white-logo-render {
-            filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+        .black-logo-mask {
+            background-color: #000000;
+            -webkit-mask: url('LOGO.png') no-repeat center / contain;
+            mask: url('LOGO.png') no-repeat center / contain;
         }
 
         /* Logo 核心背光星云呼吸动画 */
@@ -105,32 +110,18 @@
         }
         .laser-beam {
             position: absolute;
-            left: 0;
-            right: 0;
-            height: 2px;
+            left: 0; right: 0; height: 2px;
             background: linear-gradient(90deg, transparent, #3b82f6, #f59e0b, transparent);
             box-shadow: 0 0 15px #3b82f6;
             animation: scanBeam 1.2s ease-in-out infinite;
         }
 
-        /* 个人专属卡片呼吸边框 */
+        /* 专属卡片呼吸边框 */
         @keyframes userCardGlow {
             0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); border-color: rgba(245, 158, 11, 0.8); }
             50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); border-color: rgba(255, 255, 255, 0.9); }
         }
         .user-card-glow { animation: userCardGlow 3s ease-in-out infinite; }
-
-        /* 跑马灯滚动 */
-        @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-            display: flex;
-            width: 200%;
-            animation: marquee 25s linear infinite;
-        }
-        .animate-marquee:hover { animation-play-state: paused; }
 
         .typewriter-cursor::after {
             content: '|';
@@ -138,7 +129,6 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* 隐藏滚动条 */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -147,14 +137,15 @@
 </head>
 <body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white relative overflow-x-hidden pb-32">
 
-    <!-- 1. 顶栏：战术防挤压结构 (隐藏移动端冗余字标，增加 Hamburger Menu) -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/80">
+    <!-- 1. 顶栏：战术防挤压结构 (CSS Mask 纯白人脸，全设备可见) -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-3.5 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/85">
         <div class="flex items-center space-x-3">
             <button id="nav-back-btn" onclick="goBack()" class="hidden font-mono text-xs tracking-widest px-2.5 py-1.5 border border-current rounded hover:opacity-70 transition min-h-[32px]">
                 ← BACK
             </button>
             <div class="flex items-center space-x-2.5 cursor-pointer" onclick="showView('landing')">
-                <img id="nav-logo" src="LOGO.png" alt="WITHIN SEVEN Logo" class="h-6 md:h-7 w-auto object-contain transition-all white-logo-render">
+                <!-- 纯白 100% 遮罩 Logo -->
+                <div id="nav-logo" class="h-6 md:h-7 w-6 md:w-7 white-logo-mask transition-all"></div>
                 <span id="nav-brand-text" class="hidden sm:inline-block font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap">WITHIN SEVEN</span>
             </div>
         </div>
@@ -178,7 +169,7 @@
     <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-black/98 backdrop-blur-2xl flex flex-col justify-between p-8 fade-in font-mono">
         <div class="flex justify-between items-center border-b border-stone-800 pb-6">
             <div class="flex items-center space-x-3">
-                <img src="LOGO.png" alt="Logo" class="h-6 w-auto white-logo-render">
+                <div class="h-6 w-6 white-logo-mask"></div>
                 <span class="font-brand text-xs tracking-widest text-white uppercase">WITHIN SEVEN</span>
             </div>
             <button onclick="toggleMenu()" class="text-stone-400 hover:text-white text-xl p-2">✕</button>
@@ -208,10 +199,10 @@
         </div>
     </div>
 
-    <!-- 3. LANDING PAGE HERO (极致干练首屏) -->
+    <!-- 3. LANDING PAGE HERO (极致留白减法) -->
     <section id="view-landing" class="relative w-full min-h-screen bg-black">
         
-        <div class="relative w-full h-[100dvh] min-h-[620px] flex flex-col justify-between items-center overflow-hidden border-b border-stone-800">
+        <div class="relative w-full h-[100dvh] min-h-[580px] flex flex-col justify-between items-center overflow-hidden border-b border-stone-800">
             
             <div id="triptych-sector" class="absolute inset-0 z-0 flex flex-row overflow-x-auto md:overflow-hidden snap-x snap-mandatory no-scrollbar">
                 
@@ -219,10 +210,7 @@
                 <div onclick="enterFaction('utopia')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-r border-stone-800/80 bg-slate-950">
                     <img src="cover-utopia.webp" onerror="this.src='utopia-1.png'" alt="Utopia Order" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                    <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300">
                         <div class="text-slate-400 text-[10px] mb-1">SECTOR 01 // CITADEL OF ORDER</div>
                         <div class="font-bold text-sm md:text-base">WORLD 01 / UTOPIA — ORDER</div>
                         <div class="text-[10px] text-amber-500 mt-1">EXPLORE ARCHIVE ➔</div>
@@ -233,10 +221,7 @@
                 <div onclick="enterFaction('paradise')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-r border-stone-800/80 bg-stone-950">
                     <img src="cover-paradise.webp" onerror="this.src='paradise-1.png'" alt="Lost Paradise Memory" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                    <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-amber-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-amber-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300">
                         <div class="text-amber-500/70 text-[10px] mb-1">SECTOR 00 // FORGOTTEN ASHES</div>
                         <div class="font-bold text-sm md:text-base text-stone-200">WORLD 02 / LOST PARADISE — MEMORY</div>
                         <div class="text-[10px] text-amber-500 mt-1">EXPLORE RELIC ➔</div>
@@ -247,10 +232,7 @@
                 <div onclick="enterFaction('dystopia')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden bg-zinc-950">
                     <img src="cover-dystopia.webp" onerror="this.src='dystopia-1.png'" alt="Dystopia Resistance" class="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-35 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                    <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-red-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-red-500/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300 transform group-hover:-translate-y-1">
+                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300">
                         <div class="text-red-500/80 text-[10px] mb-1">SECTOR 09 // REBEL UNDERGROUND</div>
                         <div class="font-bold text-sm md:text-base text-red-500">WORLD 03 / DYSTOPIA — RESISTANCE</div>
                         <div class="text-[10px] text-red-400 mt-1">EXPLORE GEAR ➔</div>
@@ -258,16 +240,13 @@
                 </div>
             </div>
 
-            <!-- Hero 中间内容浮层 -->
-            <div class="z-20 flex flex-col items-center pt-24 md:pt-28 text-center px-4 relative max-w-4xl pointer-events-none">
-                <div class="font-mono text-[9px] md:text-[10px] text-amber-500 mb-2 tracking-widest uppercase typewriter-cursor">
-                    > WEARABLE IDENTITY SYSTEM // 777 GARMENTS
-                </div>
+            <!-- Hero 中间极简减法浮层 -->
+            <div class="z-20 flex flex-col items-center pt-20 md:pt-28 text-center px-4 relative max-w-4xl pointer-events-none">
                 
-                <!-- 纯白 3D 雕塑人脸 LOGO -->
+                <!-- 纯白 3D 雕塑人脸 LOGO (CSS Mask 绝对显示) -->
                 <div class="relative flex items-center justify-center my-2 pointer-events-auto">
-                    <div class="absolute w-52 h-52 md:w-72 md:h-72 bg-white/20 rounded-full blur-3xl pointer-events-none -z-10 nebula-pulse"></div>
-                    <img src="LOGO.png" alt="WITHIN SEVEN Emblem" class="w-32 md:w-64 h-auto object-contain white-logo-render hover:scale-105 transition duration-500">
+                    <div class="absolute w-44 h-44 md:w-64 md:h-64 bg-white/20 rounded-full blur-3xl pointer-events-none -z-10 nebula-pulse"></div>
+                    <div class="w-28 h-28 md:w-56 md:h-56 white-logo-mask hover:scale-105 transition duration-500"></div>
                 </div>
                 
                 <h1 class="text-2xl md:text-5xl font-brand font-light tracking-[0.28em] md:tracking-[0.32em] uppercase text-white mt-1 pointer-events-auto glitch-text">WITHIN SEVEN</h1>
@@ -280,7 +259,7 @@
                     DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-1">LOADING...</span>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 w-full max-w-md pointer-events-auto pb-6">
+                <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mt-5 md:mt-6 w-full max-w-md pointer-events-auto pb-6">
                     <button onclick="scrollToTriptych()" class="flex-1 py-3.5 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition font-bold shadow-2xl min-h-[44px]">
                         EXPLORE DROP 01
                     </button>
@@ -291,18 +270,7 @@
             </div>
         </div>
 
-        <!-- 📡 跑马灯字幕 Ticker 📡 -->
-        <div onclick="showView('archive')" class="w-full bg-stone-950 border-b border-stone-800 py-2.5 overflow-hidden cursor-pointer group">
-            <div class="animate-marquee font-mono text-[10px] md:text-xs text-stone-400 tracking-widest whitespace-nowrap flex gap-12">
-                <span>✦ #0042 [RED]: "SILENCE IS A CALCULATED DECISION." — 3D REMAINING</span>
-                <span>✦ #0188 [WHITE]: "ORDER IS THE ONLY ARCHITECTURE THAT SURVIVES CHAOS." — 6D REMAINING</span>
-                <span>✦ #0241 [BLUE]: "I STOPPED EXPLAINING MYSELF TO SYSTEMS BUILT TO MISUNDERSTAND ME." — 4D REMAINING</span>
-                <span>✦ #0312 [AMBER]: "BEAUTY BELONGS TO THOSE WHO WANDER THROUGH DECAYING RUINS." — 1D REMAINING</span>
-                <span>✦ [ CLICK TO OPEN PUBLIC ARCHIVE STREAM // 777 ]</span>
-            </div>
-        </div>
-
-        <!-- 4. HOW THE NUMBER WORKS (系统三步解密 + 专属配号终端) -->
+        <!-- 4. HOW THE NUMBER WORKS (系统解密) -->
         <div id="how-it-works" class="relative z-10 w-full bg-black py-20 border-b border-stone-800">
             <div class="max-w-5xl mx-auto px-6 font-mono">
                 <div class="text-center mb-10">
@@ -330,7 +298,7 @@
                     </div>
                 </div>
 
-                <!-- 💥 仪式 01：自动滚码锁定专属编号终端 💥 -->
+                <!-- 💥 “匿名表达终端” 💥 -->
                 <div class="mt-12 p-6 md:p-8 bg-stone-950 border border-stone-800 hover:border-amber-500/80 rounded-2xl max-w-xl mx-auto text-center relative shadow-2xl transition duration-500 overflow-hidden">
                     <div id="scan-beam" class="hidden laser-beam"></div>
                     
@@ -342,7 +310,6 @@
                     <div class="space-y-4">
                         <input type="text" id="custom-statement" oninput="updateLiveCard()" placeholder="TYPE YOUR 1-SENTENCE STATEMENT HERE..." maxlength="80" value="I stopped explaining myself to systems built to misunderstand me." class="w-full bg-black border border-stone-700 px-4 py-3 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono text-center">
                         
-                        <!-- 4 色扩容触控包靶 -->
                         <div class="flex justify-center items-center gap-5 py-2">
                             <span class="text-[10px] text-stone-500">ALIGNMENT COLOR:</span>
                             <button onclick="setCardTheme('CYBER BLUE', 'text-blue-400', 'border-blue-500/40')" class="w-7 h-7 rounded-full bg-blue-500 hover:scale-125 transition border-2 border-white/20 p-1 min-w-[28px] min-h-[28px]"></button>
@@ -437,7 +404,7 @@
         </div>
     </section>
 
-    <!-- 💥 仪式 02：居中全屏暗黑接入弹窗 CERemony MODAL 💥 -->
+    <!-- 💥 居中全屏接入弹窗 CEREMONY MODAL 💥 -->
     <div id="modal-ceremony" class="hidden fixed inset-0 z-[150] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-md w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl text-center space-y-6 relative overflow-hidden">
             <div id="ceremony-beam" class="laser-beam"></div>
@@ -449,7 +416,7 @@
 
             <div id="ceremony-step-2" class="hidden space-y-4">
                 <div class="text-stone-500 text-[10px] tracking-widest uppercase">// IDENTITY SYSTEM CONFIRMATION //</div>
-                <h2 id="ceremony-code-title" class="text-3xl font-bold text-amber-500">SIGNAL LOCKED TO ARCHIVE #0000</h2>
+                <h2 id="ceremony-code-title" class="text-2xl font-bold text-amber-500">SIGNAL LOCKED TO ARCHIVE #0000</h2>
                 <div class="p-4 bg-black border border-stone-800 rounded-lg text-xs italic text-stone-200" id="ceremony-quote-text">
                     “...”
                 </div>
@@ -490,6 +457,74 @@
         </div>
     </div>
 
+    <!-- 💥 彻底解锁 iOS 固顶关闭按键的宽幅双栏高定 Modal 💥 -->
+    <div id="modal-product" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl overflow-y-auto p-4 md:p-8 fade-in flex justify-center items-start">
+        <div class="max-w-4xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-2xl shadow-2xl relative font-mono text-stone-300 my-12">
+            <!-- 手机端固顶 ✕ 关闭按钮，随时可退出 -->
+            <button onclick="closeProductModal()" class="sticky top-2 float-right -mt-2 -mr-2 bg-stone-900 border border-stone-700 hover:bg-white hover:text-black text-stone-300 rounded-full w-9 h-9 flex items-center justify-center text-sm z-50 transition">✕</button>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 clear-both">
+                <div class="flex flex-col gap-3">
+                    <div class="w-full h-72 md:h-[380px] bg-stone-900 rounded-xl overflow-hidden relative border border-stone-800">
+                        <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover transition-all duration-200">
+                        <div class="absolute top-3 left-3 bg-amber-600 text-black font-bold px-3 py-1 text-[10px] rounded">
+                            DROP 01 // 777 TOTAL PIECES
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="switchModalImage(0)" class="modal-thumb-btn flex-1 py-2 text-[10px] font-mono border border-white bg-white text-black font-bold rounded text-center cursor-pointer min-h-[36px]">01 LOOK</button>
+                        <button onclick="switchModalImage(1)" class="modal-thumb-btn flex-1 py-2 text-[10px] font-mono border border-stone-800 bg-stone-900 text-stone-400 hover:text-white rounded text-center cursor-pointer min-h-[36px]">02 FIT</button>
+                        <button onclick="switchModalImage(2)" class="modal-thumb-btn flex-1 py-2 text-[10px] font-mono border border-stone-800 bg-stone-900 text-stone-400 hover:text-white rounded text-center cursor-pointer min-h-[36px]">03 MACRO</button>
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-between space-y-4">
+                    <div>
+                        <span id="modal-code" class="text-xs text-amber-500 uppercase tracking-widest">WS-01-2026</span>
+                        <h2 id="modal-title" class="text-xl md:text-2xl font-bold text-white mt-1">Product Title</h2>
+                        <p id="modal-price" class="text-lg font-bold text-amber-400 mt-2">C$77.00 CAD</p>
+                        
+                        <div class="mt-4 border-t border-b border-stone-800 py-3 space-y-1.5 text-[11px] text-stone-400">
+                            <div class="flex justify-between"><span>COMPOSITION:</span> <span id="modal-spec-fabric" class="text-stone-200 font-bold">Raw Cotton</span></div>
+                            <div class="flex justify-between"><span>WEIGHT:</span> <span id="modal-spec-weight" class="text-stone-200 font-bold">300 GSM</span></div>
+                        </div>
+                        
+                        <div class="mt-4 flex flex-col gap-3">
+                            <div>
+                                <div class="flex justify-between items-center mb-1.5">
+                                    <label class="text-[10px] text-stone-300 tracking-widest uppercase">SELECT SIZE (01-07):</label>
+                                    <button onclick="openSizeGuide('Tee')" class="text-[10px] text-amber-500 hover:text-white underline py-1">SIZE GUIDE</button>
+                                </div>
+                                <div class="grid grid-cols-7 gap-1">
+                                    <button onclick="selectModalSize('01 / XS')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="01 / XS">01</button>
+                                    <button onclick="selectModalSize('02 / S')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="02 / S">02</button>
+                                    <button onclick="selectModalSize('03 / M')" class="modal-size-btn border border-white py-2 text-xs font-bold bg-white text-black rounded min-h-[36px]" data-size="03 / M">03</button>
+                                    <button onclick="selectModalSize('04 / L')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="04 / L">04</button>
+                                    <button onclick="selectModalSize('05 / XL')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="05 / XL">05</button>
+                                    <button onclick="selectModalSize('06 / XXL')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="06 / XXL">06</button>
+                                    <button onclick="selectModalSize('07 / XXXL')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="07 / XXXL">07</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="text-[10px] text-stone-300 tracking-widest uppercase block mb-1">QUANTITY:</label>
+                                <div class="flex items-center border border-stone-700 rounded w-fit">
+                                    <button onclick="changeModalQty(-1)" class="px-3 py-1.5 text-stone-400 hover:text-white font-bold min-h-[36px]">-</button>
+                                    <span id="modal-qty" class="px-3 py-1.5 font-mono text-xs text-white">1</span>
+                                    <button onclick="changeModalQty(1)" class="px-3 py-1.5 text-stone-400 hover:text-white font-bold min-h-[36px]">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="modal-buy-btn" class="snipcart-add-item w-full py-4 bg-white text-black text-xs font-bold tracking-widest hover:bg-stone-300 transition rounded-lg uppercase min-h-[48px] mt-4">
+                        ADD TO INVENTORY — C$77 CAD
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 7. TRINITY QUIZ ENGINE -->
     <section id="view-quiz" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-6">
         <div class="max-w-xl w-full bg-stone-900/90 border border-stone-800 p-8 rounded-xl shadow-2xl relative fade-in">
@@ -523,7 +558,7 @@
         <p id="loading-msg" class="text-xs tracking-[0.25em] text-stone-400 animate-pulse">ANALYZING SUBCONSCIOUS ALIGNMENT...</p>
     </section>
 
-    <!-- 9. UTOPIA STORE (LIGHT ZONE) -->
+    <!-- 9. UTOPIA STORE -->
     <section id="view-utopia" class="hidden min-h-screen bg-slate-50 text-slate-900 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-slate-200 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -819,77 +854,6 @@
         </div>
     </div>
 
-    <!-- 宽幅双栏高定 Modal -->
-    <div id="modal-product" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 fade-in overflow-y-auto">
-        <div class="max-w-5xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-2xl shadow-2xl relative font-mono text-stone-300 grid grid-cols-1 md:grid-cols-2 gap-8 my-auto mt-20 md:mt-auto">
-            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-stone-500 hover:text-white text-lg z-10 p-1">✕</button>
-            
-            <div class="flex flex-col gap-3">
-                <div class="w-full h-80 md:h-[400px] bg-stone-900 rounded-xl overflow-hidden relative border border-stone-800">
-                    <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover transition-all duration-200">
-                    <div class="absolute top-3 left-3 bg-amber-600 text-black font-bold px-3 py-1 text-[10px] rounded">
-                        DROP 01 // 777 TOTAL PIECES
-                    </div>
-                </div>
-                <div class="flex gap-2">
-                    <button onclick="switchModalImage(0)" class="modal-thumb-btn flex-1 py-2 text-[10px] font-mono border border-white bg-white text-black font-bold rounded text-center cursor-pointer min-h-[36px]">01 LOOK</button>
-                    <button onclick="switchModalImage(1)" class="modal-thumb-btn flex-1 py-2 text-[10px] font-mono border border-stone-800 bg-stone-900 text-stone-400 hover:text-white rounded text-center cursor-pointer min-h-[36px]">02 FIT</button>
-                    <button onclick="switchModalImage(2)" class="modal-thumb-btn flex-1 py-2 text-[10px] font-mono border border-stone-800 bg-stone-900 text-stone-400 hover:text-white rounded text-center cursor-pointer min-h-[36px]">03 MACRO</button>
-                </div>
-            </div>
-
-            <div class="flex flex-col justify-between space-y-4">
-                <div>
-                    <span id="modal-code" class="text-xs text-amber-500 uppercase tracking-widest">WS-01-2026</span>
-                    <h2 id="modal-title" class="text-2xl font-bold text-white mt-1">Product Title</h2>
-                    <p id="modal-price" class="text-lg font-bold text-amber-400 mt-2">C$77.00 CAD</p>
-                    <p id="modal-desc" class="text-xs text-stone-400 mt-3 leading-relaxed">Product Description</p>
-                    
-                    <div class="mt-4 border-t border-b border-stone-800 py-3 space-y-1.5 text-[11px] text-stone-400">
-                        <div class="flex justify-between"><span>COMPOSITION:</span> <span id="modal-spec-fabric" class="text-stone-200 font-bold">Raw Cotton</span></div>
-                        <div class="flex justify-between"><span>WEIGHT:</span> <span id="modal-spec-weight" class="text-stone-200 font-bold">300 GSM</span></div>
-                        <div class="flex justify-between"><span>DISPATCH:</span> <span class="text-stone-200 font-bold">SHIPS WITHIN 7 BUSINESS DAYS</span></div>
-                    </div>
-                    
-                    <div class="mt-4 flex flex-col gap-3">
-                        <div>
-                            <div class="flex justify-between items-center mb-1.5">
-                                <label class="text-[10px] text-stone-300 tracking-widest uppercase">SELECT ARCHIVAL SIZE (01-07):</label>
-                                <button onclick="openSizeGuide('Tee')" class="text-[10px] text-amber-500 hover:text-white underline py-1">SIZE GUIDE</button>
-                            </div>
-                            <div class="grid grid-cols-7 gap-1">
-                                <button onclick="selectModalSize('01 / XS')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="01 / XS">01</button>
-                                <button onclick="selectModalSize('02 / S')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="02 / S">02</button>
-                                <button onclick="selectModalSize('03 / M')" class="modal-size-btn border border-white py-2 text-xs font-bold bg-white text-black rounded min-h-[36px]" data-size="03 / M">03</button>
-                                <button onclick="selectModalSize('04 / L')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="04 / L">04</button>
-                                <button onclick="selectModalSize('05 / XL')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="05 / XL">05</button>
-                                <button onclick="selectModalSize('06 / XXL')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="06 / XXL">06</button>
-                                <button onclick="selectModalSize('07 / XXXL')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="07 / XXXL">07</button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="text-[10px] text-stone-300 tracking-widest uppercase block mb-1">QUANTITY:</label>
-                            <div class="flex items-center border border-stone-700 rounded w-fit">
-                                <button onclick="changeModalQty(-1)" class="px-3 py-1.5 text-stone-400 hover:text-white transition font-bold min-h-[36px]">-</button>
-                                <span id="modal-qty" class="px-3 py-1.5 font-mono text-xs text-white">1</span>
-                                <button onclick="changeModalQty(1)" class="px-3 py-1.5 text-stone-400 hover:text-white transition font-bold min-h-[36px]">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-stone-900/60 p-3 rounded border border-stone-800 text-[10px] text-stone-400">
-                    🔒 <strong class="text-white">POST-PURCHASE PROTOCOL:</strong> Every piece includes an embedded NFC tag. Verify ownership upon delivery to activate your 7-day personal statement cycle.
-                </div>
-
-                <button id="modal-buy-btn" class="snipcart-add-item w-full py-4 bg-white text-black text-xs font-bold tracking-widest hover:bg-stone-300 transition rounded-lg uppercase min-h-[48px]">
-                    ADD TO INVENTORY — C$77 CAD
-                </button>
-            </div>
-        </div>
-    </section>
-
     <!-- 13. T恤与针织衫独立尺码测量对照 Modal -->
     <div id="modal-size-guide" class="hidden fixed inset-0 z-[120] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-xl shadow-2xl relative text-stone-300">
@@ -1007,7 +971,6 @@
                 }
             } catch(e) { console.warn(e); }
 
-            // 没有记号则运行破解滚码动画
             let rollCount = 0;
             const promptEl = document.getElementById('assigned-prompt-msg');
             const codeEl = document.getElementById('live-card-code');
@@ -1046,7 +1009,6 @@
             
             grid.innerHTML = "";
 
-            // 读取是否有用户的本地留言，强行置顶！
             let fullList = [...archiveEntries];
             try {
                 const userSavedSignal = localStorage.getItem('ws_user_signal');
@@ -1119,14 +1081,12 @@
         }
 
         function transmitSignal() {
-            // 自动收起 iOS 软键盘，避免挡住弹窗
             if (document.activeElement) document.activeElement.blur();
 
             const inputVal = document.getElementById('custom-statement').value.trim();
             const statementText = inputVal.length > 0 ? `“${inputVal}”` : "“A new anonymous signal published to the system.”";
             const codeDisplay = userAssignedCode || "#0777";
 
-            // 保存到 LocalStorage
             try {
                 const userSignalObj = {
                     code: codeDisplay,
@@ -1140,7 +1100,6 @@
                 localStorage.setItem('ws_user_signal', JSON.stringify(userSignalObj));
             } catch(e){}
 
-            // 触发全屏接入仪式 Modal
             const ceremonyModal = document.getElementById('modal-ceremony');
             const step1 = document.getElementById('ceremony-step-1');
             const step2 = document.getElementById('ceremony-step-2');
@@ -1160,14 +1119,13 @@
 
         function goToArchiveAndHighlight() {
             document.getElementById('modal-ceremony').classList.add('hidden');
-            // 重置筛选
             if (document.getElementById('archive-search-input')) document.getElementById('archive-search-input').value = "";
             if (document.getElementById('archive-color-filter')) document.getElementById('archive-color-filter').value = "ALL";
             
             showView('archive');
         }
 
-        // --- 5. 顶栏 Logo & 主题动态切换 ---
+        // --- 5. 顶栏 Logo & 主题动态切换 (CSS Mask 纯白 100% 反转) ---
         let currentView = 'landing';
         function setNavbarTheme(viewId) {
             const nav = document.getElementById('navbar');
@@ -1175,13 +1133,13 @@
             const navLogo = document.getElementById('nav-logo');
             
             if (viewId === 'utopia') {
-                nav.className = "fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-slate-300 backdrop-blur-md bg-white/90 text-slate-900";
+                nav.className = "fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-3.5 flex justify-between items-center transition-all duration-200 border-b border-slate-300 backdrop-blur-md bg-white/90 text-slate-900";
                 if (brandText) brandText.className = "hidden sm:inline-block font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-slate-900 uppercase transition-colors whitespace-nowrap";
-                if (navLogo) navLogo.className = "h-6 md:h-7 w-auto object-contain mix-blend-multiply transition-all";
+                if (navLogo) navLogo.className = "h-6 md:h-7 w-6 md:w-7 black-logo-mask transition-all";
             } else {
-                nav.className = "fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/80 text-white";
+                nav.className = "fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-3.5 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/85 text-white";
                 if (brandText) brandText.className = "hidden sm:inline-block font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap";
-                if (navLogo) navLogo.className = "h-6 md:h-7 w-auto object-contain transition-all white-logo-render";
+                if (navLogo) navLogo.className = "h-6 md:h-7 w-6 md:w-7 white-logo-mask transition-all";
             }
         }
 
@@ -1354,7 +1312,6 @@
             document.getElementById('modal-code').innerText = `${id}-2026 ARCHIVE`;
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-price').innerText = `C$${price}.00 CAD`;
-            document.getElementById('modal-desc').innerText = desc;
             document.getElementById('modal-spec-fabric').innerText = fabric;
             document.getElementById('modal-spec-weight').innerText = weight;
             modalQty = 1;
