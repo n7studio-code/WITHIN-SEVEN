@@ -26,15 +26,35 @@
         .glitch-text:hover {
             text-shadow: 2px 0 #ef4444, -2px 0 #06b6d4;
         }
+        
         .fade-in {
-            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Custom Theme Backgrounds */
+        /* 创新1：CRT 扫描线叠加层 */
+        .scanlines {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.15));
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+
+        /* 创新2：打字机动画 */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid white;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 2.5s steps(30, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: white; } }
+
+        /* 失乐园背景底纹 */
         .bg-paradise {
             background-color: #1c1917;
             background-image: radial-gradient(#292524 1px, transparent 1px);
@@ -44,10 +64,12 @@
 </head>
 <body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white">
 
+    <!-- 扫描线全局覆盖 (仅针对首页视觉) -->
+    <div id="scanline-overlay" class="fixed inset-0 scanlines z-30 opacity-100 transition-opacity duration-1000"></div>
+
     <!-- TOP NAVIGATION BAR -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/60">
         <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('landing')">
-            <!-- Dynamic Logo -->
             <img id="nav-logo" src="logo.png" alt="WITHIN SEVEN" class="h-8 w-auto object-contain invert mix-blend-screen transition-all">
             <span class="font-black text-base md:text-lg tracking-[0.25em] text-white">WITHIN SEVEN</span>
         </div>
@@ -59,34 +81,59 @@
     </nav>
 
     <!-- 1. LANDING PAGE / TRINITY GATEWAY -->
-    <section id="view-landing" class="relative w-screen h-screen flex flex-col items-center justify-center overflow-hidden">
-        <!-- Ambient Tri-Fold Background Preview -->
-        <div class="absolute inset-0 flex pointer-events-none opacity-20">
-            <div class="w-1/3 bg-slate-100 border-r border-slate-300"></div>
-            <div class="w-1/3 bg-stone-800 border-r border-stone-600"></div>
-            <div class="w-1/3 bg-zinc-950"></div>
+    <section id="view-landing" class="relative w-screen h-screen flex flex-col items-center justify-center overflow-hidden bg-black">
+        
+        <!-- 创新3：互动式风琴背景 (鼠标悬停会自动变宽变亮) -->
+        <div class="absolute inset-0 flex z-0 overflow-hidden">
+            <!-- Utopia Area -->
+            <div onclick="enterFaction('utopia')" class="relative flex-1 bg-slate-200 opacity-5 hover:opacity-20 hover:flex-[1.5] transition-all duration-700 cursor-crosshair border-r border-white/10 group flex items-center justify-center">
+                <span class="font-mono text-xs tracking-[0.5em] text-white rotate-90 opacity-0 group-hover:opacity-100 transition duration-500">UTOPIA</span>
+            </div>
+            <!-- Paradise Area -->
+            <div onclick="enterFaction('paradise')" class="relative flex-1 bg-amber-700 opacity-5 hover:opacity-20 hover:flex-[1.5] transition-all duration-700 cursor-crosshair border-r border-white/10 group flex items-center justify-center">
+                <span class="font-mono text-xs tracking-[0.5em] text-white rotate-90 opacity-0 group-hover:opacity-100 transition duration-500">PARADISE</span>
+            </div>
+            <!-- Dystopia Area -->
+            <div onclick="enterFaction('dystopia')" class="relative flex-1 bg-red-700 opacity-5 hover:opacity-20 hover:flex-[1.5] transition-all duration-700 cursor-crosshair group flex items-center justify-center">
+                <span class="font-mono text-xs tracking-[0.5em] text-white rotate-90 opacity-0 group-hover:opacity-100 transition duration-500">DYSTOPIA</span>
+            </div>
         </div>
 
-        <div class="z-10 flex flex-col items-center mb-8 fade-in text-center px-4">
-            <img src="logo.png" alt="WITHIN SEVEN Logo" class="w-36 md:w-44 h-auto mb-6 invert mix-blend-screen">
+        <!-- 创新4：战术 HUD 四角视窗定位 -->
+        <div class="absolute top-24 left-6 w-6 h-6 border-t-2 border-l-2 border-white/30 z-10 hidden md:block"></div>
+        <div class="absolute top-24 right-6 w-6 h-6 border-t-2 border-r-2 border-white/30 z-10 hidden md:block"></div>
+        <div class="absolute bottom-6 left-6 w-6 h-6 border-b-2 border-l-2 border-white/30 z-10 hidden md:block"></div>
+        <div class="absolute bottom-6 right-6 w-6 h-6 border-b-2 border-r-2 border-white/30 z-10 hidden md:block"></div>
+
+        <!-- 创新5：HUD 信息流 (带有 Richmond 坐标彩蛋) -->
+        <div class="absolute top-24 left-14 text-[10px] font-mono text-white/40 z-10 hidden md:block leading-relaxed">
+            SYS.VER.7.0.4 <br>
+            NET: <span class="text-green-400 animate-pulse">STABLE</span> <br>
+            LOC: LAT 49.16 / LON -123.13 (YVR)
+        </div>
+        <div class="absolute bottom-6 right-14 text-[10px] font-mono text-white/40 z-10 hidden md:block text-right">
+            SECURE CONNECTION <br>
+            AWAITING USER INPUT_
+        </div>
+
+        <!-- 核心视觉中心 -->
+        <div class="z-20 flex flex-col items-center mb-8 fade-in text-center px-4 relative">
+            <!-- 终端打字效果 -->
+            <div class="font-mono text-[10px] text-stone-400 mb-6 typewriter">
+                > INITIALIZING TRINITY ENGINE... [OK]
+            </div>
+            
+            <img src="logo.png" alt="WITHIN SEVEN Logo" class="w-36 md:w-44 h-auto mb-6 invert mix-blend-screen drop-shadow-2xl hover:scale-105 transition duration-500">
             <h1 class="text-3xl md:text-6xl font-extralight tracking-[0.4em] uppercase">WITHIN SEVEN</h1>
             <p class="text-xs font-mono tracking-[0.3em] text-stone-400 mt-4 uppercase">TRINITY ALIGNMENT // ORDER • ASHES • REBELLION</p>
         </div>
 
-        <div class="z-10 flex flex-col sm:flex-row gap-4 fade-in">
-            <button onclick="startQuiz()" class="px-8 py-4 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition shadow-2xl hover:scale-105 font-bold">
+        <div class="z-20 flex flex-col sm:flex-row gap-4 fade-in mt-4">
+            <button onclick="startQuiz()" class="px-8 py-4 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] hover:-translate-y-1 font-bold">
                 ✦ START FACTION VERIFICATION
             </button>
         </div>
 
-        <!-- DIRECT SECTOR ACCESS -->
-        <div class="z-10 absolute bottom-8 flex flex-wrap justify-center gap-4 text-xs font-mono text-stone-400 px-4">
-            <button onclick="enterFaction('utopia')" class="hover:text-white transition">01: LIGHT ZONE</button>
-            <span>//</span>
-            <button onclick="enterFaction('paradise')" class="hover:text-amber-400 transition">00: LOST PARADISE</button>
-            <span>//</span>
-            <button onclick="enterFaction('dystopia')" class="hover:text-red-500 transition">09: DARK ZONE</button>
-        </div>
     </section>
 
     <!-- 2. TRINITY QUIZ ENGINE -->
@@ -137,7 +184,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Product 01-U -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100">
                     <div class="w-full h-80 bg-slate-100 rounded-xl mb-4 flex items-center justify-center font-mono text-xs text-slate-300">
                         [ VISUAL: WS-01U ]
@@ -155,44 +201,6 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Product 02-U -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100">
-                    <div class="w-full h-80 bg-slate-100 rounded-xl mb-4 flex items-center justify-center font-mono text-xs text-slate-300">
-                        [ VISUAL: WS-02U ]
-                    </div>
-                    <span class="text-xs font-mono text-slate-400">WS-02U-2026</span>
-                    <h3 class="text-lg font-bold mt-1 text-slate-900">Zero-Seam Stealth Pocket Hoodie</h3>
-                    <p class="text-xs text-slate-500 mt-1">Matte cool-touch composite fleece with magnetic closures.</p>
-                    <div class="mt-6 flex justify-between items-center">
-                        <span class="font-mono text-sm">$185 CAD</span>
-                        <button class="snipcart-add-item px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-mono hover:bg-slate-700 transition"
-                            data-item-id="WS-02U" data-item-name="Zero-Seam Stealth Pocket Hoodie" data-item-price="185.00"
-                            data-item-url="https://withinseven.com/" data-item-description="Matte cool-touch hoodie with magnetic closures."
-                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
-                            ADD TO INVENTORY
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Product 03-U -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100">
-                    <div class="w-full h-80 bg-slate-100 rounded-xl mb-4 flex items-center justify-center font-mono text-xs text-slate-300">
-                        [ VISUAL: WS-03U ]
-                    </div>
-                    <span class="text-xs font-mono text-slate-400">WS-03U-2026</span>
-                    <h3 class="text-lg font-bold mt-1 text-slate-900">Architectural Fluid Parachute Trousers</h3>
-                    <p class="text-xs text-slate-500 mt-1">Titanium white water-repellent tech silk pants.</p>
-                    <div class="mt-6 flex justify-between items-center">
-                        <span class="font-mono text-sm">$195 CAD</span>
-                        <button class="snipcart-add-item px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-mono hover:bg-slate-700 transition"
-                            data-item-id="WS-03U" data-item-name="Architectural Fluid Parachute Trousers" data-item-price="195.00"
-                            data-item-url="https://withinseven.com/" data-item-description="Titanium white water-repellent tech silk pants."
-                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
-                            ADD TO INVENTORY
-                        </button>
-                    </div>
-                </div>
             </div>
 
             <div class="mt-20 border-t border-slate-200 pt-8 flex justify-between text-xs font-mono text-slate-500">
@@ -202,7 +210,7 @@
         </div>
     </section>
 
-    <!-- 5. LOST PARADISE STORE (DUST SECTOR / WASTELAND ARCHIVE) -->
+    <!-- 5. LOST PARADISE STORE -->
     <section id="view-paradise" class="hidden min-h-screen bg-paradise text-stone-200 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-stone-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -217,7 +225,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Product 01-P -->
                 <div class="bg-stone-900/60 border border-stone-800 p-6 rounded-xl hover:border-amber-600/60 transition">
                     <div class="w-full h-80 bg-stone-950 border border-stone-800 mb-4 flex items-center justify-center font-mono text-xs text-stone-600">
                         [ ARCHIVE_IMG: WS-01P ]
@@ -235,44 +242,6 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Product 02-P -->
-                <div class="bg-stone-900/60 border border-stone-800 p-6 rounded-xl hover:border-amber-600/60 transition">
-                    <div class="w-full h-80 bg-stone-950 border border-stone-800 mb-4 flex items-center justify-center font-mono text-xs text-stone-600">
-                        [ ARCHIVE_IMG: WS-02P ]
-                    </div>
-                    <span class="text-xs font-mono text-amber-500/80">WS-02P-2026</span>
-                    <h3 class="text-lg font-bold mt-1 text-stone-100">Mud-Dyed Earth Tone Cargo Trousers</h3>
-                    <p class="text-xs text-stone-400 mt-1">Heavy mineral wash canvas with wide-leg relaxed drape.</p>
-                    <div class="mt-6 flex justify-between items-center font-mono text-sm">
-                        <span>$210 CAD</span>
-                        <button class="snipcart-add-item px-4 py-2 bg-amber-600 text-black font-bold text-xs font-mono hover:bg-amber-500 transition rounded"
-                            data-item-id="WS-02P" data-item-name="Mud-Dyed Earth Tone Cargo Trousers" data-item-price="210.00"
-                            data-item-url="https://withinseven.com/" data-item-description="Mineral wash canvas cargo pants."
-                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
-                            CLAIM RELIC
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Product 03-P -->
-                <div class="bg-stone-900/60 border border-stone-800 p-6 rounded-xl hover:border-amber-600/60 transition">
-                    <div class="w-full h-80 bg-stone-950 border border-stone-800 mb-4 flex items-center justify-center font-mono text-xs text-stone-600">
-                        [ ARCHIVE_IMG: WS-03P ]
-                    </div>
-                    <span class="text-xs font-mono text-amber-500/80">WS-03P-2026</span>
-                    <h3 class="text-lg font-bold mt-1 text-stone-100">Faded Crackle Logo Overlayer Shirt</h3>
-                    <p class="text-xs text-stone-400 mt-1">Vintage washed linen-blend shirt with cracked archway print.</p>
-                    <div class="mt-6 flex justify-between items-center font-mono text-sm">
-                        <span>$140 CAD</span>
-                        <button class="snipcart-add-item px-4 py-2 bg-amber-600 text-black font-bold text-xs font-mono hover:bg-amber-500 transition rounded"
-                            data-item-id="WS-03P" data-item-name="Faded Crackle Logo Overlayer Shirt" data-item-price="140.00"
-                            data-item-url="https://withinseven.com/" data-item-description="Vintage washed linen shirt with cracked print."
-                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
-                            CLAIM RELIC
-                        </button>
-                    </div>
-                </div>
             </div>
 
             <div class="mt-20 border-t border-stone-800 pt-8 flex justify-between text-xs font-mono text-stone-500">
@@ -282,7 +251,7 @@
         </div>
     </section>
 
-    <!-- 6. DYSTOPIA STORE (DARK ZONE) -->
+    <!-- 6. DYSTOPIA STORE -->
     <section id="view-dystopia" class="hidden min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-zinc-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -297,7 +266,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Product 01-D -->
                 <div class="bg-zinc-900 border border-zinc-800 p-6 hover:border-red-600 transition">
                     <div class="w-full h-80 bg-zinc-950 border border-zinc-800 mb-4 flex items-center justify-center font-mono text-xs text-zinc-600">
                         [ CCTV_FEED: WS-01D ]
@@ -315,44 +283,6 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Product 02-D -->
-                <div class="bg-zinc-900 border border-zinc-800 p-6 hover:border-red-600 transition">
-                    <div class="w-full h-80 bg-zinc-950 border border-zinc-800 mb-4 flex items-center justify-center font-mono text-xs text-zinc-600">
-                        [ CCTV_FEED: WS-02D ]
-                    </div>
-                    <span class="text-xs font-mono text-red-500">WS-02D-2026</span>
-                    <h3 class="text-lg font-bold mt-1">Multi-Pocket Modular Tactical Hoodie</h3>
-                    <p class="text-xs text-zinc-400 mt-1">Equipped with signal-shielding inner pocket.</p>
-                    <div class="mt-6 flex justify-between items-center font-mono text-sm">
-                        <span>$185 CAD</span>
-                        <button class="snipcart-add-item px-4 py-2 bg-red-600 text-white text-xs font-mono hover:bg-red-700 transition"
-                            data-item-id="WS-02D" data-item-name="Multi-Pocket Modular Tactical Hoodie" data-item-price="185.00"
-                            data-item-url="https://withinseven.com/" data-item-description="Tactical hoodie with signal shield pocket."
-                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
-                            CLAIM GEAR
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Product 03-D -->
-                <div class="bg-zinc-900 border border-zinc-800 p-6 hover:border-red-600 transition">
-                    <div class="w-full h-80 bg-zinc-950 border border-zinc-800 mb-4 flex items-center justify-center font-mono text-xs text-zinc-600">
-                        [ CCTV_FEED: WS-03D ]
-                    </div>
-                    <span class="text-xs font-mono text-red-500">WS-03D-2026</span>
-                    <h3 class="text-lg font-bold mt-1">Ripstop Gridweave Modular Cargo Pants</h3>
-                    <p class="text-xs text-zinc-400 mt-1">Durable tear-resistant gridweave with webbing.</p>
-                    <div class="mt-6 flex justify-between items-center font-mono text-sm">
-                        <span>$210 CAD</span>
-                        <button class="snipcart-add-item px-4 py-2 bg-red-600 text-white text-xs font-mono hover:bg-red-700 transition"
-                            data-item-id="WS-03D" data-item-name="Ripstop Gridweave Modular Cargo Pants" data-item-price="210.00"
-                            data-item-url="https://withinseven.com/" data-item-description="Tear-resistant gridweave tactical pants."
-                            data-item-custom1-name="Size" data-item-custom1-options="S|M|L|XL">
-                            CLAIM GEAR
-                        </button>
-                    </div>
-                </div>
             </div>
 
             <div class="mt-20 border-t border-zinc-800 pt-8 flex justify-between text-xs font-mono text-zinc-500">
@@ -362,7 +292,6 @@
         </div>
     </section>
 
-    <!-- Snipcart Hidden Container -->
     <div id="snipcart" hidden></div>
 
     <script>
@@ -393,16 +322,24 @@
         function setLogoStyle(faction) {
             const logo = document.getElementById('nav-logo');
             const nav = document.getElementById('navbar');
+            const scanline = document.getElementById('scanline-overlay');
 
-            if (faction === 'utopia') {
+            if (faction === 'landing') {
+                logo.className = "h-8 w-auto object-contain invert mix-blend-screen transition-all";
+                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/60 text-white";
+                scanline.style.opacity = '1';
+            } else if (faction === 'utopia') {
                 logo.className = "h-8 w-auto object-contain mix-blend-multiply transition-all";
                 nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-slate-300 backdrop-blur-md bg-white/80 text-slate-900";
+                scanline.style.opacity = '0'; // 乌托邦里没有干扰，关闭扫描线
             } else if (faction === 'paradise') {
                 logo.className = "h-8 w-auto object-contain invert mix-blend-screen opacity-90 transition-all";
                 nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-stone-800 backdrop-blur-md bg-stone-900/80 text-stone-200";
+                scanline.style.opacity = '0.5'; // 失乐园有一点点干扰
             } else {
                 logo.className = "h-8 w-auto object-contain invert mix-blend-screen transition-all";
-                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-white/10 backdrop-blur-md bg-black/80 text-white";
+                nav.className = "fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-300 border-b border-red-900/30 backdrop-blur-md bg-black/80 text-white";
+                scanline.style.opacity = '1';
             }
         }
 
@@ -412,10 +349,8 @@
             });
             document.getElementById(`view-${viewId}`).classList.remove('hidden');
             
-            if (['utopia', 'paradise', 'dystopia'].includes(viewId)) {
+            if (['utopia', 'paradise', 'dystopia', 'landing'].includes(viewId)) {
                 setLogoStyle(viewId);
-            } else {
-                setLogoStyle('dystopia'); // Default dark
             }
             window.scrollTo(0, 0);
         }
