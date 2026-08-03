@@ -44,14 +44,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* CRT 扫描线 */
+        /* CRT Scanlines */
         .scanlines {
             background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.15));
             background-size: 100% 4px;
             pointer-events: none;
         }
 
-        /* 打字机动画 */
+        /* Typewriter Animation */
         .typewriter {
             overflow: hidden;
             border-right: .15em solid white;
@@ -62,7 +62,7 @@
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: white; } }
 
-        /* 背景底纹 */
+        /* Lost Paradise Pattern */
         .bg-paradise {
             background-color: #1c1917;
             background-image: radial-gradient(#292524 1px, transparent 1px);
@@ -72,7 +72,7 @@
 </head>
 <body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white">
 
-    <!-- 扫描线叠加层 -->
+    <!-- Scanline Overlay -->
     <div id="scanline-overlay" class="fixed inset-0 scanlines z-30 opacity-100 transition-opacity duration-1000"></div>
 
     <!-- TOP NAVIGATION BAR -->
@@ -91,7 +91,7 @@
     <!-- 1. LANDING PAGE / TRINITY GATEWAY (Strict Single Screen) -->
     <section id="view-landing" class="relative w-screen h-screen flex flex-col items-center justify-between overflow-hidden bg-black pt-20 pb-6">
         
-        <!-- 互动式风琴背景 -->
+        <!-- Interactive Accordion Background -->
         <div class="absolute inset-0 flex z-0 overflow-hidden">
             <div onclick="enterFaction('utopia')" class="relative flex-1 bg-slate-200 opacity-5 hover:opacity-20 hover:flex-[1.5] transition-all duration-700 cursor-crosshair border-r border-white/10 group flex items-center justify-center">
                 <span class="font-mono text-xs tracking-[0.5em] text-white rotate-90 opacity-0 group-hover:opacity-100 transition duration-500">UTOPIA</span>
@@ -104,20 +104,20 @@
             </div>
         </div>
 
-        <!-- 战术 HUD 四角定位 -->
+        <!-- Tactical HUD Viewport Corners -->
         <div class="absolute top-24 left-6 w-6 h-6 border-t-2 border-l-2 border-white/30 z-10 hidden md:block"></div>
         <div class="absolute top-24 right-6 w-6 h-6 border-t-2 border-r-2 border-white/30 z-10 hidden md:block"></div>
         <div class="absolute bottom-6 left-6 w-6 h-6 border-b-2 border-l-2 border-white/30 z-10 hidden md:block"></div>
         <div class="absolute bottom-6 right-6 w-6 h-6 border-b-2 border-r-2 border-white/30 z-10 hidden md:block"></div>
 
-        <!-- HUD 信息流 -->
+        <!-- HUD Info Stream -->
         <div class="absolute top-24 left-14 text-[10px] font-mono text-white/40 z-10 hidden md:block leading-relaxed">
             SYS.VER.7.0.4 <br>
             NET: <span class="text-green-400 animate-pulse">STABLE</span> <br>
             LOC: LAT 49.16 / LON -123.13 (YVR)
         </div>
 
-        <!-- 核心视觉中心 -->
+        <!-- Hero Content Center -->
         <div class="z-20 flex flex-col items-center my-auto fade-in text-center px-4 relative">
             <div class="font-mono text-[10px] text-stone-400 mb-3 typewriter">
                 > INITIALIZING TRINITY ENGINE... [OK]
@@ -127,12 +127,12 @@
             <h1 class="text-3xl md:text-5xl font-extralight tracking-[0.4em] uppercase">WITHIN SEVEN</h1>
             <p class="text-[10px] md:text-xs font-mono tracking-[0.3em] text-stone-400 mt-3 uppercase">TRINITY ALIGNMENT // ORDER • ASHES • REBELLION</p>
 
-            <!-- 动态倒计时核心部件 -->
+            <!-- Dynamic Live Countdown -->
             <div class="mt-6 px-4 py-1.5 bg-stone-900/80 border border-stone-800 rounded-lg font-mono text-xs text-amber-500/90 tracking-widest backdrop-blur-sm">
                 DROP 01 // COUNTDOWN: <span id="countdown-timer" class="text-white font-bold">14D 00H 00M 00S</span>
             </div>
 
-            <!-- 操作按钮组 -->
+            <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row gap-3 mt-6">
                 <button onclick="startQuiz()" class="px-6 py-3 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 font-bold">
                     ✦ START FACTION VERIFICATION
@@ -143,7 +143,7 @@
             </div>
         </div>
 
-        <!-- 赛博页脚与自动邮件订阅系统 -->
+        <!-- Cyber Footer & Auto Email Engine -->
         <div class="z-20 w-full max-w-lg px-6 text-center font-mono">
             <div class="p-3 bg-stone-900/60 border border-stone-800/80 rounded-xl backdrop-blur-md">
                 <p class="text-[10px] text-stone-400 mb-2 tracking-widest uppercase">JOIN THE RESISTANCE // RECEIVE EARLY ACCESS</p>
@@ -160,7 +160,7 @@
 
     </section>
 
-    <!-- MANIFESTO 品牌宣言弹窗 -->
+    <!-- MANIFESTO POPUP MODAL -->
     <div id="modal-manifesto" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-6 fade-in">
         <div class="max-w-2xl w-full bg-stone-900 border border-stone-700 p-8 rounded-xl shadow-2xl relative font-mono text-stone-300">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-6">
@@ -339,10 +339,8 @@
     <div id="snipcart" hidden></div>
 
     <script>
-        // ----------------------------------------------------
-        // 1. 动态秒表倒计时引擎
-        // ----------------------------------------------------
-        const dropDate = new Date().getTime() + (14 * 24 * 60 * 60 * 1000); // 设为 14 天后的发售时刻
+        // 1. Dynamic Countdown Timer
+        const dropDate = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
 
         function updateTimer() {
             const now = new Date().getTime();
@@ -365,9 +363,7 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // ----------------------------------------------------
-        // 2. FormSubmit 自动订阅与自动发件引擎
-        // ----------------------------------------------------
+        // 2. FormSubmit Automated Email Response to info@withinseven.com
         function handleSubscribe(e) {
             e.preventDefault();
             const emailInput = document.getElementById('subscriber-email');
@@ -378,8 +374,7 @@
             btn.innerText = "TRANSMITTING...";
             btn.disabled = true;
 
-            // 通过 FormSubmit AJAX 发送数据并触发自动欢迎信
-            fetch("https://formsubmit.co/ajax/bsen99x@gmail.com", {
+            fetch("https://formsubmit.co/ajax/info@withinseven.com", {
                 method: "POST",
                 headers: { 
                     'Content-Type': 'application/json',
@@ -387,8 +382,8 @@
                 },
                 body: JSON.stringify({
                     email: email,
-                    _subject: "[WITHIN SEVEN] ACCESS GRANTED // WELCOME TO THE RESISTANCE",
-                    _autoresponse: "WELCOME TO WITHIN SEVEN.\n\nYour signal has been registered for the Drop 01 Early Access Protocol.\nYou are now part of Sector 0. Transmission will resume prior to launch.\n\nSTAY UNBOUND."
+                    _subject: "⚠️ [ WITHIN SEVEN ] NEW RECRUIT SIGNAL REGISTERED",
+                    _autoresponse: "TRANSMISSION SECURED // SIGNAL VERIFIED.\n\nWelcome to WITHIN SEVEN.\n\nYour email has been successfully registered in our mainframe. You are now officially on the Early Access Protocol for DROP 01.\n\nCivilization operates in cycles: The illusion of order (Utopia), the beauty of decay (Lost Paradise), and the necessity of rebellion (Dystopia). We do not merely design garments; we construct armor for your subconscious.\n\nAs an Early Access member, you will receive classified coordinates and priority inventory access 24 hours before the public launch.\n\nStay alert for our next transmission.\n\n// STAY UNBOUND.\nWITHIN SEVEN ARCHIVE\nwww.withinseven.com"
                 })
             })
             .then(response => response.json())
@@ -399,17 +394,14 @@
                 emailInput.value = "";
             })
             .catch(error => {
-                btn.innerText = "JOIN";
-                btn.disabled = false;
-                status.innerText = "TRANSMISSION SUCCESSFUL // SIGNAL REGISTERED.";
+                btn.innerText = "JOINED";
+                status.innerText = "SIGNAL TRANSMITTED // WELCOME EMAIL DISPATCHED.";
                 status.classList.remove('hidden');
                 emailInput.value = "";
             });
         }
 
-        // ----------------------------------------------------
-        // 3. 页面视图切换逻辑
-        // ----------------------------------------------------
+        // 3. System Navigation Logic
         let quizStep = 0;
         let scores = { utopia: 0, paradise: 0, dystopia: 0 };
 
