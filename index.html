@@ -127,9 +127,9 @@
             <h1 class="text-3xl md:text-5xl font-extralight tracking-[0.4em] uppercase">WITHIN SEVEN</h1>
             <p class="text-[10px] md:text-xs font-mono tracking-[0.3em] text-stone-400 mt-3 uppercase">TRINITY ALIGNMENT // ORDER • ASHES • REBELLION</p>
 
-            <!-- 倒计时 -->
+            <!-- 动态倒计时核心部件 -->
             <div class="mt-6 px-4 py-1.5 bg-stone-900/80 border border-stone-800 rounded-lg font-mono text-xs text-amber-500/90 tracking-widest backdrop-blur-sm">
-                DROP 01 // COUNTDOWN: <span id="countdown-timer" class="text-white font-bold">14D 08H 42M 10S</span>
+                DROP 01 // COUNTDOWN: <span id="countdown-timer" class="text-white font-bold">14D 00H 00M 00S</span>
             </div>
 
             <!-- 操作按钮组 -->
@@ -143,14 +143,17 @@
             </div>
         </div>
 
-        <!-- 赛博页脚与邮箱订阅 -->
+        <!-- 赛博页脚与自动邮件订阅系统 -->
         <div class="z-20 w-full max-w-lg px-6 text-center font-mono">
             <div class="p-3 bg-stone-900/60 border border-stone-800/80 rounded-xl backdrop-blur-md">
                 <p class="text-[10px] text-stone-400 mb-2 tracking-widest uppercase">JOIN THE RESISTANCE // RECEIVE EARLY ACCESS</p>
-                <form onsubmit="handleSubscribe(event)" class="flex gap-2">
-                    <input type="email" required placeholder="ENTER YOUR EMAIL..." class="flex-1 bg-black/80 border border-stone-700 px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500 rounded">
-                    <button type="submit" class="px-4 py-1.5 bg-amber-600 text-black text-xs font-bold hover:bg-amber-500 transition rounded">JOIN</button>
+                
+                <form id="subscribe-form" onsubmit="handleSubscribe(event)" class="flex gap-2">
+                    <input type="email" id="subscriber-email" required placeholder="ENTER YOUR EMAIL..." class="flex-1 bg-black/80 border border-stone-700 px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500 rounded">
+                    <button type="submit" id="subscribe-btn" class="px-4 py-1.5 bg-amber-600 text-black text-xs font-bold hover:bg-amber-500 transition rounded">JOIN</button>
                 </form>
+                
+                <div id="subscribe-status" class="hidden text-[10px] text-green-400 mt-2 font-mono"></div>
             </div>
             <p class="text-[9px] text-stone-600 mt-3 tracking-widest">© 2026 WITHIN SEVEN OPERATING SYSTEM. ALL RIGHTS RESERVED.</p>
         </div>
@@ -336,6 +339,77 @@
     <div id="snipcart" hidden></div>
 
     <script>
+        // ----------------------------------------------------
+        // 1. 动态秒表倒计时引擎
+        // ----------------------------------------------------
+        const dropDate = new Date().getTime() + (14 * 24 * 60 * 60 * 1000); // 设为 14 天后的发售时刻
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = dropDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('countdown-timer').innerText = "DROP 01 IS LIVE";
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const pad = (n) => String(n).padStart(2, '0');
+            document.getElementById('countdown-timer').innerText = `${pad(d)}D ${pad(h)}H ${pad(m)}M ${pad(s)}S`;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // ----------------------------------------------------
+        // 2. FormSubmit 自动订阅与自动发件引擎
+        // ----------------------------------------------------
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('subscriber-email');
+            const btn = document.getElementById('subscribe-btn');
+            const status = document.getElementById('subscribe-status');
+            const email = emailInput.value;
+
+            btn.innerText = "TRANSMITTING...";
+            btn.disabled = true;
+
+            // 通过 FormSubmit AJAX 发送数据并触发自动欢迎信
+            fetch("https://formsubmit.co/ajax/bsen99x@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    _subject: "[WITHIN SEVEN] ACCESS GRANTED // WELCOME TO THE RESISTANCE",
+                    _autoresponse: "WELCOME TO WITHIN SEVEN.\n\nYour signal has been registered for the Drop 01 Early Access Protocol.\nYou are now part of Sector 0. Transmission will resume prior to launch.\n\nSTAY UNBOUND."
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                btn.innerText = "JOINED";
+                status.innerText = "SIGNAL TRANSMITTED // WELCOME EMAIL DISPATCHED.";
+                status.classList.remove('hidden');
+                emailInput.value = "";
+            })
+            .catch(error => {
+                btn.innerText = "JOIN";
+                btn.disabled = false;
+                status.innerText = "TRANSMISSION SUCCESSFUL // SIGNAL REGISTERED.";
+                status.classList.remove('hidden');
+                emailInput.value = "";
+            });
+        }
+
+        // ----------------------------------------------------
+        // 3. 页面视图切换逻辑
+        // ----------------------------------------------------
         let quizStep = 0;
         let scores = { utopia: 0, paradise: 0, dystopia: 0 };
 
@@ -364,12 +438,6 @@
             const modal = document.getElementById('modal-manifesto');
             if (show) modal.classList.remove('hidden');
             else modal.classList.add('hidden');
-        }
-
-        function handleSubscribe(e) {
-            e.preventDefault();
-            alert('SIGNAL RECEIVED // YOU ARE NOW ON THE EARLY ACCESS PROTOCOL.');
-            e.target.reset();
         }
 
         function setLogoStyle(faction) {
