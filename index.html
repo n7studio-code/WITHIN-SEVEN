@@ -65,6 +65,26 @@
         .fade-in { animation: fadeIn 0.18s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+        /* Snipcart 侧边栏暗黑高定定制变量 Overrides */
+        :root {
+            --snipcart-bg-color: #0a0a0a;
+            --snipcart-modal-bg: #0a0a0a;
+            --snipcart-cart-bg: #0a0a0a;
+            --snipcart-text-color: #f5f5f5;
+            --snipcart-border-color: #262626;
+            --snipcart-btn-bg: #ffffff;
+            --snipcart-btn-color: #000000;
+        }
+        #snipcart .snipcart-cart-header, #snipcart .snipcart-layout, #snipcart .snipcart-cart {
+            background-color: #0a0a0a !important;
+            color: #f5f5f5 !important;
+            font-family: 'JetBrains Mono', monospace !important;
+        }
+        #snipcart .snipcart-item-line {
+            border-bottom: 1px solid #262626 !important;
+            background-color: #121212 !important;
+        }
+
         /* Logo 核心背光星云呼吸动画 */
         @keyframes nebulaPulse {
             0%, 100% { transform: scale(1); opacity: 0.18; }
@@ -88,6 +108,17 @@
             animation: scanBeam 1.2s ease-in-out infinite;
         }
 
+        /* 提交动画撕裂 Glitch */
+        @keyframes cardGlitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); filter: hue-rotate(90deg); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); filter: hue-rotate(180deg); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); filter: none; }
+        }
+        .glitch-anim { animation: cardGlitch 0.4s ease-out; }
+
         .typewriter-cursor::after {
             content: '|';
             animation: blink 1s step-start infinite;
@@ -103,21 +134,21 @@
 </head>
 <body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white relative overflow-x-hidden pb-32">
 
-    <!-- 1. 顶栏：自适应颜色 + 保留完整人脸细节 LOGO -->
+    <!-- 1. 顶栏：自适应颜色 + 公开档案库直达按钮 -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/80">
         <div class="flex items-center space-x-4">
             <button id="nav-back-btn" onclick="goBack()" class="hidden font-mono text-xs tracking-widest px-3 py-1.5 border border-current rounded hover:opacity-70 transition min-h-[32px]">
                 ← BACK
             </button>
             <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('landing')">
-                <!-- 移除抹平细节的滤镜，精准展现人脸轮廓 -->
                 <img id="nav-logo" src="LOGO.png" alt="WITHIN SEVEN Logo" class="h-7 w-auto object-contain transition-all mix-blend-screen drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
                 <span id="nav-brand-text" class="font-brand font-light text-sm md:text-base tracking-[0.32em] text-white uppercase transition-colors">WITHIN SEVEN</span>
             </div>
         </div>
         <div class="flex items-center space-x-4 md:space-x-6 font-mono text-xs">
-            <button id="audio-toggle-btn" onclick="toggleAudio()" class="hidden md:inline-block tracking-widest text-stone-400 hover:text-white transition px-2.5 py-1 border border-stone-800 rounded">
-                AUDIO: OFF 🔇
+            <!-- 全网公共信号档案库直达通道 -->
+            <button onclick="showView('archive')" class="tracking-widest text-amber-500 hover:text-white border border-amber-500/50 hover:border-white transition px-3 py-1.5 rounded text-[11px]">
+                PUBLIC ARCHIVE // 777
             </button>
             <button class="snipcart-checkout tracking-widest hover:text-amber-500 transition border border-current px-4 py-2 rounded-full backdrop-blur-sm min-h-[36px]">
                 INVENTORY [ <span class="snipcart-items-count text-amber-500 font-bold">0</span> ]
@@ -181,7 +212,7 @@
                     > WEARABLE IDENTITY SYSTEM // EDITION CAPACITY: 777 GARMENTS
                 </div>
                 
-                <!-- 核心 LOGO 渲染：保留所有 3D 雕塑面部与线条阴影 -->
+                <!-- 3D 雕塑面部与肌肉线条完整展现 LOGO -->
                 <div class="relative flex items-center justify-center my-2 pointer-events-auto">
                     <div class="absolute w-56 h-56 md:w-72 md:h-72 bg-white/20 rounded-full blur-3xl pointer-events-none -z-10 nebula-pulse"></div>
                     <img src="LOGO.png" alt="WITHIN SEVEN Emblem" class="w-36 md:w-64 h-auto object-contain mix-blend-screen drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] hover:scale-105 transition duration-500">
@@ -197,9 +228,14 @@
                     DROP 01 — 777 INDIVIDUALLY NUMBERED PIECES ACROSS THREE WORLDS.
                 </p>
 
-                <!-- 倒计时面板 -->
-                <div class="mt-5 px-5 py-2 bg-black/90 border border-stone-800 rounded-lg font-mono text-xs text-amber-500 tracking-widest backdrop-blur-md pointer-events-auto shadow-2xl">
-                    DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-2">LOADING...</span>
+                <!-- 倒计时面板与 Manifesto 入口 -->
+                <div class="mt-4 flex flex-wrap items-center justify-center gap-3 pointer-events-auto">
+                    <div class="px-5 py-2 bg-black/90 border border-stone-800 rounded-lg font-mono text-xs text-amber-500 tracking-widest backdrop-blur-md shadow-2xl">
+                        DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-1">LOADING...</span>
+                    </div>
+                    <button onclick="openManifesto()" class="px-4 py-2 bg-stone-900/80 hover:bg-stone-800 border border-stone-700 text-stone-300 font-mono text-xs tracking-widest rounded transition backdrop-blur-md">
+                        [ READ MANIFESTO ]
+                    </button>
                 </div>
 
                 <!-- 动态按钮区 -->
@@ -242,7 +278,7 @@
                     </div>
                 </div>
 
-                <!-- 💥 创新互动：带激光扫描波束的“匿名表达终端” 💥 -->
+                <!-- 💥 创新互动：带激光扫描波束的“匿名表达终端” (iOS Auto-zoom 16px 防放大修复) 💥 -->
                 <div class="mt-12 p-6 md:p-8 bg-stone-950 border border-stone-800 hover:border-amber-500/80 rounded-2xl max-w-xl mx-auto text-center relative shadow-2xl transition duration-500 overflow-hidden">
                     <div id="scan-beam" class="hidden laser-beam"></div>
                     
@@ -250,7 +286,8 @@
                     <p class="text-xs text-stone-400 mb-4">Type a sentence and choose an alignment color to test the live archive generator:</p>
                     
                     <div class="space-y-4">
-                        <input type="text" id="custom-statement" oninput="updateLiveCard()" placeholder="TYPE YOUR 1-SENTENCE STATEMENT HERE..." maxlength="80" value="I stopped explaining myself to systems built to misunderstand me." class="w-full bg-black border border-stone-700 px-4 py-3 text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono text-center">
+                        <!-- 锁定 16px 防止 iOS 自动缩放视角 -->
+                        <input type="text" id="custom-statement" oninput="updateLiveCard()" placeholder="TYPE YOUR 1-SENTENCE STATEMENT HERE..." maxlength="80" value="I stopped explaining myself to systems built to misunderstand me." class="w-full bg-black border border-stone-700 px-4 py-3 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono text-center">
                         
                         <!-- 颜色选择器 -->
                         <div class="flex justify-center items-center gap-4 py-1">
@@ -272,7 +309,7 @@
                         <button onclick="transmitSignal()" class="mt-4 px-6 py-2.5 bg-stone-900 border border-stone-700 hover:border-amber-500 text-amber-500 text-xs font-bold uppercase transition rounded hover:-translate-y-0.5 min-h-[38px]">
                             TRANSMIT TO PUBLIC ARCHIVE
                         </button>
-                        <div id="transmit-status" class="hidden text-[10px] text-emerald-400 mt-3 font-mono">✦ SIGNAL BROADCASTED TO 777 MAINFRAME.</div>
+                        <div id="transmit-status" class="hidden text-[10px] text-emerald-400 mt-3 font-mono">✦ SIGNAL BROADCASTED TO PUBLIC ARCHIVE STREAM.</div>
                     </div>
                 </div>
 
@@ -289,7 +326,7 @@
             <div class="p-5 bg-stone-950 border border-stone-800 rounded-xl backdrop-blur-md w-full max-w-md text-center mb-16">
                 <p class="text-[10px] text-stone-400 mb-3 font-mono tracking-widest uppercase">ENTER THE SYSTEM // RECEIVE DROP ACCESS</p>
                 <form id="subscribe-form" onsubmit="handleSubscribe(event)" class="flex gap-2">
-                    <input type="email" id="subscriber-email" required placeholder="ENTER YOUR EMAIL..." class="flex-1 bg-black border border-stone-700 px-3 py-2 text-xs text-white focus:outline-none focus:border-white rounded font-mono">
+                    <input type="email" id="subscriber-email" required placeholder="ENTER YOUR EMAIL..." class="flex-1 bg-black border border-stone-700 px-3 py-2 text-[16px] md:text-xs text-white focus:outline-none focus:border-white rounded font-mono">
                     <button type="submit" id="subscribe-btn" class="px-5 py-2 bg-white text-black text-xs font-bold font-mono hover:bg-stone-300 transition rounded min-h-[36px]">JOIN</button>
                 </form>
                 <div id="subscribe-status" class="hidden text-[10px] mt-2 font-mono"></div>
@@ -301,6 +338,7 @@
             </div>
 
             <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 max-w-4xl text-[11px] font-mono text-stone-500 mb-8 px-4">
+                <button onclick="openManifesto()" class="hover:text-stone-300 transition py-1 text-amber-500">Read Manifesto</button>
                 <button onclick="openShippingModal()" class="hover:text-stone-300 transition py-1">Shipping Policy</button>
                 <button onclick="openReturnsModal()" class="hover:text-stone-300 transition py-1">Returns & Exchanges</button>
                 <button onclick="openPrivacyModal()" class="hover:text-stone-300 transition py-1">Privacy Policy</button>
@@ -318,7 +356,65 @@
         </div>
     </section>
 
-    <!-- 4. TRINITY QUIZ ENGINE -->
+    <!-- 3. 全网 PUBLIC ARCHIVE 专属视图 VIEW (核心护城河) -->
+    <section id="view-archive" class="hidden min-h-screen bg-black text-stone-200 pt-28 pb-20 px-6 md:px-12 fade-in font-mono">
+        <div class="max-w-6xl mx-auto">
+            <div class="border-b border-stone-800 pb-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                <div>
+                    <span class="text-xs text-amber-500 uppercase tracking-widest">// GLOBAL IDENTITY ARCHIVE //</span>
+                    <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-white mt-1">PUBLIC ARCHIVE</h1>
+                    <p class="text-xs text-stone-400 mt-2 max-w-2xl leading-relaxed">
+                        Live 7-day personal statement transmissions published by verified owners of 777 numbered garments worldwide.
+                    </p>
+                </div>
+                
+                <!-- 搜号框 + 阵营过滤器 -->
+                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                    <!-- 锁定 16px 阻止 iOS Safari Auto-Zoom -->
+                    <input type="text" id="archive-search-input" oninput="filterArchive()" placeholder="SEARCH #001 - #777..." class="bg-stone-900 border border-stone-700 px-3 py-2 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono">
+                    
+                    <select id="archive-color-filter" onchange="filterArchive()" class="bg-stone-900 border border-stone-700 px-3 py-2 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono">
+                        <option value="ALL">ALL ALIGNMENTS</option>
+                        <option value="UTOPIA WHITE">UTOPIA WHITE</option>
+                        <option value="PARADISE AMBER">PARADISE AMBER</option>
+                        <option value="DYSTOPIA RED">DYSTOPIA RED</option>
+                        <option value="CYBER BLUE">CYBER BLUE</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 全网匿名信号卡片瀑布流列表 Grid -->
+            <div id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- JS 动态卡片列表渲染区域 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. MANIFESTO 品牌宣言 Modal -->
+    <div id="modal-manifesto" class="hidden fixed inset-0 z-[140] bg-black/95 backdrop-blur-xl flex items-center justify-center p-6 fade-in font-mono">
+        <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl relative text-stone-300 space-y-6 max-h-[85vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-stone-800 pb-4">
+                <span class="text-xs text-amber-500 tracking-widest uppercase">// SYSTEM MANIFESTO // WITHIN SEVEN</span>
+                <button onclick="closeManifesto()" class="text-stone-500 hover:text-white text-lg p-1">✕</button>
+            </div>
+            
+            <div class="text-xs text-stone-300 leading-relaxed space-y-4">
+                <p class="font-bold text-white text-sm">WE REJECT PERMANENT LABELS.</p>
+                <p>In an era of hyper-surveillance and relentless identity categorizations, true autonomy is not about explaining yourself—it is about choosing when to speak, and when to dissolve back into silence.</p>
+                <p>WITHIN SEVEN is a Wearable Identity System. We produce 777 individually numbered physical garments. Each piece carries an immutable serial code and an embedded NFC chip.</p>
+                <p>Upon verification, the owner gains access to publish one sentence and choose one alignment color. This message stands publicly in the global archive for exactly seven days. Once the cycle expires, the signal is wiped, resetting the canvas for your next evolution.</p>
+                <p class="text-amber-500 font-bold border-l-2 border-amber-500 pl-3 py-1">
+                    “A NUMBERED GARMENT. A MEANING ONLY YOU CAN ASSIGN. HELD FOR SEVEN DAYS.”
+                </p>
+            </div>
+
+            <button onclick="closeManifesto()" class="w-full py-3 bg-white text-black font-bold text-xs rounded mt-4 min-h-[40px]">
+                ACKNOWLEDGE MANIFESTO
+            </button>
+        </div>
+    </div>
+
+    <!-- 5. TRINITY QUIZ ENGINE -->
     <section id="view-quiz" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-6">
         <div class="max-w-xl w-full bg-stone-900/90 border border-stone-800 p-8 rounded-xl shadow-2xl relative fade-in">
             <div class="w-full bg-stone-800 h-1 mb-8 rounded-full overflow-hidden">
@@ -345,13 +441,13 @@
         </div>
     </section>
 
-    <!-- 5. SCANNING LOADING SCREEN -->
+    <!-- 6. SCANNING LOADING SCREEN -->
     <section id="view-loading" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center font-mono">
         <div class="w-16 h-16 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mb-6"></div>
         <p id="loading-msg" class="text-xs tracking-[0.25em] text-stone-400 animate-pulse">ANALYZING SUBCONSCIOUS ALIGNMENT...</p>
     </section>
 
-    <!-- 6. UTOPIA STORE (LIGHT ZONE - 50/50 宽幅旗舰版式) -->
+    <!-- 7. UTOPIA STORE (LIGHT ZONE - 50/50 宽幅旗舰版式) -->
     <section id="view-utopia" class="hidden min-h-screen bg-slate-50 text-slate-900 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-slate-200 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -377,9 +473,9 @@
                         </div>
                     </div>
                     <div class="flex gap-2">
-                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-1.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">01 LOOK</button>
-                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-2.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">02 FIT</button>
-                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-3.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">03 MACRO</button>
+                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-1.png'" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">01 LOOK</button>
+                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-2.png'" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">02 FIT</button>
+                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-3.png'" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">03 MACRO</button>
                     </div>
                 </div>
 
@@ -430,7 +526,7 @@
                     </div>
 
                     <div class="mt-8">
-                        <button id="btn-WS-01U" onclick="playCyberSound('transmit')" class="snipcart-add-item w-full py-4 bg-slate-900 text-white font-mono text-xs font-bold tracking-widest hover:bg-slate-700 transition rounded-lg uppercase min-h-[48px]"
+                        <button id="btn-WS-01U" class="snipcart-add-item w-full py-4 bg-slate-900 text-white font-mono text-xs font-bold tracking-widest hover:bg-slate-700 transition rounded-lg uppercase min-h-[48px]"
                             data-item-id="WS-01U" data-item-name="UTOPIA 01 // Seamless Precision Sculpted Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03 / M" data-item-quantity="1">
                             ADD TO INVENTORY — C$77 CAD
                         </button>
@@ -445,7 +541,7 @@
         </div>
     </section>
 
-    <!-- 7. LOST PARADISE STORE (50/50 宽幅旗舰版式) -->
+    <!-- 8. LOST PARADISE STORE (50/50 宽幅旗舰版式) -->
     <section id="view-paradise" class="hidden min-h-screen bg-paradise text-stone-200 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-stone-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -471,9 +567,9 @@
                         </div>
                     </div>
                     <div class="flex gap-2">
-                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-1.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">01 LOOK</button>
-                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-2.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">02 FIT</button>
-                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-3.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">03 MACRO</button>
+                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-1.png'" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">01 LOOK</button>
+                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-2.png'" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">02 FIT</button>
+                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-3.png'" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">03 MACRO</button>
                     </div>
                 </div>
 
@@ -524,7 +620,7 @@
                     </div>
 
                     <div class="mt-8">
-                        <button id="btn-WS-01P" onclick="playCyberSound('transmit')" class="snipcart-add-item w-full py-4 bg-amber-600 text-black font-mono text-xs font-bold tracking-widest hover:bg-amber-500 transition rounded-lg uppercase min-h-[48px]"
+                        <button id="btn-WS-01P" class="snipcart-add-item w-full py-4 bg-amber-600 text-black font-mono text-xs font-bold tracking-widest hover:bg-amber-500 transition rounded-lg uppercase min-h-[48px]"
                             data-item-id="WS-01P" data-item-name="PARADISE 01 // Sun-Faded Distressed Knit Relic" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03 / M" data-item-quantity="1">
                             CLAIM RELIC — C$77 CAD
                         </button>
@@ -539,7 +635,7 @@
         </div>
     </section>
 
-    <!-- 8. DYSTOPIA STORE (50/50 宽幅旗舰版式) -->
+    <!-- 9. DYSTOPIA STORE (50/50 宽幅旗舰版式) -->
     <section id="view-dystopia" class="hidden min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-16 px-6 md:px-12 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="border-b border-zinc-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -565,9 +661,9 @@
                         </div>
                     </div>
                     <div class="flex gap-2">
-                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-1.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">01 LOOK</button>
-                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-2.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">02 FIT</button>
-                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-3.png'; playCyberSound('click');" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">03 MACRO</button>
+                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-1.png'" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">01 LOOK</button>
+                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-2.png'" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">02 FIT</button>
+                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-3.png'" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">03 MACRO</button>
                     </div>
                 </div>
 
@@ -618,7 +714,7 @@
                     </div>
 
                     <div class="mt-8">
-                        <button id="btn-WS-01D" onclick="playCyberSound('transmit')" class="snipcart-add-item w-full py-4 bg-red-600 text-white font-mono text-xs font-bold tracking-widest hover:bg-red-700 transition rounded-lg uppercase min-h-[48px]"
+                        <button id="btn-WS-01D" class="snipcart-add-item w-full py-4 bg-red-600 text-white font-mono text-xs font-bold tracking-widest hover:bg-red-700 transition rounded-lg uppercase min-h-[48px]"
                             data-item-id="WS-01D" data-item-name="DYSTOPIA 01 // Acid-Washed Raw Edge Tactical Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03 / M" data-item-quantity="1">
                             CLAIM GEAR — C$77 CAD
                         </button>
@@ -633,7 +729,7 @@
         </div>
     </section>
 
-    <!-- 9. 真实政策与规则 Modal 界面 -->
+    <!-- 10. 真实政策与规则 Modal 界面 -->
     <div id="modal-info" class="hidden fixed inset-0 z-[130] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-xl w-full bg-stone-950 border border-stone-800 p-8 rounded-xl shadow-2xl relative text-stone-300 space-y-4">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4">
@@ -711,14 +807,14 @@
                     🔒 <strong class="text-white">POST-PURCHASE PROTOCOL:</strong> Every piece includes an embedded NFC tag. Verify ownership upon delivery to activate your 7-day personal statement cycle.
                 </div>
 
-                <button id="modal-buy-btn" onclick="playCyberSound('transmit')" class="snipcart-add-item w-full py-4 bg-white text-black text-xs font-bold tracking-widest hover:bg-stone-300 transition rounded-lg uppercase min-h-[48px]">
+                <button id="modal-buy-btn" class="snipcart-add-item w-full py-4 bg-white text-black text-xs font-bold tracking-widest hover:bg-stone-300 transition rounded-lg uppercase min-h-[48px]">
                     ADD TO INVENTORY — C$77 CAD
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- 10. T恤与针织衫独立尺码测量对照 Modal -->
+    <!-- 11. T恤与针织衫独立尺码测量对照 Modal -->
     <div id="modal-size-guide" class="hidden fixed inset-0 z-[120] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
         <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-xl shadow-2xl relative text-stone-300">
             <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-4">
@@ -804,62 +900,68 @@
         setInterval(updateTimer, 1000); updateTimer();
 
         function scrollToTriptych() {
-            playCyberSound('click');
             document.getElementById('triptych-sector').scrollIntoView({ behavior: 'smooth' });
         }
         function scrollToHowItWorks() {
-            playCyberSound('click');
             document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // --- 2. 网页原生 Web Audio 赛博音浪合成器 ---
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        let audioEnabled = false;
+        // Manifesto 品牌宣言 Modal
+        function openManifesto() { document.getElementById('modal-manifesto').classList.remove('hidden'); }
+        function closeManifesto() { document.getElementById('modal-manifesto').classList.add('hidden'); }
 
-        function toggleAudio() {
-            audioEnabled = !audioEnabled;
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const btn = document.getElementById('audio-toggle-btn');
-            btn.innerText = audioEnabled ? 'AUDIO: ON 🔊' : 'AUDIO: OFF 🔇';
-            btn.className = audioEnabled ? 'hidden md:inline-block tracking-widest text-amber-500 font-bold transition px-2.5 py-1 border border-amber-500/50 rounded' : 'hidden md:inline-block tracking-widest text-stone-400 hover:text-white transition px-2.5 py-1 border border-stone-800 rounded';
-            if (audioEnabled) playCyberSound('click');
+        // --- 2. PUBLIC ARCHIVE 全网公共信号数据库 (核心护城河) ---
+        let archiveEntries = [
+            { code: "#0042", color: "DYSTOPIA RED", text: "“Silence is not weakness. It is a calculated decision.”", time: "3D 14H REMAINING", colorClass: "text-red-500", borderClass: "border-red-500/30" },
+            { code: "#0188", color: "UTOPIA WHITE", text: "“Order is the only architecture that survives chaos.”", time: "6D 22H REMAINING", colorClass: "text-white", borderClass: "border-white/30" },
+            { code: "#0241", color: "CYBER BLUE", text: "“I stopped explaining myself to systems built to misunderstand me.”", time: "4D 08H REMAINING", colorClass: "text-blue-400", borderClass: "border-blue-500/30" },
+            { code: "#0312", color: "PARADISE AMBER", text: "“Beauty belongs to those who wander through decaying ruins.”", time: "1D 02H REMAINING", colorClass: "text-amber-500", borderClass: "border-amber-500/30" },
+            { code: "#0509", color: "DYSTOPIA RED", text: "“Resistance is refusing to be tracked or categorized.”", time: "5D 11H REMAINING", colorClass: "text-red-500", borderClass: "border-red-500/30" },
+            { code: "#0711", color: "CYBER BLUE", text: "“We exist in the space between seven days.”", time: "2D 19H REMAINING", colorClass: "text-blue-400", borderClass: "border-blue-500/30" }
+        ];
+
+        function renderArchive() {
+            const grid = document.getElementById('archive-grid');
+            const searchVal = document.getElementById('archive-search-input').value.trim().toLowerCase();
+            const filterVal = document.getElementById('archive-color-filter').value;
+            
+            grid.innerHTML = "";
+            let filtered = archiveEntries.filter(item => {
+                const matchSearch = item.code.toLowerCase().includes(searchVal) || item.text.toLowerCase().includes(searchVal);
+                const matchColor = (filterVal === "ALL") || (item.color === filterVal);
+                return matchSearch && matchColor;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-2 p-12 text-center text-stone-500 border border-stone-800 rounded-xl">NO SIGNAL FOUND FOR QUERY "${searchVal}". GARMENT MAY BE UNCLAIMED.</div>`;
+                return;
+            }
+
+            filtered.forEach(item => {
+                grid.innerHTML += `
+                    <div class="p-6 bg-stone-950 border ${item.borderClass} rounded-xl relative overflow-hidden transition-all hover:scale-[1.01] shadow-xl">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-2xl font-bold ${item.colorClass}">${item.code}</span>
+                            <span class="text-[9px] px-2 py-0.5 rounded border border-stone-800 bg-stone-900 text-stone-400">VERIFIED VIA NFC</span>
+                        </div>
+                        <blockquote class="text-sm italic text-stone-200 my-3 leading-relaxed">${item.text}</blockquote>
+                        <div class="flex justify-between items-center border-t border-stone-900 pt-3 mt-4 text-[10px] text-stone-500">
+                            <span>ALIGNMENT: <strong class="${item.colorClass}">${item.color}</strong></span>
+                            <span>EXPIRES: <strong class="text-white">${item.time}</strong></span>
+                        </div>
+                    </div>
+                `;
+            });
         }
 
-        function playCyberSound(type) {
-            if (!audioEnabled) return;
-            try {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                
-                if (type === 'click') {
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.05);
-                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.05);
-                } else if (type === 'transmit') {
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(200, audioCtx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.25);
-                    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.25);
-                }
-            } catch(e) { console.log(e); }
-        }
+        function filterArchive() { renderArchive(); }
 
-        // --- 3. 实机“表达生成器”互动 + 激光扫描线 ---
+        // --- 3. 实机“表达生成器”互动 + 激光扫描线 + 实时插入公共档案库 ---
         let currentThemeColorClass = "text-blue-400";
         let currentThemeBorderClass = "border-blue-500/40";
         let currentThemeName = "CYBER BLUE";
 
         function setCardTheme(name, colorClass, borderClass) {
-            playCyberSound('click');
             currentThemeName = name;
             currentThemeColorClass = colorClass;
             currentThemeBorderClass = borderClass;
@@ -884,15 +986,30 @@
         }
 
         function transmitSignal() {
-            playCyberSound('transmit');
             const status = document.getElementById('transmit-status');
             const beam = document.getElementById('scan-beam');
+            const cardEl = document.getElementById('live-demo-card');
+            const inputVal = document.getElementById('custom-statement').value.trim();
             
             beam.classList.remove('hidden');
-            status.classList.remove('hidden');
+            cardEl.classList.add('glitch-anim');
+
+            // 实时插入公共档案库最上方！
+            const newEntry = {
+                code: "#0777",
+                color: currentThemeName,
+                text: inputVal.length > 0 ? `“${inputVal}”` : "“A new anonymous signal published to the system.”",
+                time: "6D 23H REMAINING",
+                colorClass: currentThemeColorClass,
+                borderClass: currentThemeBorderClass
+            };
+            archiveEntries.unshift(newEntry);
+            renderArchive();
 
             setTimeout(() => {
                 beam.classList.add('hidden');
+                cardEl.classList.remove('glitch-anim');
+                status.classList.remove('hidden');
                 setTimeout(() => { status.classList.add('hidden'); }, 3000);
             }, 1200);
         }
@@ -916,9 +1033,14 @@
         }
 
         function showView(viewId, pushHistory = true) {
-            playCyberSound('click');
-            ['landing', 'utopia', 'paradise', 'dystopia'].forEach(v => document.getElementById(`view-${v}`).classList.add('hidden'));
-            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+            ['landing', 'utopia', 'paradise', 'dystopia', 'archive'].forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if (el) el.classList.add('hidden');
+            });
+            
+            const targetEl = document.getElementById(`view-${viewId}`);
+            if (targetEl) targetEl.classList.remove('hidden');
+            
             if (pushHistory && viewId !== currentView) history.pushState({ view: viewId }, '', '#' + viewId);
             currentView = viewId;
 
@@ -928,6 +1050,7 @@
                 else backBtn.classList.remove('hidden');
             }
             setNavbarTheme(viewId);
+            if (viewId === 'archive') renderArchive();
             window.scrollTo(0, 0);
         }
         
@@ -948,11 +1071,13 @@
         ];
 
         function startQuiz() {
-            playCyberSound('click');
             quizStep = 0;
             scores = { utopia: 0, paradise: 0, dystopia: 0 };
             updateQuizUI();
-            ['landing', 'utopia', 'paradise', 'dystopia'].forEach(v => document.getElementById(`view-${v}`).classList.add('hidden'));
+            ['landing', 'utopia', 'paradise', 'dystopia', 'archive'].forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if (el) el.classList.add('hidden');
+            });
             document.getElementById('view-quiz').classList.remove('hidden');
         }
 
@@ -966,7 +1091,6 @@
         }
 
         function answerQuiz(faction) {
-            playCyberSound('click');
             scores[faction]++;
             quizStep++;
             if (quizStep < 3) {
@@ -986,7 +1110,6 @@
 
         // --- 6. 数量与 7 尺码选择逻辑 ---
         function changeCardQty(id, delta) {
-            playCyberSound('click');
             let span = document.getElementById(`qty-${id}`);
             let current = parseInt(span.innerText);
             let next = current + delta;
@@ -995,7 +1118,6 @@
             document.getElementById(`btn-${id}`).setAttribute('data-item-quantity', next);
         }
         function selectCardSize(productId, sizeLabel, btnElement) {
-            playCyberSound('click');
             const container = btnElement.parentElement;
             container.querySelectorAll('button').forEach(b => b.className = "h-10 text-[11px] font-mono border border-stone-700/60 rounded text-stone-400 hover:border-white transition");
             if (productId.includes('U')) btnElement.className = "h-10 text-[11px] font-mono border border-slate-900 bg-slate-900 text-white rounded font-bold";
@@ -1007,7 +1129,6 @@
 
         // --- 7. 政策弹窗 ---
         function openShippingModal() {
-            playCyberSound('click');
             openInfoModal('SHIPPING POLICY & TIMELINE', 
                 `1. CANADA EXPRESS: C$9.77 flat rate tracked courier across all 10 provinces. Free shipping on orders over C$154.00.\n` +
                 `2. LOCAL PICKUP: Free self-pickup available at our Richmond, BC hub upon dispatch notification.\n` +
@@ -1017,7 +1138,6 @@
         }
 
         function openReturnsModal() {
-            playCyberSound('click');
             openInfoModal('RETURNS & EXCHANGES POLICY', 
                 `1. 14-DAY PROTOCOL: Complimentary return window begins on the exact date of carrier delivery confirmation.\n` +
                 `2. INTEGRITY REQUIREMENT: Items must remain unworn, unwashed, and with both embedded NFC chips and serialized archival tags completely intact.\n` +
@@ -1026,7 +1146,6 @@
         }
 
         function openPrivacyModal() {
-            playCyberSound('click');
             openInfoModal('PIPEDA COMPLIANT PRIVACY POLICY', 
                 `1. DATA COLLECTION: WITHIN SEVEN collects email addresses and shipping information solely for order fulfillment, unique serial assignment, and essential drop notifications under Canadian PIPEDA regulations.\n` +
                 `2. ZERO THIRD-PARTY SIGNAL TRADING: We never sell, trade, or monetize your personal transmission signals or browsing behaviors.\n` +
@@ -1039,11 +1158,10 @@
             document.getElementById('info-modal-body').innerText = text;
             document.getElementById('modal-info').classList.remove('hidden');
         }
-        function closeInfoModal() { playCyberSound('click'); document.getElementById('modal-info').classList.add('hidden'); }
+        function closeInfoModal() { document.getElementById('modal-info').classList.add('hidden'); }
 
         // --- 8. 独立尺码表 ---
         function openSizeGuide(type) {
-            playCyberSound('click');
             const tableBody = document.getElementById('size-table-body');
             const title = document.getElementById('size-guide-title');
             
@@ -1072,14 +1190,13 @@
             }
             document.getElementById('modal-size-guide').classList.remove('hidden');
         }
-        function closeSizeGuide() { playCyberSound('click'); document.getElementById('modal-size-guide').classList.add('hidden'); }
+        function closeSizeGuide() { document.getElementById('modal-size-guide').classList.add('hidden'); }
 
         // --- 9. Modal & Product 相册切图 ---
         let currentModalImgs = [];
         let modalQty = 1;
 
         function openProductModal(id, title, price, desc, imgArray, fabric, weight, type) {
-            playCyberSound('click');
             currentModalImgs = imgArray;
             document.getElementById('modal-code').innerText = `${id}-2026 ARCHIVE`;
             document.getElementById('modal-title').innerText = title;
@@ -1106,7 +1223,6 @@
         }
 
         function switchModalImage(index) {
-            playCyberSound('click');
             if (currentModalImgs && currentModalImgs[index]) {
                 document.getElementById('modal-img').src = currentModalImgs[index];
                 document.querySelectorAll('.modal-thumb-btn').forEach((btn, i) => {
@@ -1116,9 +1232,8 @@
             }
         }
 
-        function closeProductModal() { playCyberSound('click'); document.getElementById('modal-product').classList.add('hidden'); }
+        function closeProductModal() { document.getElementById('modal-product').classList.add('hidden'); }
         function selectModalSize(sizeLabel) {
-            playCyberSound('click');
             document.querySelectorAll('.modal-size-btn').forEach(b => {
                 if (b.getAttribute('data-size') === sizeLabel) b.className = "modal-size-btn border border-white py-2 text-xs font-bold bg-white text-black rounded min-h-[36px]";
                 else b.className = "modal-size-btn border border-stone-800 py-2 text-xs font-bold text-stone-400 hover:border-stone-500 rounded min-h-[36px]";
@@ -1126,7 +1241,6 @@
             document.getElementById('modal-buy-btn').setAttribute('data-item-custom1-value', sizeLabel);
         }
         function changeModalQty(delta) {
-            playCyberSound('click');
             modalQty += delta;
             if (modalQty < 1) modalQty = 1;
             document.getElementById('modal-qty').innerText = modalQty;
@@ -1136,7 +1250,6 @@
         // --- 10. EmailJS Engine ---
         function handleSubscribe(e) {
             e.preventDefault();
-            playCyberSound('transmit');
             const emailInput = document.getElementById('subscriber-email');
             const btn = document.getElementById('subscribe-btn');
             const status = document.getElementById('subscribe-status');
@@ -1159,14 +1272,14 @@
             });
         }
 
-        // --- 11. Cookie Management ---
+        // --- 11. Cookie Management & Initialization ---
         document.addEventListener("DOMContentLoaded", () => {
             if (!localStorage.getItem('ws_cookie_consent')) setTimeout(() => document.getElementById('cookie-banner').classList.remove('translate-y-full'), 2000);
+            renderArchive();
         });
-        function openCookieSettings() { playCyberSound('click'); document.getElementById('modal-cookie-settings').classList.remove('hidden'); }
-        function closeCookieSettings() { playCyberSound('click'); document.getElementById('modal-cookie-settings').classList.add('hidden'); }
+        function openCookieSettings() { document.getElementById('modal-cookie-settings').classList.remove('hidden'); }
+        function closeCookieSettings() { document.getElementById('modal-cookie-settings').classList.add('hidden'); }
         function saveCookiePreferences(acceptAll = false) {
-            playCyberSound('click');
             if (acceptAll) { localStorage.setItem('ws_cookie_analytics', 'true'); }
             else { localStorage.setItem('ws_cookie_analytics', document.getElementById('cookie-analytics').checked); }
             localStorage.setItem('ws_cookie_consent', 'true');
