@@ -44,7 +44,7 @@
 
         .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-        /* 🔒 门界 1: 满屏拱门 Logo Portal */
+        /* 🔒 门界 1: 满屏拱门 Logo Portal (永久锁定) */
         #portal-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -132,7 +132,7 @@
             50% { opacity: 1; }
         }
 
-        /* 🔴🟢🔵 门界 2: 红绿蓝阵营圣殿抉择门界 (Faction Selection Stage) */
+        /* 🔴🟢🔵 门界 2: 带有真实留言流的红绿蓝阵营圣殿 (Faction Gate) */
         #faction-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -143,7 +143,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
+            overflow-y: auto;
             transition: opacity 0.6s ease;
         }
 
@@ -154,49 +155,49 @@
 
         .faction-title-block {
             text-align: center;
-            margin-bottom: 48px;
+            margin-bottom: 32px;
             z-index: 10;
         }
 
         .faction-main-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
             letter-spacing: 6px;
             color: #ffffff;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-transform: uppercase;
         }
 
         .faction-sub-title {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: #a3a3a3;
             letter-spacing: 2px;
         }
 
-        /* 三大阵营柱网格 */
         .faction-pillars-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 24px;
             width: 100%;
-            max-width: 1000px;
+            max-width: 1140px;
             z-index: 10;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 900px) {
             .faction-pillars-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         .faction-card {
             background: #111111;
             border: 1px solid #262626;
-            padding: 36px 24px;
-            text-align: center;
+            padding: 28px 20px;
             cursor: pointer;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .faction-card::before {
@@ -207,51 +208,82 @@
             transition: background 0.3s;
         }
 
-        /* 红阵营悬停 */
         .faction-card.red-card:hover {
             border-color: var(--brand-red);
             box-shadow: 0 0 35px rgba(230, 0, 0, 0.35);
-            transform: translateY(-8px);
+            transform: translateY(-6px);
         }
         .faction-card.red-card:hover::before { background: var(--brand-red); }
 
-        /* 绿阵营悬停 */
         .faction-card.green-card:hover {
             border-color: var(--brand-green);
             box-shadow: 0 0 35px rgba(0, 168, 67, 0.35);
-            transform: translateY(-8px);
+            transform: translateY(-6px);
         }
         .faction-card.green-card:hover::before { background: var(--brand-green); }
 
-        /* 蓝阵营悬停 */
         .faction-card.blue-card:hover {
             border-color: var(--brand-blue);
             box-shadow: 0 0 35px rgba(0, 68, 255, 0.35);
-            transform: translateY(-8px);
+            transform: translateY(-6px);
         }
         .faction-card.blue-card:hover::before { background: var(--brand-blue); }
 
-        .faction-code {
+        .faction-card-header {
+            border-bottom: 1px solid #222;
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+        }
+
+        .faction-code { font-family: var(--font-mono); font-size: 0.72rem; color: #737373; letter-spacing: 2px; margin-bottom: 6px; }
+        .faction-name { font-size: 1.25rem; font-weight: 800; letter-spacing: 3px; color: #ffffff; }
+
+        /* 💬 阵营卡片内部嵌入的真实消费者留言流 Preview */
+        .faction-quotes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .faction-quote-item {
+            background: #0a0a0a;
+            border: 1px solid #1f1f1f;
+            padding: 12px;
+            font-size: 0.82rem;
+            color: #d4d4d4;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .faction-quote-meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: #666;
+            margin-bottom: 6px;
+            font-style: normal;
+        }
+
+        .faction-select-cta {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid #333;
+            color: #fff;
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            color: #737373;
+            font-weight: 700;
             letter-spacing: 2px;
-            margin-bottom: 16px;
+            text-transform: uppercase;
+            transition: all 0.2s;
         }
 
-        .faction-name {
-            font-size: 1.3rem;
-            font-weight: 800;
-            letter-spacing: 3px;
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
-
-        .faction-quote {
-            font-size: 0.85rem;
-            color: #a3a3a3;
-            line-height: 1.6;
-            font-style: italic;
+        .faction-card:hover .faction-select-cta {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
         }
 
         /* Top Header Nav */
@@ -464,7 +496,7 @@
 </head>
 <body>
 
-<!-- 🔒 1. 拱门满屏入口 Portal Overlay (100vh) -->
+<!-- 🔒 1. 拱门满屏入口 Portal Overlay (100vh - 永久锁定) -->
 <div id="portal-overlay">
     <canvas id="portal-canvas"></canvas>
     <div class="portal-aura"></div>
@@ -474,7 +506,7 @@
     <div class="portal-enter-prompt" onclick="enterArchwayPortal()">[ TAP LOGO TO ENTER THE ARCHIVE ]</div>
 </div>
 
-<!-- 🔴🟢🔵 2. 阵营抉择圣殿门界 Overlay (Faction Gate) -->
+<!-- 🔴🟢🔵 2. 带有消费者真实留言的阵营抉择门界 (Faction Gate) -->
 <div id="faction-overlay">
     <div class="faction-title-block">
         <div class="faction-main-title">SELECT YOUR FREQUENCY</div>
@@ -482,25 +514,67 @@
     </div>
 
     <div class="faction-pillars-grid">
-        <!-- RED -->
+        <!-- 🔴 RED -->
         <div class="faction-card red-card" onclick="selectFaction('RED', '#e60000')">
-            <div class="faction-code">FREQUENCY 01</div>
-            <div class="faction-name">🔴 RESISTANCE</div>
-            <div class="faction-quote">"Burn through the noise and reclaim your presence."</div>
+            <div class="faction-card-header">
+                <div class="faction-code">FREQUENCY 01 // RED</div>
+                <div class="faction-name">🔴 RESISTANCE</div>
+            </div>
+            
+            <div class="faction-quotes-container">
+                <div class="faction-quote-item">
+                    <div class="faction-quote-meta"><span>#0142</span><span>COLOR: RED</span></div>
+                    "In an ocean of digital noise, I choose to be a flame that burns out in 7 days."
+                </div>
+                <div class="faction-quote-item">
+                    <div class="faction-quote-meta"><span>#0589</span><span>COLOR: RED</span></div>
+                    "Do not ask for permission to speak. Just leave your mark."
+                </div>
+            </div>
+
+            <button class="faction-select-cta">ENTER WITH RED</button>
         </div>
 
-        <!-- GREEN -->
+        <!-- 🟢 GREEN -->
         <div class="faction-card green-card" onclick="selectFaction('GREEN', '#00a843')">
-            <div class="faction-code">FREQUENCY 02</div>
-            <div class="faction-name">🟢 SYNTHESIS</div>
-            <div class="faction-quote">"Keep the pulse alive in an ever-evolving mesh."</div>
+            <div class="faction-card-header">
+                <div class="faction-code">FREQUENCY 02 // GREEN</div>
+                <div class="faction-name">🟢 SYNTHESIS</div>
+            </div>
+
+            <div class="faction-quotes-container">
+                <div class="faction-quote-item">
+                    <div class="faction-quote-meta"><span>#0088</span><span>COLOR: GREEN</span></div>
+                    "Growth is silent. The roots expand long before the noise begins."
+                </div>
+                <div class="faction-quote-item">
+                    <div class="faction-quote-meta"><span>#0412</span><span>COLOR: GREEN</span></div>
+                    "We are nodes in the same mesh, breathing in 7-day cycles."
+                </div>
+            </div>
+
+            <button class="faction-select-cta">ENTER WITH GREEN</button>
         </div>
 
-        <!-- BLUE -->
+        <!-- 🔵 BLUE -->
         <div class="faction-card blue-card" onclick="selectFaction('BLUE', '#0044ff')">
-            <div class="faction-code">FREQUENCY 03</div>
-            <div class="faction-name">🔵 AWAKENING</div>
-            <div class="faction-quote">"Today, blue means becoming visible in the void."</div>
+            <div class="faction-card-header">
+                <div class="faction-code">FREQUENCY 03 // BLUE</div>
+                <div class="faction-name">🔵 AWAKENING</div>
+            </div>
+
+            <div class="faction-quotes-container">
+                <div class="faction-quote-item">
+                    <div class="faction-quote-meta"><span>#0234</span><span>COLOR: BLUE</span></div>
+                    "Today, blue means becoming visible in the void."
+                </div>
+                <div class="faction-quote-item">
+                    <div class="faction-quote-meta"><span>#0671</span><span>COLOR: BLUE</span></div>
+                    "The quietest voice in the room holds the deepest truth."
+                </div>
+            </div>
+
+            <button class="faction-select-cta">ENTER WITH BLUE</button>
         </div>
     </div>
 </div>
@@ -598,7 +672,7 @@
         <img src="/LOGO.png" alt="Watermark" class="watermark-img" onerror="this.style.display='none';">
     </section>
 
-    <!-- Screen 2: Private Preview & Live Ledger Signal Stream -->
+    <!-- Screen 2: Interactive Private Preview & Live Ledger Signal Stream -->
     <section class="screen-interactive">
         <div class="section-heading">// SYSTEM INTERACTION & LIVE SIGNAL STREAM</div>
         
