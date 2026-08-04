@@ -1,1394 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WITHIN SEVEN — Drop 01</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Snipcart v3 Code -->
+  <script>
+    window.SnipcartSettings = {
+      publicApiKey: 'ZDJmZTZIY2ItNzEwOC00NzQxLWFHNWUtOGFhNDQxNzM2NjM5M2E2MTg0MzQxNzMz',
+      loadStrategy: 'on-user-interaction',
+      modalTemplate: 'custom',
+    };
+  </script>
+  <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;800&display=swap');
     
-    <!-- SEO & Identity Metadata -->
-    <title>WITHIN SEVEN // Wearable Identity System & Numbered Garments</title>
-    <meta name="description" content="WITHIN SEVEN is a wearable identity system. 777 individually numbered garments, NFC tags, and 7-day personal statement cycles across three worlds.">
-    <meta name="keywords" content="Within Seven, Wearable Identity System, Numbered Clothing, Streetwear, NFC Garments, Conceptual Fashion">
-    <link rel="canonical" href="https://withinseven.com/">
-    
-    <!-- Favicon Icon -->
-    <link rel="icon" type="image/png" href="LOGO.png">
-
-    <!-- Tailwind CSS Engine -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- High Fashion Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@300;400;700&family=Syncopate:wght@300;400;700&display=swap" rel="stylesheet">
-
-    <!-- Snipcart Checkout Integration -->
-    <script>
-      window.SnipcartSettings = {
-        publicApiKey: 'ZDJmZTZIY2ItNzEwZS00NzQxLWFHNWUtOGFhNDQxMzMyZjNhNjM5M2EzMTg0MzQyNDc4NzMz',
-        loadStrategy: 'on-user-interaction',
-      };
-    </script>
-    <script src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js" async></script>
-    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
-
-    <!-- EmailJS Engine -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-       (function(){ emailjs.init({ publicKey: "KJOBMZTZ7SCJuXcQ8" }); })();
-    </script>
-
-    <style>
-        .font-sans { font-family: 'Inter', sans-serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        .font-brand { font-family: 'Syncopate', sans-serif; }
-        .glitch-text:hover { text-shadow: 2px 0 #ef4444, -2px 0 #06b6d4; }
-        
-        .fade-in { animation: fadeIn 0.18s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* Snipcart 结账绝绝对绝对压制层级 z-9999 */
-        #snipcart { z-index: 9999 !important; }
-        :root {
-            --snipcart-bg-color: #0a0a0a;
-            --snipcart-modal-bg: #0a0a0a;
-            --snipcart-cart-bg: #0a0a0a;
-            --snipcart-text-color: #f5f5f5;
-            --snipcart-border-color: #262626;
-            --snipcart-btn-bg: #ffffff;
-            --snipcart-btn-color: #000000;
-        }
-        #snipcart .snipcart-cart-header, #snipcart .snipcart-layout, #snipcart .snipcart-cart {
-            background-color: #0a0a0a !important;
-            color: #f5f5f5 !important;
-            font-family: 'JetBrains Mono', monospace !important;
-        }
-
-        /* 纯白渲染：兼容所有手机 iOS/Android 的超强图片纯白滤镜 */
-        .white-logo-img {
-            filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
-        }
-
-        /* 核心呼吸背光 */
-        @keyframes nebulaPulse {
-            0%, 100% { transform: scale(1); opacity: 0.18; }
-            50% { transform: scale(1.25); opacity: 0.35; }
-        }
-        .nebula-pulse { animation: nebulaPulse 6s ease-in-out infinite; }
-
-        /* 极光扫描线 */
-        @keyframes scanBeam {
-            0% { top: -10%; opacity: 0; }
-            50% { opacity: 1; }
-            100% { top: 110%; opacity: 0; }
-        }
-        .laser-beam {
-            position: absolute;
-            left: 0; right: 0; height: 2px;
-            background: linear-gradient(90deg, transparent, #3b82f6, #f59e0b, transparent);
-            box-shadow: 0 0 15px #3b82f6;
-            animation: scanBeam 1.2s ease-in-out infinite;
-        }
-
-        /* 个人专属卡片呼吸边框 */
-        @keyframes userCardGlow {
-            0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); border-color: rgba(245, 158, 11, 0.8); }
-            50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); border-color: rgba(255, 255, 255, 0.9); }
-        }
-        .user-card-glow { animation: userCardGlow 3s ease-in-out infinite; }
-
-        .typewriter-cursor::after {
-            content: '|';
-            animation: blink 1s step-start infinite;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        .bg-paradise { background-color: #1c1917; background-image: radial-gradient(#292524 1px, transparent 1px); background-size: 16px 16px; }
-    </style>
+    body {
+      font-family: 'Space Mono', monospace;
+      background-color: #050505;
+      color: #e5e5e5;
+    }
+    .font-sans { font-family: 'Inter', sans-serif; }
+    .border-subtle { border-color: rgba(255, 255, 255, 0.12); }
+    .bg-card { background-color: #0d0d0d; }
+  </style>
 </head>
-<body class="bg-black text-white font-sans antialiased selection:bg-stone-500 selection:text-white relative overflow-x-hidden pb-32">
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-white selection:text-black">
 
-    <!-- 1. 顶栏：战术防挤压结构 (原生 <img> + 白化滤镜，绝不隐形) -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-3.5 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/85">
-        <div class="flex items-center space-x-3">
-            <button id="nav-back-btn" onclick="goBack()" class="hidden font-mono text-xs tracking-widest px-2.5 py-1.5 border border-current rounded hover:opacity-70 transition min-h-[32px]">
-                ← BACK
-            </button>
-            <div class="flex items-center space-x-2.5 cursor-pointer" onclick="showView('landing')">
-                <img id="nav-logo" src="LOGO.png" alt="WITHIN SEVEN" class="h-6 md:h-7 w-auto object-contain white-logo-img transition-all">
-                <span id="nav-brand-text" class="hidden sm:inline-block font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap">WITHIN SEVEN</span>
-            </div>
-        </div>
-        
-        <div class="flex items-center space-x-2 md:space-x-4 font-mono text-xs">
-            <button onclick="showView('archive')" class="hidden md:inline-block tracking-widest text-amber-500 hover:text-white border border-amber-500/50 hover:border-white transition px-3 py-1.5 rounded text-[11px] whitespace-nowrap">
-                PUBLIC ARCHIVE // 777
-            </button>
-            
-            <button onclick="toggleMenu()" class="inline-block p-2 text-stone-300 hover:text-white border border-stone-800 rounded min-h-[36px] min-w-[36px]">
-                ☰
-            </button>
+  <!-- TOP NOTICE BAR: Canada Only + US Waitlist -->
+  <div class="bg-neutral-900 border-b border-subtle py-2 px-4 text-xs text-center tracking-widest text-neutral-400">
+    <span>🇨🇦 DROP 01 SHIPS TO CANADIAN ADDRESSES ONLY.</span>
+    <button onclick="openWaitlistModal()" class="underline text-white hover:text-neutral-300 ml-2 cursor-pointer">
+      US & INTERNATIONAL: JOIN WAITLIST →
+    </button>
+  </div>
 
-            <button class="snipcart-checkout tracking-widest hover:text-amber-500 transition border border-current px-3 md:px-4 py-1.5 md:py-2 rounded-full backdrop-blur-sm min-h-[36px] whitespace-nowrap text-[11px] md:text-xs">
-                INVENTORY [ <span class="snipcart-items-count text-amber-500 font-bold">0</span> ]
-            </button>
-        </div>
-    </nav>
+  <!-- HEADER -->
+  <header class="border-b border-subtle py-6 px-6 md:px-12 flex justify-between items-center sticky top-0 bg-black/90 backdrop-blur z-40">
+    <a href="#" class="text-xl font-bold tracking-tighter text-white">WITHIN SEVEN</a>
+    
+    <div class="flex items-center gap-6 text-xs uppercase tracking-wider">
+      <a href="#archive" class="hover:text-neutral-400 transition-colors">ARCHIVE</a>
+      <a href="#about" class="hover:text-neutral-400 transition-colors hidden md:inline">PROTOCOL</a>
+      <!-- SNIPCART CART TRIGGER -->
+      <button class="snipcart-checkout flex items-center gap-2 border border-subtle px-4 py-2 hover:bg-white hover:text-black transition-all">
+        <span>INVENTORY</span>
+        <span class="snipcart-items-count bg-neutral-800 text-white text-[10px] px-1.5 py-0.5 rounded-full border border-neutral-700">0</span>
+      </button>
+    </div>
+  </header>
 
-    <!-- 2. 全屏抽屉目录 MENU DRAWER (z-50) -->
-    <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-black/98 backdrop-blur-2xl flex flex-col justify-between p-8 fade-in font-mono">
-        <div class="flex justify-between items-center border-b border-stone-800 pb-6">
-            <div class="flex items-center space-x-3">
-                <img src="LOGO.png" alt="Logo" class="h-6 w-auto white-logo-img">
-                <span class="font-brand text-xs tracking-widest text-white uppercase">WITHIN SEVEN</span>
-            </div>
-            <button onclick="toggleMenu()" class="text-stone-400 hover:text-white text-xl p-2">✕</button>
+  <!-- MAIN HERO & PRODUCT SECTION -->
+  <main class="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      
+      <!-- LEFT: VISUAL / CAMPAIGN -->
+      <div class="lg:col-span-7 space-y-4">
+        <div class="aspect-[4/5] bg-neutral-900 border border-subtle relative overflow-hidden flex flex-col justify-between p-8">
+          <div class="flex justify-between items-start text-xs tracking-widest text-neutral-500">
+            <span>FORM 01 // DROP 01</span>
+            <span>LIMIT: 777 PIECES</span>
+          </div>
+          
+          <div class="my-auto text-center space-y-2">
+            <div id="product-color-display" class="w-32 h-32 mx-auto rounded-full border border-subtle transition-all duration-500 bg-neutral-100"></div>
+            <p id="product-color-title" class="text-xs uppercase tracking-widest text-neutral-400 pt-4">ALIGNMENT: UTOPIA (WHITE)</p>
+          </div>
+
+          <div class="text-xs text-neutral-600 flex justify-between">
+            <span>HEAVYWEIGHT RAW UNIFORM</span>
+            <span>MADE IN CANADA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: PURCHASING & PRODUCT OPTIONS -->
+      <div class="lg:col-span-5 space-y-8">
+        <div>
+          <span class="text-xs text-neutral-500 tracking-widest uppercase">FORM 01 UNIFORM</span>
+          <h1 class="text-3xl font-extrabold tracking-tight text-white mt-1 font-sans">A NUMBERED UNIFORM.</h1>
+          <p class="text-lg text-neutral-400 mt-2 font-sans font-light">One iconic silhouette. Four alignments. 777 unique numbered pieces.</p>
+          <div class="mt-4 text-2xl font-mono text-white">C$154.00 <span class="text-xs text-neutral-500 font-normal">CAD (Taxes incl. at checkout)</span></div>
         </div>
 
-        <div class="flex flex-col space-y-6 my-auto text-sm tracking-[0.2em]">
-            <button onclick="toggleMenu(); showView('landing'); scrollToTriptych();" class="text-left py-2 border-b border-stone-900 text-stone-300 hover:text-white flex justify-between">
-                <span>01 // EXPLORE DROP 01</span> <span>➔</span>
+        <hr class="border-subtle" />
+
+        <!-- COLOR SELECTOR -->
+        <div class="space-y-3">
+          <label class="text-xs uppercase tracking-widest text-neutral-400 block">1. SELECT ALIGNMENT (COLOR)</label>
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <button onclick="selectColor('Utopia (White)', '#ffffff', 'text-black')" class="color-btn border border-white bg-neutral-900 text-white p-3 text-left hover:border-white transition-all">
+              <span class="block font-bold">UTOPIA</span>
+              <span class="text-[10px] text-neutral-500">Pure White</span>
             </button>
-            <button onclick="toggleMenu(); showView('archive');" class="text-left py-2 border-b border-stone-900 text-amber-400 font-bold flex justify-between">
-                <span>02 // PUBLIC ARCHIVE (留言库)</span> <span>➔</span>
+            <button onclick="selectColor('Lost Paradise (Amber)', '#d97706', 'text-white')" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
+              <span class="block font-bold">LOST PARADISE</span>
+              <span class="text-[10px] text-neutral-500">Deep Amber</span>
             </button>
-            <button onclick="toggleMenu(); showView('landing'); scrollToHowItWorks();" class="text-left py-2 border-b border-stone-900 text-stone-300 hover:text-white flex justify-between">
-                <span>03 // HOW SYSTEM WORKS</span> <span>➔</span>
+            <button onclick="selectColor('Dystopia (Red)', '#dc2626', 'text-white')" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
+              <span class="block font-bold">DYSTOPIA</span>
+              <span class="text-[10px] text-neutral-500">Crimson Red</span>
             </button>
-            <button onclick="toggleMenu(); openManifesto();" class="text-left py-2 border-b border-stone-900 text-stone-300 hover:text-white flex justify-between">
-                <span>04 // BRAND MANIFESTO</span> <span>➔</span>
+            <button onclick="selectColor('Cyber Blue', '#2563eb', 'text-white')" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
+              <span class="block font-bold">CYBER BLUE</span>
+              <span class="text-[10px] text-neutral-500">Electric Blue</span>
             </button>
-            <button onclick="toggleMenu(); startQuiz();" class="text-left py-2 border-b border-stone-900 text-stone-300 hover:text-white flex justify-between">
-                <span>05 // FACTION ALIGNMENT TEST</span> <span>➔</span>
-            </button>
+          </div>
         </div>
 
-        <div class="border-t border-stone-800 pt-6 text-[10px] text-stone-500 tracking-widest space-y-2">
-            <div>STATUS: ONLINE // DROP 01 PRE-ORDER</div>
-            <div>© 2026 WITHIN SEVEN OPERATING SYSTEM.</div>
+        <!-- SIZE SELECTOR -->
+        <div class="space-y-3">
+          <label class="text-xs uppercase tracking-widest text-neutral-400 block">2. SELECT SIZE (UNISEX BOXYS)</label>
+          <div class="grid grid-cols-5 gap-2 text-xs">
+            <button onclick="selectSize('S')" class="size-btn border border-subtle p-2.5 text-center hover:border-white">S</button>
+            <button onclick="selectSize('M')" class="size-btn border border-white bg-white text-black p-2.5 text-center font-bold">M</button>
+            <button onclick="selectSize('L')" class="size-btn border border-subtle p-2.5 text-center hover:border-white">L</button>
+            <button onclick="selectSize('XL')" class="size-btn border border-subtle p-2.5 text-center hover:border-white">XL</button>
+            <button onclick="selectSize('XXL')" class="size-btn border border-subtle p-2.5 text-center hover:border-white">XXL</button>
+          </div>
         </div>
+
+        <!-- SNIPCART ADD TO CART BUTTON -->
+        <div class="pt-4 space-y-3">
+          <button 
+            id="buy-button"
+            class="snipcart-add-item w-full bg-white text-black font-bold py-4 px-6 text-sm tracking-widest uppercase hover:bg-neutral-200 transition-all cursor-pointer"
+            data-item-id="form-01-uniform"
+            data-item-name="WITHIN SEVEN — FORM 01 UNIFORM"
+            data-item-price="154.00"
+            data-item-url="https://withinseven.com"
+            data-item-description="Heavyweight Raw Cotton Uniform. Includes sealed physical claim key & embedded NTAG213 entry."
+            data-item-custom1-name="Alignment / Color"
+            data-item-custom1-options="Utopia (White)[+0.00]|Lost Paradise (Amber)[+0.00]|Dystopia (Red)[+0.00]|Cyber Blue[+0.00]"
+            data-item-custom1-value="Utopia (White)"
+            data-item-custom2-name="Size"
+            data-item-custom2-options="S|M|L|XL|XXL"
+            data-item-custom2-value="M">
+            ADD TO INVENTORY — C$154.00
+          </button>
+          
+          <p class="text-[11px] text-neutral-500 text-center tracking-tight">
+            Free shipping across Canada on orders over C$154. Orders ship in 3–5 business days.
+          </p>
+        </div>
+
+        <!-- DETAILS ACCORDION -->
+        <div class="border-t border-subtle pt-6 space-y-3 text-xs text-neutral-400">
+          <div class="flex justify-between py-1">
+            <span class="text-white">GARMENT</span>
+            <span>Heavyweight Premium Raw Cotton</span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span class="text-white">HARDWARE</span>
+            <span>Washable NTAG213 NFC Label + Back QR</span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span class="text-white">AUTHENTICATION</span>
+            <span>Sealed Physical Claim Key Card Included</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- PROTOCOL / HOW IT WORKS SECTION -->
+  <section id="about" class="border-t border-subtle bg-card py-16 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto space-y-12">
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <span class="text-xs text-neutral-500 tracking-widest uppercase">THE PROTOCOL</span>
+        <h2 class="text-2xl font-bold text-white font-sans">TAP. REVEAL. EXPRESS.</h2>
+        <p class="text-xs text-neutral-400 leading-relaxed">
+          Each garment carries a unique number (#0001–#0777). Technology is invisible; the meaning is entirely yours.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-xs">
+        <div class="border border-subtle p-6 space-y-3 bg-black">
+          <div class="text-neutral-500 font-bold">01 / TAP OR SCAN</div>
+          <p class="text-neutral-300 leading-normal">
+            Tap the NFC label inside the lower hem with your smartphone, or scan the high-contrast QR code on the back of the label to open the garment entry.
+          </p>
+        </div>
+        <div class="border border-subtle p-6 space-y-3 bg-black">
+          <div class="text-neutral-500 font-bold">02 / REVEAL KEY</div>
+          <p class="text-neutral-300 leading-normal">
+            Unseal the physical card included in your package to reveal your 12-character Claim Key. This key proves you own the physical garment.
+          </p>
+        </div>
+        <div class="border border-subtle p-6 space-y-3 bg-black">
+          <div class="text-neutral-500 font-bold">03 / 7-DAY SENTENCE</div>
+          <p class="text-neutral-300 leading-normal">
+            Publish one statement (up to 140 chars). It remains on the public ledger for exactly 7 days before fading into the permanent archive.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHIVE SECTION (NO MISLEADING NFC CLAIMS) -->
+  <section id="archive" class="py-16 px-6 md:px-12 max-w-7xl mx-auto w-full space-y-8">
+    <div class="flex justify-between items-end border-b border-subtle pb-4">
+      <div>
+        <span class="text-xs text-neutral-500 tracking-widest uppercase">PUBLIC LEDGER</span>
+        <h2 class="text-xl font-bold text-white font-sans mt-1">ACTIVE EXPRESSIONS</h2>
+      </div>
+      <span class="text-xs text-neutral-500">LIVE FEED</span>
     </div>
 
-    <!-- 3. LANDING PAGE HERO (精确匹配你 GitHub 的 cover-xxx.png 图片路径) -->
-    <section id="view-landing" class="relative w-full min-h-screen bg-black">
-        
-        <div class="relative w-full h-[100dvh] min-h-[580px] flex flex-col justify-between items-center overflow-hidden border-b border-stone-800">
-            
-            <div id="triptych-sector" class="absolute inset-0 z-0 flex flex-row overflow-x-auto md:overflow-hidden snap-x snap-mandatory no-scrollbar">
-                
-                <!-- 01 UTOPIA -->
-                <div onclick="enterFaction('utopia')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-r border-stone-800/80 bg-slate-950">
-                    <img src="cover-utopia.png" alt="Utopia Sector" class="absolute inset-0 w-full h-full object-cover opacity-50 md:opacity-45 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300">
-                        <div class="text-slate-400 text-[10px] mb-1">SECTOR 01 // CITADEL OF ORDER</div>
-                        <div class="font-bold text-sm md:text-base">WORLD 01 / UTOPIA — ORDER</div>
-                        <div class="text-[10px] text-amber-500 mt-1">EXPLORE SECTOR ➔</div>
-                    </div>
-                </div>
-
-                <!-- 02 LOST PARADISE -->
-                <div onclick="enterFaction('paradise')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden border-r border-stone-800/80 bg-stone-950">
-                    <img src="cover-paradise.png" alt="Lost Paradise Sector" class="absolute inset-0 w-full h-full object-cover opacity-50 md:opacity-45 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300">
-                        <div class="text-amber-500/70 text-[10px] mb-1">SECTOR 00 // FORGOTTEN ASHES</div>
-                        <div class="font-bold text-sm md:text-base text-stone-200">WORLD 02 / LOST PARADISE — MEMORY</div>
-                        <div class="text-[10px] text-amber-500 mt-1">EXPLORE RELIC ➔</div>
-                    </div>
-                </div>
-
-                <!-- 03 DYSTOPIA -->
-                <div onclick="enterFaction('dystopia')" class="group flex-none w-[85vw] md:w-auto md:flex-1 snap-center hover:md:flex-[1.8] transition-all duration-500 relative cursor-pointer overflow-hidden bg-zinc-950">
-                    <img src="cover-dystopia.png" alt="Dystopia Sector" class="absolute inset-0 w-full h-full object-cover opacity-50 md:opacity-45 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                    <div class="absolute bottom-8 md:bottom-6 left-6 right-6 font-mono text-xs tracking-widest text-white transition-all duration-300">
-                        <div class="text-red-500/80 text-[10px] mb-1">SECTOR 09 // REBEL UNDERGROUND</div>
-                        <div class="font-bold text-sm md:text-base text-red-500">WORLD 03 / DYSTOPIA — RESISTANCE</div>
-                        <div class="text-[10px] text-red-400 mt-1">EXPLORE GEAR ➔</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hero 中间极简减法浮层 -->
-            <div class="z-20 flex flex-col items-center pt-20 md:pt-28 text-center px-4 relative max-w-4xl pointer-events-none">
-                
-                <div class="relative flex items-center justify-center my-2 pointer-events-auto">
-                    <div class="absolute w-44 h-44 md:w-64 md:h-64 bg-white/20 rounded-full blur-3xl pointer-events-none -z-10 nebula-pulse"></div>
-                    <img src="LOGO.png" alt="WITHIN SEVEN" class="w-28 md:w-56 h-auto object-contain white-logo-img hover:scale-105 transition duration-500">
-                </div>
-                
-                <h1 class="text-2xl md:text-5xl font-brand font-light tracking-[0.28em] md:tracking-[0.32em] uppercase text-white mt-1 pointer-events-auto glitch-text">WITHIN SEVEN</h1>
-                
-                <p class="text-[11px] md:text-sm font-mono tracking-[0.2em] md:tracking-[0.25em] text-stone-200 mt-2 md:mt-3 uppercase font-bold max-w-2xl leading-relaxed pointer-events-auto">
-                    A NUMBERED GARMENT. A MEANING ONLY YOU CAN ASSIGN. HELD FOR SEVEN DAYS.
-                </p>
-
-                <div class="mt-4 px-4 py-1.5 bg-black/90 border border-stone-800 rounded-lg font-mono text-[11px] md:text-xs text-amber-500 tracking-widest backdrop-blur-md shadow-2xl pointer-events-auto">
-                    DROP 01 COUNTDOWN: <span id="countdown-timer" class="text-white font-bold ml-1">LOADING...</span>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mt-5 md:mt-6 w-full max-w-md pointer-events-auto pb-6">
-                    <button onclick="scrollToTriptych()" class="flex-1 py-3.5 bg-white text-black font-mono text-xs tracking-widest uppercase hover:bg-stone-300 transition font-bold shadow-2xl min-h-[44px]">
-                        EXPLORE DROP 01
-                    </button>
-                    <button onclick="showView('archive')" class="flex-1 py-3.5 bg-black/80 text-white border border-white/40 font-mono text-xs tracking-widest uppercase hover:bg-white/10 transition backdrop-blur-md min-h-[44px]">
-                        PUBLIC ARCHIVE ➔
-                    </button>
-                </div>
-            </div>
+    <!-- DEMO ENTRY -->
+    <div class="border border-subtle bg-card p-6 md:p-8 space-y-4">
+      <div class="flex justify-between items-center text-xs">
+        <div class="flex items-center gap-3">
+          <span class="font-bold text-white font-mono">FORM 01 — 0234 / 0777</span>
+          <span class="bg-neutral-800 text-neutral-300 text-[10px] px-2 py-0.5 border border-neutral-700">CLAIMED VIA SEALED KEY</span>
         </div>
+        <span class="text-neutral-500">EXPIRES IN: 4D 12H</span>
+      </div>
 
-        <!-- 4. HOW THE NUMBER WORKS (系统三步解密) -->
-        <div id="how-it-works" class="relative z-10 w-full bg-black py-20 border-b border-stone-800">
-            <div class="max-w-5xl mx-auto px-6 font-mono">
-                <div class="text-center mb-10">
-                    <span class="text-xs text-amber-500 tracking-widest uppercase">// SYSTEM PROTOCOL //</span>
-                    <h2 class="text-xl md:text-2xl font-bold text-white mt-1 uppercase">HOW THE WEARABLE IDENTITY SYSTEM WORKS</h2>
-                </div>
+      <blockquote class="text-lg md:text-xl font-sans text-white italic py-2">
+        "We build digital armor not to hide who we are, but to decide when we speak."
+      </blockquote>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-xs leading-relaxed">
-                    <div class="bg-stone-950 p-6 border border-stone-800 rounded-xl hover:border-amber-500/50 transition">
-                        <div class="text-amber-500 font-bold mb-2 text-sm">01 // CLAIM</div>
-                        <p class="text-stone-300 font-bold mb-1">Garment & Unique Serial</p>
-                        <p class="text-stone-500 text-[11px]">Choose your garment from Drop 01. A unique number (001–777) is randomly assigned to your physical piece upon dispatch confirmation.</p>
-                    </div>
+      <div class="flex justify-between items-center text-xs text-neutral-500 pt-2 border-t border-subtle">
+        <span>ALIGNMENT: DYSTOPIA (RED)</span>
+        <span>ANONYMOUS OWNER</span>
+      </div>
+    </div>
+  </section>
 
-                    <div class="bg-stone-950 p-6 border border-stone-800 rounded-xl hover:border-amber-500/50 transition">
-                        <div class="text-amber-500 font-bold mb-2 text-sm">02 // ACTIVATE</div>
-                        <p class="text-stone-300 font-bold mb-1">NFC Tag & Private Verification</p>
-                        <p class="text-stone-500 text-[11px]">Scan the embedded NFC chip inside your garment upon arrival to verify ownership and unlock your private statement portal.</p>
-                    </div>
+  <!-- FOOTER -->
+  <footer class="border-t border-subtle py-12 px-6 md:px-12 bg-black text-xs text-neutral-500 space-y-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-3">
+        <div class="text-white font-bold tracking-tighter">WITHIN SEVEN</div>
+        <p class="text-[11px] leading-relaxed">
+          Vancouver, BC, Canada.<br />
+          A meaning only you can assign.
+        </p>
+      </div>
 
-                    <div class="bg-stone-950 p-6 border border-stone-800 rounded-xl hover:border-amber-500/50 transition">
-                        <div class="text-amber-500 font-bold mb-2 text-sm">03 // DEFINE</div>
-                        <p class="text-stone-300 font-bold mb-1">Color, Sentence & 7-Day Cycle</p>
-                        <p class="text-stone-500 text-[11px]">Select a color and submit one sentence. Your number, color, and message publish to the public archive for a 7-day immutable cycle.</p>
-                    </div>
-                </div>
+      <div class="space-y-2">
+        <div class="text-white font-bold">SHIPPING & COMPLIANCE</div>
+        <p class="text-[11px] leading-relaxed">
+          Ships exclusively to Canadian addresses.<br />
+          Orders processed in 3–5 business days.<br />
+          Official contract invoice sent via email upon order.
+        </p>
+      </div>
 
-                <!-- 💥 “匿名表达终端” 💥 -->
-                <div class="mt-12 p-6 md:p-8 bg-stone-950 border border-stone-800 hover:border-amber-500/80 rounded-2xl max-w-xl mx-auto text-center relative shadow-2xl transition duration-500 overflow-hidden">
-                    <div id="scan-beam" class="hidden laser-beam"></div>
-                    
-                    <div class="text-[10px] text-amber-500 uppercase tracking-widest mb-1">// INTERACTIVE TERMINAL // SIMULATE YOUR STATEMENT</div>
-                    <div id="assigned-prompt-msg" class="text-[10px] text-stone-400 font-mono mb-4">
-                        [ SYSTEM INFO ]: Allocating ephemeral test protocol...
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <input type="text" id="custom-statement" oninput="updateLiveCard()" placeholder="TYPE YOUR 1-SENTENCE STATEMENT HERE..." maxlength="80" value="I stopped explaining myself to systems built to misunderstand me." class="w-full bg-black border border-stone-700 px-4 py-3 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono text-center">
-                        
-                        <div class="flex justify-center items-center gap-5 py-2">
-                            <span class="text-[10px] text-stone-500">ALIGNMENT COLOR:</span>
-                            <button onclick="setCardTheme('CYBER BLUE', 'text-blue-400', 'border-blue-500/40')" class="w-7 h-7 rounded-full bg-blue-500 hover:scale-125 transition border-2 border-white/20 p-1 min-w-[28px] min-h-[28px]"></button>
-                            <button onclick="setCardTheme('PARADISE AMBER', 'text-amber-500', 'border-amber-500/40')" class="w-7 h-7 rounded-full bg-amber-500 hover:scale-125 transition border-2 border-white/20 p-1 min-w-[28px] min-h-[28px]"></button>
-                            <button onclick="setCardTheme('DYSTOPIA RED', 'text-red-500', 'border-red-500/40')" class="w-7 h-7 rounded-full bg-red-500 hover:scale-125 transition border-2 border-white/20 p-1 min-w-[28px] min-h-[28px]"></button>
-                            <button onclick="setCardTheme('UTOPIA WHITE', 'text-white', 'border-white/40')" class="w-7 h-7 rounded-full bg-white hover:scale-125 transition border-2 border-white/20 p-1 min-w-[28px] min-h-[28px]"></button>
-                        </div>
-                    </div>
+      <div class="space-y-2">
+        <div class="text-white font-bold">RETURN POLICY</div>
+        <p class="text-[11px] leading-relaxed">
+          Returns accepted within 14 days ONLY if the physical Claim Key seal remains UNSCRATCHED and INTACT.
+        </p>
+      </div>
 
-                    <div id="live-demo-card" class="mt-6 p-6 bg-black border border-blue-500/40 rounded-xl transition-all duration-300 relative">
-                        <div class="text-[10px] text-stone-500 uppercase tracking-widest mb-1">ASSIGNED PUBLIC ARCHIVE ENTRY</div>
-                        <div id="live-card-code" class="text-2xl font-bold text-blue-400 transition-colors">#0777 // CYBER BLUE</div>
-                        <blockquote id="live-card-text" class="text-sm italic text-stone-200 my-3 leading-relaxed">“I stopped explaining myself to systems built to misunderstand me.”</blockquote>
-                        <div class="text-[10px] text-stone-500 uppercase tracking-widest">CYCLE EXPIRATION: <span class="text-white font-bold animate-pulse">6D 23H 59M REMAINING</span></div>
-                        
-                        <button onclick="transmitSignal()" class="mt-4 px-6 py-2.5 bg-stone-900 border border-stone-700 hover:border-amber-500 text-amber-500 text-xs font-bold uppercase transition rounded hover:-translate-y-0.5 min-h-[38px]">
-                            TRANSMIT TO PUBLIC ARCHIVE
-                        </button>
-                    </div>
-                </div>
-
-                <div class="text-center mt-10">
-                    <button onclick="startQuiz()" class="text-xs text-stone-400 hover:text-white underline tracking-widest uppercase">
-                        TAKE FACTION ALIGNMENT TEST (OPTIONAL) ✦
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 极简页脚 -->
-        <div class="relative z-10 w-full bg-black py-16 flex flex-col items-center">
-            <div class="p-5 bg-stone-950 border border-stone-800 rounded-xl backdrop-blur-md w-full max-w-md text-center mb-16">
-                <p class="text-[10px] text-stone-400 mb-3 font-mono tracking-widest uppercase">ENTER THE SYSTEM // RECEIVE DROP ACCESS</p>
-                <form id="subscribe-form" onsubmit="handleSubscribe(event)" class="flex gap-2">
-                    <input type="email" id="subscriber-email" required placeholder="ENTER YOUR EMAIL..." class="flex-1 bg-black border border-stone-700 px-3 py-2 text-[16px] md:text-xs text-white focus:outline-none focus:border-white rounded font-mono">
-                    <button type="submit" id="subscribe-btn" class="px-5 py-2 bg-white text-black text-xs font-bold font-mono hover:bg-stone-300 transition rounded min-h-[36px]">JOIN</button>
-                </form>
-                <div id="subscribe-status" class="hidden text-[10px] mt-2 font-mono"></div>
-            </div>
-
-            <div class="flex gap-6 mb-8 text-stone-400">
-                <a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-white transition p-1"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                <a href="https://x.com" target="_blank" rel="noopener" class="hover:text-white transition p-1"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 max-w-4xl text-[11px] font-mono text-stone-500 mb-8 px-4">
-                <button onclick="openManifesto()" class="hover:text-stone-300 transition py-1 text-amber-500">Read Manifesto</button>
-                <button onclick="openShippingModal()" class="hover:text-stone-300 transition py-1">Shipping Policy</button>
-                <button onclick="openReturnsModal()" class="hover:text-stone-300 transition py-1">Returns & Exchanges</button>
-                <button onclick="openPrivacyModal()" class="hover:text-stone-300 transition py-1">Privacy Policy</button>
-                <button onclick="openCookieSettings()" class="hover:text-stone-300 transition py-1">Cookies Center</button>
-                <button onclick="openInfoModal('CONTACT US', 'Direct system dispatch: info@withinseven.com // Richmond, BC Headquarters. Response timeframe: Within 24 hours.')" class="hover:text-stone-300 transition py-1">Contact Us</button>
-            </div>
-
-            <div class="w-full max-w-6xl border-t border-stone-800 pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] font-mono text-stone-600 tracking-widest px-6 gap-4">
-                <div>© 2026 WITHIN SEVEN OPERATING SYSTEM. ALL RIGHTS RESERVED.</div>
-                <div class="flex gap-6">
-                    <span>SHIPPING TO: <span class="text-stone-400 font-bold">CANADA (C$)</span></span>
-                    <span>LANGUAGE: <span class="text-stone-400 font-bold">ENGLISH</span></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. 全网 PUBLIC ARCHIVE 独立沉浸页面 VIEW -->
-    <section id="view-archive" class="hidden min-h-screen bg-black text-stone-200 pt-28 pb-20 px-6 md:px-12 fade-in font-mono">
-        <div class="max-w-6xl mx-auto">
-            <div class="border-b border-stone-800 pb-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-                <div>
-                    <span class="text-xs text-amber-500 uppercase tracking-widest">// GLOBAL IDENTITY ARCHIVE //</span>
-                    <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-white mt-1">PUBLIC ARCHIVE</h1>
-                    <p class="text-xs text-stone-400 mt-2 max-w-2xl leading-relaxed">
-                        Live 7-day personal statement transmissions published by verified owners of 777 numbered garments worldwide.
-                    </p>
-                </div>
-                
-                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                    <input type="text" id="archive-search-input" oninput="filterArchive()" placeholder="SEARCH #001 - #777..." class="bg-stone-900 border border-stone-700 px-3 py-2 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono">
-                    
-                    <select id="archive-color-filter" onchange="filterArchive()" class="bg-stone-900 border border-stone-700 px-3 py-2 text-[16px] md:text-xs text-stone-200 focus:outline-none focus:border-amber-500 rounded font-mono">
-                        <option value="ALL">ALL ALIGNMENTS</option>
-                        <option value="UTOPIA WHITE">UTOPIA WHITE</option>
-                        <option value="PARADISE AMBER">PARADISE AMBER</option>
-                        <option value="DYSTOPIA RED">DYSTOPIA RED</option>
-                        <option value="CYBER BLUE">CYBER BLUE</option>
-                    </select>
-                </div>
-            </div>
-
-            <div id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            </div>
-        </div>
-    </section>
-
-    <!-- 💥 居中全屏接入弹窗 CEREMONY MODAL (z-[150]) 💥 -->
-    <div id="modal-ceremony" class="hidden fixed inset-0 z-[150] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-6 fade-in font-mono">
-        <div class="max-w-md w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl text-center space-y-6 relative overflow-hidden">
-            <div id="ceremony-beam" class="laser-beam"></div>
-            
-            <div id="ceremony-step-1" class="space-y-3">
-                <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                <div class="text-xs text-amber-500 tracking-widest uppercase animate-pulse">ENCRYPTING TRANSMISSION SIGNAL...</div>
-            </div>
-
-            <div id="ceremony-step-2" class="hidden space-y-4">
-                <div class="text-stone-500 text-[10px] tracking-widest uppercase">// IDENTITY SYSTEM CONFIRMATION //</div>
-                <h2 id="ceremony-code-title" class="text-2xl font-bold text-amber-500">SIGNAL LOCKED TO ARCHIVE #0000</h2>
-                <div class="p-4 bg-black border border-stone-800 rounded-lg text-xs italic text-stone-200" id="ceremony-quote-text">
-                    “...”
-                </div>
-                <div class="text-white font-bold text-sm tracking-widest pt-2">
-                    WELCOME TO WITHIN SEVEN.
-                </div>
-                <p class="text-[11px] text-stone-400 leading-relaxed">
-                    Your anonymous statement has been recorded and anchored to the global mainframe for a 7-day cycle.
-                </p>
-                <button onclick="goToArchiveAndHighlight()" class="w-full py-3.5 bg-white text-black font-bold text-xs uppercase rounded hover:bg-stone-300 transition mt-4 min-h-[44px]">
-                    VIEW YOUR SIGNAL IN PUBLIC ARCHIVE ➔
-                </button>
-            </div>
-        </div>
+      <div class="space-y-2">
+        <div class="text-white font-bold">CONTACT</div>
+        <p class="text-[11px]">support@withinseven.com</p>
+        <p class="text-[10px] text-neutral-600">Support reviewed twice daily on business days.</p>
+      </div>
     </div>
 
-    <!-- 6. MANIFESTO 品牌宣言 Modal (z-[140]) -->
-    <div id="modal-manifesto" class="hidden fixed inset-0 z-[140] bg-black/95 backdrop-blur-xl flex items-center justify-center p-6 fade-in font-mono">
-        <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl relative text-stone-300 space-y-6 max-h-[85vh] overflow-y-auto">
-            <div class="flex justify-between items-center border-b border-stone-800 pb-4">
-                <span class="text-xs text-amber-500 tracking-widest uppercase">// SYSTEM MANIFESTO // WITHIN SEVEN</span>
-                <button onclick="closeManifesto()" class="text-stone-500 hover:text-white text-lg p-1">✕</button>
-            </div>
-            
-            <div class="text-xs text-stone-300 leading-relaxed space-y-4">
-                <p class="font-bold text-white text-sm">WE REJECT PERMANENT LABELS.</p>
-                <p>In an era of hyper-surveillance and relentless identity categorizations, true autonomy is not about explaining yourself—it is about choosing when to speak, and when to dissolve back into silence.</p>
-                <p>WITHIN SEVEN is a Wearable Identity System. We produce 777 individually numbered physical garments. Each piece carries an immutable serial code and an embedded NFC chip.</p>
-                <p>Upon verification, the owner gains access to publish one sentence and choose one alignment color. This message stands publicly in the global archive for exactly seven days. Once the cycle expires, the signal is wiped, resetting the canvas for your next evolution.</p>
-                <p class="text-amber-500 font-bold border-l-2 border-amber-500 pl-3 py-1">
-                    “A NUMBERED GARMENT. A MEANING ONLY YOU CAN ASSIGN. HELD FOR SEVEN DAYS.”
-                </p>
-            </div>
-
-            <button onclick="closeManifesto()" class="w-full py-3 bg-white text-black font-bold text-xs rounded mt-4 min-h-[40px]">
-                ACKNOWLEDGE MANIFESTO
-            </button>
-        </div>
+    <div class="max-w-7xl mx-auto border-t border-subtle pt-6 flex justify-between text-[10px] text-neutral-600">
+      <span>© 2026 WITHIN SEVEN™. ALL RIGHTS RESERVED.</span>
+      <span>id.withinseven.com</span>
     </div>
+  </footer>
 
-    <!-- 💥 彻底解锁 iOS 固顶关闭按键的宽幅双栏高定 Modal (z-[100]) 💥 -->
-    <div id="modal-product" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl overflow-y-auto p-4 md:p-8 fade-in flex justify-center items-start">
-        <div class="max-w-4xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-2xl shadow-2xl relative font-mono text-stone-300 my-12">
-            <button onclick="closeProductModal()" class="sticky top-2 float-right -mt-2 -mr-2 bg-stone-900 border border-stone-700 hover:bg-white hover:text-black text-stone-300 rounded-full w-9 h-9 flex items-center justify-center text-sm z-50 transition">✕</button>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 clear-both">
-                <div class="flex flex-col gap-3">
-                    <div class="w-full h-72 md:h-[380px] bg-stone-900 rounded-xl overflow-hidden relative border border-stone-800">
-                        <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover transition-all duration-200">
-                        <div class="absolute top-3 left-3 bg-amber-600 text-black font-bold px-3 py-1 text-[10px] rounded">
-                            DROP 01 // 777 TOTAL PIECES
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="switchModalImage(0)" class="modal-thumb-btn flex-1 py-2 text-[10px] font-mono border border-white bg-white text-black font-bold rounded text-center cursor-pointer min-h-[36px]">01 LOOK</button>
-                        <button onclick="switchModalImage(1)" class="modal-thumb-btn flex-1 py-2 text-[10px] font-mono border border-stone-800 bg-stone-900 text-stone-400 hover:text-white rounded text-center cursor-pointer min-h-[36px]">02 FIT</button>
-                        <button onclick="switchModalImage(2)" class="modal-thumb-btn flex-1 py-2 text-[10px] font-mono border border-stone-800 bg-stone-900 text-stone-400 hover:text-white rounded text-center cursor-pointer min-h-[36px]">03 MACRO</button>
-                    </div>
-                </div>
-
-                <div class="flex flex-col justify-between space-y-4">
-                    <div>
-                        <span id="modal-code" class="text-xs text-amber-500 uppercase tracking-widest">WS-01-2026</span>
-                        <h2 id="modal-title" class="text-xl md:text-2xl font-bold text-white mt-1">Product Title</h2>
-                        <p id="modal-price" class="text-lg font-bold text-amber-400 mt-2">C$77.00 CAD</p>
-                        
-                        <div class="mt-4 border-t border-b border-stone-800 py-3 space-y-1.5 text-[11px] text-stone-400">
-                            <div class="flex justify-between"><span>COMPOSITION:</span> <span id="modal-spec-fabric" class="text-stone-200 font-bold">Raw Cotton</span></div>
-                            <div class="flex justify-between"><span>WEIGHT:</span> <span id="modal-spec-weight" class="text-stone-200 font-bold">300 GSM</span></div>
-                        </div>
-                        
-                        <div class="mt-4 flex flex-col gap-3">
-                            <div>
-                                <div class="flex justify-between items-center mb-1.5">
-                                    <label class="text-[10px] text-stone-300 tracking-widest uppercase">SELECT SIZE (01-07):</label>
-                                    <button onclick="openSizeGuide('Tee')" class="text-[10px] text-amber-500 hover:text-white underline py-1">SIZE GUIDE</button>
-                                </div>
-                                <div class="grid grid-cols-7 gap-1">
-                                    <button onclick="selectModalSize('01 / XS')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="01 / XS">01</button>
-                                    <button onclick="selectModalSize('02 / S')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="02 / S">02</button>
-                                    <button onclick="selectModalSize('03 / M')" class="modal-size-btn border border-white py-2 text-xs font-bold bg-white text-black rounded min-h-[36px]" data-size="03 / M">03</button>
-                                    <button onclick="selectModalSize('04 / L')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="04 / L">04</button>
-                                    <button onclick="selectModalSize('05 / XL')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="05 / XL">05</button>
-                                    <button onclick="selectModalSize('06 / XXL')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="06 / XXL">06</button>
-                                    <button onclick="selectModalSize('07 / XXXL')" class="modal-size-btn border border-stone-800 py-2 text-xs font-bold rounded min-h-[36px]" data-size="07 / XXXL">07</button>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="text-[10px] text-stone-300 tracking-widest uppercase block mb-1">QUANTITY:</label>
-                                <div class="flex items-center border border-stone-700 rounded w-fit">
-                                    <button onclick="changeModalQty(-1)" class="px-3 py-1.5 text-stone-400 hover:text-white transition font-bold min-h-[36px]">-</button>
-                                    <span id="modal-qty" class="px-3 py-1.5 font-mono text-xs text-white">1</span>
-                                    <button onclick="changeModalQty(1)" class="px-3 py-1.5 text-stone-400 hover:text-white transition font-bold min-h-[36px]">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button id="modal-buy-btn" class="snipcart-add-item w-full py-4 bg-white text-black text-xs font-bold tracking-widest hover:bg-stone-300 transition rounded-lg uppercase min-h-[48px] mt-4">
-                        ADD TO INVENTORY — C$77 CAD
-                    </button>
-                </div>
-            </div>
-        </div>
+  <!-- US WAITLIST MODAL -->
+  <div id="waitlist-modal" class="fixed inset-0 bg-black/80 backdrop-blur items-center justify-center hidden z-50 p-6">
+    <div class="bg-card border border-subtle p-8 max-w-md w-full space-y-6 relative">
+      <button onclick="closeWaitlistModal()" class="absolute top-4 right-4 text-neutral-500 hover:text-white">✕</button>
+      <div class="space-y-2">
+        <span class="text-xs text-neutral-500 tracking-widest uppercase">INTERNATIONAL ACCESS</span>
+        <h3 class="text-lg font-bold text-white font-sans">JOIN THE US WAITLIST</h3>
+        <p class="text-xs text-neutral-400">
+          Drop 01 currently ships exclusively within Canada. Enter your email to be notified when US & international shipping unlocks.
+        </p>
+      </div>
+      <form onsubmit="event.preventDefault(); alert('Added to waitlist.'); closeWaitlistModal();" class="space-y-3">
+        <input type="email" required placeholder="your.email@domain.com" class="w-full bg-black border border-subtle p-3 text-xs text-white focus:outline-none focus:border-white" />
+        <button type="submit" class="w-full bg-white text-black font-bold py-3 text-xs uppercase hover:bg-neutral-200">JOIN WAITLIST</button>
+      </form>
     </div>
-
-    <!-- 7. TRINITY QUIZ ENGINE -->
-    <section id="view-quiz" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-6">
-        <div class="max-w-xl w-full bg-stone-900/90 border border-stone-800 p-8 rounded-xl shadow-2xl relative fade-in">
-            <div class="w-full bg-stone-800 h-1 mb-8 rounded-full overflow-hidden">
-                <div id="quiz-progress" class="bg-amber-500 h-full w-1/3 transition-all duration-300"></div>
-            </div>
-            
-            <span id="quiz-step" class="text-xs font-mono text-amber-500 uppercase tracking-widest">TRINITY SEQUENCE 01 // 03</span>
-            <h2 id="quiz-question" class="text-lg md:text-xl font-light mt-2 mb-8 text-stone-200">Loading question...</h2>
-
-            <div class="space-y-3">
-                <button onclick="answerQuiz('utopia')" class="w-full p-4 border border-stone-700 hover:border-white hover:bg-white hover:text-black transition text-left text-xs md:text-sm font-mono flex justify-between items-center group rounded-lg">
-                    <span id="opt-a">A. Option A</span>
-                    <span class="opacity-0 group-hover:opacity-100 transition">➔</span>
-                </button>
-                <button onclick="answerQuiz('paradise')" class="w-full p-4 border border-stone-700 hover:border-amber-500 hover:bg-amber-900/30 hover:text-amber-300 transition text-left text-xs md:text-sm font-mono flex justify-between items-center group rounded-lg">
-                    <span id="opt-b">B. Option B</span>
-                    <span class="opacity-0 group-hover:opacity-100 transition">➔</span>
-                </button>
-                <button onclick="answerQuiz('dystopia')" class="w-full p-4 border border-stone-700 hover:border-red-500 hover:bg-red-950/40 hover:text-red-400 transition text-left text-xs md:text-sm font-mono flex justify-between items-center group rounded-lg">
-                    <span id="opt-c">C. Option C</span>
-                    <span class="opacity-0 group-hover:opacity-100 transition">➔</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. SCANNING LOADING SCREEN -->
-    <section id="view-loading" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center font-mono">
-        <div class="w-16 h-16 border-2 border-amber-500 border-t-transparent rounded-full animate-spin mb-6"></div>
-        <p id="loading-msg" class="text-xs tracking-[0.25em] text-stone-400 animate-pulse">ANALYZING SUBCONSCIOUS ALIGNMENT...</p>
-    </section>
-
-    <!-- 9. UTOPIA STORE -->
-    <section id="view-utopia" class="hidden min-h-screen bg-slate-50 text-slate-900 pt-28 pb-16 px-6 md:px-12 fade-in">
-        <div class="max-w-7xl mx-auto">
-            <div class="border-b border-slate-200 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
-                <div>
-                    <span class="text-xs font-mono tracking-widest text-slate-400 uppercase">DROP 01 ART THEME // SECTOR 01</span>
-                    <h1 class="text-4xl md:text-6xl font-extralight tracking-widest mt-2 text-slate-950">UTOPIA 01</h1>
-                </div>
-                <div class="mt-4 md:mt-0 text-xs font-mono bg-slate-200 px-3 py-1.5 rounded-full text-slate-700 font-bold">
-                    CITADEL ALIGNMENT
-                </div>
-            </div>
-
-            <div class="bg-white p-6 md:p-10 rounded-2xl shadow-sm border border-slate-200/80 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-                <div class="md:col-span-6 flex flex-col gap-3">
-                    <div class="w-full h-[420px] md:h-[540px] bg-slate-100 rounded-xl overflow-hidden relative border border-slate-200 cursor-pointer" 
-                         onclick="openProductModal('WS-01U', 'UTOPIA 01 // Seamless Precision Sculpted Tee', 77, 'Architectural zero-friction silhouette crafted from organic cotton TENCEL™ blend.', ['utopia-1.png', 'utopia-2.png', 'utopia-3.png'], '60% Organic Cotton / 40% TENCEL™ Lyocell', '300 GSM Heavy Structure', 'Tee')">
-                        <img id="utopia-main-card-img" src="utopia-1.png" alt="Utopia Garment" class="w-full h-full object-cover transition-all duration-200">
-                        <div class="absolute top-4 left-4 bg-slate-900 text-white font-mono text-[10px] font-bold px-3 py-1.5 rounded">
-                            DROP 01 // 777 TOTAL PIECES
-                        </div>
-                        <div class="absolute bottom-4 right-4 bg-black/70 text-white font-mono text-[10px] px-3 py-1.5 rounded backdrop-blur-sm">
-                            🔍 INSPECT ARCHIVE
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-1.png'" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">01 LOOK</button>
-                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-2.png'" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">02 FIT</button>
-                        <button onclick="document.getElementById('utopia-main-card-img').src='utopia-3.png'" class="flex-1 py-2 text-[10px] font-mono border border-slate-300 rounded hover:border-slate-900 min-h-[36px]">03 MACRO</button>
-                    </div>
-                </div>
-
-                <div class="md:col-span-6 flex flex-col justify-between space-y-6">
-                    <div>
-                        <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">WS-01U-2026 ARCHIVE</span>
-                        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mt-1">Seamless Precision Sculpted Tee</h2>
-                        <p class="text-2xl font-mono font-bold text-slate-900 mt-3">C$77 CAD</p>
-
-                        <p class="text-[11px] font-mono text-emerald-700 mt-1 font-bold">
-                            C$9.77 tracked Canada shipping · Free on C$154+ orders
-                        </p>
-
-                        <p class="text-xs text-slate-500 mt-4 leading-relaxed font-mono">
-                            Zero-friction liquid-drape cotton blend with seamless bonded hems and architectural drop-shoulder posture.
-                        </p>
-
-                        <div class="mt-6 border-t border-b border-slate-200 py-4 space-y-2 text-xs font-mono text-slate-600">
-                            <div class="flex justify-between"><span>COMPOSITION:</span> <span class="text-slate-900 font-bold">60% Organic Cotton / 40% TENCEL™ Lyocell</span></div>
-                            <div class="flex justify-between"><span>WEIGHT:</span> <span class="text-slate-900 font-bold">300 GSM Heavy Structure</span></div>
-                            <div class="flex justify-between"><span>SERIALIZATION:</span> <span class="text-slate-900 font-bold">UNIQUE NUMBER ASSIGNED AT DISPATCH</span></div>
-                        </div>
-
-                        <div class="mt-6">
-                            <div class="flex justify-between items-center mb-2">
-                                <label class="text-xs font-mono font-bold text-slate-700 uppercase">SELECT ARCHIVAL SIZE:</label>
-                                <button onclick="openSizeGuide('Tee')" class="text-xs font-mono text-slate-400 hover:text-slate-900 underline py-1">Size Guide</button>
-                            </div>
-                            <div class="grid grid-cols-4 sm:grid-cols-7 gap-1.5">
-                                <button onclick="selectCardSize('WS-01U', '01 / XS', this)" class="h-10 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">01 / XS</button>
-                                <button onclick="selectCardSize('WS-01U', '02 / S', this)" class="h-10 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">02 / S</button>
-                                <button onclick="selectCardSize('WS-01U', '03 / M', this)" class="h-10 text-[11px] font-mono border border-slate-900 bg-slate-900 text-white rounded font-bold">03 / M</button>
-                                <button onclick="selectCardSize('WS-01U', '04 / L', this)" class="h-10 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">04 / L</button>
-                                <button onclick="selectCardSize('WS-01U', '05 / XL', this)" class="h-10 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">05 / XL</button>
-                                <button onclick="selectCardSize('WS-01U', '06 / XXL', this)" class="h-10 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">06 / XXL</button>
-                                <button onclick="selectCardSize('WS-01U', '07 / XXXL', this)" class="h-10 text-[11px] font-mono border border-slate-300 rounded hover:border-slate-900">07 / XXXL</button>
-                            </div>
-                        </div>
-
-                        <div class="mt-6">
-                            <label class="text-xs font-mono font-bold text-slate-700 uppercase block mb-2">QUANTITY:</label>
-                            <div class="flex items-center border border-slate-300 rounded w-fit">
-                                <button onclick="changeCardQty('WS-01U', -1)" class="px-4 py-2.5 text-slate-500 hover:text-slate-900 font-bold min-h-[40px]">-</button>
-                                <span id="qty-WS-01U" class="px-4 py-2.5 font-mono text-xs font-bold">1</span>
-                                <button onclick="changeCardQty('WS-01U', 1)" class="px-4 py-2.5 text-slate-500 hover:text-slate-900 font-bold min-h-[40px]">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8">
-                        <button id="btn-WS-01U" class="snipcart-add-item w-full py-4 bg-slate-900 text-white font-mono text-xs font-bold tracking-widest hover:bg-slate-700 transition rounded-lg uppercase min-h-[48px]"
-                            data-item-id="WS-01U" data-item-name="UTOPIA 01 // Seamless Precision Sculpted Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03 / M" data-item-quantity="1">
-                            ADD TO INVENTORY — C$77 CAD
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-20 border-t border-slate-200 pt-8 flex justify-between text-xs font-mono text-slate-500">
-                <button onclick="enterFaction('paradise')" class="hover:text-amber-600 transition py-2">➔ CROSS BOUNDARY: LOST PARADISE</button>
-                <button onclick="enterFaction('dystopia')" class="hover:text-red-600 transition py-2">⚠ INFILTRATE DARK ZONE</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- 10. LOST PARADISE STORE -->
-    <section id="view-paradise" class="hidden min-h-screen bg-paradise text-stone-200 pt-28 pb-16 px-6 md:px-12 fade-in">
-        <div class="max-w-7xl mx-auto">
-            <div class="border-b border-stone-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
-                <div>
-                    <span class="text-xs font-mono tracking-widest text-amber-500/80 uppercase">DROP 01 ART THEME // SECTOR 00</span>
-                    <h1 class="text-4xl md:text-6xl font-serif tracking-widest mt-2 text-stone-100 italic">LOST PARADISE</h1>
-                </div>
-                <div class="mt-4 md:mt-0 text-xs font-mono bg-amber-950/40 border border-amber-800/50 px-3 py-1.5 rounded text-amber-400 font-bold">
-                    ASHES ALIGNMENT
-                </div>
-            </div>
-
-            <div class="bg-stone-900/60 p-6 md:p-10 rounded-2xl border border-stone-800 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-                <div class="md:col-span-6 flex flex-col gap-3">
-                    <div class="w-full h-[420px] md:h-[540px] bg-stone-950 rounded-xl overflow-hidden relative border border-stone-800 cursor-pointer"
-                         onclick="openProductModal('WS-01P', 'PARADISE 01 // Sun-Faded Distressed Knit Relic', 77, 'Raw cotton yarn with hand-done edge erosion & mended patch detail.', ['paradise-1.png', 'paradise-2.png', 'paradise-3.png'], '100% Raw Mended Cotton Knit', '480 GSM Heavy Structure', 'Knit')">
-                        <img id="paradise-main-card-img" src="paradise-1.png" alt="Paradise Sweater" class="w-full h-full object-cover transition-all duration-200">
-                        <div class="absolute top-4 left-4 bg-amber-600 text-black font-mono text-[10px] font-bold px-3 py-1.5 rounded">
-                            DROP 01 // 777 TOTAL PIECES
-                        </div>
-                        <div class="absolute bottom-4 right-4 bg-black/70 text-amber-400 font-mono text-[10px] px-3 py-1.5 rounded backdrop-blur-sm border border-amber-500/20">
-                            🔍 INSPECT ARCHIVE
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-1.png'" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">01 LOOK</button>
-                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-2.png'" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">02 FIT</button>
-                        <button onclick="document.getElementById('paradise-main-card-img').src='paradise-3.png'" class="flex-1 py-2 text-[10px] font-mono border border-stone-800 rounded hover:border-amber-500 transition min-h-[36px]">03 MACRO</button>
-                    </div>
-                </div>
-
-                <div class="md:col-span-6 flex flex-col justify-between space-y-6">
-                    <div>
-                        <span class="text-xs font-mono text-amber-500/80 uppercase tracking-widest">WS-01P-2026 ARCHIVE</span>
-                        <h2 class="text-2xl md:text-3xl font-bold text-stone-100 mt-1">Sun-Faded Distressed Knit Relic</h2>
-                        <p class="text-2xl font-mono font-bold text-amber-400 mt-3">C$77 CAD</p>
-
-                        <p class="text-[11px] font-mono text-amber-400/90 mt-1 font-bold">
-                            C$9.77 tracked Canada shipping · Free on C$154+ orders
-                        </p>
-
-                        <p class="text-xs text-stone-400 mt-4 leading-relaxed font-mono">
-                            Heavyweight raw cotton yarn treated with sun-fade distressing and hand-stitched mended patches along structural seams.
-                        </p>
-
-                        <div class="mt-6 border-t border-b border-stone-800 py-4 space-y-2 text-xs font-mono text-stone-400">
-                            <div class="flex justify-between"><span>COMPOSITION:</span> <span class="text-stone-200 font-bold">100% Raw Cotton Knit</span></div>
-                            <div class="flex justify-between"><span>WEIGHT:</span> <span class="text-stone-200 font-bold">480 GSM Heavy Structure</span></div>
-                            <div class="flex justify-between"><span>SERIALIZATION:</span> <span class="text-stone-200 font-bold">UNIQUE NUMBER ASSIGNED AT DISPATCH</span></div>
-                        </div>
-
-                        <div class="mt-6">
-                            <div class="flex justify-between items-center mb-2">
-                                <label class="text-xs font-mono font-bold text-stone-300 uppercase">SELECT ARCHIVAL SIZE:</label>
-                                <button onclick="openSizeGuide('Knit')" class="text-xs font-mono text-stone-400 hover:text-white underline py-1">Size Guide</button>
-                            </div>
-                            <div class="grid grid-cols-4 sm:grid-cols-7 gap-1.5">
-                                <button onclick="selectCardSize('WS-01P', '01 / XS', this)" class="h-10 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">01 / XS</button>
-                                <button onclick="selectCardSize('WS-01P', '02 / S', this)" class="h-10 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">02 / S</button>
-                                <button onclick="selectCardSize('WS-01P', '03 / M', this)" class="h-10 text-[11px] font-mono border border-amber-500 bg-amber-600 text-black font-bold rounded">03 / M</button>
-                                <button onclick="selectCardSize('WS-01P', '04 / L', this)" class="h-10 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">04 / L</button>
-                                <button onclick="selectCardSize('WS-01P', '05 / XL', this)" class="h-10 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">05 / XL</button>
-                                <button onclick="selectCardSize('WS-01P', '06 / XXL', this)" class="h-10 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">06 / XXL</button>
-                                <button onclick="selectCardSize('WS-01P', '07 / XXXL', this)" class="h-10 text-[11px] font-mono border border-stone-700 rounded hover:border-amber-500">07 / XXXL</button>
-                            </div>
-                        </div>
-
-                        <div class="mt-6">
-                            <label class="text-xs font-mono font-bold text-stone-300 uppercase block mb-2">QUANTITY:</label>
-                            <div class="flex items-center border border-stone-700 rounded w-fit">
-                                <button onclick="changeCardQty('WS-01P', -1)" class="px-4 py-2.5 text-stone-400 hover:text-white font-bold min-h-[40px]">-</button>
-                                <span id="qty-WS-01P" class="px-4 py-2.5 font-mono text-xs font-bold">1</span>
-                                <button onclick="changeCardQty('WS-01P', 1)" class="px-4 py-2.5 text-stone-400 hover:text-white font-bold min-h-[40px]">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8">
-                        <button id="btn-WS-01P" class="snipcart-add-item w-full py-4 bg-amber-600 text-black font-mono text-xs font-bold tracking-widest hover:bg-amber-500 transition rounded-lg uppercase min-h-[48px]"
-                            data-item-id="WS-01P" data-item-name="PARADISE 01 // Sun-Faded Distressed Knit Relic" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03 / M" data-item-quantity="1">
-                            CLAIM RELIC — C$77 CAD
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-20 border-t border-stone-800 pt-8 flex justify-between text-xs font-mono text-stone-500">
-                <button onclick="enterFaction('utopia')" class="hover:text-white transition py-2">↺ ASCEND TO LIGHT ZONE</button>
-                <button onclick="enterFaction('dystopia')" class="hover:text-red-500 transition py-2">➔ DESCEND TO DARK ZONE</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- 11. DYSTOPIA STORE -->
-    <section id="view-dystopia" class="hidden min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-16 px-6 md:px-12 fade-in">
-        <div class="max-w-7xl mx-auto">
-            <div class="border-b border-zinc-800 pb-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end">
-                <div>
-                    <span class="text-xs font-mono tracking-widest text-red-500 uppercase">DROP 01 ART THEME // SECTOR 09</span>
-                    <h1 class="text-4xl md:text-6xl font-black tracking-tighter mt-2 glitch-text">DYSTOPIA 01</h1>
-                </div>
-                <div class="mt-4 md:mt-0 text-xs font-mono bg-red-950/60 border border-red-800 px-3 py-1.5 rounded text-red-400 font-bold">
-                    REBEL ALIGNMENT
-                </div>
-            </div>
-
-            <div class="bg-zinc-900 p-6 md:p-10 rounded-2xl border border-zinc-800 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-                <div class="md:col-span-6 flex flex-col gap-3">
-                    <div class="w-full h-[420px] md:h-[540px] bg-zinc-950 rounded-xl overflow-hidden relative border border-zinc-800 cursor-pointer"
-                         onclick="openProductModal('WS-01D', 'DYSTOPIA 01 // Acid-Washed Raw Edge Tactical Tee', 77, '280gsm raw cotton with snow-acid wash treatment & asymmetrical raw hem.', ['dystopia-1.png', 'dystopia-2.png', 'dystopia-3.png'], '100% Acid-Washed Raw Cotton', '280 GSM Heavy Duty', 'Tee')">
-                        <img id="dystopia-main-card-img" src="dystopia-1.png" alt="Dystopia Tee" class="w-full h-full object-cover transition-all duration-200">
-                        <div class="absolute top-4 left-4 bg-red-600 text-white font-mono text-[10px] font-bold px-3 py-1.5 rounded">
-                            DROP 01 // 777 TOTAL PIECES
-                        </div>
-                        <div class="absolute bottom-4 right-4 bg-black/80 text-red-400 font-mono text-[10px] px-3 py-1.5 rounded backdrop-blur-sm border border-red-800/40">
-                            🔍 INSPECT ARCHIVE
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-1.png'" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">01 LOOK</button>
-                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-2.png'" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">02 FIT</button>
-                        <button onclick="document.getElementById('dystopia-main-card-img').src='dystopia-3.png'" class="flex-1 py-2 text-[10px] font-mono border border-zinc-800 rounded hover:border-red-500 transition min-h-[36px]">03 MACRO</button>
-                    </div>
-                </div>
-
-                <div class="md:col-span-6 flex flex-col justify-between space-y-6">
-                    <div>
-                        <span class="text-xs font-mono text-red-500 uppercase tracking-widest">WS-01D-2026 ARCHIVE</span>
-                        <h2 class="text-2xl md:text-3xl font-bold text-zinc-100 mt-1">Acid-Washed Raw Edge Tactical Tee</h2>
-                        <p class="text-2xl font-mono font-bold text-red-500 mt-3">C$77 CAD</p>
-
-                        <p class="text-[11px] font-mono text-red-400 mt-1 font-bold">
-                            C$9.77 tracked Canada shipping · Free on C$154+ orders
-                        </p>
-
-                        <p class="text-xs text-zinc-400 mt-4 leading-relaxed font-mono">
-                            Heavyweight 280gsm raw cotton featuring snow-acid wash, oversized tactical chest pocket, and split asymmetrical hemline.
-                        </p>
-
-                        <div class="mt-6 border-t border-b border-zinc-800 py-4 space-y-2 text-xs font-mono text-zinc-400">
-                            <div class="flex justify-between"><span>COMPOSITION:</span> <span class="text-zinc-200 font-bold">100% Acid-Washed Raw Cotton</span></div>
-                            <div class="flex justify-between"><span>WEIGHT:</span> <span class="text-zinc-200 font-bold">280 GSM Heavy Duty</span></div>
-                            <div class="flex justify-between"><span>SERIALIZATION:</span> <span class="text-zinc-200 font-bold">UNIQUE NUMBER ASSIGNED AT DISPATCH</span></div>
-                        </div>
-
-                        <div class="mt-6">
-                            <div class="flex justify-between items-center mb-2">
-                                <label class="text-xs font-mono font-bold text-zinc-300 uppercase">SELECT ARCHIVAL SIZE:</label>
-                                <button onclick="openSizeGuide('Tee')" class="text-xs font-mono text-zinc-400 hover:text-white underline py-1">Size Guide</button>
-                            </div>
-                            <div class="grid grid-cols-4 sm:grid-cols-7 gap-1.5">
-                                <button onclick="selectCardSize('WS-01D', '01 / XS', this)" class="h-10 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">01 / XS</button>
-                                <button onclick="selectCardSize('WS-01D', '02 / S', this)" class="h-10 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">02 / S</button>
-                                <button onclick="selectCardSize('WS-01D', '03 / M', this)" class="h-10 text-[11px] font-mono border border-red-600 bg-red-600 text-white font-bold rounded">03 / M</button>
-                                <button onclick="selectCardSize('WS-01D', '04 / L', this)" class="h-10 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">04 / L</button>
-                                <button onclick="selectCardSize('WS-01D', '05 / XL', this)" class="h-10 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">05 / XL</button>
-                                <button onclick="selectCardSize('WS-01D', '06 / XXL', this)" class="h-10 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">06 / XXL</button>
-                                <button onclick="selectCardSize('WS-01D', '07 / XXXL', this)" class="h-10 text-[11px] font-mono border border-zinc-700 rounded hover:border-red-500">07 / XXXL</button>
-                            </div>
-                        </div>
-
-                        <div class="mt-6">
-                            <label class="text-xs font-mono font-bold text-zinc-300 uppercase block mb-2">QUANTITY:</label>
-                            <div class="flex items-center border border-zinc-700 rounded w-fit">
-                                <button onclick="changeCardQty('WS-01D', -1)" class="px-4 py-2.5 text-zinc-500 hover:text-white font-bold min-h-[40px]">-</button>
-                                <span id="qty-WS-01D" class="px-4 py-2.5 font-mono text-xs font-bold">1</span>
-                                <button onclick="changeCardQty('WS-01D', 1)" class="px-4 py-2.5 text-zinc-500 hover:text-white font-bold min-h-[40px]">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8">
-                        <button id="btn-WS-01D" class="snipcart-add-item w-full py-4 bg-red-600 text-white font-mono text-xs font-bold tracking-widest hover:bg-red-700 transition rounded-lg uppercase min-h-[48px]"
-                            data-item-id="WS-01D" data-item-name="DYSTOPIA 01 // Acid-Washed Raw Edge Tactical Tee" data-item-price="77.00" data-item-url="https://withinseven.com/" data-item-custom1-name="Size" data-item-custom1-value="03 / M" data-item-quantity="1">
-                            CLAIM GEAR — C$77 CAD
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-20 border-t border-zinc-800 pt-8 flex justify-between text-xs font-mono text-zinc-500">
-                <button onclick="enterFaction('utopia')" class="hover:text-white transition py-2">↺ RETURN TO LIGHT ZONE</button>
-                <button onclick="enterFaction('paradise')" class="hover:text-amber-400 transition py-2">➔ ESCAPE TO LOST PARADISE</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- 12. 真实政策与规则 Modal 界面 (z-[130]) -->
-    <div id="modal-info" class="hidden fixed inset-0 z-[130] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
-        <div class="max-w-xl w-full bg-stone-950 border border-stone-800 p-8 rounded-xl shadow-2xl relative text-stone-300 space-y-4">
-            <div class="flex justify-between items-center border-b border-stone-800 pb-4">
-                <span id="info-modal-title" class="text-xs text-amber-500 tracking-widest uppercase">// SYSTEM INFORMATION</span>
-                <button onclick="closeInfoModal()" class="text-stone-500 hover:text-white text-lg p-1">✕</button>
-            </div>
-            <div id="info-modal-body" class="text-xs text-stone-400 leading-relaxed font-mono space-y-3">
-                Information details...
-            </div>
-            <button onclick="closeInfoModal()" class="w-full py-3 bg-white text-black font-bold text-xs rounded mt-4 min-h-[40px]">ACKNOWLEDGE</button>
-        </div>
-    </div>
-
-    <!-- 13. T恤与针织衫独立尺码测量对照 Modal (z-[120]) -->
-    <div id="modal-size-guide" class="hidden fixed inset-0 z-[120] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
-        <div class="max-w-2xl w-full bg-stone-950 border border-stone-800 p-6 md:p-8 rounded-xl shadow-2xl relative text-stone-300">
-            <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-4">
-                <span id="size-guide-title" class="text-xs text-amber-500 tracking-widest uppercase">// ARCHIVAL TEE SIZE GUIDE (GARMENT CIRCUMFERENCE)</span>
-                <button onclick="closeSizeGuide()" class="text-stone-500 hover:text-white text-lg p-1">✕</button>
-            </div>
-            
-            <p class="text-[11px] text-stone-400 mb-4">* All measurements are full garment chest circumferences. Pit-to-pit flat measure equals exactly half.</p>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs whitespace-nowrap">
-                    <thead>
-                        <tr class="text-stone-500 border-b border-stone-800">
-                            <th class="py-2.5">CODE</th>
-                            <th class="py-2.5">EQUIV</th>
-                            <th class="py-2.5">CHEST CIRCUMFERENCE (cm)</th>
-                            <th class="py-2.5">PIT-TO-PIT FLAT (cm)</th>
-                            <th class="py-2.5">LENGTH (cm)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="size-table-body" class="divide-y divide-stone-900">
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="mt-5 p-3 bg-stone-900/60 border border-stone-800 rounded text-[11px] text-stone-400">
-                👤 <strong class="text-stone-200">MODEL SPECS:</strong> Male model is 185cm / 68kg wearing size <strong class="text-amber-400">03 / M</strong> for an architectural relaxed fit.
-            </div>
-        </div>
-    </div>
-
-    <!-- Cookie Settings Modal (z-[110]) -->
-    <div id="modal-cookie-settings" class="hidden fixed inset-0 z-[110] bg-black/90 backdrop-blur-md flex items-center justify-center p-6 fade-in font-mono">
-        <div class="max-w-xl w-full bg-stone-950 border border-stone-800 p-8 rounded-2xl shadow-2xl relative text-stone-300">
-            <div class="flex justify-between items-center border-b border-stone-800 pb-4 mb-6">
-                <span class="text-xs text-amber-500 tracking-widest uppercase">// SYS.PREFERENCES // COOKIE PROTOCOLS</span>
-                <button onclick="closeCookieSettings()" class="text-stone-500 hover:text-white text-lg p-1">✕</button>
-            </div>
-            <div class="space-y-4 text-xs mb-6">
-                <div class="p-4 bg-stone-900/60 border border-stone-800 rounded-lg flex justify-between"><span class="font-bold text-white uppercase">01 // Essential Inventory & Security</span><span class="text-[10px] text-amber-500 font-bold">REQUIRED</span></div>
-                <div class="p-4 bg-stone-900/60 border border-stone-800 rounded-lg flex justify-between items-center">
-                    <span class="font-bold text-white uppercase">02 // Traffic Signals & Analytics</span>
-                    <input type="checkbox" id="cookie-analytics" class="accent-amber-500 w-5 h-5 cursor-pointer">
-                </div>
-            </div>
-            <div class="flex gap-3">
-                <button onclick="saveCookiePreferences(false)" class="flex-1 py-3 border border-stone-700 text-stone-300 text-xs font-bold rounded min-h-[40px]">SAVE PREFERENCES</button>
-                <button onclick="saveCookiePreferences(true)" class="flex-1 py-3 bg-white text-black font-bold text-xs rounded min-h-[40px]">ACCEPT ALL</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Cookie Banner -->
-    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-black/95 border-t border-stone-800 backdrop-blur-xl z-[45] p-4 flex flex-col md:flex-row justify-between items-center transition-transform duration-300 translate-y-full font-mono">
-        <div class="text-[10px] md:text-xs text-stone-400 mb-3 md:mb-0 max-w-4xl">
-            <span class="text-amber-500 font-bold">SYS.NOTICE //</span> We utilize necessary cookies for system cart state and inventory security.
-        </div>
-        <div class="flex gap-3 w-full md:w-auto">
-            <button onclick="openCookieSettings()" class="flex-1 md:flex-none px-4 py-2 border border-stone-700 text-stone-300 text-[10px] rounded min-h-[32px]">SETTINGS</button>
-            <button onclick="saveCookiePreferences(true)" class="flex-1 md:flex-none px-6 py-2 bg-white text-black font-bold text-[10px] rounded min-h-[32px]">ACKNOWLEDGE</button>
-        </div>
-    </div>
-
-    <div id="snipcart" hidden></div>
-
-    <script>
-        // --- 1. 倒计时硬编码固定 (Nov 11, 2026 UTC) ---
-        const dropDate = new Date("2026-11-11T00:00:00Z").getTime();
-        function updateTimer() {
-            const now = new Date().getTime();
-            const diff = dropDate - now;
-            if (diff <= 0) {
-                document.getElementById('countdown-timer').innerText = "DROP 01 IS LIVE";
-                return;
-            }
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-            const pad = (n) => String(n).padStart(2, '0');
-            document.getElementById('countdown-timer').innerText = `${pad(d)}D ${pad(h)}H ${pad(m)}M ${pad(s)}S`;
-        }
-        setInterval(updateTimer, 1000); updateTimer();
-
-        function scrollToTriptych() {
-            document.getElementById('triptych-sector').scrollIntoView({ behavior: 'smooth' });
-        }
-        function scrollToHowItWorks() {
-            document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        function openManifesto() { document.getElementById('modal-manifesto').classList.remove('hidden'); }
-        function closeManifesto() { document.getElementById('modal-manifesto').classList.add('hidden'); }
-
-        // --- 2. 专属随机配号 + LocalStorage 逻辑 ---
-        let userAssignedCode = "";
-        let currentThemeColorClass = "text-blue-400";
-        let currentThemeBorderClass = "border-blue-500/40";
-        let currentThemeName = "CYBER BLUE";
-
-        function initUserCode() {
-            try {
-                const saved = localStorage.getItem('ws_user_code');
-                if (saved) {
-                    userAssignedCode = saved;
-                    document.getElementById('assigned-prompt-msg').innerText = `[ SYSTEM INFO ]: Session protocol re-anchored: ${userAssignedCode}`;
-                    updateLiveCard();
-                    return;
-                }
-            } catch(e) { console.warn(e); }
-
-            let rollCount = 0;
-            const promptEl = document.getElementById('assigned-prompt-msg');
-            const codeEl = document.getElementById('live-card-code');
-            
-            const timer = setInterval(() => {
-                const randomNum = String(Math.floor(Math.random() * 777) + 1).padStart(4, '0');
-                codeEl.innerText = `#${randomNum} // ALLOCATING...`;
-                rollCount++;
-                if (rollCount > 10) {
-                    clearInterval(timer);
-                    userAssignedCode = `#${String(Math.floor(Math.random() * 770) + 10).padStart(4, '0')}`;
-                    try { localStorage.setItem('ws_user_code', userAssignedCode); } catch(e){}
-                    promptEl.innerText = `[ SYSTEM INFO ]: Ephemeral test protocol assigned: ${userAssignedCode}`;
-                    updateLiveCard();
-                }
-            }, 80);
-        }
-
-        // --- 3. PUBLIC ARCHIVE 数据引擎 ---
-        let archiveEntries = [
-            { code: "#0042", color: "DYSTOPIA RED", text: "“Silence is not weakness. It is a calculated decision.”", time: "3D 14H REMAINING", colorClass: "text-red-500", borderClass: "border-red-500/30" },
-            { code: "#0188", color: "UTOPIA WHITE", text: "“Order is the only architecture that survives chaos.”", time: "6D 22H REMAINING", colorClass: "text-white", borderClass: "border-white/30" },
-            { code: "#0241", color: "CYBER BLUE", text: "“I stopped explaining myself to systems built to misunderstand me.”", time: "4D 08H REMAINING", colorClass: "text-blue-400", borderClass: "border-blue-500/30" },
-            { code: "#0312", color: "PARADISE AMBER", text: "“Beauty belongs to those who wander through decaying ruins.”", time: "1D 02H REMAINING", colorClass: "text-amber-500", borderClass: "border-amber-500/30" },
-            { code: "#0509", color: "DYSTOPIA RED", text: "“Resistance is refusing to be tracked or categorized.”", time: "5D 11H REMAINING", colorClass: "text-red-500", borderClass: "border-red-500/30" },
-            { code: "#0711", color: "CYBER BLUE", text: "“We exist in the space between seven days.”", time: "2D 19H REMAINING", colorClass: "text-blue-400", borderClass: "border-blue-500/30" }
-        ];
-
-        function renderArchive() {
-            const grid = document.getElementById('archive-grid');
-            const searchInput = document.getElementById('archive-search-input');
-            const colorFilter = document.getElementById('archive-color-filter');
-            
-            const searchVal = searchInput ? searchInput.value.trim().toLowerCase() : "";
-            const filterVal = colorFilter ? colorFilter.value : "ALL";
-            
-            grid.innerHTML = "";
-
-            let fullList = [...archiveEntries];
-            try {
-                const userSavedSignal = localStorage.getItem('ws_user_signal');
-                if (userSavedSignal) {
-                    const parsed = JSON.parse(userSavedSignal);
-                    fullList = fullList.filter(item => item.code !== parsed.code);
-                    fullList.unshift(parsed);
-                }
-            } catch(e){}
-
-            let filtered = fullList.filter(item => {
-                const matchSearch = item.code.toLowerCase().includes(searchVal) || item.text.toLowerCase().includes(searchVal);
-                const matchColor = (filterVal === "ALL") || (item.color === filterVal);
-                return matchSearch && matchColor;
-            });
-
-            if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-2 p-12 text-center text-stone-500 border border-stone-800 rounded-xl">NO SIGNAL FOUND FOR QUERY "${searchVal}". GARMENT MAY BE UNCLAIMED.</div>`;
-                return;
-            }
-
-            filtered.forEach(item => {
-                const isUserCard = item.isUser;
-                const cardBorder = isUserCard ? "user-card-glow border-amber-500" : item.borderClass;
-                const userBadge = isUserCard ? `<span class="text-[9px] px-2 py-0.5 rounded border border-amber-500/50 bg-amber-950/60 text-amber-400 font-bold animate-pulse">✦ YOUR CURRENT SIGNAL</span>` : `<span class="text-[9px] px-2 py-0.5 rounded border border-stone-800 bg-stone-900 text-stone-400">VERIFIED VIA NFC</span>`;
-
-                grid.innerHTML += `
-                    <div class="p-6 bg-stone-950 border ${cardBorder} rounded-xl relative overflow-hidden transition-all hover:scale-[1.01] shadow-xl">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-2xl font-bold ${item.colorClass}">${item.code}</span>
-                            ${userBadge}
-                        </div>
-                        <blockquote class="text-sm italic text-stone-200 my-3 leading-relaxed">${item.text}</blockquote>
-                        <div class="flex justify-between items-center border-t border-stone-900 pt-3 mt-4 text-[10px] text-stone-500">
-                            <span>ALIGNMENT: <strong class="${item.colorClass}">${item.color}</strong></span>
-                            <span>EXPIRES: <strong class="text-white">${item.time}</strong></span>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function filterArchive() { renderArchive(); }
-
-        // --- 4. 表达生成器 + TRANSMIT 接入仪式 ---
-        function setCardTheme(name, colorClass, borderClass) {
-            currentThemeName = name;
-            currentThemeColorClass = colorClass;
-            currentThemeBorderClass = borderClass;
-            updateLiveCard();
-        }
-
-        function updateLiveCard() {
-            const inputVal = document.getElementById('custom-statement').value.trim();
-            const textEl = document.getElementById('live-card-text');
-            const codeEl = document.getElementById('live-card-code');
-            const cardEl = document.getElementById('live-demo-card');
-
-            const codeDisplay = userAssignedCode || "#0777";
-
-            cardEl.className = `mt-6 p-6 bg-black border ${currentThemeBorderClass} rounded-xl transition-all duration-300 relative`;
-            codeEl.className = `text-2xl font-bold transition-colors ${currentThemeColorClass}`;
-            codeEl.innerText = `${codeDisplay} // ${currentThemeName}`;
-            
-            if (inputVal.length > 0) {
-                textEl.innerText = `“${inputVal}”`;
-            } else {
-                textEl.innerText = `“Your 1-sentence statement will publish here.”`;
-            }
-        }
-
-        function transmitSignal() {
-            if (document.activeElement) document.activeElement.blur();
-
-            const inputVal = document.getElementById('custom-statement').value.trim();
-            const statementText = inputVal.length > 0 ? `“${inputVal}”` : "“A new anonymous signal published to the system.”";
-            const codeDisplay = userAssignedCode || "#0777";
-
-            try {
-                const userSignalObj = {
-                    code: codeDisplay,
-                    color: currentThemeName,
-                    text: statementText,
-                    time: "6D 23H REMAINING",
-                    colorClass: currentThemeColorClass,
-                    borderClass: currentThemeBorderClass,
-                    isUser: true
-                };
-                localStorage.setItem('ws_user_signal', JSON.stringify(userSignalObj));
-            } catch(e){}
-
-            const ceremonyModal = document.getElementById('modal-ceremony');
-            const step1 = document.getElementById('ceremony-step-1');
-            const step2 = document.getElementById('ceremony-step-2');
-            
-            document.getElementById('ceremony-code-title').innerText = `SIGNAL LOCKED TO ${codeDisplay}`;
-            document.getElementById('ceremony-quote-text').innerText = statementText;
-
-            step1.classList.remove('hidden');
-            step2.classList.add('hidden');
-            ceremonyModal.classList.remove('hidden');
-
-            setTimeout(() => {
-                step1.classList.add('hidden');
-                step2.classList.remove('hidden');
-            }, 1200);
-        }
-
-        function goToArchiveAndHighlight() {
-            document.getElementById('modal-ceremony').classList.add('hidden');
-            if (document.getElementById('archive-search-input')) document.getElementById('archive-search-input').value = "";
-            if (document.getElementById('archive-color-filter')) document.getElementById('archive-color-filter').value = "ALL";
-            
-            showView('archive');
-        }
-
-        // --- 5. 顶栏 Logo & 主题与智能后退路由逻辑 ---
-        let currentView = 'landing';
-
-        function closeAllModals() {
-            let closedAny = false;
-            ['modal-product', 'modal-ceremony', 'modal-manifesto', 'modal-info', 'modal-size-guide', 'modal-cookie-settings', 'mobile-menu'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el && !el.classList.contains('hidden')) {
-                    el.classList.add('hidden');
-                    closedAny = true;
-                }
-            });
-            return closedAny;
-        }
-
-        function setNavbarTheme(viewId) {
-            const nav = document.getElementById('navbar');
-            const brandText = document.getElementById('nav-brand-text');
-            const navLogo = document.getElementById('nav-logo');
-            
-            if (viewId === 'utopia') {
-                nav.className = "fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-3.5 flex justify-between items-center transition-all duration-200 border-b border-slate-300 backdrop-blur-md bg-white/90 text-slate-900";
-                if (brandText) brandText.className = "hidden sm:inline-block font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-slate-900 uppercase transition-colors whitespace-nowrap";
-                if (navLogo) navLogo.className = "h-6 md:h-7 w-auto object-contain transition-all";
-            } else {
-                nav.className = "fixed top-0 left-0 w-full z-40 px-4 md:px-6 py-3.5 flex justify-between items-center transition-all duration-200 border-b border-white/10 backdrop-blur-md bg-black/85 text-white";
-                if (brandText) brandText.className = "hidden sm:inline-block font-brand font-light text-xs md:text-base tracking-[0.25em] md:tracking-[0.32em] text-white uppercase transition-colors whitespace-nowrap";
-                if (navLogo) navLogo.className = "h-6 md:h-7 w-auto object-contain white-logo-img transition-all";
-            }
-        }
-
-        function showView(viewId, pushHistory = true) {
-            closeAllModals();
-
-            ['landing', 'utopia', 'paradise', 'dystopia', 'archive'].forEach(v => {
-                const el = document.getElementById(`view-${v}`);
-                if (el) el.classList.add('hidden');
-            });
-            
-            const targetEl = document.getElementById(`view-${viewId}`);
-            if (targetEl) targetEl.classList.remove('hidden');
-            
-            if (pushHistory && viewId !== currentView) history.pushState({ view: viewId }, '', '#' + viewId);
-            currentView = viewId;
-
-            const backBtn = document.getElementById('nav-back-btn');
-            if (backBtn) {
-                if (viewId === 'landing') backBtn.classList.add('hidden');
-                else backBtn.classList.remove('hidden');
-            }
-            setNavbarTheme(viewId);
-            if (viewId === 'archive') renderArchive();
-            window.scrollTo(0, 0);
-        }
-        
-        window.onpopstate = function(event) {
-            if (closeAllModals()) {
-                history.pushState({ view: currentView }, '', '#' + currentView);
-                return;
-            }
-            if (event.state && event.state.view) showView(event.state.view, false);
-            else showView('landing', false);
-        };
-
-        function goBack() { 
-            if (closeAllModals()) return;
-            window.history.length > 1 ? window.history.back() : showView('landing'); 
-        }
-        function enterFaction(faction) { showView(faction); }
-
-        // --- 6. 答题引擎 ---
-        let quizStep = 0;
-        let scores = { utopia: 0, paradise: 0, dystopia: 0 };
-        const questions = [
-            { q: "When civilization collapses under its own weight, what do you reach for?", a: "An automated, rational system to restore absolute order.", b: "Relics of the past, seeking beauty in the crumbling ruins.", c: "Tactical gear to survive in the underground resistance." },
-            { q: "How do you define the true purpose of garments?", a: "A seamless second skin: weightless, pure, and friction-free.", b: "An organic canvas: weathered by time, raw, and layered.", c: "Armor for battle: heavy-duty, multi-pocketed, and protective." },
-            { q: "What is your stance towards constant surveillance?", a: "Blend in gracefully as a perfect, immaculate component.", b: "Wander unnoticed through forgotten grey sectors.", c: "Conceal identity, disrupt signals, and dismantle the network." }
-        ];
-
-        function startQuiz() {
-            quizStep = 0;
-            scores = { utopia: 0, paradise: 0, dystopia: 0 };
-            updateQuizUI();
-            ['landing', 'utopia', 'paradise', 'dystopia', 'archive'].forEach(v => {
-                const el = document.getElementById(`view-${v}`);
-                if (el) el.classList.add('hidden');
-            });
-            document.getElementById('view-quiz').classList.remove('hidden');
-        }
-
-        function updateQuizUI() {
-            document.getElementById('quiz-progress').style.width = `${((quizStep + 1) / 3) * 100}%`;
-            document.getElementById('quiz-step').innerText = `TRINITY SEQUENCE 0${quizStep + 1} // 03`;
-            document.getElementById('quiz-question').innerText = questions[quizStep].q;
-            document.getElementById('opt-a').innerText = "A. " + questions[quizStep].a;
-            document.getElementById('opt-b').innerText = "B. " + questions[quizStep].b;
-            document.getElementById('opt-c').innerText = "C. " + questions[quizStep].c;
-        }
-
-        function answerQuiz(faction) {
-            scores[faction]++;
-            quizStep++;
-            if (quizStep < 3) {
-                updateQuizUI();
-            } else {
-                document.getElementById('view-quiz').classList.add('hidden');
-                document.getElementById('view-loading').classList.remove('hidden');
-                let target = 'utopia';
-                if (scores.paradise >= scores.utopia && scores.paradise >= scores.dystopia) target = 'paradise';
-                else if (scores.dystopia >= scores.utopia && scores.dystopia >= scores.paradise) target = 'dystopia';
-                setTimeout(() => {
-                    document.getElementById('view-loading').classList.add('hidden');
-                    enterFaction(target);
-                }, 1000);
-            }
-        }
-
-        // --- 7. 数量与 7 尺码选择逻辑 ---
-        function changeCardQty(id, delta) {
-            let span = document.getElementById(`qty-${id}`);
-            let current = parseInt(span.innerText);
-            let next = current + delta;
-            if (next < 1) next = 1;
-            span.innerText = next;
-            document.getElementById(`btn-${id}`).setAttribute('data-item-quantity', next);
-        }
-        function selectCardSize(productId, sizeLabel, btnElement) {
-            const container = btnElement.parentElement;
-            container.querySelectorAll('button').forEach(b => b.className = "h-10 text-[11px] font-mono border border-stone-700/60 rounded text-stone-400 hover:border-white transition");
-            if (productId.includes('U')) btnElement.className = "h-10 text-[11px] font-mono border border-slate-900 bg-slate-900 text-white rounded font-bold";
-            else if (productId.includes('P')) btnElement.className = "h-10 text-[11px] font-mono border border-amber-500 bg-amber-600 text-black font-bold rounded";
-            else btnElement.className = "h-10 text-[11px] font-mono border border-red-600 bg-red-600 text-white font-bold rounded";
-            const cartBtn = document.getElementById(`btn-${productId}`);
-            if (cartBtn) cartBtn.setAttribute('data-item-custom1-value', sizeLabel);
-        }
-
-        // --- 8. 政策弹窗 ---
-        function openShippingModal() {
-            openInfoModal('SHIPPING POLICY & TIMELINE', 
-                `1. CANADA EXPRESS: C$9.77 flat rate tracked courier across all 10 provinces. Free shipping on orders over C$154.00.\n` +
-                `2. LOCAL PICKUP: Free self-pickup available at our Richmond, BC hub upon dispatch notification.\n` +
-                `3. US & INTERNATIONAL: Calculated live at checkout based on destination country taxes & customs.\n` +
-                `4. PRE-ORDER DISPATCH SCHEDULE: Production closes after Drop 01 lock. All numbered pieces dispatch within 7 business days from order lock.`
-            );
-        }
-
-        function openReturnsModal() {
-            openInfoModal('RETURNS & EXCHANGES POLICY', 
-                `1. 14-DAY PROTOCOL: Complimentary return window begins on the exact date of carrier delivery confirmation.\n` +
-                `2. INTEGRITY REQUIREMENT: Items must remain unworn, unwashed, and with both embedded NFC chips and serialized archival tags completely intact.\n` +
-                `3. REFUND PROCESSING: Approved returns will be credited to the original payment method within 5–7 business days. Original shipping fees are non-refundable.`
-            );
-        }
-
-        function openPrivacyModal() {
-            openInfoModal('PIPEDA COMPLIANT PRIVACY POLICY', 
-                `1. DATA COLLECTION: WITHIN SEVEN collects email addresses and shipping information solely for order fulfillment, unique serial assignment, and essential drop notifications under Canadian PIPEDA regulations.\n` +
-                `2. ZERO THIRD-PARTY SIGNAL TRADING: We never sell, trade, or monetize your personal transmission signals or browsing behaviors.\n` +
-                `3. ENCRYPTED INFRASTRUCTURE: Checkout data and payment processing are handled via PCI-compliant Snipcart and EmailJS TLS endpoints.`
-            );
-        }
-
-        function openInfoModal(title, text) {
-            document.getElementById('info-modal-title').innerText = `// ${title}`;
-            document.getElementById('info-modal-body').innerText = text;
-            document.getElementById('modal-info').classList.remove('hidden');
-        }
-        function closeInfoModal() { document.getElementById('modal-info').classList.add('hidden'); }
-
-        // --- 9. 独立尺码表 ---
-        function openSizeGuide(type) {
-            const tableBody = document.getElementById('size-table-body');
-            const title = document.getElementById('size-guide-title');
-            
-            if (type === 'Knit') {
-                title.innerText = "// ARCHIVAL KNIT SWEATER SIZE GUIDE (GARMENT CIRCUMFERENCE)";
-                tableBody.innerHTML = `
-                    <tr><td class="py-2 font-bold text-white">01</td><td>XS</td><td>114</td><td>57</td><td>66</td></tr>
-                    <tr><td class="py-2 font-bold text-white">02</td><td>S</td><td>120</td><td>60</td><td>68</td></tr>
-                    <tr class="bg-stone-900/40"><td class="py-2 font-bold text-amber-400">03</td><td class="text-amber-400">M (STANDARD)</td><td class="text-amber-400">126</td><td class="text-amber-400">63</td><td class="text-amber-400">71</td></tr>
-                    <tr><td class="py-2 font-bold text-white">04</td><td>L</td><td>132</td><td>66</td><td>74</td></tr>
-                    <tr><td class="py-2 font-bold text-white">05</td><td>XL</td><td>138</td><td>69</td><td>77</td></tr>
-                    <tr><td class="py-2 font-bold text-white">06</td><td>XXL</td><td>144</td><td>72</td><td>79</td></tr>
-                    <tr><td class="py-2 font-bold text-white">07</td><td>XXXL</td><td>150</td><td>75</td><td>81</td></tr>
-                `;
-            } else {
-                title.innerText = "// ARCHIVAL TEE SIZE GUIDE (GARMENT CIRCUMFERENCE)";
-                tableBody.innerHTML = `
-                    <tr><td class="py-2 font-bold text-white">01</td><td>XS</td><td>108</td><td>54</td><td>68</td></tr>
-                    <tr><td class="py-2 font-bold text-white">02</td><td>S</td><td>114</td><td>57</td><td>70</td></tr>
-                    <tr class="bg-stone-900/40"><td class="py-2 font-bold text-amber-400">03</td><td class="text-amber-400">M (STANDARD)</td><td class="text-amber-400">120</td><td class="text-amber-400">60</td><td class="text-amber-400">73</td></tr>
-                    <tr><td class="py-2 font-bold text-white">04</td><td>L</td><td>126</td><td>63</td><td>76</td></tr>
-                    <tr><td class="py-2 font-bold text-white">05</td><td>XL</td><td>132</td><td>66</td><td>79</td></tr>
-                    <tr><td class="py-2 font-bold text-white">06</td><td>XXL</td><td>138</td><td>69</td><td>81</td></tr>
-                    <tr><td class="py-2 font-bold text-white">07</td><td>XXXL</td><td>144</td><td>72</td><td>83</td></tr>
-                `;
-            }
-            document.getElementById('modal-size-guide').classList.remove('hidden');
-        }
-        function closeSizeGuide() { document.getElementById('modal-size-guide').classList.add('hidden'); }
-
-        // --- 10. Modal & Product 相册切图 ---
-        let currentModalImgs = [];
-        let modalQty = 1;
-
-        function openProductModal(id, title, price, desc, imgArray, fabric, weight, type) {
-            currentModalImgs = imgArray;
-            document.getElementById('modal-code').innerText = `${id}-2026 ARCHIVE`;
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-price').innerText = `C$${price}.00 CAD`;
-            document.getElementById('modal-spec-fabric').innerText = fabric;
-            document.getElementById('modal-spec-weight').innerText = weight;
-            modalQty = 1;
-            document.getElementById('modal-qty').innerText = modalQty;
-
-            switchModalImage(0);
-
-            const buyBtn = document.getElementById('modal-buy-btn');
-            buyBtn.setAttribute('data-item-id', id);
-            buyBtn.setAttribute('data-item-name', title);
-            buyBtn.setAttribute('data-item-price', price.toFixed(2));
-            buyBtn.setAttribute('data-item-url', 'https://withinseven.com/');
-            buyBtn.setAttribute('data-item-custom1-name', 'Size');
-            buyBtn.setAttribute('data-item-custom1-value', '03 / M');
-            buyBtn.setAttribute('data-item-quantity', modalQty);
-
-            selectModalSize('03 / M');
-            document.getElementById('modal-product').classList.remove('hidden');
-        }
-
-        function switchModalImage(index) {
-            if (currentModalImgs && currentModalImgs[index]) {
-                document.getElementById('modal-img').src = currentModalImgs[index];
-                document.querySelectorAll('.modal-thumb-btn').forEach((btn, i) => {
-                    if (i === index) btn.className = "modal-thumb-btn flex-1 py-2 text-[10px] font-mono border border-white bg-white text-black font-bold rounded text-center cursor-pointer min-h-[36px]";
-                    else btn.className = "modal-thumb-btn flex-1 py-2 text-[10px] font-mono border border-stone-800 bg-stone-900 text-stone-400 hover:text-white rounded text-center cursor-pointer min-h-[36px]";
-                });
-            }
-        }
-
-        function closeProductModal() { document.getElementById('modal-product').classList.add('hidden'); }
-        function selectModalSize(sizeLabel) {
-            document.querySelectorAll('.modal-size-btn').forEach(b => {
-                if (b.getAttribute('data-size') === sizeLabel) b.className = "modal-size-btn border border-white py-2 text-xs font-bold bg-white text-black rounded min-h-[36px]";
-                else b.className = "modal-size-btn border border-stone-800 py-2 text-xs font-bold text-stone-400 hover:border-stone-500 rounded min-h-[36px]";
-            });
-            document.getElementById('modal-buy-btn').setAttribute('data-item-custom1-value', sizeLabel);
-        }
-        function changeModalQty(delta) {
-            modalQty += delta;
-            if (modalQty < 1) modalQty = 1;
-            document.getElementById('modal-qty').innerText = modalQty;
-            document.getElementById('modal-buy-btn').setAttribute('data-item-quantity', modalQty);
-        }
-
-        // --- 11. EmailJS Engine ---
-        function handleSubscribe(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('subscriber-email');
-            const btn = document.getElementById('subscribe-btn');
-            const status = document.getElementById('subscribe-status');
-            btn.innerText = "TRANSMITTING..."; btn.disabled = true;
-
-            emailjs.send("service_h9efu33", "template_vqygtvd", { user_email: emailInput.value }, "KJOBMZTZ7SCJuXcQ8")
-            .then(() => {
-                btn.innerText = "JOINED";
-                btn.disabled = false;
-                status.className = "text-[10px] mt-2 font-mono text-emerald-400 block";
-                status.innerText = "SIGNAL TRANSMITTED // ACCESS PROTOCOL DISPATCHED TO INBOX.";
-                emailInput.value = "";
-            })
-            .catch(err => {
-                console.error("EmailJS Error:", err);
-                btn.innerText = "RETRY";
-                btn.disabled = false;
-                status.className = "text-[10px] mt-2 font-mono text-rose-500 block font-bold";
-                status.innerText = "⚠️ TRANSMISSION FAILED. CHECK SYSTEM CONNECTION.";
-            });
-        }
-
-        // --- 12. Cookie Management & Initialization ---
-        document.addEventListener("DOMContentLoaded", () => {
-            if (!localStorage.getItem('ws_cookie_consent')) setTimeout(() => document.getElementById('cookie-banner').classList.remove('translate-y-full'), 2000);
-            initUserCode();
-            renderArchive();
-        });
-        function openCookieSettings() { document.getElementById('modal-cookie-settings').classList.remove('hidden'); }
-        function closeCookieSettings() { document.getElementById('modal-cookie-settings').classList.add('hidden'); }
-        function saveCookiePreferences(acceptAll = false) {
-            if (acceptAll) { localStorage.setItem('ws_cookie_analytics', 'true'); }
-            else { localStorage.setItem('ws_cookie_analytics', document.getElementById('cookie-analytics').checked); }
-            localStorage.setItem('ws_cookie_consent', 'true');
-            closeCookieSettings(); document.getElementById('cookie-banner').classList.add('translate-y-full');
-        }
-    </script>
+  </div>
+
+  <!-- INTERACTIVE JS -->
+  <script>
+    let selectedColor = 'Utopia (White)';
+    let selectedSize = 'M';
+
+    function selectColor(colorName, hexColor, textColorClass) {
+      selectedColor = colorName;
+      document.getElementById('product-color-title').innerText = `ALIGNMENT: ${colorName.toUpperCase()}`;
+      document.getElementById('product-color-display').style.backgroundColor = hexColor;
+
+      // Update Snipcart custom data attribute
+      const btn = id('buy-button');
+      btn.setAttribute('data-item-custom1-value', colorName);
+
+      // Highlight UI
+      document.querySelectorAll('.color-btn').forEach(b => {
+        b.classList.remove('border-white', 'text-white');
+        b.classList.add('border-subtle', 'text-neutral-400');
+      });
+      event.currentTarget.classList.remove('border-subtle', 'text-neutral-400');
+      event.currentTarget.classList.add('border-white', 'text-white');
+    }
+
+    function selectSize(size) {
+      selectedSize = size;
+      const btn = id('buy-button');
+      btn.setAttribute('data-item-custom2-value', size);
+
+      document.querySelectorAll('.size-btn').forEach(b => {
+        b.classList.remove('border-white', 'bg-white', 'text-black', 'font-bold');
+        b.classList.add('border-subtle');
+      });
+      event.currentTarget.classList.remove('border-subtle');
+      event.currentTarget.classList.add('border-white', 'bg-white', 'text-black', 'font-bold');
+    }
+
+    function id(e) { return document.getElementById(e); }
+    function openWaitlistModal() { id('waitlist-modal').style.display = 'flex'; }
+    function closeWaitlistModal() { id('waitlist-modal').style.display = 'none'; }
+  </script>
 </body>
 </html>
