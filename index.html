@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WITHIN SEVEN — Drop 01</title>
   
+  <!-- FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -12,7 +15,6 @@
   <script>
     window.SnipcartSettings = {
       publicApiKey: 'ZDJmZTZIY2ItNzEwOC00NzQxLWFHNWUtOGFhNDQxNzM2NjM5M2E2MTg0MzQxNzMz',
-      loadStrategy: 'on-user-interaction',
       modalTemplate: 'custom',
     };
   </script>
@@ -42,15 +44,36 @@
     </button>
   </div>
 
-  <!-- HEADER -->
-  <header class="border-b border-subtle py-6 px-6 md:px-12 flex justify-between items-center sticky top-0 bg-black/90 backdrop-blur z-40">
-    <a href="#" class="text-xl font-bold tracking-tighter text-white">WITHIN SEVEN</a>
+  <!-- HEADER WITH DUAL LOGO SUPPORT -->
+  <header class="border-b border-subtle py-5 px-6 md:px-12 flex justify-between items-center sticky top-0 bg-black/90 backdrop-blur z-40">
+    
+    <!-- BRAND LOGO AREA -->
+    <a href="#" class="flex items-center gap-3 text-white hover:opacity-80 transition-opacity">
+      <!-- 1. 本地图片 Logo 自动尝试加载（如无图片则自动切换显示 SVG 徽标） -->
+      <img 
+        src="logo.svg" 
+        alt="WITHIN SEVEN Logo" 
+        class="h-7 w-auto hidden" 
+        onload="this.classList.remove('hidden'); document.getElementById('fallback-logo-svg').classList.add('hidden');"
+        onerror="this.remove()" 
+      />
+
+      <!-- 2. 暗黑极简 W7 矢量徽标 + 品牌名 -->
+      <div id="fallback-logo-svg" class="flex items-center gap-2.5">
+        <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 3H22V6H8.2L14.8 19.2L12.1 20.5L4.5 5.3V3H2Z"/>
+          <path d="M19.5 9.5L18 11L21 14L18 17L19.5 18.5L24 14L19.5 9.5Z"/>
+        </svg>
+        <span class="text-lg font-extrabold tracking-tighter text-white font-sans">WITHIN SEVEN</span>
+      </div>
+    </a>
     
     <div class="flex items-center gap-6 text-xs uppercase tracking-wider">
       <a href="#archive" class="hover:text-neutral-400 transition-colors">ARCHIVE</a>
       <a href="#about" class="hover:text-neutral-400 transition-colors hidden md:inline">PROTOCOL</a>
+      
       <!-- SNIPCART CART TRIGGER -->
-      <button class="snipcart-checkout flex items-center gap-2 border border-subtle px-4 py-2 hover:bg-white hover:text-black transition-all">
+      <button class="snipcart-checkout flex items-center gap-2 border border-subtle px-4 py-2 hover:bg-white hover:text-black transition-all cursor-pointer">
         <span>INVENTORY</span>
         <span class="snipcart-items-count bg-neutral-800 text-white text-[10px] px-1.5 py-0.5 rounded-full border border-neutral-700">0</span>
       </button>
@@ -69,13 +92,25 @@
             <span>LIMIT: 777 PIECES</span>
           </div>
           
-          <div class="my-auto text-center space-y-2">
-            <div id="product-color-display" class="w-32 h-32 mx-auto rounded-full border border-subtle transition-all duration-500 bg-neutral-100"></div>
-            <p id="product-color-title" class="text-xs uppercase tracking-widest text-neutral-400 pt-4">ALIGNMENT: UTOPIA (WHITE)</p>
+          <div class="my-auto text-center space-y-3">
+            <div id="product-color-display" class="w-32 h-32 mx-auto rounded-full border border-subtle transition-all duration-500 bg-neutral-100 flex items-center justify-center">
+              <!-- 无线感应 Icon 水印 -->
+              <svg class="w-8 h-8 text-black/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18a6 6 0 100-12 6 6 0 000 12z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+              </svg>
+            </div>
+            <p id="product-color-title" class="text-xs uppercase tracking-widest text-neutral-400 pt-2">ALIGNMENT: UTOPIA (WHITE)</p>
           </div>
 
           <div class="text-xs text-neutral-600 flex justify-between">
-            <span>HEAVYWEIGHT RAW UNIFORM</span>
+            <span class="flex items-center gap-1.5">
+              <!-- 无线信号 Icon -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071a10 10 0 0114.142 0M2.929 8.929a15 15 0 0121.214 0" />
+              </svg>
+              HEAVYWEIGHT RAW UNIFORM
+            </span>
             <span>MADE IN CANADA</span>
           </div>
         </div>
@@ -96,19 +131,19 @@
         <div class="space-y-3">
           <label class="text-xs uppercase tracking-widest text-neutral-400 block">1. SELECT ALIGNMENT (COLOR)</label>
           <div class="grid grid-cols-2 gap-3 text-xs">
-            <button onclick="selectColor('Utopia (White)', '#ffffff', 'text-black')" class="color-btn border border-white bg-neutral-900 text-white p-3 text-left hover:border-white transition-all">
+            <button onclick="selectColor('Utopia (White)', '#ffffff', 'text-black', this)" class="color-btn border border-white bg-neutral-900 text-white p-3 text-left hover:border-white transition-all">
               <span class="block font-bold">UTOPIA</span>
               <span class="text-[10px] text-neutral-500">Pure White</span>
             </button>
-            <button onclick="selectColor('Lost Paradise (Amber)', '#d97706', 'text-white')" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
+            <button onclick="selectColor('Lost Paradise (Amber)', '#d97706', 'text-white', this)" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
               <span class="block font-bold">LOST PARADISE</span>
               <span class="text-[10px] text-neutral-500">Deep Amber</span>
             </button>
-            <button onclick="selectColor('Dystopia (Red)', '#dc2626', 'text-white')" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
+            <button onclick="selectColor('Dystopia (Red)', '#dc2626', 'text-white', this)" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
               <span class="block font-bold">DYSTOPIA</span>
               <span class="text-[10px] text-neutral-500">Crimson Red</span>
             </button>
-            <button onclick="selectColor('Cyber Blue', '#2563eb', 'text-white')" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
+            <button onclick="selectColor('Cyber Blue', '#2563eb', 'text-white', this)" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
               <span class="block font-bold">CYBER BLUE</span>
               <span class="text-[10px] text-neutral-500">Electric Blue</span>
             </button>
@@ -119,15 +154,15 @@
         <div class="space-y-3">
           <label class="text-xs uppercase tracking-widest text-neutral-400 block">2. SELECT SIZE (UNISEX BOXYS)</label>
           <div class="grid grid-cols-5 gap-2 text-xs">
-            <button onclick="selectSize('S')" class="size-btn border border-subtle p-2.5 text-center hover:border-white">S</button>
-            <button onclick="selectSize('M')" class="size-btn border border-white bg-white text-black p-2.5 text-center font-bold">M</button>
-            <button onclick="selectSize('L')" class="size-btn border border-subtle p-2.5 text-center hover:border-white">L</button>
-            <button onclick="selectSize('XL')" class="size-btn border border-subtle p-2.5 text-center hover:border-white">XL</button>
-            <button onclick="selectSize('XXL')" class="size-btn border border-subtle p-2.5 text-center hover:border-white">XXL</button>
+            <button onclick="selectSize('S', this)" class="size-btn border border-subtle p-2.5 text-center hover:border-white">S</button>
+            <button onclick="selectSize('M', this)" class="size-btn border border-white bg-white text-black p-2.5 text-center font-bold">M</button>
+            <button onclick="selectSize('L', this)" class="size-btn border border-subtle p-2.5 text-center hover:border-white">L</button>
+            <button onclick="selectSize('XL', this)" class="size-btn border border-subtle p-2.5 text-center hover:border-white">XL</button>
+            <button onclick="selectSize('XXL', this)" class="size-btn border border-subtle p-2.5 text-center hover:border-white">XXL</button>
           </div>
         </div>
 
-        <!-- SNIPCART ADD TO CART BUTTON -->
+        <!-- SNIPCART ADD TO CART BUTTON (CRITICAL FIX: data-item-url="/") -->
         <div class="pt-4 space-y-3">
           <button 
             id="buy-button"
@@ -135,10 +170,10 @@
             data-item-id="form-01-uniform"
             data-item-name="WITHIN SEVEN — FORM 01 UNIFORM"
             data-item-price="154.00"
-            data-item-url="https://withinseven.com"
+            data-item-url="/"
             data-item-description="Heavyweight Raw Cotton Uniform. Includes sealed physical claim key & embedded NTAG213 entry."
             data-item-custom1-name="Alignment / Color"
-            data-item-custom1-options="Utopia (White)[+0.00]|Lost Paradise (Amber)[+0.00]|Dystopia (Red)[+0.00]|Cyber Blue[+0.00]"
+            data-item-custom1-options="Utopia (White)|Lost Paradise (Amber)|Dystopia (Red)|Cyber Blue"
             data-item-custom1-value="Utopia (White)"
             data-item-custom2-name="Size"
             data-item-custom2-options="S|M|L|XL|XXL"
@@ -184,19 +219,35 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-xs">
         <div class="border border-subtle p-6 space-y-3 bg-black">
-          <div class="text-neutral-500 font-bold">01 / TAP OR SCAN</div>
+          <div class="text-neutral-500 font-bold flex items-center gap-2">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18a6 6 0 100-12 6 6 0 000 12z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 100-18 9 9 0 000 18z"/>
+            </svg>
+            01 / TAP OR SCAN
+          </div>
           <p class="text-neutral-300 leading-normal">
             Tap the NFC label inside the lower hem with your smartphone, or scan the high-contrast QR code on the back of the label to open the garment entry.
           </p>
         </div>
         <div class="border border-subtle p-6 space-y-3 bg-black">
-          <div class="text-neutral-500 font-bold">02 / REVEAL KEY</div>
+          <div class="text-neutral-500 font-bold flex items-center gap-2">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+            </svg>
+            02 / REVEAL KEY
+          </div>
           <p class="text-neutral-300 leading-normal">
             Unseal the physical card included in your package to reveal your 12-character Claim Key. This key proves you own the physical garment.
           </p>
         </div>
         <div class="border border-subtle p-6 space-y-3 bg-black">
-          <div class="text-neutral-500 font-bold">03 / 7-DAY SENTENCE</div>
+          <div class="text-neutral-500 font-bold flex items-center gap-2">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+            </svg>
+            03 / 7-DAY SENTENCE
+          </div>
           <p class="text-neutral-300 leading-normal">
             Publish one statement (up to 140 chars). It remains on the public ledger for exactly 7 days before fading into the permanent archive.
           </p>
@@ -205,12 +256,12 @@
     </div>
   </section>
 
-  <!-- ARCHIVE SECTION (NO MISLEADING NFC CLAIMS) -->
+  <!-- ARCHIVE SECTION -->
   <section id="archive" class="py-16 px-6 md:px-12 max-w-7xl mx-auto w-full space-y-8">
     <div class="flex justify-between items-end border-b border-subtle pb-4">
       <div>
         <span class="text-xs text-neutral-500 tracking-widest uppercase">PUBLIC LEDGER</span>
-        <h2 class="text-xl font-bold text-white font-sans mt-1">ACTIVE EXPRESSIONS</h2>
+        <h2 class="text-1xl font-bold text-white font-sans mt-1">ACTIVE EXPRESSIONS</h2>
       </div>
       <span class="text-xs text-neutral-500">LIVE FEED</span>
     </div>
@@ -240,7 +291,13 @@
   <footer class="border-t border-subtle py-12 px-6 md:px-12 bg-black text-xs text-neutral-500 space-y-8">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
       <div class="space-y-3">
-        <div class="text-white font-bold tracking-tighter">WITHIN SEVEN</div>
+        <!-- FOOTER BRAND WITH ICON -->
+        <div class="text-white font-bold tracking-tighter flex items-center gap-2">
+          <svg class="w-4 h-4 text-white fill-current" viewBox="0 0 24 24">
+            <path d="M2 3H22V6H8.2L14.8 19.2L12.1 20.5L4.5 5.3V3H2Z"/>
+          </svg>
+          WITHIN SEVEN
+        </div>
         <p class="text-[11px] leading-relaxed">
           Vancouver, BC, Canada.<br />
           A meaning only you can assign.
@@ -294,30 +351,31 @@
     </div>
   </div>
 
+  <!-- EXPLICIT SNIPCART CONTAINER (CRITICAL FIX) -->
+  <div id="snipcart" data-api-key="ZDJmZTZIY2ItNzEwOC00NzQxLWFHNWUtOGFhNDQxNzM2NjM5M2E2MTg0MzQxNzMz" hidden></div>
+
   <!-- INTERACTIVE JS -->
   <script>
     let selectedColor = 'Utopia (White)';
     let selectedSize = 'M';
 
-    function selectColor(colorName, hexColor, textColorClass) {
+    function selectColor(colorName, hexColor, textColorClass, element) {
       selectedColor = colorName;
       document.getElementById('product-color-title').innerText = `ALIGNMENT: ${colorName.toUpperCase()}`;
       document.getElementById('product-color-display').style.backgroundColor = hexColor;
 
-      // Update Snipcart custom data attribute
       const btn = id('buy-button');
       btn.setAttribute('data-item-custom1-value', colorName);
 
-      // Highlight UI
       document.querySelectorAll('.color-btn').forEach(b => {
         b.classList.remove('border-white', 'text-white');
         b.classList.add('border-subtle', 'text-neutral-400');
       });
-      event.currentTarget.classList.remove('border-subtle', 'text-neutral-400');
-      event.currentTarget.classList.add('border-white', 'text-white');
+      element.classList.remove('border-subtle', 'text-neutral-400');
+      element.classList.add('border-white', 'text-white');
     }
 
-    function selectSize(size) {
+    function selectSize(size, element) {
       selectedSize = size;
       const btn = id('buy-button');
       btn.setAttribute('data-item-custom2-value', size);
@@ -326,8 +384,8 @@
         b.classList.remove('border-white', 'bg-white', 'text-black', 'font-bold');
         b.classList.add('border-subtle');
       });
-      event.currentTarget.classList.remove('border-subtle');
-      event.currentTarget.classList.add('border-white', 'bg-white', 'text-black', 'font-bold');
+      element.classList.remove('border-subtle');
+      element.classList.add('border-white', 'bg-white', 'text-black', 'font-bold');
     }
 
     function id(e) { return document.getElementById(e); }
