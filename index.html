@@ -4,113 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WITHIN SEVEN — DROP 01</title>
+    
+    <!-- 谷歌先锋高奢字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <!-- Snipcart 官方 CSS -->
     <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
+
     <style>
         :root {
-            --bg: #080808;
-            --panel: #111111;
-            --border: #222222;
-            --text: #e5e5e5;
-            --muted: #777777;
-            --accent: #ff3333;
-            --live: #10b981;
-            --font-mono: 'Courier New', Courier, monospace;
+            --bg-dark: #050505;
+            --panel-bg: #0d0d0d;
+            --panel-border: #1a1a1a;
+            --accent-red: #ff2a2a;
+            --live-green: #00ff66;
+            --text-main: #f0f0f0;
+            --text-dim: #666666;
+            --font-main: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.5;
-            padding: 20px;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            -webkit-font-smoothing: antialiased;
+            padding: 0 20px 80px 20px;
+        }
+
+        /* 战术网格背景纹理 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
+        /* 顶栏 Header - 双 LOGO 组合 (图形 LOGO + 文字 LOGO) */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--panel-border);
+            margin-bottom: 50px;
         }
 
-        .logo {
+        .brand-logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        /* 图形 LOGO (先锋双重几何 [7] 徽章 SVG) */
+        .graphic-logo {
+            width: 32px;
+            height: 32px;
+            fill: none;
+            stroke: var(--text-main);
+            stroke-width: 2;
+        }
+
+        /* 文字 LOGO */
+        .text-logo {
             font-weight: 800;
-            letter-spacing: 3px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            letter-spacing: 6px;
+            color: var(--text-main);
+            text-transform: uppercase;
         }
 
-        .cart-summary {
+        .cart-trigger {
             font-family: var(--font-mono);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--panel-border);
+            padding: 10px 20px;
             cursor: pointer;
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            background: var(--panel);
-            color: var(--text);
+            transition: all 0.3s ease;
         }
 
-        /* 商品网格布局 */
-        .grid {
+        .cart-trigger:hover {
+            border-color: var(--text-main);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* 主架构 Display Grid */
+        .main-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: 60px;
         }
 
-        @media (min-width: 768px) {
-            .grid { grid-template-columns: 1fr 1fr; }
+        @media (min-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1.1fr 0.9fr;
+            }
         }
 
-        /* 3 图轮播画廊 (4:5 比例) */
-        .gallery {
+        /* 4:5 高奢相册 */
+        .gallery-wrap {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 16px;
         }
 
-        .main-img-container {
+        .main-stage {
             width: 100%;
             aspect-ratio: 4 / 5;
-            background: var(--panel);
-            border: 1px solid var(--border);
-            overflow: hidden;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--panel-border);
             position: relative;
+            overflow: hidden;
         }
 
-        .main-img-container img {
+        .main-stage img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: opacity 0.25s ease-in-out;
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .thumbs {
+        .tech-tag-overlay {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(4px);
+        }
+
+        .thumbs-row {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .thumb-btn {
-            width: 80px;
+            width: 85px;
             aspect-ratio: 4 / 5;
-            border: 1px solid var(--border);
-            background: var(--panel);
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
             cursor: pointer;
             overflow: hidden;
+            opacity: 0.4;
+            transition: all 0.2s ease;
             padding: 0;
-            opacity: 0.5;
-            transition: 0.2s;
         }
 
         .thumb-btn.active, .thumb-btn:hover {
             opacity: 1;
-            border-color: var(--text);
+            border-color: var(--text-main);
         }
 
         .thumb-btn img {
@@ -119,263 +185,395 @@
             object-fit: cover;
         }
 
-        /* 商品详情区 */
-        .product-info h1 {
-            font-size: 2rem;
+        /* 右侧产品属性 */
+        .product-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 【修改1】：核心说明 Slogan 区域 */
+        .core-slogan-box {
+            background: rgba(255, 42, 42, 0.04);
+            border: 1px solid rgba(255, 42, 42, 0.2);
+            padding: 16px 20px;
+            margin-bottom: 25px;
+        }
+
+        .core-slogan-title {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .core-slogan-sub {
+            font-family: var(--font-main);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .item-series {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-red);
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+
+        .item-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .item-price {
+            font-family: var(--font-mono);
+            font-size: 1.4rem;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .item-price span {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-left: 8px;
+        }
+
+        .item-description {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            border-left: 2px solid var(--panel-border);
+            padding-left: 15px;
+        }
+
+        /* 尺码选择器 */
+        .selector-box {
+            margin-bottom: 25px;
+        }
+
+        .selector-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .size-grid {
+            display: flex;
+            gap: 12px;
+        }
+
+        .size-chip {
+            width: 55px;
+            height: 55px;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            color: var(--text-main);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .size-chip:hover { border-color: var(--text-dim); }
+
+        .size-chip.active {
+            background: var(--text-main);
+            color: var(--bg-dark);
+            border-color: var(--text-main);
+        }
+
+        .size-alert {
+            color: var(--accent-red);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            margin-top: 10px;
+            display: none;
+            letter-spacing: 1px;
+        }
+
+        /* 购买按钮 */
+        .action-buy-btn {
+            width: 100%;
+            padding: 20px;
+            background: var(--text-main);
+            color: var(--bg-dark);
+            border: none;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-bottom: 40px;
+        }
+
+        .action-buy-btn:hover {
+            background: #ffffff;
+            box-shadow: 0 0 25px rgba(255,255,255,0.15);
+            transform: translateY(-1px);
+        }
+
+        /* 【修改3】：免费访客模拟器 (GUEST SIMULATOR) */
+        .simulator-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .simulator-title {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--text-dim);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sim-input {
+            width: 100%;
+            background: #000;
+            border: 1px solid var(--panel-border);
+            padding: 12px 15px;
+            color: var(--text-main);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .sim-input:focus {
+            border-color: var(--text-dim);
+        }
+
+        .sim-card-preview {
+            background: #000;
+            border: 1px dashed rgba(255,255,255,0.15);
+            padding: 20px;
+            position: relative;
+        }
+
+        .sim-badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .sim-badge {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            padding: 4px 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sim-badge.guest { color: #f59e0b; border-color: rgba(245, 158, 11, 0.3); }
+        .sim-badge.unassigned { color: var(--text-dim); }
+        .sim-badge.not-published { color: var(--accent-red); border-color: rgba(255, 42, 42, 0.3); }
+
+        .sim-statement-text {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            min-height: 48px;
+        }
+
+        .sim-claim-cta {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 14px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .sim-claim-cta:hover {
+            background: var(--text-main);
+            color: var(--bg-dark);
+        }
+
+        /* 【修改2 & 4】：3步规则与 Manifesto 区 */
+        .rules-manifesto-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--panel-border);
+        }
+
+        .section-heading {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--text-dim);
+            margin-bottom: 30px;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        @media (min-width: 768px) {
+            .rules-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .rule-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            padding: 24px;
+        }
+
+        .rule-num {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .rule-title {
+            font-weight: 700;
+            font-size: 1.1rem;
             letter-spacing: 1px;
             margin-bottom: 10px;
         }
 
-        .price {
-            font-size: 1.5rem;
-            font-family: var(--font-mono);
-            margin-bottom: 20px;
-            color: var(--text);
-        }
-
-        .currency-tag {
-            font-size: 0.8rem;
-            color: var(--muted);
-            margin-left: 5px;
-        }
-
-        .desc {
-            color: var(--muted);
-            margin-bottom: 30px;
-            font-size: 0.95rem;
-        }
-
-        /* 尺码选择区 */
-        .size-section {
-            margin-bottom: 25px;
-        }
-
-        .label {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--muted);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .size-options {
-            display: flex;
-            gap: 10px;
-        }
-
-        .size-btn {
-            width: 50px;
-            height: 50px;
-            border: 1px solid var(--border);
-            background: var(--panel);
-            color: var(--text);
-            font-family: var(--font-mono);
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .size-btn:hover {
-            border-color: var(--muted);
-        }
-
-        .size-btn.active {
-            border-color: var(--text);
-            background: var(--text);
-            color: var(--bg);
-        }
-
-        .error-msg {
-            color: var(--accent);
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            margin-top: 8px;
-            display: none;
-        }
-
-        /* 购买按钮 */
-        .buy-btn {
-            width: 100%;
-            padding: 18px;
-            background: var(--text);
-            color: var(--bg);
-            border: none;
-            font-family: var(--font-mono);
-            font-weight: bold;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-bottom: 40px;
-        }
-
-        .buy-btn:hover {
-            background: #ffffff;
-            box-shadow: 0 0 15px rgba(255,255,255,0.2);
-        }
-
-        /* PLG 实时终端面板 */
-        .terminal-box {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            padding: 25px;
-            font-family: var(--font-mono);
-            margin-top: 20px;
-        }
-
-        .terminal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 12px;
-            margin-bottom: 20px;
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 8px;
-            border-radius: 2px;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        .status-badge.live { background: rgba(16, 185, 129, 0.1); color: var(--live); }
-        .status-badge.idle { background: rgba(255, 255, 255, 0.05); color: var(--muted); }
-
-        .garment-meta {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .garment-meta .num { color: var(--accent); font-weight: bold; }
-        .garment-meta .tag { background: #222; padding: 2px 6px; font-size: 0.75rem; }
-
-        .statement-text {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            color: var(--text);
-            word-break: break-word;
-        }
-
-        .terminal-footer {
-            font-size: 0.75rem;
-            color: var(--muted);
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            border-top: 1px dashed var(--border);
-            padding-top: 12px;
-        }
-
-        .grace-tag {
-            color: #f59e0b;
-            font-size: 0.75rem;
-            margin-top: 10px;
-        }
-
-        .anchor-cta-btn {
-            background: transparent;
-            border: 1px solid var(--text);
-            color: var(--text);
-            padding: 10px 16px;
-            font-family: var(--font-mono);
+        .rule-desc {
             font-size: 0.85rem;
-            cursor: pointer;
-            margin-top: 15px;
-            width: 100%;
-            transition: 0.2s;
+            color: var(--text-dim);
+            line-height: 1.6;
         }
 
-        .anchor-cta-btn:hover {
-            background: var(--text);
-            color: var(--bg);
+        .manifesto-box {
+            background: rgba(255,255,255,0.02);
+            border-left: 2px solid var(--text-main);
+            padding: 25px 30px;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-main);
         }
 
-        /* 消费者保护合规条款声明区 */
-        .legal-section {
-            margin-top: 60px;
+        /* 底部法务 Compliance Footer */
+        .legal-footer {
+            margin-top: 80px;
             padding-top: 30px;
-            border-top: 1px solid var(--border);
-            font-size: 0.8rem;
-            color: var(--muted);
+            border-top: 1px solid var(--panel-border);
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 30px;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            line-height: 1.6;
         }
 
         @media (min-width: 768px) {
-            .legal-section { grid-template-columns: 1fr 1fr; }
+            .legal-footer { grid-template-columns: 1fr 1fr; }
         }
 
-        .legal-card h4 {
-            color: var(--text);
-            margin-bottom: 8px;
+        .legal-block h5 {
             font-family: var(--font-mono);
+            color: var(--text-main);
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <!-- Header: 双 LOGO (图形 + 文字) -->
     <header>
-        <div class="logo">WITHIN SEVEN</div>
-        <!-- Snipcart 购物车触发按钮 -->
-        <button class="cart-summary snipcart-checkout">
-            CART (<span class="snipcart-items-count">0</span>)
+        <a href="#" class="brand-logo-wrap">
+            <!-- 先锋图形 LOGO (双重 [7] 徽标) -->
+            <svg class="graphic-logo" viewBox="0 0 32 32">
+                <rect x="2" y="2" width="28" height="28" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <path d="M10 10H22L14 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/>
+            </svg>
+            <!-- 文字 LOGO -->
+            <span class="text-logo">WITHIN SEVEN</span>
+        </a>
+        <button class="cart-trigger snipcart-checkout">
+            BAG [<span class="snipcart-items-count">0</span>]
         </button>
     </header>
 
-    <div class="grid">
-        <!-- 3 图画廊区 -->
-        <div class="gallery">
-            <div class="main-img-container">
-                <img id="main-product-img" src="front.jpg" alt="WITHIN SEVEN Garment Front" onerror="this.src='https://via.placeholder.com/600x750/111/fff?text=FRONT+VIEW'">
+    <!-- Main Display Grid -->
+    <div class="main-grid">
+        
+        <!-- Gallery Stage -->
+        <div class="gallery-wrap">
+            <div class="main-stage">
+                <span class="tech-tag-overlay">FRAME // 01 [FRONT]</span>
+                <img id="stage-image" src="front.jpg" alt="Drop 01 Garment" onerror="this.src='https://via.placeholder.com/800x1000/0d0d0d/333333?text=DROP+01+FRONT+VIEW'">
             </div>
-            <div class="thumbs">
-                <button class="thumb-btn active" onclick="switchImage('front.jpg', this)">
-                    <img src="front.jpg" alt="Front" onerror="this.src='https://via.placeholder.com/150x187/111/fff?text=FRONT'">
+            <div class="thumbs-row">
+                <button class="thumb-btn active" onclick="updateStage('front.jpg', 'FRAME // 01 [FRONT]', this)">
+                    <img src="front.jpg" alt="Front" onerror="this.src='https://via.placeholder.com/200x250/0d0d0d/333333?text=01'">
                 </button>
-                <button class="thumb-btn" onclick="switchImage('back.jpg', this)">
-                    <img src="back.jpg" alt="Back" onerror="this.src='https://via.placeholder.com/150x187/111/fff?text=BACK'">
+                <button class="thumb-btn" onclick="updateStage('back.jpg', 'FRAME // 02 [BACK]', this)">
+                    <img src="back.jpg" alt="Back" onerror="this.src='https://via.placeholder.com/200x250/0d0d0d/333333?text=02'">
                 </button>
-                <button class="thumb-btn" onclick="switchImage('detail.jpg', this)">
-                    <img src="detail.jpg" alt="Detail" onerror="this.src='https://via.placeholder.com/150x187/111/fff?text=DETAIL'">
+                <button class="thumb-btn" onclick="updateStage('detail.jpg', 'FRAME // 03 [DETAIL]', this)">
+                    <img src="detail.jpg" alt="Detail" onerror="this.src='https://via.placeholder.com/200x250/0d0d0d/333333?text=03'">
                 </button>
             </div>
         </div>
 
-        <!-- 商品购买信息与 PLG 终端 -->
-        <div class="product-info">
-            <h1>DROP 01 — DYSTOPIA ARMOR</h1>
-            <div class="price">$180.00 <span class="currency-tag">CAD (Excl. Tax & Shipping)</span></div>
-            <p class="desc">
-                Limited edition of 777 serialized heavy-gauge garments. Integrated with NTAG213 NFC claim tag & encrypted ledger key. Enables 7-day ephemerality terminal statement publishing.
-            </p>
-
-            <!-- 尺码选择器 -->
-            <div class="size-section">
-                <div class="label">SELECT SIZE [REQUIRED]</div>
-                <div class="size-options">
-                    <button class="size-btn" onclick="selectSize('S', this)">S</button>
-                    <button class="size-btn" onclick="selectSize('M', this)">M</button>
-                    <button class="size-btn" onclick="selectSize('L', this)">L</button>
-                    <button class="size-btn" onclick="selectSize('XL', this)">XL</button>
-                </div>
-                <div id="size-error" class="error-msg">⚠️ SELECT SIZE TO PURCHASE</div>
+        <!-- Product Details -->
+        <div class="product-meta">
+            
+            <!-- 【修改1】：增加的核心说明 Slogan 区域 -->
+            <div class="core-slogan-box">
+                <div class="core-slogan-title">ONE GARMENT. ONE PERMANENT NUMBER. A NEW STATEMENT EVERY SEVEN DAYS.</div>
+                <div class="core-slogan-sub">Numbers are assigned during final quality control and cannot be selected.</div>
             </div>
 
-            <!-- Snipcart 购买加购按钮 -->
+            <div class="item-series">LIMITED EDITION // 777 UNITS</div>
+            <h1 class="item-title">DROP 01 — DYSTOPIA ARMOR</h1>
+            <div class="item-price">$180.00 <span>CAD (Excluding Shipping & Taxes)</span></div>
+            
+            <p class="item-description">
+                Heavyweight 480GSM loopback cotton garment embedded with an encrypted NTAG213 NFC Claim Tag. Grants exclusive access to the 7-day ephemeral digital ledger terminal.
+            </p>
+
+            <!-- Size Selector -->
+            <div class="selector-box">
+                <div class="selector-label">SELECT SIZE [MANDATORY]</div>
+                <div class="size-grid">
+                    <button class="size-chip" onclick="applySize('S', this)">S</button>
+                    <button class="size-chip" onclick="applySize('M', this)">M</button>
+                    <button class="size-chip" onclick="applySize('L', this)">L</button>
+                    <button class="size-chip" onclick="applySize('XL', this)">XL</button>
+                </div>
+                <div id="size-warning" class="size-alert">⚠️ PLEASE SELECT A SIZE BEFORE ADDING TO BAG</div>
+            </div>
+
+            <!-- Snipcart Action Buy Button -->
             <button 
-                id="add-to-cart-btn"
-                class="buy-btn snipcart-add-item"
+                id="snipcart-btn"
+                class="action-buy-btn snipcart-add-item"
                 data-item-id="withinseven-drop01"
                 data-item-price="180.00"
                 data-item-url="/"
@@ -385,137 +583,146 @@
                 data-item-custom1-name="Size"
                 data-item-custom1-options="S|M|L|XL"
                 data-item-custom1-required="true"
-                onclick="validateSizeSelection(event)">
-                ADD TO CART
+                onclick="checkSizeSelection(event)">
+                PURCHASE DROP 01
             </button>
 
-            <!-- PLG 实时动态终端区 -->
-            <div class="terminal-box">
-                <div class="terminal-header">
-                    <span>LIVE LEDGER TERMINAL</span>
-                    <span>7-DAY EPHEMERALITY</span>
+            <!-- 【修改3】：免费访客体验模拟器 (GUEST PREVIEW SIMULATOR) -->
+            <div class="simulator-box">
+                <div class="simulator-title">
+                    <span>STATEMENT SIMULATOR</span>
+                    <span>FREE TRYOUT</span>
                 </div>
-                <div id="terminal-content">
-                    <div class="status-badge idle">CONNECTING TO EDGE WORKER...</div>
+                <input 
+                    type="text" 
+                    class="sim-input" 
+                    id="guest-sim-input" 
+                    placeholder="Type your statement here to simulate..."
+                    maxlength="140"
+                    oninput="updateSimPreview(this.value)">
+                
+                <div class="sim-card-preview">
+                    <div class="sim-badge-row">
+                        <span class="sim-badge guest">GUEST PREVIEW</span>
+                        <span class="sim-badge unassigned">UNASSIGNED SIGNAL</span>
+                        <span class="sim-badge not-published">PREVIEW ONLY — NOT PUBLISHED</span>
+                    </div>
+                    <div class="sim-statement-text" id="sim-text-target">
+                        "We build digital armor not to hide who we are, but to decide when we speak."
+                    </div>
+                    <button class="sim-claim-cta" onclick="jumpToPurchase()">
+                        CLAIM A NUMBERED GARMENT TO ENTER THE LEDGER
+                    </button>
                 </div>
             </div>
+
         </div>
     </div>
 
-    <!-- BC 省消费者保护法 (Consumer Protection BC 2026) 示警声明 -->
-    <div class="legal-section">
-        <div class="legal-card">
-            <h4>BC PRE-ORDER & DELIVERY NOTICE</h4>
-            <p>In compliance with BC Business Practices and Consumer Protection Code (2026): All Drop 01 orders are fulfilled within 30 days of pre-order confirmation. Full itemized invoice provided upon transaction.</p>
+    <!-- 【修改2 & 4】：3步规则与 Manifesto 区域 -->
+    <div class="rules-manifesto-section">
+        <div class="section-heading">// PROTOCOL & SYSTEM RULES</div>
+        
+        <div class="rules-grid">
+            <div class="rule-card">
+                <div class="rule-num">01 / UNBOXING</div>
+                <div class="rule-title">SEALED KEY</div>
+                <div class="rule-desc">Each garment comes with a physical scratch-off Claim Key on its label. Unseal it to bind ownership to your email.</div>
+            </div>
+            <div class="rule-card">
+                <div class="rule-num">02 / AUTHENTICATION</div>
+                <div class="rule-title">ONE-TIME BURN</div>
+                <div class="rule-desc">The Claim Key burns permanently after initial setup. Subsequent access uses seamless Magic Link authentication.</div>
+            </div>
+            <!-- 【修改2】：精确修改后的第 3 步 -->
+            <div class="rule-card">
+                <div class="rule-num">03 / 7-DAY SIGNAL</div>
+                <div class="rule-title">EPHEMERAL VOICE</div>
+                <div class="rule-desc">Publish one statement for exactly seven days. When the cycle ends, it disappears from public view and the numbered garment becomes ready to speak again.</div>
+            </div>
         </div>
-        <div class="legal-card">
-            <h4>CANCELLATION & RETURN POLICY</h4>
-            <p>Unclaimed key items with intact scratch-off seals are eligible for return within 14 days of receipt. Once the Claim Key tag seal is broken, digital ledger access is permanently assigned.</p>
+
+        <!-- 【修改4】：Manifesto -->
+        <div class="manifesto-box">
+            "Once the seven-day cycle expires, the signal disappears from public view. The garment returns to silence, ready for its next expression."
+        </div>
+    </div>
+
+    <!-- BC Consumer Protection 2026 Compliance -->
+    <div class="legal-footer">
+        <div class="legal-block">
+            <h5>PRE-ORDER & FULFILLMENT</h5>
+            <p>In accordance with the BC Business Practices & Consumer Protection Act (2026): Orders are dispatched within 30 days of payment confirmation. Itemized receipts provided automatically.</p>
+        </div>
+        <div class="legal-block">
+            <h5>CLAIM KEY & RETURN POLICY</h5>
+            <p>14-day return window applies to unworn garments with unbroken Claim Key scratch seals. Breaking the physical key seal permanently transfers ledger ownership.</p>
         </div>
     </div>
 </div>
 
-<!-- Snipcart 核心 HTML (已锁定 CAD 币种) -->
-<!-- 💡 提示：请将下面的 YOUR_SNIPCART_API_KEY 替换为你自己的 Snipcart API Key -->
+<!-- Snipcart Key Integration -->
+<!-- 自动配置 API Key: ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz -->
 <div id="snipcart" data-api-key="ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz" data-currency="cad" hidden></div>
 <script src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 
 <script>
-    let currentSelectedSize = '';
+    let chosenSize = '';
 
-    // 1. 三图画廊平滑切换
-    function switchImage(src, btnEl) {
-        const mainImg = document.getElementById('main-product-img');
-        mainImg.style.opacity = '0.3';
+    // 1. 三图画廊切换
+    function updateStage(imgSrc, frameTag, btnElement) {
+        const stageImg = document.getElementById('stage-image');
+        const overlay = document.querySelector('.tech-tag-overlay');
+        
+        stageImg.style.opacity = '0.2';
         setTimeout(() => {
-            mainImg.src = src;
-            mainImg.style.opacity = '1';
-        }, 150);
+            stageImg.src = imgSrc;
+            overlay.textContent = frameTag;
+            stageImg.style.opacity = '1';
+        }, 120);
 
         document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
-        btnEl.classList.add('active');
+        btnElement.classList.add('active');
     }
 
-    // 2. 选择尺码逻辑
-    function selectSize(size, btnEl) {
-        currentSelectedSize = size;
-        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-        btnEl.classList.add('active');
+    // 2. 选择尺码
+    function applySize(size, btnElement) {
+        chosenSize = size;
+        document.querySelectorAll('.size-chip').forEach(b => b.classList.remove('active'));
+        btnElement.classList.add('active');
         
-        // 隐藏未选择尺码的报错
-        document.getElementById('size-error').style.display = 'none';
+        document.getElementById('size-warning').style.display = 'none';
 
-        // 动态绑定选择的尺码到 Snipcart 属性
-        const addBtn = document.getElementById('add-to-cart-btn');
-        addBtn.setAttribute('data-item-custom1-value', size);
+        const buyBtn = document.getElementById('snipcart-btn');
+        buyBtn.setAttribute('data-item-custom1-value', size);
     }
 
-    // 3. 拦截未选择尺码直接加购的动作
-    function validateSizeSelection(e) {
-        if (!currentSelectedSize) {
+    // 3. 拦截未选尺码加购
+    function checkSizeSelection(e) {
+        if (!chosenSize) {
             e.preventDefault();
             e.stopPropagation();
-            const errEl = document.getElementById('size-error');
-            errEl.style.display = 'block';
-            errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const warningEl = document.getElementById('size-warning');
+            warningEl.style.display = 'block';
+            warningEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return false;
         }
     }
 
-    // 4. 从 PLG 未锚定提示区域一键平滑滚动到购买区
-    function scrollToBuy() {
-        document.querySelector('.size-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // 4. 一键平滑滚动至加购区
+    function jumpToPurchase() {
+        document.querySelector('.selector-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // 5. 拉取 Supabase / Cloudflare Worker 边缘节点数据
-    async function fetchLiveTerminalData() {
-        const container = document.getElementById('terminal-content');
-        try {
-            const res = await fetch('https://id.withinseven.com/api/archive');
-            if (!res.ok) throw new Error("API Response Error");
-            const data = await res.json();
-
-            if (data && data.length > 0) {
-                const active = data[0];
-                const pubDate = new Date(active.published_at).toLocaleString();
-                const expDate = new Date(active.expires_at).toLocaleString();
-
-                container.innerHTML = `
-                    <div class="status-badge live">● LIVE SIGNAL DETECTED</div>
-                    <div class="garment-meta" style="margin-top:15px;">
-                        <span class="num">#${String(active.garment_number).padStart(4, '0')}</span>
-                        <span class="tag">${active.color}</span>
-                    </div>
-                    <div class="statement-text">"${active.statement_text}"</div>
-                    <div class="terminal-footer">
-                        <span>PUBLISHED: ${pubDate}</span>
-                        <span>VANISHES: ${expDate}</span>
-                    </div>
-                    ${active.is_in_grace_period ? '<div class="grace-tag">⚡ 7-MINUTE EDIT WINDOW ACTIVE FOR OWNER</div>' : ''}
-                `;
-            } else {
-                renderUnanchoredState(container);
-            }
-        } catch (err) {
-            console.warn("Terminal live fetch fallback:", err);
-            renderUnanchoredState(container);
+    // 5. 免费访客模拟器实时打字联动
+    function updateSimPreview(val) {
+        const target = document.getElementById('sim-text-target');
+        if (val.trim().length > 0) {
+            target.textContent = `"${val}"`;
+        } else {
+            target.textContent = '"We build digital armor not to hide who we are, but to decide when we speak."';
         }
     }
-
-    function renderUnanchoredState(container) {
-        container.innerHTML = `
-            <div class="status-badge idle">○ UNANCHORED SIGNAL</div>
-            <div class="statement-text" style="color: var(--muted); font-size: 0.95rem; margin-top: 15px;">
-                "NO ACTIVE STATEMENT RECORDED IN THE PAST 7 DAYS. BE THE FIRST TO ANCHOR YOUR VOICE TO THE LEDGER."
-            </div>
-            <button class="anchor-cta-btn" onclick="scrollToBuy()">ANCHOR YOUR STATEMENT — BUY DROP 01</button>
-        `;
-    }
-
-    // 页面加载完成后自动拉取数据
-    document.addEventListener('DOMContentLoaded', () => {
-        fetchLiveTerminalData();
-    });
 </script>
 
 </body>
