@@ -22,14 +22,14 @@
             --text-primary: #111111;
             --text-secondary: #525252;
             --text-muted: #737373;
-            --brand-blue: #0044ff;
-            --brand-red: #ff1a1a;
-            --brand-green: #00e65c;
+            --brand-blue: #0055ff;
+            --brand-red: #ff0033;
+            --brand-green: #00ff66;
             --brand-yellow: #ffcc00;
             --brand-black: #111111;
             --brand-white: #ffffff;
-            --brand-violet: #a855f7;
-            --brand-active: #0044ff; /* 动态阵营染亮色 */
+            --brand-violet: #b026ff;
+            --brand-active: #0055ff;
             --font-sans: 'Inter', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -47,7 +47,7 @@
 
         .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-        /* 🔒 门界 1: 满屏拱门 Logo Portal (打死不动锁死) */
+        /* 🔒 1. 拱门满屏入口 Portal Overlay (打死不动锁定) */
         #portal-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -135,18 +135,19 @@
             50% { opacity: 1; }
         }
 
-        /* 💥 门界 2: 7 色高饱和度爆彩阵营门界 (The Seven Frequencies Overlay) */
+        /* ⚡ 2. 7 根通天激光光柱门界 (The Seven Laser Monolith Overlay) */
         #faction-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background-color: #030303;
+            background-color: #030305;
             z-index: 999998;
             display: none;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 30px 16px;
+            padding: 30px 12px;
+            overflow-x: hidden;
             overflow-y: auto;
             transition: opacity 0.6s ease;
         }
@@ -156,146 +157,207 @@
             opacity: 1;
         }
 
-        .faction-title-block {
+        .faction-header-text {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             z-index: 10;
         }
 
-        .faction-main-title {
-            font-size: 1.6rem;
+        .faction-header-text h2 {
+            font-size: 1.8rem;
             font-weight: 800;
-            letter-spacing: 6px;
+            letter-spacing: 8px;
             color: #ffffff;
-            margin-bottom: 6px;
             text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
         }
 
-        .faction-sub-title {
+        .faction-header-text p {
             font-family: var(--font-mono);
             font-size: 0.78rem;
-            color: #888;
-            letter-spacing: 2px;
+            color: #888888;
+            letter-spacing: 3px;
+            margin-top: 6px;
         }
 
-        /* 7 阵营响应式网格 */
-        .seven-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
+        /* 7 根立柱网格 */
+        .laser-pillars-wrap {
+            display: flex;
             width: 100%;
-            max-width: 1280px;
+            max-width: 1400px;
+            height: 72vh;
+            min-height: 480px;
+            gap: 12px;
             z-index: 10;
+            justify-content: center;
         }
 
-        @media (min-width: 640px) {
-            .seven-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (min-width: 1024px) {
-            .seven-grid { grid-template-columns: repeat(4, 1fr); }
-        }
-        @media (min-width: 1280px) {
-            .seven-grid { grid-template-columns: repeat(7, 1fr); }
+        @media (max-width: 900px) {
+            .laser-pillars-wrap {
+                flex-direction: column;
+                height: auto;
+            }
         }
 
-        .seven-card {
-            background: #0d0d0d;
-            border: 1px solid #222;
-            padding: 20px 14px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        /* 单根激光柱 */
+        .beam-pillar {
+            flex: 1;
+            background: rgba(12, 12, 15, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             position: relative;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 280px;
+            padding: 20px 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
         }
 
-        .seven-card::before {
-            content: '';
+        /* 柱体内部贯穿的激光芯线 (Laser Core) */
+        .beam-laser-line {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: #333;
-            transition: background 0.3s;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 2px; height: 100%;
+            opacity: 0.3;
+            transition: all 0.4s ease;
+            pointer-events: none;
         }
 
-        /* 七色独立悬停特效 */
-        .seven-card.c-red:hover { border-color: var(--brand-red); box-shadow: 0 0 30px rgba(255,26,26,0.35); transform: translateY(-6px); }
-        .seven-card.c-red::before { background: var(--brand-red); }
-
-        .seven-card.c-green:hover { border-color: var(--brand-green); box-shadow: 0 0 30px rgba(0,230,92,0.35); transform: translateY(-6px); }
-        .seven-card.c-green::before { background: var(--brand-green); }
-
-        .seven-card.c-blue:hover { border-color: var(--brand-blue); box-shadow: 0 0 30px rgba(0,68,255,0.35); transform: translateY(-6px); }
-        .seven-card.c-blue::before { background: var(--brand-blue); }
-
-        .seven-card.c-yellow:hover { border-color: var(--brand-yellow); box-shadow: 0 0 30px rgba(255,204,0,0.35); transform: translateY(-6px); }
-        .seven-card.c-yellow::before { background: var(--brand-yellow); }
-
-        .seven-card.c-black:hover { border-color: #ffffff; box-shadow: 0 0 30px rgba(255,255,255,0.2); transform: translateY(-6px); }
-        .seven-card.c-black::before { background: #ffffff; }
-
-        .seven-card.c-white:hover { border-color: #ffffff; box-shadow: 0 0 30px rgba(255,255,255,0.5); transform: translateY(-6px); background: #181818; }
-        .seven-card.c-white::before { background: #ffffff; }
-
-        .seven-card.c-violet:hover { border-color: var(--brand-violet); box-shadow: 0 0 30px rgba(168,85,247,0.35); transform: translateY(-6px); }
-        .seven-card.c-violet::before { background: var(--brand-violet); }
-
-        .seven-card-header {
-            border-bottom: 1px solid #1f1f1f;
-            padding-bottom: 10px;
-            margin-bottom: 12px;
+        /* 柱体底部发光能量阵 (Base Light Glow) */
+        .beam-base-glow {
+            position: absolute;
+            bottom: -50px; left: 50%;
+            transform: translateX(-50%);
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(35px);
+            transition: all 0.4s ease;
+            pointer-events: none;
         }
 
-        .seven-code { font-family: var(--font-mono); font-size: 0.65rem; color: #666; letter-spacing: 1px; margin-bottom: 4px; }
-        .seven-name { font-size: 0.98rem; font-weight: 800; letter-spacing: 1.5px; color: #ffffff; }
+        /* 悬停爆炸级激光特效 */
+        .beam-pillar:hover {
+            flex: 1.4;
+            background: rgba(20, 20, 28, 0.95);
+            transform: translateY(-8px);
+        }
 
-        .seven-quotes-wrap {
+        .beam-pillar:hover .beam-laser-line {
+            width: 4px;
+            opacity: 1;
+        }
+
+        .beam-pillar:hover .beam-base-glow {
+            opacity: 0.8;
+            transform: translateX(-50%) scale(1.4);
+        }
+
+        /* 🔴 RED BEAM */
+        .p-red .beam-laser-line { background: var(--brand-red); box-shadow: 0 0 15px var(--brand-red); }
+        .p-red .beam-base-glow { background: var(--brand-red); }
+        .p-red:hover { border-color: var(--brand-red); box-shadow: 0 0 40px rgba(255, 0, 51, 0.4); }
+
+        /* 🟢 GREEN BEAM */
+        .p-green .beam-laser-line { background: var(--brand-green); box-shadow: 0 0 15px var(--brand-green); }
+        .p-green .beam-base-glow { background: var(--brand-green); }
+        .p-green:hover { border-color: var(--brand-green); box-shadow: 0 0 40px rgba(0, 255, 102, 0.4); }
+
+        /* 🔵 BLUE BEAM */
+        .p-blue .beam-laser-line { background: var(--brand-blue); box-shadow: 0 0 15px var(--brand-blue); }
+        .p-blue .beam-base-glow { background: var(--brand-blue); }
+        .p-blue:hover { border-color: var(--brand-blue); box-shadow: 0 0 40px rgba(0, 85, 255, 0.4); }
+
+        /* 🟡 YELLOW BEAM */
+        .p-yellow .beam-laser-line { background: var(--brand-yellow); box-shadow: 0 0 15px var(--brand-yellow); }
+        .p-yellow .beam-base-glow { background: var(--brand-yellow); }
+        .p-yellow:hover { border-color: var(--brand-yellow); box-shadow: 0 0 40px rgba(255, 204, 0, 0.4); }
+
+        /* ⚫ BLACK BEAM */
+        .p-black .beam-laser-line { background: #ffffff; box-shadow: 0 0 15px #ffffff; }
+        .p-black .beam-base-glow { background: #ffffff; }
+        .p-black:hover { border-color: #ffffff; box-shadow: 0 0 40px rgba(255, 255, 255, 0.25); }
+
+        /* ⚪ WHITE BEAM */
+        .p-white .beam-laser-line { background: #ffffff; box-shadow: 0 0 20px #ffffff; }
+        .p-white .beam-base-glow { background: #ffffff; }
+        .p-white:hover { border-color: #ffffff; box-shadow: 0 0 50px rgba(255, 255, 255, 0.6); }
+
+        /* 🟣 VIOLET BEAM */
+        .p-violet .beam-laser-line { background: var(--brand-violet); box-shadow: 0 0 15px var(--brand-violet); }
+        .p-violet .beam-base-glow { background: var(--brand-violet); }
+        .p-violet:hover { border-color: var(--brand-violet); box-shadow: 0 0 40px rgba(176, 38, 255, 0.4); }
+
+        .beam-top-tag {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: #888888;
+            letter-spacing: 1px;
+            position: relative; z-index: 2;
+        }
+
+        .beam-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-top: 6px;
+            position: relative; z-index: 2;
+        }
+
+        /* 悬浮在光柱内部的消费者留言碎片 */
+        .beam-quotes-wrap {
+            position: relative; z-index: 2;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 16px;
+            gap: 10px;
+            margin: 16px 0;
         }
 
-        .seven-quote-item {
-            background: #050505;
-            border: 1px solid #1a1a1a;
-            padding: 8px 10px;
-            font-size: 0.74rem;
-            color: #cccccc;
-            line-height: 1.4;
+        .beam-quote-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            font-size: 0.75rem;
+            color: #dddddd;
+            line-height: 1.45;
             font-style: italic;
+            backdrop-filter: blur(5px);
         }
 
-        .seven-quote-meta {
+        .beam-quote-num {
             font-family: var(--font-mono);
-            font-size: 0.6rem;
-            color: #555;
-            margin-bottom: 4px;
+            font-size: 0.62rem;
+            color: #777777;
             font-style: normal;
+            margin-bottom: 4px;
         }
 
-        .seven-select-cta {
+        .beam-action-btn {
             width: 100%;
             padding: 10px;
             background: transparent;
-            border: 1px solid #333;
-            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ffffff;
             font-family: var(--font-mono);
             font-size: 0.7rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            transition: all 0.2s;
+            position: relative; z-index: 2;
+            transition: all 0.2s ease;
         }
 
-        .seven-card:hover .seven-select-cta {
+        .beam-pillar:hover .beam-action-btn {
             background: #ffffff;
             color: #000000;
             border-color: #ffffff;
         }
 
-        /* Top Header Nav */
+        /* Header */
         header {
             display: flex;
             justify-content: space-between;
@@ -331,7 +393,7 @@
         }
         .cart-trigger:hover { background: var(--text-primary); color: #fff; }
 
-        /* 三概念选项卡 Switcher */
+        /* 三概念 Tab */
         .triad-tab-bar {
             display: flex;
             justify-content: center;
@@ -361,7 +423,7 @@
             box-shadow: 0 4px 14px rgba(0,0,0,0.12);
         }
 
-        /* Product Stage Grid */
+        /* Product Stage */
         .screen-product {
             display: grid;
             grid-template-columns: 1fr;
@@ -422,7 +484,7 @@
         }
         .action-buy-btn:hover { background: var(--brand-active); }
 
-        /* 水印 Manifesto */
+        /* Manifesto */
         .manifesto-watermark-section {
             background: var(--panel-bg); border: 1px solid var(--border-subtle);
             padding: 40px; margin-bottom: 64px; position: relative; overflow: hidden;
@@ -505,7 +567,7 @@
 </head>
 <body>
 
-<!-- 🔒 1. 拱门满屏入口 Portal Overlay (100vh - 打死不动) -->
+<!-- 🔒 1. 拱门满屏入口 Portal Overlay (100vh - 锁定不动) -->
 <div id="portal-overlay">
     <canvas id="portal-canvas"></canvas>
     <div class="portal-aura"></div>
@@ -515,117 +577,153 @@
     <div class="portal-enter-prompt" onclick="enterArchwayPortal()">[ TAP LOGO TO ENTER THE ARCHIVE ]</div>
 </div>
 
-<!-- 🔴🟢🔵🟡⚫⚪🟣 2. 7 色灵魂光谱抉择门界 (The Seven Frequencies Overlay) -->
+<!-- ⚡ 2. 7 根激光冲天光柱门界 (The Seven Laser Monolith Overlay) -->
 <div id="faction-overlay">
-    <div class="faction-title-block">
-        <div class="faction-main-title">SELECT YOUR FREQUENCY</div>
-        <div class="faction-sub-title">THE GARMENT IS BLANK. CHOOSE THE SPECTRUM OF YOUR VOICE.</div>
+    <div class="faction-header-text">
+        <h2>SELECT YOUR FREQUENCY</h2>
+        <p>THE GARMENT IS BLANK. CHOOSE THE SPECTRUM OF YOUR VOICE.</p>
     </div>
 
-    <div class="seven-grid">
+    <!-- 7 根通天激光柱 -->
+    <div class="laser-pillars-wrap">
         <!-- 01 RED -->
-        <div class="seven-card c-red" onclick="selectFaction('RED', '#ff1a1a')">
-            <div class="seven-card-header">
-                <div class="seven-code">01 // RED</div>
-                <div class="seven-name">RESISTANCE</div>
+        <div class="beam-pillar p-red" onclick="selectFaction('RED', '#ff0033')">
+            <div class="beam-laser-line"></div>
+            <div class="beam-base-glow"></div>
+            
+            <div>
+                <div class="beam-top-tag">01 // RED</div>
+                <div class="beam-title">RESISTANCE</div>
             </div>
-            <div class="seven-quotes-wrap">
-                <div class="seven-quote-item">
-                    <div class="seven-quote-meta">#0142</div>
+
+            <div class="beam-quotes-wrap">
+                <div class="beam-quote-card">
+                    <div class="beam-quote-num">#0142</div>
                     "In an ocean of digital noise, I choose to be a flame that burns out in 7 days."
                 </div>
             </div>
-            <button class="seven-select-cta">ALIGN RED</button>
+
+            <button class="beam-action-btn">ALIGN RED</button>
         </div>
 
         <!-- 02 GREEN -->
-        <div class="seven-card c-green" onclick="selectFaction('GREEN', '#00e65c')">
-            <div class="seven-card-header">
-                <div class="seven-code">02 // GREEN</div>
-                <div class="seven-name">SYNTHESIS</div>
+        <div class="beam-pillar p-green" onclick="selectFaction('GREEN', '#00ff66')">
+            <div class="beam-laser-line"></div>
+            <div class="beam-base-glow"></div>
+
+            <div>
+                <div class="beam-top-tag">02 // GREEN</div>
+                <div class="beam-title">SYNTHESIS</div>
             </div>
-            <div class="seven-quotes-wrap">
-                <div class="seven-quote-item">
-                    <div class="seven-quote-meta">#0088</div>
+
+            <div class="beam-quotes-wrap">
+                <div class="beam-quote-card">
+                    <div class="beam-quote-num">#0088</div>
                     "Growth is silent. The roots expand long before the noise begins."
                 </div>
             </div>
-            <button class="seven-select-cta">ALIGN GREEN</button>
+
+            <button class="beam-action-btn">ALIGN GREEN</button>
         </div>
 
         <!-- 03 BLUE -->
-        <div class="seven-card c-blue" onclick="selectFaction('BLUE', '#0044ff')">
-            <div class="seven-card-header">
-                <div class="seven-code">03 // BLUE</div>
-                <div class="seven-name">AWAKENING</div>
+        <div class="beam-pillar p-blue" onclick="selectFaction('BLUE', '#0055ff')">
+            <div class="beam-laser-line"></div>
+            <div class="beam-base-glow"></div>
+
+            <div>
+                <div class="beam-top-tag">03 // BLUE</div>
+                <div class="beam-title">AWAKENING</div>
             </div>
-            <div class="seven-quotes-wrap">
-                <div class="seven-quote-item">
-                    <div class="seven-quote-meta">#0234</div>
+
+            <div class="beam-quotes-wrap">
+                <div class="beam-quote-card">
+                    <div class="beam-quote-num">#0234</div>
                     "Today, blue means becoming visible in the void."
                 </div>
             </div>
-            <button class="seven-select-cta">ALIGN BLUE</button>
+
+            <button class="beam-action-btn">ALIGN BLUE</button>
         </div>
 
         <!-- 04 YELLOW -->
-        <div class="seven-card c-yellow" onclick="selectFaction('YELLOW', '#ffcc00')">
-            <div class="seven-card-header">
-                <div class="seven-code">04 // YELLOW</div>
-                <div class="seven-name">ILLUMINATION</div>
+        <div class="beam-pillar p-yellow" onclick="selectFaction('YELLOW', '#ffcc00')">
+            <div class="beam-laser-line"></div>
+            <div class="beam-base-glow"></div>
+
+            <div>
+                <div class="beam-top-tag">04 // YELLOW</div>
+                <div class="beam-title">ILLUMINATION</div>
             </div>
-            <div class="seven-quotes-wrap">
-                <div class="seven-quote-item">
-                    <div class="seven-quote-meta">#0307</div>
+
+            <div class="beam-quotes-wrap">
+                <div class="beam-quote-card">
+                    <div class="beam-quote-num">#0307</div>
                     "A temporary blinding light is worth a lifetime of dim shadows."
                 </div>
             </div>
-            <button class="seven-select-cta">ALIGN YELLOW</button>
+
+            <button class="beam-action-btn">ALIGN YELLOW</button>
         </div>
 
         <!-- 05 BLACK -->
-        <div class="seven-card c-black" onclick="selectFaction('BLACK', '#111111')">
-            <div class="seven-card-header">
-                <div class="seven-code">05 // BLACK</div>
-                <div class="seven-name">ECLIPSE</div>
+        <div class="beam-pillar p-black" onclick="selectFaction('BLACK', '#111111')">
+            <div class="beam-laser-line"></div>
+            <div class="beam-base-glow"></div>
+
+            <div>
+                <div class="beam-top-tag">05 // BLACK</div>
+                <div class="beam-title">ECLIPSE</div>
             </div>
-            <div class="seven-quotes-wrap">
-                <div class="seven-quote-item">
-                    <div class="seven-quote-meta">#0007</div>
+
+            <div class="beam-quotes-wrap">
+                <div class="beam-quote-card">
+                    <div class="beam-quote-num">#0007</div>
                     "True luxury is having nothing to prove and no identity to broadcast."
                 </div>
             </div>
-            <button class="seven-select-cta">ALIGN BLACK</button>
+
+            <button class="beam-action-btn">ALIGN BLACK</button>
         </div>
 
         <!-- 06 WHITE -->
-        <div class="seven-card c-white" onclick="selectFaction('WHITE', '#ffffff')">
-            <div class="seven-card-header">
-                <div class="seven-code" style="color:#aaa;">06 // WHITE</div>
-                <div class="seven-name">PURITY</div>
+        <div class="beam-pillar p-white" onclick="selectFaction('WHITE', '#ffffff')">
+            <div class="beam-laser-line"></div>
+            <div class="beam-base-glow"></div>
+
+            <div>
+                <div class="beam-top-tag" style="color:#aaa;">06 // WHITE</div>
+                <div class="beam-title">PURITY</div>
             </div>
-            <div class="seven-quotes-wrap">
-                <div class="seven-quote-item">
-                    <div class="seven-quote-meta">#0101</div>
+
+            <div class="beam-quotes-wrap">
+                <div class="beam-quote-card">
+                    <div class="beam-quote-num">#0101</div>
                     "Clean slate. No history. Pure unconditioned voice."
                 </div>
             </div>
-            <button class="seven-select-cta">ALIGN WHITE</button>
+
+            <button class="beam-action-btn">ALIGN WHITE</button>
         </div>
 
         <!-- 07 VIOLET -->
-        <div class="seven-card c-violet" onclick="selectFaction('VIOLET', '#a855f7')">
-            <div class="seven-card-header">
-                <div class="seven-code">07 // VIOLET</div>
-                <div class="seven-name">TRANSCENDENCE</div>
+        <div class="beam-pillar p-violet" onclick="selectFaction('VIOLET', '#b026ff')">
+            <div class="beam-laser-line"></div>
+            <div class="beam-base-glow"></div>
+
+            <div>
+                <div class="beam-top-tag">07 // VIOLET</div>
+                <div class="beam-title">TRANSCENDENCE</div>
             </div>
-            <div class="seven-quotes-wrap">
-                <div class="seven-quote-item">
-                    <div class="seven-quote-meta">#0707</div>
+
+            <div class="beam-quotes-wrap">
+                <div class="beam-quote-card">
+                    <div class="beam-quote-num">#0707</div>
                     "Vibrate at a frequency only the quiet ones can decode."
                 </div>
             </div>
-            <button class="seven-select-cta">ALIGN VIOLET</button>
+
+            <button class="beam-action-btn">ALIGN VIOLET</button>
         </div>
     </div>
 </div>
@@ -723,7 +821,7 @@
         <img src="/LOGO.png" alt="Watermark" class="watermark-img" onerror="this.style.display='none';">
     </section>
 
-    <!-- Screen 2: Interactive Private Preview & Live Ledger Signal Stream -->
+    <!-- Screen 2: Private Preview & Live Ledger Signal Stream -->
     <section class="screen-interactive">
         <div class="section-heading">// SYSTEM INTERACTION & LIVE SIGNAL STREAM</div>
         
@@ -743,9 +841,9 @@
                     
                     <div class="color-picker-row">
                         <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">SIGNAL COLOR:</span>
-                        <button class="color-dot-btn color-dot-blue active" id="dot-blue" onclick="selectSimColor('#0044ff', 'BLUE', this)"></button>
-                        <button class="color-dot-btn color-dot-red" id="dot-red" onclick="selectSimColor('#ff1a1a', 'RED', this)"></button>
-                        <button class="color-dot-btn color-dot-green" id="dot-green" onclick="selectSimColor('#00e65c', 'GREEN', this)"></button>
+                        <button class="color-dot-btn color-dot-blue active" id="dot-blue" onclick="selectSimColor('#0055ff', 'BLUE', this)"></button>
+                        <button class="color-dot-btn color-dot-red" id="dot-red" onclick="selectSimColor('#ff0033', 'RED', this)"></button>
+                        <button class="color-dot-btn color-dot-green" id="dot-green" onclick="selectSimColor('#00ff66', 'GREEN', this)"></button>
                         <button class="color-dot-btn color-dot-black" id="dot-black" onclick="selectSimColor('#111111', 'BLACK', this)"></button>
                     </div>
 
@@ -758,7 +856,7 @@
                         </div>
                         <div class="preview-body-layout">
                             <svg id="interactive-face-avatar" class="interactive-face-svg" viewBox="0 0 42 42">
-                                <circle cx="21" cy="21" r="18" fill="none" id="face-stroke-circle" stroke="#0044ff" stroke-width="1.8"/>
+                                <circle cx="21" cy="21" r="18" fill="none" id="face-stroke-circle" stroke="#0055ff" stroke-width="1.8"/>
                                 <path id="eye-left" d="M 14 17 L 18 17" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
                                 <path id="eye-right" d="M 24 17 L 28 17" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
                                 <path d="M 16 28 C 18 30 24 30 26 28" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
@@ -875,7 +973,7 @@
         draw() {
             pCtx.beginPath();
             pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            pCtx.fillStyle = `rgba(0, 68, 255, ${this.alpha})`;
+            pCtx.fillStyle = `rgba(0, 85, 255, ${this.alpha})`;
             pCtx.fill();
         }
     }
@@ -896,7 +994,7 @@
                     pCtx.beginPath();
                     pCtx.moveTo(portalParticles[i].x, portalParticles[i].y);
                     pCtx.lineTo(portalParticles[j].x, portalParticles[j].y);
-                    pCtx.strokeStyle = `rgba(0, 68, 255, ${0.18 - dist / 1000})`;
+                    pCtx.strokeStyle = `rgba(0, 85, 255, ${0.18 - dist / 1000})`;
                     pCtx.stroke();
                 }
             }
@@ -913,7 +1011,7 @@
         portalGate.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
 
-    /* 点击拱门进入 7 色选择 overlay */
+    /* 点击拱门进入 7 激光柱选择 overlay */
     function enterArchwayPortal() {
         portalOverlay.classList.add('portal-open');
         setTimeout(() => {
@@ -922,14 +1020,14 @@
         }, 600);
     }
 
-    /* 🌈 2. 7 色选择逻辑：全站染亮指定色 */
+    /* ⚡ 2. 7 激光柱选择逻辑：全站染亮指定色 */
     function selectFaction(factionName, colorHex) {
         document.documentElement.style.setProperty('--brand-active', colorHex);
         
         // 自动将 Simulator 选为该颜色
-        if (factionName === 'RED') selectSimColor('#ff1a1a', 'RED', document.getElementById('dot-red'));
-        if (factionName === 'GREEN') selectSimColor('#00e65c', 'GREEN', document.getElementById('dot-green'));
-        if (factionName === 'BLUE') selectSimColor('#0044ff', 'BLUE', document.getElementById('dot-blue'));
+        if (factionName === 'RED') selectSimColor('#ff0033', 'RED', document.getElementById('dot-red'));
+        if (factionName === 'GREEN') selectSimColor('#00ff66', 'GREEN', document.getElementById('dot-green'));
+        if (factionName === 'BLUE') selectSimColor('#0055ff', 'BLUE', document.getElementById('dot-blue'));
         if (factionName === 'BLACK') selectSimColor('#111111', 'BLACK', document.getElementById('dot-black'));
 
         const factionOverlay = document.getElementById('faction-overlay');
