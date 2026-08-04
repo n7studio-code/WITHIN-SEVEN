@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WITHIN SEVEN — DROP 01</title>
     
-    <!-- 谷歌先锋高奢字体 -->
+    <!-- 谷歌先锋字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
             padding: 0 20px 80px 20px;
         }
 
-        /* 战术网格背景纹理 */
+        /* 背景战术网格 */
         body::before {
             content: "";
             position: fixed;
@@ -55,7 +55,7 @@
             z-index: 1;
         }
 
-        /* 顶栏 Header - 双 LOGO 组合 (图形 LOGO + 文字 LOGO) */
+        /* Header - 双 LOGO (图形 + 文字) */
         header {
             display: flex;
             justify-content: space-between;
@@ -72,7 +72,6 @@
             text-decoration: none;
         }
 
-        /* 图形 LOGO (先锋双重几何 [7] 徽章 SVG) */
         .graphic-logo {
             width: 32px;
             height: 32px;
@@ -81,7 +80,6 @@
             stroke-width: 2;
         }
 
-        /* 文字 LOGO */
         .text-logo {
             font-weight: 800;
             font-size: 1.1rem;
@@ -120,7 +118,7 @@
             }
         }
 
-        /* 4:5 高奢相册 */
+        /* 4:5 画廊 */
         .gallery-wrap {
             display: flex;
             flex-direction: column;
@@ -185,13 +183,13 @@
             object-fit: cover;
         }
 
-        /* 右侧产品属性 */
+        /* 商品详情 */
         .product-meta {
             display: flex;
             flex-direction: column;
         }
 
-        /* 【修改1】：核心说明 Slogan 区域 */
+        /* 修改1：商品区域 Slogan */
         .core-slogan-box {
             background: rgba(255, 42, 42, 0.04);
             border: 1px solid rgba(255, 42, 42, 0.2);
@@ -203,7 +201,7 @@
             font-family: var(--font-mono);
             font-size: 0.85rem;
             font-weight: 700;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             color: var(--text-main);
             margin-bottom: 8px;
             line-height: 1.4;
@@ -249,7 +247,7 @@
             color: var(--text-dim);
             font-size: 0.9rem;
             line-height: 1.7;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             border-left: 2px solid var(--panel-border);
             padding-left: 15px;
         }
@@ -324,12 +322,12 @@
             transform: translateY(-1px);
         }
 
-        /* 【修改3】：免费访客模拟器 (GUEST SIMULATOR) */
+        /* 修改3：免费体验模拟器 */
         .simulator-box {
             background: var(--panel-bg);
             border: 1px solid var(--panel-border);
             padding: 25px;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
 
         .simulator-title {
@@ -354,9 +352,7 @@
             outline: none;
         }
 
-        .sim-input:focus {
-            border-color: var(--text-dim);
-        }
+        .sim-input:focus { border-color: var(--text-dim); }
 
         .sim-card-preview {
             background: #000;
@@ -386,7 +382,7 @@
 
         .sim-statement-text {
             font-family: var(--font-mono);
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.5;
             color: var(--text-main);
             margin-bottom: 20px;
@@ -412,7 +408,106 @@
             color: var(--bg-dark);
         }
 
-        /* 【修改2 & 4】：3步规则与 Manifesto 区 */
+        /* 实时终端 */
+        .ledger-terminal {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            padding: 25px;
+            position: relative;
+        }
+
+        .terminal-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--panel-border);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 1.5px;
+        }
+
+        .status-dot {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: var(--font-mono);
+        }
+
+        .status-dot.live-mode { color: var(--live-green); }
+        .status-dot.idle-mode { color: var(--text-dim); }
+
+        .pulse-led {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--live-green);
+            box-shadow: 0 0 8px var(--live-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.85); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .statement-display {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            word-break: break-word;
+        }
+
+        .statement-meta-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        .garment-id { color: var(--accent-red); font-weight: 700; }
+        .garment-tag { background: rgba(255,255,255,0.06); padding: 2px 8px; border: 1px solid rgba(255,255,255,0.08); }
+
+        .terminal-time-info {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            border-top: 1px dashed var(--panel-border);
+            padding-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .cta-convert-btn {
+            width: 100%;
+            margin-top: 15px;
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cta-convert-btn:hover {
+            background: var(--text-main);
+            color: var(--bg-dark);
+        }
+
+        /* 修改2与4：规则与 Manifesto 区域 */
         .rules-manifesto-section {
             margin-top: 60px;
             padding-top: 40px;
@@ -475,7 +570,6 @@
             color: var(--text-main);
         }
 
-        /* 底部法务 Compliance Footer */
         .legal-footer {
             margin-top: 80px;
             padding-top: 30px;
@@ -506,12 +600,10 @@
     <!-- Header: 双 LOGO (图形 + 文字) -->
     <header>
         <a href="#" class="brand-logo-wrap">
-            <!-- 先锋图形 LOGO (双重 [7] 徽标) -->
             <svg class="graphic-logo" viewBox="0 0 32 32">
                 <rect x="2" y="2" width="28" height="28" stroke="currentColor" stroke-width="1.5" fill="none"/>
                 <path d="M10 10H22L14 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/>
             </svg>
-            <!-- 文字 LOGO -->
             <span class="text-logo">WITHIN SEVEN</span>
         </a>
         <button class="cart-trigger snipcart-checkout">
@@ -519,32 +611,30 @@
         </button>
     </header>
 
-    <!-- Main Display Grid -->
+    <!-- Main Grid -->
     <div class="main-grid">
-        
-        <!-- Gallery Stage -->
+        <!-- Gallery -->
         <div class="gallery-wrap">
             <div class="main-stage">
                 <span class="tech-tag-overlay">FRAME // 01 [FRONT]</span>
-                <img id="stage-image" src="front.jpg" alt="Drop 01 Garment" onerror="this.src='https://via.placeholder.com/800x1000/0d0d0d/333333?text=DROP+01+FRONT+VIEW'">
+                <img id="stage-image" src="front.jpg" alt="Drop 01 Garment" onerror="this.onerror=null;this.src='https://via.placeholder.com/800x1000/0d0d0d/333333?text=DROP+01+FRONT+VIEW';">
             </div>
             <div class="thumbs-row">
                 <button class="thumb-btn active" onclick="updateStage('front.jpg', 'FRAME // 01 [FRONT]', this)">
-                    <img src="front.jpg" alt="Front" onerror="this.src='https://via.placeholder.com/200x250/0d0d0d/333333?text=01'">
+                    <img src="front.jpg" alt="Front" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/0d0d0d/333333?text=01';">
                 </button>
                 <button class="thumb-btn" onclick="updateStage('back.jpg', 'FRAME // 02 [BACK]', this)">
-                    <img src="back.jpg" alt="Back" onerror="this.src='https://via.placeholder.com/200x250/0d0d0d/333333?text=02'">
+                    <img src="back.jpg" alt="Back" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/0d0d0d/333333?text=02';">
                 </button>
                 <button class="thumb-btn" onclick="updateStage('detail.jpg', 'FRAME // 03 [DETAIL]', this)">
-                    <img src="detail.jpg" alt="Detail" onerror="this.src='https://via.placeholder.com/200x250/0d0d0d/333333?text=03'">
+                    <img src="detail.jpg" alt="Detail" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/0d0d0d/333333?text=03';">
                 </button>
             </div>
         </div>
 
         <!-- Product Details -->
         <div class="product-meta">
-            
-            <!-- 【修改1】：增加的核心说明 Slogan 区域 -->
+            <!-- 修改1: Slogan -->
             <div class="core-slogan-box">
                 <div class="core-slogan-title">ONE GARMENT. ONE PERMANENT NUMBER. A NEW STATEMENT EVERY SEVEN DAYS.</div>
                 <div class="core-slogan-sub">Numbers are assigned during final quality control and cannot be selected.</div>
@@ -570,7 +660,7 @@
                 <div id="size-warning" class="size-alert">⚠️ PLEASE SELECT A SIZE BEFORE ADDING TO BAG</div>
             </div>
 
-            <!-- Snipcart Action Buy Button -->
+            <!-- Snipcart Button -->
             <button 
                 id="snipcart-btn"
                 class="action-buy-btn snipcart-add-item"
@@ -587,7 +677,7 @@
                 PURCHASE DROP 01
             </button>
 
-            <!-- 【修改3】：免费访客体验模拟器 (GUEST PREVIEW SIMULATOR) -->
+            <!-- 修改3: Simulator -->
             <div class="simulator-box">
                 <div class="simulator-title">
                     <span>STATEMENT SIMULATOR</span>
@@ -616,10 +706,21 @@
                 </div>
             </div>
 
+            <!-- Live Ledger Terminal Container -->
+            <div class="ledger-terminal">
+                <div class="terminal-bar">
+                    <span>LIVE LEDGER TERMINAL</span>
+                    <span>EPHEMERALITY: 7-DAYS</span>
+                </div>
+                <div id="terminal-viewport">
+                    <div class="status-dot idle-mode">CONNECTING TO EDGE MESH...</div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- 【修改2 & 4】：3步规则与 Manifesto 区域 -->
+    <!-- 修改2与4: Protocol Rules & Manifesto -->
     <div class="rules-manifesto-section">
         <div class="section-heading">// PROTOCOL & SYSTEM RULES</div>
         
@@ -634,7 +735,7 @@
                 <div class="rule-title">ONE-TIME BURN</div>
                 <div class="rule-desc">The Claim Key burns permanently after initial setup. Subsequent access uses seamless Magic Link authentication.</div>
             </div>
-            <!-- 【修改2】：精确修改后的第 3 步 -->
+            <!-- 修改2: 7-DAY SIGNAL -->
             <div class="rule-card">
                 <div class="rule-num">03 / 7-DAY SIGNAL</div>
                 <div class="rule-title">EPHEMERAL VOICE</div>
@@ -642,13 +743,13 @@
             </div>
         </div>
 
-        <!-- 【修改4】：Manifesto -->
+        <!-- 修改4: Manifesto -->
         <div class="manifesto-box">
             "Once the seven-day cycle expires, the signal disappears from public view. The garment returns to silence, ready for its next expression."
         </div>
     </div>
 
-    <!-- BC Consumer Protection 2026 Compliance -->
+    <!-- BC Compliance -->
     <div class="legal-footer">
         <div class="legal-block">
             <h5>PRE-ORDER & FULFILLMENT</h5>
@@ -661,15 +762,14 @@
     </div>
 </div>
 
-<!-- Snipcart Key Integration -->
-<!-- 自动配置 API Key: ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz -->
+<!-- 自动配置的 API Key -->
 <div id="snipcart" data-api-key="ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz" data-currency="cad" hidden></div>
 <script src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 
 <script>
     let chosenSize = '';
 
-    // 1. 三图画廊切换
+    // 1. 相册切换
     function updateStage(imgSrc, frameTag, btnElement) {
         const stageImg = document.getElementById('stage-image');
         const overlay = document.querySelector('.tech-tag-overlay');
@@ -685,7 +785,7 @@
         btnElement.classList.add('active');
     }
 
-    // 2. 选择尺码
+    // 2. 尺码选择
     function applySize(size, btnElement) {
         chosenSize = size;
         document.querySelectorAll('.size-chip').forEach(b => b.classList.remove('active'));
@@ -697,11 +797,12 @@
         buyBtn.setAttribute('data-item-custom1-value', size);
     }
 
-    // 3. 拦截未选尺码加购
+    // 3. 拦截未选尺码直接弹出的 Snipcart 弹窗 (使用 stopImmediatePropagation)
     function checkSizeSelection(e) {
         if (!chosenSize) {
             e.preventDefault();
             e.stopPropagation();
+            if (e.stopImmediatePropagation) e.stopImmediatePropagation();
             const warningEl = document.getElementById('size-warning');
             warningEl.style.display = 'block';
             warningEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -709,12 +810,12 @@
         }
     }
 
-    // 4. 一键平滑滚动至加购区
+    // 4. 一键平滑滚动到购买区
     function jumpToPurchase() {
         document.querySelector('.selector-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // 5. 免费访客模拟器实时打字联动
+    // 5. 免费 Simulator 实时输入
     function updateSimPreview(val) {
         const target = document.getElementById('sim-text-target');
         if (val.trim().length > 0) {
@@ -723,6 +824,59 @@
             target.textContent = '"We build digital armor not to hide who we are, but to decide when we speak."';
         }
     }
+
+    // 6. 实时拉取 Cloudflare Edge API 并渲染 Terminal (严格包含 DOM 节点检测与挂载)
+    async function initTerminalFeed() {
+        const viewport = document.getElementById('terminal-viewport');
+        if (!viewport) return;
+
+        try {
+            const res = await fetch('https://id.withinseven.com/api/archive');
+            if (!res.ok) throw new Error("Terminal Endpoint Unreachable");
+            const data = await res.json();
+
+            if (data && data.length > 0) {
+                const active = data[0];
+                const publishedTime = new Date(active.published_at).toLocaleString();
+                const vanishTime = new Date(active.expires_at).toLocaleString();
+
+                viewport.innerHTML = `
+                    <div class="status-dot live-mode">
+                        <span class="pulse-led"></span> SIGNAL BROADCASTING
+                    </div>
+                    <div class="statement-meta-row" style="margin-top: 15px;">
+                        <span class="garment-id">#${String(active.garment_number).padStart(4, '0')}</span>
+                        <span class="garment-tag">${active.color}</span>
+                    </div>
+                    <div class="statement-display">"${active.statement_text}"</div>
+                    <div class="terminal-time-info">
+                        <span>ANCHORED: ${publishedTime}</span>
+                        <span>VANISHES: ${vanishTime}</span>
+                    </div>
+                `;
+            } else {
+                renderUnanchoredTerminal(viewport);
+            }
+        } catch (err) {
+            console.warn("Terminal Fallback:", err);
+            renderUnanchoredTerminal(viewport);
+        }
+    }
+
+    function renderUnanchoredTerminal(viewport) {
+        viewport.innerHTML = `
+            <div class="status-dot idle-mode">○ UNANCHORED SIGNAL</div>
+            <div class="statement-display" style="color: var(--text-dim); font-size: 0.85rem; margin-top: 12px;">
+                "NO ACTIVE STATEMENT RECORDED IN THE PAST 7 DAYS. BE THE FIRST TO ANCHOR YOUR VOICE TO THE LEDGER."
+            </div>
+            <button class="cta-convert-btn" onclick="jumpToPurchase()">ANCHOR YOUR STATEMENT — BUY DROP 01</button>
+        `;
+    }
+
+    // 页面完全加载后调用 API 初始化
+    document.addEventListener('DOMContentLoaded', () => {
+        initTerminalFeed();
+    });
 </script>
 
 </body>
