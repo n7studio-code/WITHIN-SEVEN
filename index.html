@@ -9,7 +9,7 @@
     <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Snipcart v3 CSS -->
     <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
@@ -47,7 +47,7 @@
 
         .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-        /* 🔒 1. 拱门满屏入口 Portal Overlay (打死不动锁定) */
+        /* 🔒 1. 拱门满屏入口 Portal Overlay (z-index: 999999 - 锁定不动) */
         #portal-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -135,61 +135,95 @@
             50% { opacity: 1; }
         }
 
-        /* ⚡ 2. 7 根通天激光光柱门界 (The Seven Laser Monolith Overlay) */
+        /* ⚡ 2. 7 根通天激光光柱门界 (z-index: 999998 - 紧贴大门背后，绝不闪现底色) */
         #faction-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background-color: #030305;
+            background-color: #020204;
             z-index: 999998;
-            display: none;
+            display: flex; /* 默认渲染，在大门正下方待命 */
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 12px;
+            padding: 24px 12px;
             overflow-x: hidden;
             overflow-y: auto;
             transition: opacity 0.6s ease;
         }
 
-        #faction-overlay.faction-enter {
-            display: flex;
-            opacity: 1;
-        }
-
         .faction-header-text {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             z-index: 10;
         }
 
         .faction-header-text h2 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             letter-spacing: 8px;
             color: #ffffff;
             text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(255,255,255,0.3);
+            text-shadow: 0 0 20px rgba(255,255,255,0.4);
         }
 
         .faction-header-text p {
             font-family: var(--font-mono);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             color: #888888;
             letter-spacing: 3px;
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
-        /* 7 根立柱网格 */
+        /* ⏰ 倒计时黑客时钟 */
+        .launch-timer-box {
+            background: rgba(15, 15, 20, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 10px 24px;
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            font-family: var(--font-mono);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .timer-label {
+            font-size: 0.68rem;
+            color: var(--brand-blue);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .timer-digits-row {
+            display: flex;
+            gap: 12px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .timer-unit {
+            display: flex;
+            align-items: baseline;
+            gap: 2px;
+        }
+
+        .timer-unit span { font-size: 0.65rem; color: #666; font-weight: 400; }
+
+        /* 7 根激光柱网格 */
         .laser-pillars-wrap {
             display: flex;
             width: 100%;
-            max-width: 1400px;
-            height: 72vh;
-            min-height: 480px;
-            gap: 12px;
+            max-width: 1440px;
+            height: 68vh;
+            min-height: 440px;
+            gap: 10px;
             z-index: 10;
             justify-content: center;
+            margin-top: 12px;
         }
 
         @media (max-width: 900px) {
@@ -199,23 +233,21 @@
             }
         }
 
-        /* 单根激光柱 */
         .beam-pillar {
             flex: 1;
-            background: rgba(12, 12, 15, 0.85);
+            background: rgba(10, 10, 14, 0.9);
             border: 1px solid rgba(255, 255, 255, 0.08);
             position: relative;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 20px 12px;
+            padding: 18px 12px;
             backdrop-filter: blur(10px);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
         }
 
-        /* 柱体内部贯穿的激光芯线 (Laser Core) */
         .beam-laser-line {
             position: absolute;
             top: 0; left: 50%;
@@ -226,7 +258,6 @@
             pointer-events: none;
         }
 
-        /* 柱体底部发光能量阵 (Base Light Glow) */
         .beam-base-glow {
             position: absolute;
             bottom: -50px; left: 50%;
@@ -239,151 +270,94 @@
             pointer-events: none;
         }
 
-        /* 悬停爆炸级激光特效 */
         .beam-pillar:hover {
-            flex: 1.4;
-            background: rgba(20, 20, 28, 0.95);
+            flex: 1.45;
+            background: rgba(18, 18, 26, 0.95);
             transform: translateY(-8px);
         }
 
         .beam-pillar:hover .beam-laser-line {
-            width: 4px;
-            opacity: 1;
+            width: 4px; opacity: 1;
         }
 
         .beam-pillar:hover .beam-base-glow {
-            opacity: 0.8;
-            transform: translateX(-50%) scale(1.4);
+            opacity: 0.95;
+            transform: translateX(-50%) scale(1.5);
         }
 
         /* 🔴 RED BEAM */
         .p-red .beam-laser-line { background: var(--brand-red); box-shadow: 0 0 15px var(--brand-red); }
         .p-red .beam-base-glow { background: var(--brand-red); }
-        .p-red:hover { border-color: var(--brand-red); box-shadow: 0 0 40px rgba(255, 0, 51, 0.4); }
+        .p-red:hover { border-color: var(--brand-red); box-shadow: 0 0 45px rgba(255, 0, 51, 0.45); }
 
         /* 🟢 GREEN BEAM */
         .p-green .beam-laser-line { background: var(--brand-green); box-shadow: 0 0 15px var(--brand-green); }
         .p-green .beam-base-glow { background: var(--brand-green); }
-        .p-green:hover { border-color: var(--brand-green); box-shadow: 0 0 40px rgba(0, 255, 102, 0.4); }
+        .p-green:hover { border-color: var(--brand-green); box-shadow: 0 0 45px rgba(0, 255, 102, 0.45); }
 
         /* 🔵 BLUE BEAM */
         .p-blue .beam-laser-line { background: var(--brand-blue); box-shadow: 0 0 15px var(--brand-blue); }
         .p-blue .beam-base-glow { background: var(--brand-blue); }
-        .p-blue:hover { border-color: var(--brand-blue); box-shadow: 0 0 40px rgba(0, 85, 255, 0.4); }
+        .p-blue:hover { border-color: var(--brand-blue); box-shadow: 0 0 45px rgba(0, 85, 255, 0.45); }
 
         /* 🟡 YELLOW BEAM */
         .p-yellow .beam-laser-line { background: var(--brand-yellow); box-shadow: 0 0 15px var(--brand-yellow); }
         .p-yellow .beam-base-glow { background: var(--brand-yellow); }
-        .p-yellow:hover { border-color: var(--brand-yellow); box-shadow: 0 0 40px rgba(255, 204, 0, 0.4); }
+        .p-yellow:hover { border-color: var(--brand-yellow); box-shadow: 0 0 45px rgba(255, 204, 0, 0.45); }
 
         /* ⚫ BLACK BEAM */
         .p-black .beam-laser-line { background: #ffffff; box-shadow: 0 0 15px #ffffff; }
         .p-black .beam-base-glow { background: #ffffff; }
-        .p-black:hover { border-color: #ffffff; box-shadow: 0 0 40px rgba(255, 255, 255, 0.25); }
+        .p-black:hover { border-color: #ffffff; box-shadow: 0 0 45px rgba(255, 255, 255, 0.3); }
 
         /* ⚪ WHITE BEAM */
         .p-white .beam-laser-line { background: #ffffff; box-shadow: 0 0 20px #ffffff; }
         .p-white .beam-base-glow { background: #ffffff; }
-        .p-white:hover { border-color: #ffffff; box-shadow: 0 0 50px rgba(255, 255, 255, 0.6); }
+        .p-white:hover { border-color: #ffffff; box-shadow: 0 0 50px rgba(255, 255, 255, 0.65); }
 
         /* 🟣 VIOLET BEAM */
         .p-violet .beam-laser-line { background: var(--brand-violet); box-shadow: 0 0 15px var(--brand-violet); }
         .p-violet .beam-base-glow { background: var(--brand-violet); }
-        .p-violet:hover { border-color: var(--brand-violet); box-shadow: 0 0 40px rgba(176, 38, 255, 0.4); }
+        .p-violet:hover { border-color: var(--brand-violet); box-shadow: 0 0 45px rgba(176, 38, 255, 0.45); }
 
-        .beam-top-tag {
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            color: #888888;
-            letter-spacing: 1px;
-            position: relative; z-index: 2;
-        }
+        .beam-top-tag { font-family: var(--font-mono); font-size: 0.65rem; color: #888; letter-spacing: 1px; position: relative; z-index: 2; }
+        .beam-title { font-size: 1.05rem; font-weight: 800; letter-spacing: 2px; color: #ffffff; margin-top: 4px; position: relative; z-index: 2; }
 
-        .beam-title {
-            font-size: 1.1rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: #ffffff;
-            margin-top: 6px;
-            position: relative; z-index: 2;
-        }
-
-        /* 悬浮在光柱内部的消费者留言碎片 */
         .beam-quotes-wrap {
             position: relative; z-index: 2;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 16px 0;
+            display: flex; flex-direction: column; gap: 10px; margin: 14px 0;
         }
 
         .beam-quote-card {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            font-size: 0.75rem;
-            color: #dddddd;
-            line-height: 1.45;
-            font-style: italic;
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 10px; font-size: 0.74rem; color: #dddddd; line-height: 1.45; font-style: italic; backdrop-filter: blur(5px);
         }
 
-        .beam-quote-num {
-            font-family: var(--font-mono);
-            font-size: 0.62rem;
-            color: #777777;
-            font-style: normal;
-            margin-bottom: 4px;
-        }
+        .beam-quote-num { font-family: var(--font-mono); font-size: 0.62rem; color: #777; font-style: normal; margin-bottom: 4px; }
 
         .beam-action-btn {
-            width: 100%;
-            padding: 10px;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #ffffff;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            position: relative; z-index: 2;
-            transition: all 0.2s ease;
+            width: 100%; padding: 10px; background: transparent; border: 1px solid rgba(255,255,255,0.2);
+            color: #ffffff; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 1.5px; text-transform: uppercase; position: relative; z-index: 2; transition: all 0.2s ease;
         }
 
-        .beam-pillar:hover .beam-action-btn {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
-        }
+        .beam-pillar:hover .beam-action-btn { background: #ffffff; color: #000000; border-color: #ffffff; }
 
         /* Header */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 0;
-            border-bottom: 1px solid var(--border-subtle);
-            position: relative;
-            z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 0; border-bottom: 1px solid var(--border-subtle); position: relative; z-index: 100;
         }
 
-        .brand-logo-wrap {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-
+        .brand-logo-wrap { display: flex; align-items: center; gap: 16px; text-decoration: none; color: var(--text-primary); }
         .official-logo-img { width: 44px; height: auto; object-fit: contain; }
         .text-logo { font-weight: 800; font-size: 1.2rem; letter-spacing: 5px; }
 
         .nav-right { display: flex; align-items: center; gap: 24px; }
         .nav-btn {
-            font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px;
-            background: transparent; border: none; cursor: pointer; color: var(--text-primary);
-            text-transform: uppercase; text-decoration: none; transition: color 0.2s;
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; background: transparent; border: none;
+            cursor: pointer; color: var(--text-primary); text-transform: uppercase; text-decoration: none; transition: color 0.2s;
         }
         .nav-btn:hover { color: var(--brand-active); }
 
@@ -395,61 +369,30 @@
 
         /* 三概念 Tab */
         .triad-tab-bar {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin: 40px 0 48px 0;
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 16px;
+            display: flex; justify-content: center; gap: 16px; margin: 40px 0 48px 0;
+            border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px;
         }
 
         .concept-tab {
-            background: transparent;
-            border: 1px solid var(--border-subtle);
-            padding: 12px 24px;
-            font-family: var(--font-mono);
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            color: var(--text-secondary);
+            background: transparent; border: 1px solid var(--border-subtle); padding: 12px 24px;
+            font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px;
+            cursor: pointer; transition: all 0.25s ease; color: var(--text-secondary);
         }
 
         .concept-tab.active {
-            background: var(--text-primary);
-            color: #ffffff;
-            border-color: var(--text-primary);
-            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+            background: var(--text-primary); color: #ffffff; border-color: var(--text-primary); box-shadow: 0 4px 14px rgba(0,0,0,0.12);
         }
 
         /* Product Stage */
-        .screen-product {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 48px;
-            margin-bottom: 64px;
-        }
-
-        @media (min-width: 960px) {
-            .screen-product { grid-template-columns: 1.1fr 0.9fr; }
-        }
+        .screen-product { display: grid; grid-template-columns: 1fr; gap: 48px; margin-bottom: 64px; }
+        @media (min-width: 960px) { .screen-product { grid-template-columns: 1.1fr 0.9fr; } }
 
         .gallery-wrap { display: flex; flex-direction: column; gap: 16px; }
-        .main-stage {
-            width: 100%; aspect-ratio: 4 / 5;
-            background-color: #0d0d0d;
-            border: 1px solid var(--border-subtle);
-            overflow: hidden;
-            position: relative;
-        }
+        .main-stage { width: 100%; aspect-ratio: 4 / 5; background-color: #0d0d0d; border: 1px solid var(--border-subtle); overflow: hidden; position: relative; }
         .main-stage img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
 
         .thumbs-row { display: flex; gap: 14px; }
-        .thumb-btn {
-            width: 90px; aspect-ratio: 4 / 5; background: #0d0d0d;
-            border: 1px solid var(--border-subtle); cursor: pointer; opacity: 0.5; transition: 0.2s;
-        }
+        .thumb-btn { width: 90px; aspect-ratio: 4 / 5; background: #0d0d0d; border: 1px solid var(--border-subtle); cursor: pointer; opacity: 0.5; transition: 0.2s; }
         .thumb-btn.active, .thumb-btn:hover { opacity: 1; border-color: var(--text-primary); }
         .thumb-btn img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -459,43 +402,27 @@
         .item-price { font-size: 1.35rem; font-weight: 700; margin-bottom: 20px; }
         .item-desc { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; }
 
-        .color-philosophy-tag {
-            background: #f0f4ff; border: 1px solid #c7d2fe; color: var(--brand-active);
-            font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; padding: 10px 14px; margin-bottom: 28px; display: inline-block; transition: all 0.3s;
-        }
+        .color-philosophy-tag { background: #f0f4ff; border: 1px solid #c7d2fe; color: var(--brand-active); font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; padding: 10px 14px; margin-bottom: 28px; display: inline-block; transition: all 0.3s; }
 
         .size-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .size-guide-btn {
-            background: transparent; border: none; color: var(--brand-active);
-            font-size: 0.78rem; font-weight: 700; cursor: pointer; letter-spacing: 1px; transition: color 0.3s;
-        }
+        .size-guide-btn { background: transparent; border: none; color: var(--brand-active); font-size: 0.78rem; font-weight: 700; cursor: pointer; letter-spacing: 1px; transition: color 0.3s; }
         .size-guide-btn:hover { text-decoration: underline; }
 
         .size-grid { display: flex; gap: 12px; margin-bottom: 24px; }
-        .size-chip {
-            width: 52px; height: 52px; background: #fff; border: 1px solid var(--border-subtle);
-            font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.2s;
-        }
+        .size-chip { width: 52px; height: 52px; background: #fff; border: 1px solid var(--border-subtle); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
         .size-chip.active { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
 
-        .action-buy-btn {
-            width: 100%; padding: 20px; background: var(--text-primary); color: #fff;
-            border: none; font-size: 0.9rem; font-weight: 700; letter-spacing: 3px; cursor: pointer; transition: 0.2s;
-        }
+        .action-buy-btn { width: 100%; padding: 20px; background: var(--text-primary); color: #fff; border: none; font-size: 0.9rem; font-weight: 700; letter-spacing: 3px; cursor: pointer; transition: 0.2s; }
         .action-buy-btn:hover { background: var(--brand-active); }
 
         /* Manifesto */
-        .manifesto-watermark-section {
-            background: var(--panel-bg); border: 1px solid var(--border-subtle);
-            padding: 40px; margin-bottom: 64px; position: relative; overflow: hidden;
-            display: flex; align-items: center; justify-content: space-between;
-        }
+        .manifesto-watermark-section { background: var(--panel-bg); border: 1px solid var(--border-subtle); padding: 40px; margin-bottom: 64px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; }
         .manifesto-content { position: relative; z-index: 2; max-width: 780px; }
         .manifesto-title { font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 12px; }
         .manifesto-text { font-size: 1.1rem; line-height: 1.7; font-style: italic; font-weight: 500; }
         .watermark-img { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 220px; opacity: 0.06; pointer-events: none; }
 
-        /* Interactive Screen 2: Private Preview & Live Ledger */
+        /* Interactive Screen 2 */
         .screen-interactive { border-top: 1px solid var(--border-subtle); padding-top: 56px; margin-bottom: 64px; }
         .section-heading { font-size: 0.82rem; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 28px; text-transform: uppercase; }
         .interactive-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -531,7 +458,7 @@
         .pulse-led { width: 8px; height: 8px; border-radius: 50%; background-color: var(--brand-green); box-shadow: 0 0 6px var(--brand-green); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* 首页公开留言卡片流 */
+        /* Signal Stream Cards */
         .signal-cards-container { display: flex; flex-direction: column; gap: 16px; max-height: 380px; overflow-y: auto; padding-right: 6px; }
         .signal-card { background: #ffffff; border: 1px solid var(--border-subtle); border-left: 3px solid var(--brand-blue); padding: 16px 20px; transition: transform 0.2s ease; }
         .signal-card:hover { transform: translateX(4px); }
@@ -567,7 +494,7 @@
 </head>
 <body>
 
-<!-- 🔒 1. 拱门满屏入口 Portal Overlay (100vh - 锁定不动) -->
+<!-- 🔒 1. 拱门满屏入口 Portal Overlay (100vh - 锁死不动) -->
 <div id="portal-overlay">
     <canvas id="portal-canvas"></canvas>
     <div class="portal-aura"></div>
@@ -577,11 +504,26 @@
     <div class="portal-enter-prompt" onclick="enterArchwayPortal()">[ TAP LOGO TO ENTER THE ARCHIVE ]</div>
 </div>
 
-<!-- ⚡ 2. 7 根激光冲天光柱门界 (The Seven Laser Monolith Overlay) -->
+<!-- ⚡ 2. 7 根通天激光光柱门界 (z-index: 999998 - 紧贴大门背面，绝不闪现底色) -->
 <div id="faction-overlay">
     <div class="faction-header-text">
         <h2>SELECT YOUR FREQUENCY</h2>
         <p>THE GARMENT IS BLANK. CHOOSE THE SPECTRUM OF YOUR VOICE.</p>
+
+        <!-- ⏰ 温哥华 (PST) 实时秒动倒计时钟 -->
+        <div class="launch-timer-box">
+            <span class="timer-label">LAUNCH IN:</span>
+            <div class="timer-digits-row">
+                <div class="timer-unit"><div id="timer-days">000</div><span>D</span></div>
+                <div>:</div>
+                <div class="timer-unit"><div id="timer-hours">00</div><span>H</span></div>
+                <div>:</div>
+                <div class="timer-unit"><div id="timer-mins">00</div><span>M</span></div>
+                <div>:</div>
+                <div class="timer-unit"><div id="timer-secs">00</div><span>S</span></div>
+            </div>
+            <span class="timer-label" style="color: #666; font-size: 0.6rem;">(VANCOUVER PST)</span>
+        </div>
     </div>
 
     <!-- 7 根通天激光柱 -->
@@ -743,11 +685,11 @@
         </div>
     </header>
 
-    <!-- 三概念切换 Switcher -->
+    <!-- 三概念切换 Switcher (全量更新命名) -->
     <div class="triad-tab-bar">
-        <button class="concept-tab active" onclick="switchConcept('dystopia', this)">DROP 01 // DYSTOPIA</button>
-        <button class="concept-tab" onclick="switchConcept('paradise', this)">DROP 02 // PARADISE LOST</button>
-        <button class="concept-tab" onclick="switchConcept('utopia', this)">DROP 03 // UTOPIA</button>
+        <button class="concept-tab active" onclick="switchConcept('utopia', this)">DROP 01 // UTOPIA</button>
+        <button class="concept-tab" onclick="switchConcept('dystopia', this)">DROP 02 // DYSTOPIA</button>
+        <button class="concept-tab" onclick="switchConcept('paradise', this)">DROP 03 // LOST IN PARADISE</button>
     </div>
 
     <!-- 商品区 -->
@@ -770,7 +712,7 @@
         </div>
 
         <div class="product-meta">
-            <div class="item-series" id="concept-series-tag">LIMITED EDITION // 777 UNITS (DYSTOPIA ARCHIVE)</div>
+            <div class="item-series" id="concept-series-tag">LIMITED EDITION // 777 UNITS (UTOPIA ARCHIVE)</div>
             <h1 class="item-title" id="concept-title">DROP 01 — THE NUMBERED BLANK</h1>
             <div class="item-price">CA$180.00 <span style="font-size: 0.8rem; font-weight: 400; color: #737373;">(Excluding Shipping & Taxes)</span></div>
             
@@ -815,13 +757,13 @@
         <div class="manifesto-content">
             <div class="manifesto-title">// BRAND MANIFESTO</div>
             <div class="manifesto-text" id="manifesto-text-target">
-                "Today, blue means becoming visible. The garment arrives as a blank canvas — you decide the color, the words, and when to speak."
+                "Utopia is not a place; it is a moment where no one is watching and everyone is heard."
             </div>
         </div>
         <img src="/LOGO.png" alt="Watermark" class="watermark-img" onerror="this.style.display='none';">
     </section>
 
-    <!-- Screen 2: Private Preview & Live Ledger Signal Stream -->
+    <!-- Screen 2: Interactive Private Preview & Live Ledger Signal Stream -->
     <section class="screen-interactive">
         <div class="section-heading">// SYSTEM INTERACTION & LIVE SIGNAL STREAM</div>
         
@@ -1011,12 +953,11 @@
         portalGate.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
 
-    /* 点击拱门进入 7 激光柱选择 overlay */
+    /* 点击拱门进入 7 激光柱 overlay */
     function enterArchwayPortal() {
         portalOverlay.classList.add('portal-open');
         setTimeout(() => {
             portalOverlay.style.display = 'none';
-            document.getElementById('faction-overlay').classList.add('faction-enter');
         }, 600);
     }
 
@@ -1037,28 +978,60 @@
         }, 600);
     }
 
-    /* 三重概念数据 */
+    /* ⏰ 3. 温哥华 (PST/PDT) 2026-11-11 实时秒动倒计时钟 */
+    function initVancouverCountdown() {
+        // 温哥华时区 ISO 时间戳: 2026-11-11T00:00:00-08:00 (PST)
+        const targetTime = new Date("2026-11-11T00:00:00-08:00").getTime();
+
+        function updateClock() {
+            const now = new Date().getTime();
+            const diff = targetTime - now;
+
+            if (diff <= 0) {
+                document.getElementById('timer-days').textContent = "000";
+                document.getElementById('timer-hours').textContent = "00";
+                document.getElementById('timer-mins').textContent = "00";
+                document.getElementById('timer-secs').textContent = "00";
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('timer-days').textContent = String(d).padStart(3, '0');
+            document.getElementById('timer-hours').textContent = String(h).padStart(2, '0');
+            document.getElementById('timer-mins').textContent = String(m).padStart(2, '0');
+            document.getElementById('timer-secs').textContent = String(s).padStart(2, '0');
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+    }
+
+    /* ✨ 4. 三重概念重写 (UTOPIA / DYSTOPIA / LOST IN PARADISE) */
     const conceptData = {
-        'dystopia': {
-            series: 'LIMITED EDITION // 777 UNITS (DYSTOPIA ARCHIVE)',
+        'utopia': {
+            series: 'LIMITED EDITION // 777 UNITS (UTOPIA ARCHIVE)',
             title: 'DROP 01 — THE NUMBERED BLANK',
             desc: 'A numbered heavyweight T-shirt with an NFC access tag and sealed Claim Card. Cut from 420GSM heavy loopback cotton. Tap to unlock your private page and publish one anonymous statement for seven days.',
+            philosophy: 'TO BE UNNAMED IS TO BE TRULY FREE.',
+            manifesto: '"Utopia is not a place; it is a moment where no one is watching and everyone is heard."'
+        },
+        'dystopia': {
+            series: 'CONCEPT ARCHIVE // DYSTOPIA',
+            title: 'DROP 02 — THE SILENT FLESH',
+            desc: 'Washed charcoal loopback fleece with a subtle amber stitch. Reflects the erasure of self in the noise of digital hyper-connectivity. Releases Q4 2026.',
             philosophy: 'THE GARMENT IS BLANK. THE COLOR IS YOURS TO ASSIGN.',
             manifesto: '"Today, blue means becoming visible. The garment arrives as a blank canvas — you decide the color, the words, and when to speak."'
         },
         'paradise': {
-            series: 'CONCEPT ARCHIVE // PARADISE LOST',
-            title: 'DROP 02 — THE SILENT FLESH',
-            desc: 'Washed charcoal loopback fleece with a subtle amber stitch. Reflects the erasure of self in the noise of digital hyper-connectivity. Releases Q4 2026.',
-            philosophy: 'MEMORY IS EPHEMERAL. SILENCE IS THE ULTIMATE LUXURY.',
-            manifesto: '"In a world that never stops recording, disappearing is the only sacred choice left."'
-        },
-        'utopia': {
-            series: 'CONCEPT ARCHIVE // UTOPIA',
+            series: 'CONCEPT ARCHIVE // LOST IN PARADISE',
             title: 'DROP 03 — THE UNBOUND ETHER',
             desc: 'Pure optic white high-gauge jersey with translucent brand markings. Freedom beyond identity — absolute anonymity in pure void. Pre-order preview.',
-            philosophy: 'TO BE UNNAMED IS TO BE TRULY FREE.',
-            manifesto: '"Utopia is not a place; it is a moment where no one is watching and everyone is heard."'
+            philosophy: 'MEMORY IS EPHEMERAL. SILENCE IS THE ULTIMATE LUXURY.',
+            manifesto: '"In a world that never stops recording, disappearing is the only sacred choice left."'
         }
     };
 
@@ -1317,7 +1290,10 @@
     }
     function closePolicyModal() { document.getElementById('policy-modal').style.display = 'none'; }
 
-    document.addEventListener('DOMContentLoaded', () => { initTerminalFeed(); });
+    document.addEventListener('DOMContentLoaded', () => { 
+        initTerminalFeed(); 
+        initVancouverCountdown();
+    });
 </script>
 
 </body>
