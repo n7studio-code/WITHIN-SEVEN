@@ -23,10 +23,13 @@
             --text-secondary: #525252;
             --text-muted: #737373;
             --brand-blue: #0044ff;
-            --brand-red: #e60000;
-            --brand-green: #00a843;
-            --brand-gold: #d97706;
-            --brand-active: #0044ff; /* 动态阵营渲染色 */
+            --brand-red: #ff1a1a;
+            --brand-green: #00e65c;
+            --brand-yellow: #ffcc00;
+            --brand-black: #111111;
+            --brand-white: #ffffff;
+            --brand-violet: #a855f7;
+            --brand-active: #0044ff; /* 动态阵营染亮色 */
             --font-sans: 'Inter', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -44,7 +47,7 @@
 
         .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-        /* 🔒 门界 1: 满屏拱门 Logo Portal (永久锁定) */
+        /* 🔒 门界 1: 满屏拱门 Logo Portal (打死不动锁死) */
         #portal-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -132,18 +135,18 @@
             50% { opacity: 1; }
         }
 
-        /* 🔴🟢🔵 门界 2: 带有真实留言流的红绿蓝阵营圣殿 (Faction Gate) */
+        /* 💥 门界 2: 7 色高饱和度爆彩阵营门界 (The Seven Frequencies Overlay) */
         #faction-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background-color: #080808;
+            background-color: #030303;
             z-index: 999998;
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 30px 20px;
+            padding: 30px 16px;
             overflow-y: auto;
             transition: opacity 0.6s ease;
         }
@@ -155,135 +158,141 @@
 
         .faction-title-block {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             z-index: 10;
         }
 
         .faction-main-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
             letter-spacing: 6px;
             color: #ffffff;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
         }
 
         .faction-sub-title {
             font-family: var(--font-mono);
             font-size: 0.78rem;
-            color: #a3a3a3;
+            color: #888;
             letter-spacing: 2px;
         }
 
-        .faction-pillars-grid {
+        /* 7 阵营响应式网格 */
+        .seven-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 16px;
             width: 100%;
-            max-width: 1140px;
+            max-width: 1280px;
             z-index: 10;
         }
 
-        @media (min-width: 900px) {
-            .faction-pillars-grid { grid-template-columns: repeat(3, 1fr); }
+        @media (min-width: 640px) {
+            .seven-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .seven-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (min-width: 1280px) {
+            .seven-grid { grid-template-columns: repeat(7, 1fr); }
         }
 
-        .faction-card {
-            background: #111111;
-            border: 1px solid #262626;
-            padding: 28px 20px;
+        .seven-card {
+            background: #0d0d0d;
+            border: 1px solid #222;
+            padding: 20px 14px;
             cursor: pointer;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            min-height: 280px;
         }
 
-        .faction-card::before {
+        .seven-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
+            top: 0; left: 0; width: 100%; height: 4px;
             background: #333;
             transition: background 0.3s;
         }
 
-        .faction-card.red-card:hover {
-            border-color: var(--brand-red);
-            box-shadow: 0 0 35px rgba(230, 0, 0, 0.35);
-            transform: translateY(-6px);
+        /* 七色独立悬停特效 */
+        .seven-card.c-red:hover { border-color: var(--brand-red); box-shadow: 0 0 30px rgba(255,26,26,0.35); transform: translateY(-6px); }
+        .seven-card.c-red::before { background: var(--brand-red); }
+
+        .seven-card.c-green:hover { border-color: var(--brand-green); box-shadow: 0 0 30px rgba(0,230,92,0.35); transform: translateY(-6px); }
+        .seven-card.c-green::before { background: var(--brand-green); }
+
+        .seven-card.c-blue:hover { border-color: var(--brand-blue); box-shadow: 0 0 30px rgba(0,68,255,0.35); transform: translateY(-6px); }
+        .seven-card.c-blue::before { background: var(--brand-blue); }
+
+        .seven-card.c-yellow:hover { border-color: var(--brand-yellow); box-shadow: 0 0 30px rgba(255,204,0,0.35); transform: translateY(-6px); }
+        .seven-card.c-yellow::before { background: var(--brand-yellow); }
+
+        .seven-card.c-black:hover { border-color: #ffffff; box-shadow: 0 0 30px rgba(255,255,255,0.2); transform: translateY(-6px); }
+        .seven-card.c-black::before { background: #ffffff; }
+
+        .seven-card.c-white:hover { border-color: #ffffff; box-shadow: 0 0 30px rgba(255,255,255,0.5); transform: translateY(-6px); background: #181818; }
+        .seven-card.c-white::before { background: #ffffff; }
+
+        .seven-card.c-violet:hover { border-color: var(--brand-violet); box-shadow: 0 0 30px rgba(168,85,247,0.35); transform: translateY(-6px); }
+        .seven-card.c-violet::before { background: var(--brand-violet); }
+
+        .seven-card-header {
+            border-bottom: 1px solid #1f1f1f;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
         }
-        .faction-card.red-card:hover::before { background: var(--brand-red); }
 
-        .faction-card.green-card:hover {
-            border-color: var(--brand-green);
-            box-shadow: 0 0 35px rgba(0, 168, 67, 0.35);
-            transform: translateY(-6px);
-        }
-        .faction-card.green-card:hover::before { background: var(--brand-green); }
+        .seven-code { font-family: var(--font-mono); font-size: 0.65rem; color: #666; letter-spacing: 1px; margin-bottom: 4px; }
+        .seven-name { font-size: 0.98rem; font-weight: 800; letter-spacing: 1.5px; color: #ffffff; }
 
-        .faction-card.blue-card:hover {
-            border-color: var(--brand-blue);
-            box-shadow: 0 0 35px rgba(0, 68, 255, 0.35);
-            transform: translateY(-6px);
-        }
-        .faction-card.blue-card:hover::before { background: var(--brand-blue); }
-
-        .faction-card-header {
-            border-bottom: 1px solid #222;
-            padding-bottom: 14px;
-            margin-bottom: 18px;
-        }
-
-        .faction-code { font-family: var(--font-mono); font-size: 0.72rem; color: #737373; letter-spacing: 2px; margin-bottom: 6px; }
-        .faction-name { font-size: 1.25rem; font-weight: 800; letter-spacing: 3px; color: #ffffff; }
-
-        /* 💬 阵营卡片内部嵌入的真实消费者留言流 Preview */
-        .faction-quotes-container {
+        .seven-quotes-wrap {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 24px;
+            gap: 8px;
+            margin-bottom: 16px;
         }
 
-        .faction-quote-item {
-            background: #0a0a0a;
-            border: 1px solid #1f1f1f;
-            padding: 12px;
-            font-size: 0.82rem;
-            color: #d4d4d4;
-            line-height: 1.5;
+        .seven-quote-item {
+            background: #050505;
+            border: 1px solid #1a1a1a;
+            padding: 8px 10px;
+            font-size: 0.74rem;
+            color: #cccccc;
+            line-height: 1.4;
             font-style: italic;
         }
 
-        .faction-quote-meta {
-            display: flex;
-            justify-content: space-between;
+        .seven-quote-meta {
             font-family: var(--font-mono);
-            font-size: 0.68rem;
-            color: #666;
-            margin-bottom: 6px;
+            font-size: 0.6rem;
+            color: #555;
+            margin-bottom: 4px;
             font-style: normal;
         }
 
-        .faction-select-cta {
+        .seven-select-cta {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: transparent;
             border: 1px solid #333;
             color: #fff;
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             transition: all 0.2s;
         }
 
-        .faction-card:hover .faction-select-cta {
-            background: #fff;
-            color: #000;
-            border-color: #fff;
+        .seven-card:hover .seven-select-cta {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
         }
 
         /* Top Header Nav */
@@ -496,7 +505,7 @@
 </head>
 <body>
 
-<!-- 🔒 1. 拱门满屏入口 Portal Overlay (100vh - 永久锁定) -->
+<!-- 🔒 1. 拱门满屏入口 Portal Overlay (100vh - 打死不动) -->
 <div id="portal-overlay">
     <canvas id="portal-canvas"></canvas>
     <div class="portal-aura"></div>
@@ -506,75 +515,117 @@
     <div class="portal-enter-prompt" onclick="enterArchwayPortal()">[ TAP LOGO TO ENTER THE ARCHIVE ]</div>
 </div>
 
-<!-- 🔴🟢🔵 2. 带有消费者真实留言的阵营抉择门界 (Faction Gate) -->
+<!-- 🔴🟢🔵🟡⚫⚪🟣 2. 7 色灵魂光谱抉择门界 (The Seven Frequencies Overlay) -->
 <div id="faction-overlay">
     <div class="faction-title-block">
         <div class="faction-main-title">SELECT YOUR FREQUENCY</div>
         <div class="faction-sub-title">THE GARMENT IS BLANK. CHOOSE THE SPECTRUM OF YOUR VOICE.</div>
     </div>
 
-    <div class="faction-pillars-grid">
-        <!-- 🔴 RED -->
-        <div class="faction-card red-card" onclick="selectFaction('RED', '#e60000')">
-            <div class="faction-card-header">
-                <div class="faction-code">FREQUENCY 01 // RED</div>
-                <div class="faction-name">🔴 RESISTANCE</div>
+    <div class="seven-grid">
+        <!-- 01 RED -->
+        <div class="seven-card c-red" onclick="selectFaction('RED', '#ff1a1a')">
+            <div class="seven-card-header">
+                <div class="seven-code">01 // RED</div>
+                <div class="seven-name">RESISTANCE</div>
             </div>
-            
-            <div class="faction-quotes-container">
-                <div class="faction-quote-item">
-                    <div class="faction-quote-meta"><span>#0142</span><span>COLOR: RED</span></div>
+            <div class="seven-quotes-wrap">
+                <div class="seven-quote-item">
+                    <div class="seven-quote-meta">#0142</div>
                     "In an ocean of digital noise, I choose to be a flame that burns out in 7 days."
                 </div>
-                <div class="faction-quote-item">
-                    <div class="faction-quote-meta"><span>#0589</span><span>COLOR: RED</span></div>
-                    "Do not ask for permission to speak. Just leave your mark."
-                </div>
             </div>
-
-            <button class="faction-select-cta">ENTER WITH RED</button>
+            <button class="seven-select-cta">ALIGN RED</button>
         </div>
 
-        <!-- 🟢 GREEN -->
-        <div class="faction-card green-card" onclick="selectFaction('GREEN', '#00a843')">
-            <div class="faction-card-header">
-                <div class="faction-code">FREQUENCY 02 // GREEN</div>
-                <div class="faction-name">🟢 SYNTHESIS</div>
+        <!-- 02 GREEN -->
+        <div class="seven-card c-green" onclick="selectFaction('GREEN', '#00e65c')">
+            <div class="seven-card-header">
+                <div class="seven-code">02 // GREEN</div>
+                <div class="seven-name">SYNTHESIS</div>
             </div>
-
-            <div class="faction-quotes-container">
-                <div class="faction-quote-item">
-                    <div class="faction-quote-meta"><span>#0088</span><span>COLOR: GREEN</span></div>
+            <div class="seven-quotes-wrap">
+                <div class="seven-quote-item">
+                    <div class="seven-quote-meta">#0088</div>
                     "Growth is silent. The roots expand long before the noise begins."
                 </div>
-                <div class="faction-quote-item">
-                    <div class="faction-quote-meta"><span>#0412</span><span>COLOR: GREEN</span></div>
-                    "We are nodes in the same mesh, breathing in 7-day cycles."
-                </div>
             </div>
-
-            <button class="faction-select-cta">ENTER WITH GREEN</button>
+            <button class="seven-select-cta">ALIGN GREEN</button>
         </div>
 
-        <!-- 🔵 BLUE -->
-        <div class="faction-card blue-card" onclick="selectFaction('BLUE', '#0044ff')">
-            <div class="faction-card-header">
-                <div class="faction-code">FREQUENCY 03 // BLUE</div>
-                <div class="faction-name">🔵 AWAKENING</div>
+        <!-- 03 BLUE -->
+        <div class="seven-card c-blue" onclick="selectFaction('BLUE', '#0044ff')">
+            <div class="seven-card-header">
+                <div class="seven-code">03 // BLUE</div>
+                <div class="seven-name">AWAKENING</div>
             </div>
-
-            <div class="faction-quotes-container">
-                <div class="faction-quote-item">
-                    <div class="faction-quote-meta"><span>#0234</span><span>COLOR: BLUE</span></div>
+            <div class="seven-quotes-wrap">
+                <div class="seven-quote-item">
+                    <div class="seven-quote-meta">#0234</div>
                     "Today, blue means becoming visible in the void."
                 </div>
-                <div class="faction-quote-item">
-                    <div class="faction-quote-meta"><span>#0671</span><span>COLOR: BLUE</span></div>
-                    "The quietest voice in the room holds the deepest truth."
+            </div>
+            <button class="seven-select-cta">ALIGN BLUE</button>
+        </div>
+
+        <!-- 04 YELLOW -->
+        <div class="seven-card c-yellow" onclick="selectFaction('YELLOW', '#ffcc00')">
+            <div class="seven-card-header">
+                <div class="seven-code">04 // YELLOW</div>
+                <div class="seven-name">ILLUMINATION</div>
+            </div>
+            <div class="seven-quotes-wrap">
+                <div class="seven-quote-item">
+                    <div class="seven-quote-meta">#0307</div>
+                    "A temporary blinding light is worth a lifetime of dim shadows."
                 </div>
             </div>
+            <button class="seven-select-cta">ALIGN YELLOW</button>
+        </div>
 
-            <button class="faction-select-cta">ENTER WITH BLUE</button>
+        <!-- 05 BLACK -->
+        <div class="seven-card c-black" onclick="selectFaction('BLACK', '#111111')">
+            <div class="seven-card-header">
+                <div class="seven-code">05 // BLACK</div>
+                <div class="seven-name">ECLIPSE</div>
+            </div>
+            <div class="seven-quotes-wrap">
+                <div class="seven-quote-item">
+                    <div class="seven-quote-meta">#0007</div>
+                    "True luxury is having nothing to prove and no identity to broadcast."
+                </div>
+            </div>
+            <button class="seven-select-cta">ALIGN BLACK</button>
+        </div>
+
+        <!-- 06 WHITE -->
+        <div class="seven-card c-white" onclick="selectFaction('WHITE', '#ffffff')">
+            <div class="seven-card-header">
+                <div class="seven-code" style="color:#aaa;">06 // WHITE</div>
+                <div class="seven-name">PURITY</div>
+            </div>
+            <div class="seven-quotes-wrap">
+                <div class="seven-quote-item">
+                    <div class="seven-quote-meta">#0101</div>
+                    "Clean slate. No history. Pure unconditioned voice."
+                </div>
+            </div>
+            <button class="seven-select-cta">ALIGN WHITE</button>
+        </div>
+
+        <!-- 07 VIOLET -->
+        <div class="seven-card c-violet" onclick="selectFaction('VIOLET', '#a855f7')">
+            <div class="seven-card-header">
+                <div class="seven-code">07 // VIOLET</div>
+                <div class="seven-name">TRANSCENDENCE</div>
+            </div>
+            <div class="seven-quotes-wrap">
+                <div class="seven-quote-item">
+                    <div class="seven-quote-meta">#0707</div>
+                    "Vibrate at a frequency only the quiet ones can decode."
+                </div>
+            </div>
+            <button class="seven-select-cta">ALIGN VIOLET</button>
         </div>
     </div>
 </div>
@@ -693,8 +744,8 @@
                     <div class="color-picker-row">
                         <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">SIGNAL COLOR:</span>
                         <button class="color-dot-btn color-dot-blue active" id="dot-blue" onclick="selectSimColor('#0044ff', 'BLUE', this)"></button>
-                        <button class="color-dot-btn color-dot-red" id="dot-red" onclick="selectSimColor('#e60000', 'RED', this)"></button>
-                        <button class="color-dot-btn color-dot-green" id="dot-green" onclick="selectSimColor('#00a843', 'GREEN', this)"></button>
+                        <button class="color-dot-btn color-dot-red" id="dot-red" onclick="selectSimColor('#ff1a1a', 'RED', this)"></button>
+                        <button class="color-dot-btn color-dot-green" id="dot-green" onclick="selectSimColor('#00e65c', 'GREEN', this)"></button>
                         <button class="color-dot-btn color-dot-black" id="dot-black" onclick="selectSimColor('#111111', 'BLACK', this)"></button>
                     </div>
 
@@ -862,7 +913,7 @@
         portalGate.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
 
-    /* 点击拱门进入阵营选择 overlay */
+    /* 点击拱门进入 7 色选择 overlay */
     function enterArchwayPortal() {
         portalOverlay.classList.add('portal-open');
         setTimeout(() => {
@@ -871,14 +922,15 @@
         }, 600);
     }
 
-    /* 🔴🟢🔵 2. 阵营选择逻辑：染色全站 UI */
+    /* 🌈 2. 7 色选择逻辑：全站染亮指定色 */
     function selectFaction(factionName, colorHex) {
         document.documentElement.style.setProperty('--brand-active', colorHex);
         
         // 自动将 Simulator 选为该颜色
-        if (factionName === 'RED') selectSimColor(colorHex, 'RED', document.getElementById('dot-red'));
-        if (factionName === 'GREEN') selectSimColor(colorHex, 'GREEN', document.getElementById('dot-green'));
-        if (factionName === 'BLUE') selectSimColor(colorHex, 'BLUE', document.getElementById('dot-blue'));
+        if (factionName === 'RED') selectSimColor('#ff1a1a', 'RED', document.getElementById('dot-red'));
+        if (factionName === 'GREEN') selectSimColor('#00e65c', 'GREEN', document.getElementById('dot-green'));
+        if (factionName === 'BLUE') selectSimColor('#0044ff', 'BLUE', document.getElementById('dot-blue'));
+        if (factionName === 'BLACK') selectSimColor('#111111', 'BLACK', document.getElementById('dot-black'));
 
         const factionOverlay = document.getElementById('faction-overlay');
         factionOverlay.style.opacity = '0';
@@ -995,7 +1047,10 @@
         'BLUE': 'var(--brand-blue)',
         'RED': 'var(--brand-red)',
         'GREEN': 'var(--brand-green)',
-        'BLACK': '#111111'
+        'YELLOW': 'var(--brand-yellow)',
+        'BLACK': '#111111',
+        'WHITE': '#888888',
+        'VIOLET': 'var(--brand-violet)'
     };
 
     async function initTerminalFeed() {
