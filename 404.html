@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WITHIN SEVEN — TERMINAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --bg: #050505;
+            --panel: #0d0d0d;
+            --border: #1a1a1a;
+            --text: #f0f0f0;
+            --muted: #666;
+            --accent: #ff2a2a;
+            --green: #00ff66;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--text); font-family: var(--font-mono); padding: 20px; display: flex; justify-content: center; }
+        .card { width: 100%; max-width: 520px; background: var(--panel); border: 1px solid var(--border); padding: 30px; margin-top: 30px; }
+        .header { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 25px; font-size: 0.8rem; color: var(--muted); }
+        .tag-id { color: var(--accent); font-weight: bold; }
+        .input-box { width: 100%; background: #000; border: 1px solid var(--border); color: #fff; padding: 12px; font-family: var(--font-mono); margin-bottom: 12px; outline: none; font-size: 0.85rem; }
+        .input-box:focus { border-color: var(--text); }
+        .btn { width: 100%; background: var(--text); color: var(--bg); border: none; padding: 14px; font-family: var(--font-mono); font-weight: bold; cursor: pointer; letter-spacing: 1px; font-size: 0.8rem; }
+        .btn:hover { background: #fff; }
+        .btn-sub { background: transparent; color: var(--text); border: 1px solid var(--border); margin-top: 8px; }
+        .btn-sub:hover { border-color: var(--text); }
+        .statement-display { font-size: 1.05rem; line-height: 1.6; margin: 20px 0; word-break: break-word; }
+        .msg-err { color: var(--accent); font-size: 0.75rem; margin-top: 10px; }
+        .msg-ok { color: var(--green); font-size: 0.75rem; margin-top: 10px; }
+        .cooldown-box { background: rgba(255,42,42,0.04); border: 1px solid rgba(255,42,42,0.2); padding: 15px; margin-top: 15px; font-size: 0.75rem; line-height: 1.5; color: var(--muted); }
+        .auth-bar { background: #111; padding: 12px; border: 1px solid var(--border); margin-top: 20px; font-size: 0.75rem; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="header">
+        <span>WITHIN SEVEN // LEDGER</span>
+        <span class="tag-id" id="garment-tag">#----</span>
+    </div>
+    
+    <!-- 纯 DOM 视口节点 -->
+    <div id="viewport"></div>
+</div>
+
+<script>
+    // 凭证配置
+    const SUPABASE_URL = "https://dfyigdgknxfqwnaykmfw.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_H-TTFizO1CEVpXJub6fiyA_clCGrSki";
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    let stateData = null;
+    let currentUser = null;
+    let serialNum = null;
+
+    // 1. 严格正则匹配 URL (/g/0001 - /g/0777)
+    function parseRoute() {
+        const match = window.location.pathname.match(/^\/g\/(\d{4})\/?$/);
+        if (!match) return null;
+        const num = Number(match[1]);
+        if (num < 1 || num > 777) return null;
+        return num;
+    }
+
+    // DOM 构建辅助器 (防 XSS)
+    function createEl(tag, text = "", className = "") {
+        const el = document.createElement(tag);
+        if (text) el.textContent = text;
+        if (className) el.className = className;
+        return el;
+    }
+
+    // 2. 初始化核心逻辑
+    async function init() {
+        const viewport = document.getElementById('viewport');
+        viewport.innerHTML = ""; // 清空
+        
+        serialNum = parseRoute();
+        if (!serialNum) {
+            viewport.appendChild(createEl("div", "⚠️ INVALID OR UNISSUED GARMENT ENTRY", "msg-err"));
+            return;
+        }
+
+        document.getElementById('garment-tag').textContent = `#${String(serialNum).padStart(4, '0')}`;
+
+        // 获取当前 Auth 状态
+        const { data: { user } } = await supabaseClient.auth.getUser();
+        currentUser = user;
+
+        // 调用净化 RPC
+        const { data, error } = await supabaseClient.rpc('get_garment_state', { p_serial: serialNum });
+
+        if (error || !data || data.error) {
+            viewport.appendChild(createEl("div", "⚠️ UNABLE TO FETCH LEDGER STATE", "msg-err"));
+            return;
+        }
+
+        stateData = data;
+        renderView(viewport);
+    }
+
+    // 3. 安全 DOM 渲染引擎
+    function renderView(container) {
+        container.innerHTML = "";
+
+        // A. 基础属性显示
+        const metaDiv = createEl("div", `COLOR: ${stateData.color} // SIZE: ${stateData.size}`, "msg-ok");
+        metaDiv.style.color = "var(--muted)";
+        metaDiv.style.fontSize = "0.75rem";
+        container.appendChild(metaDiv);
+
+        // B. 动态显示当前 7 天宣言
+        if (stateData.statement_body) {
+            const stmtDiv = createEl("div", `"${stateData.statement_body}"`, "statement-display");
+            container.appendChild(stmtDiv);
+
+            const timeDiv = createEl("div", `VANISHES AT: ${new Date(stateData.expires_at).toLocaleString()}`, "msg-ok");
+            timeDiv.style.color = "var(--muted)";
+            container.appendChild(timeDiv);
+        } else {
+            const silentDiv = createEl("div", '"THIS GARMENT IS CURRENTLY SILENT."', "statement-display");
+            silentDiv.style.color = "var(--muted)";
+            container.appendChild(silentDiv);
+        }
+
+        // C. 未认领状态：输入 Key 绑定
+        if (!stateData.is_claimed) {
+            const unclaimedBox = createEl("div");
+            unclaimedBox.style.marginTop = "20px";
+            unclaimedBox.appendChild(createEl("div", "GARMENT IS UNCLAIMED. UNSEAL YOUR PHYSICAL KEY:", "msg-ok"));
+
+            if (!currentUser) {
+                renderAuthForm(unclaimedBox, "AUTHENTICATE TO CLAIM OWNERSHIP");
+            } else {
+                const keyInput = createEl("input", "", "input-box");
+                keyInput.placeholder = "ENTER CLAIM KEY (XXXX-XXXX-XXXX)";
+                keyInput.id = "claim-key-field";
+
+                const claimBtn = createEl("button", "BURN KEY & CLAIM OWNERSHIP", "btn");
+                claimBtn.onclick = () => executeClaim(keyInput.value);
+
+                unclaimedBox.appendChild(keyInput);
+                unclaimedBox.appendChild(claimBtn);
+            }
+            container.appendChild(unclaimedBox);
+            return;
+        }
+
+        // D. 已认领状态 ➔ 用户是服装拥有者 (Owner)
+        if (stateData.is_owner) {
+            const ownerSection = createEl("div");
+            ownerSection.style.marginTop = "25px";
+            ownerSection.style.borderTop = "1px dashed var(--border)";
+            ownerSection.style.paddingTop = "15px";
+
+            ownerSection.appendChild(createEl("div", "● OWNER TERMINAL ACCESS GRANTED", "msg-ok"));
+
+            const nextPostDate = stateData.next_post_at ? new Date(stateData.next_post_at) : null;
+            const isCooldown = nextPostDate && nextPostDate > new Date();
+
+            if (isCooldown) {
+                const coolBox = createEl("div", `⚡ 7-DAY CYCLE COOLDOWN ACTIVE.\nNEXT PUBLISH WINDOW OPENS: ${nextPostDate.toLocaleString()}`, "cooldown-box");
+                ownerSection.appendChild(coolBox);
+
+                // 如果在 7 分钟改错黄金期，显示编辑按钮
+                if (stateData.is_in_grace_period && stateData.statement_id) {
+                    const editBox = createEl("div");
+                    editBox.style.marginTop = "15px";
+                    
+                    const editInput = createEl("input", "", "input-box");
+                    editInput.value = stateData.statement_body;
+                    editInput.id = "edit-input-field";
+
+                    const editBtn = createEl("button", "EDIT STATEMENT (7-MIN WINDOW)", "btn");
+                    editBtn.onclick = () => executeEdit(stateData.statement_id, editInput.value);
+
+                    editBox.appendChild(editInput);
+                    editBox.appendChild(editBtn);
+                    ownerSection.appendChild(editBox);
+                }
+
+                // 隐藏按钮
+                if (stateData.statement_body) {
+                    const hideBtn = createEl("button", "HIDE STATEMENT FROM PUBLIC VIEW", "btn btn-sub");
+                    hideBtn.onclick = () => executeHide(stateData.statement_id);
+                    ownerSection.appendChild(hideBtn);
+                }
+            } else {
+                // 允许发布新 7 天宣言
+                const pubInput = createEl("input", "", "input-box");
+                pubInput.placeholder = "Write a statement for the next 7 days...";
+                pubInput.id = "pub-input-field";
+                pubInput.maxLength = 140;
+
+                const pubBtn = createEl("button", "PUBLISH STATEMENT (7-DAY LOCK)", "btn");
+                pubBtn.onclick = () => executePublish(pubInput.value);
+
+                ownerSection.appendChild(pubInput);
+                ownerSection.appendChild(pubBtn);
+            }
+
+            container.appendChild(ownerSection);
+            return;
+        }
+
+        // E. 已认领状态 ➔ 但用户尚未登录或非拥有者 (提供重新登录入口)
+        const reAuthBox = createEl("div", "", "auth-bar");
+        if (!currentUser) {
+            reAuthBox.appendChild(createEl("div", "ARE YOU THE OWNER OF THIS GARMENT?", "msg-ok"));
+            renderAuthForm(reAuthBox, "SIGN IN WITH MAGIC LINK");
+        } else {
+            reAuthBox.appendChild(createEl("div", `SIGNED IN AS: ${currentUser.email} (NOT OWNER)`, "msg-err"));
+        }
+        container.appendChild(reAuthBox);
+    }
+
+    // 辅助 Auth 表单渲染
+    function renderAuthForm(parent, btnText) {
+        const emailInput = createEl("input", "", "input-box");
+        emailInput.placeholder = "Enter your email...";
+        emailInput.type = "email";
+        emailInput.id = "auth-email-field";
+
+        const authBtn = createEl("button", btnText, "btn btn-sub");
+        authBtn.onclick = () => sendMagicLink(emailInput.value);
+
+        const statusMsg = createEl("div", "", "msg-ok");
+        statusMsg.id = "auth-status-msg";
+
+        parent.appendChild(emailInput);
+        parent.appendChild(authBtn);
+        parent.appendChild(statusMsg);
+    }
+
+    // 4. 操作函数集
+    async function sendMagicLink(email) {
+        const msgEl = document.getElementById('auth-status-msg');
+        if (!email.trim()) return;
+
+        // 固定安全的 Magic Link 回调地址
+        const redirectUrl = `${window.location.origin}/g/${String(serialNum).padStart(4, '0')}`;
+
+        const { error } = await supabaseClient.auth.signInWithOtp({
+            email: email.trim(),
+            options: { emailRedirectTo: redirectUrl }
+        });
+
+        if (error) {
+            msgEl.textContent = `⚠️ ${error.message}`;
+            msgEl.className = "msg-err";
+        } else {
+            msgEl.textContent = "✓ MAGIC LINK SENT. CHECK YOUR INBOX.";
+            msgEl.className = "msg-ok";
+        }
+    }
+
+    async function executeClaim(rawKey) {
+        if (!rawKey.trim()) return;
+        const { data, error } = await supabaseClient.rpc('claim_garment', {
+            p_serial: serialNum,
+            p_raw_key: rawKey.trim()
+        });
+
+        if (error) alert(`Claim Failed: ${error.message}`);
+        else window.location.reload();
+    }
+
+    async function executePublish(body) {
+        if (!body.trim()) return;
+        const { data, error } = await supabaseClient.rpc('publish_statement', {
+            p_serial: serialNum,
+            p_body: body.trim()
+        });
+
+        if (error) alert(`Publish Failed: ${error.message}`);
+        else window.location.reload();
+    }
+
+    async function executeHide(statementId) {
+        if (!confirm("Hide statement? Cooldown period remains active.")) return;
+        const { error } = await supabaseClient.rpc('hide_statement', { p_statement_id: statementId });
+
+        if (error) alert(`Hide Failed: ${error.message}`);
+        else window.location.reload();
+    }
+
+    async function executeEdit(statementId, newBody) {
+        if (!newBody.trim()) return;
+        const { error } = await supabaseClient.rpc('edit_statement', {
+            p_statement_id: statementId,
+            p_new_body: newBody.trim()
+        });
+
+        if (error) alert(`Edit Failed: ${error.message}`);
+        else window.location.reload();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
