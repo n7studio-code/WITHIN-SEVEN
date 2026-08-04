@@ -26,7 +26,7 @@
             --brand-red: #e60000;
             --brand-green: #00a843;
             --brand-gold: #d97706;
-            --brand-cyan: #06b6d4;
+            --brand-active: #0044ff; /* 动态阵营渲染色 */
             --font-sans: 'Inter', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -44,7 +44,7 @@
 
         .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-        /* 🚪 1. 满屏玄幻“拱门门界”入口 (Archway Fullscreen Portal) */
+        /* 🔒 门界 1: 满屏拱门 Logo Portal */
         #portal-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -62,7 +62,7 @@
 
         #portal-overlay.portal-open {
             opacity: 0;
-            transform: scale(2.5);
+            transform: scale(2.2);
             pointer-events: none;
         }
 
@@ -132,13 +132,126 @@
             50% { opacity: 1; }
         }
 
-        .portal-skip-note {
-            position: relative; z-index: 3;
-            margin-top: 10px;
+        /* 🔴🟢🔵 门界 2: 红绿蓝阵营圣殿抉择门界 (Faction Selection Stage) */
+        #faction-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: #080808;
+            z-index: 999998;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            transition: opacity 0.6s ease;
+        }
+
+        #faction-overlay.faction-enter {
+            display: flex;
+            opacity: 1;
+        }
+
+        .faction-title-block {
+            text-align: center;
+            margin-bottom: 48px;
+            z-index: 10;
+        }
+
+        .faction-main-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 6px;
+            color: #ffffff;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .faction-sub-title {
             font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: #666;
+            font-size: 0.8rem;
+            color: #a3a3a3;
             letter-spacing: 2px;
+        }
+
+        /* 三大阵营柱网格 */
+        .faction-pillars-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            width: 100%;
+            max-width: 1000px;
+            z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .faction-pillars-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .faction-card {
+            background: #111111;
+            border: 1px solid #262626;
+            padding: 36px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faction-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: #333;
+            transition: background 0.3s;
+        }
+
+        /* 红阵营悬停 */
+        .faction-card.red-card:hover {
+            border-color: var(--brand-red);
+            box-shadow: 0 0 35px rgba(230, 0, 0, 0.35);
+            transform: translateY(-8px);
+        }
+        .faction-card.red-card:hover::before { background: var(--brand-red); }
+
+        /* 绿阵营悬停 */
+        .faction-card.green-card:hover {
+            border-color: var(--brand-green);
+            box-shadow: 0 0 35px rgba(0, 168, 67, 0.35);
+            transform: translateY(-8px);
+        }
+        .faction-card.green-card:hover::before { background: var(--brand-green); }
+
+        /* 蓝阵营悬停 */
+        .faction-card.blue-card:hover {
+            border-color: var(--brand-blue);
+            box-shadow: 0 0 35px rgba(0, 68, 255, 0.35);
+            transform: translateY(-8px);
+        }
+        .faction-card.blue-card:hover::before { background: var(--brand-blue); }
+
+        .faction-code {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #737373;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .faction-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .faction-quote {
+            font-size: 0.85rem;
+            color: #a3a3a3;
+            line-height: 1.6;
+            font-style: italic;
         }
 
         /* Top Header Nav */
@@ -169,7 +282,7 @@
             background: transparent; border: none; cursor: pointer; color: var(--text-primary);
             text-transform: uppercase; text-decoration: none; transition: color 0.2s;
         }
-        .nav-btn:hover { color: var(--brand-blue); }
+        .nav-btn:hover { color: var(--brand-active); }
 
         .cart-trigger {
             border: 1px solid var(--text-primary); padding: 10px 20px; font-weight: 700;
@@ -238,20 +351,20 @@
         .thumb-btn img { width: 100%; height: 100%; object-fit: cover; }
 
         .product-meta { display: flex; flex-direction: column; }
-        .item-series { font-family: var(--font-mono); font-size: 0.75rem; color: var(--brand-blue); letter-spacing: 2px; margin-bottom: 8px; font-weight: 700; }
+        .item-series { font-family: var(--font-mono); font-size: 0.75rem; color: var(--brand-active); letter-spacing: 2px; margin-bottom: 8px; font-weight: 700; transition: color 0.3s; }
         .item-title { font-size: 2.1rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px; }
         .item-price { font-size: 1.35rem; font-weight: 700; margin-bottom: 20px; }
         .item-desc { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; }
 
         .color-philosophy-tag {
-            background: #f0f4ff; border: 1px solid #c7d2fe; color: var(--brand-blue);
-            font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; padding: 10px 14px; margin-bottom: 28px; display: inline-block;
+            background: #f0f4ff; border: 1px solid #c7d2fe; color: var(--brand-active);
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; padding: 10px 14px; margin-bottom: 28px; display: inline-block; transition: all 0.3s;
         }
 
         .size-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .size-guide-btn {
-            background: transparent; border: none; color: var(--brand-blue);
-            font-size: 0.78rem; font-weight: 700; cursor: pointer; letter-spacing: 1px;
+            background: transparent; border: none; color: var(--brand-active);
+            font-size: 0.78rem; font-weight: 700; cursor: pointer; letter-spacing: 1px; transition: color 0.3s;
         }
         .size-guide-btn:hover { text-decoration: underline; }
 
@@ -266,7 +379,7 @@
             width: 100%; padding: 20px; background: var(--text-primary); color: #fff;
             border: none; font-size: 0.9rem; font-weight: 700; letter-spacing: 3px; cursor: pointer; transition: 0.2s;
         }
-        .action-buy-btn:hover { background: var(--brand-blue); }
+        .action-buy-btn:hover { background: var(--brand-active); }
 
         /* 水印 Manifesto */
         .manifesto-watermark-section {
@@ -279,7 +392,7 @@
         .manifesto-text { font-size: 1.1rem; line-height: 1.7; font-style: italic; font-weight: 500; }
         .watermark-img { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 220px; opacity: 0.06; pointer-events: none; }
 
-        /* 💬 Interactive Screen 2: Private Preview & Live Ledger Signal Stream */
+        /* Interactive Screen 2: Private Preview & Live Ledger */
         .screen-interactive { border-top: 1px solid var(--border-subtle); padding-top: 56px; margin-bottom: 64px; }
         .section-heading { font-size: 0.82rem; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 28px; text-transform: uppercase; }
         .interactive-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -315,74 +428,30 @@
         .pulse-led { width: 8px; height: 8px; border-radius: 50%; background-color: var(--brand-green); box-shadow: 0 0 6px var(--brand-green); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* ✨ 首页高级信号卡片流 (Signal Card Gallery) */
-        .signal-cards-container {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            max-height: 380px;
-            overflow-y: auto;
-            padding-right: 6px;
-        }
-
-        .signal-card {
-            background: #ffffff;
-            border: 1px solid var(--border-subtle);
-            border-left: 3px solid var(--brand-blue); /* 动态颜色边框 */
-            padding: 16px 20px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .signal-card:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .signal-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            font-family: var(--font-mono);
-            font-size: 0.78rem;
-        }
-
+        /* 首页公开留言卡片流 */
+        .signal-cards-container { display: flex; flex-direction: column; gap: 16px; max-height: 380px; overflow-y: auto; padding-right: 6px; }
+        .signal-card { background: #ffffff; border: 1px solid var(--border-subtle); border-left: 3px solid var(--brand-blue); padding: 16px 20px; transition: transform 0.2s ease; }
+        .signal-card:hover { transform: translateX(4px); }
+        .signal-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: var(--font-mono); font-size: 0.78rem; }
         .signal-garment-num { font-weight: 800; color: var(--brand-red); }
         .signal-color-badge { background: var(--panel-bg); padding: 2px 8px; border: 1px solid var(--border-subtle); font-weight: 700; font-size: 0.7rem; }
         .signal-demo-badge { background: #fef3c7; color: #92400e; padding: 2px 6px; font-size: 0.65rem; font-weight: 700; border: 1px solid #fcd34d; }
-
-        .signal-text-body {
-            font-size: 0.92rem;
-            line-height: 1.5;
-            color: var(--text-primary);
-            font-style: italic;
-            margin-bottom: 12px;
-            word-break: break-word;
-        }
-
-        .signal-time-footer {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-            border-top: 1px dashed var(--border-subtle);
-            padding-top: 8px;
-        }
+        .signal-text-body { font-size: 0.92rem; line-height: 1.5; font-style: italic; margin-bottom: 12px; word-break: break-word; }
+        .signal-time-footer { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); display: flex; justify-content: space-between; border-top: 1px dashed var(--border-subtle); padding-top: 8px; }
 
         /* Garment Search Block */
         .search-section { background: var(--panel-bg); border: 1px solid var(--border-subtle); padding: 28px; margin-top: 32px; }
         .search-bar-row { display: flex; gap: 12px; margin-top: 14px; }
         .search-input { flex: 1; background: #fff; border: 1px solid var(--border-subtle); padding: 12px 16px; font-family: var(--font-mono); font-size: 0.9rem; outline: none; }
         .search-btn { background: var(--text-primary); color: #fff; border: none; padding: 12px 24px; font-weight: 700; font-size: 0.8rem; letter-spacing: 1.5px; cursor: pointer; }
-        .search-btn:hover { background: var(--brand-blue); }
+        .search-btn:hover { background: var(--brand-active); }
         .search-result-display { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--border-subtle); font-family: var(--font-mono); font-size: 0.85rem; display: none; }
 
         /* Legal Footer */
         .legal-footer { margin-top: 80px; padding-top: 36px; border-top: 1px solid var(--border-subtle); color: var(--text-secondary); font-size: 0.8rem; line-height: 1.6; }
         .footer-links-row { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 32px; }
         .footer-link { color: var(--text-primary); text-decoration: none; font-weight: 600; cursor: pointer; }
-        .footer-link:hover { color: var(--brand-blue); }
+        .footer-link:hover { color: var(--brand-active); }
         .legal-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
         @media (min-width: 768px) { .legal-grid { grid-template-columns: 1fr 1fr; } }
         .legal-block h5 { color: var(--text-primary); font-size: 0.82rem; letter-spacing: 1px; margin-bottom: 8px; }
@@ -395,7 +464,7 @@
 </head>
 <body>
 
-<!-- 🚪 1. 拱门满屏入口 Portal Overlay (100vh) -->
+<!-- 🔒 1. 拱门满屏入口 Portal Overlay (100vh) -->
 <div id="portal-overlay">
     <canvas id="portal-canvas"></canvas>
     <div class="portal-aura"></div>
@@ -403,7 +472,37 @@
         <img src="/LOGO.png" alt="WITHIN SEVEN ARCHWAY GATE" class="portal-archway-logo">
     </div>
     <div class="portal-enter-prompt" onclick="enterArchwayPortal()">[ TAP LOGO TO ENTER THE ARCHIVE ]</div>
-    <div class="portal-skip-note">WITHIN SEVEN — EPHEMERAL DIGITAL APPAREL</div>
+</div>
+
+<!-- 🔴🟢🔵 2. 阵营抉择圣殿门界 Overlay (Faction Gate) -->
+<div id="faction-overlay">
+    <div class="faction-title-block">
+        <div class="faction-main-title">SELECT YOUR FREQUENCY</div>
+        <div class="faction-sub-title">THE GARMENT IS BLANK. CHOOSE THE SPECTRUM OF YOUR VOICE.</div>
+    </div>
+
+    <div class="faction-pillars-grid">
+        <!-- RED -->
+        <div class="faction-card red-card" onclick="selectFaction('RED', '#e60000')">
+            <div class="faction-code">FREQUENCY 01</div>
+            <div class="faction-name">🔴 RESISTANCE</div>
+            <div class="faction-quote">"Burn through the noise and reclaim your presence."</div>
+        </div>
+
+        <!-- GREEN -->
+        <div class="faction-card green-card" onclick="selectFaction('GREEN', '#00a843')">
+            <div class="faction-code">FREQUENCY 02</div>
+            <div class="faction-name">🟢 SYNTHESIS</div>
+            <div class="faction-quote">"Keep the pulse alive in an ever-evolving mesh."</div>
+        </div>
+
+        <!-- BLUE -->
+        <div class="faction-card blue-card" onclick="selectFaction('BLUE', '#0044ff')">
+            <div class="faction-code">FREQUENCY 03</div>
+            <div class="faction-name">🔵 AWAKENING</div>
+            <div class="faction-quote">"Today, blue means becoming visible in the void."</div>
+        </div>
+    </div>
 </div>
 
 <div class="container">
@@ -499,7 +598,7 @@
         <img src="/LOGO.png" alt="Watermark" class="watermark-img" onerror="this.style.display='none';">
     </section>
 
-    <!-- Screen 2: Interactive Private Preview & Live Ledger Signal Stream -->
+    <!-- Screen 2: Private Preview & Live Ledger Signal Stream -->
     <section class="screen-interactive">
         <div class="section-heading">// SYSTEM INTERACTION & LIVE SIGNAL STREAM</div>
         
@@ -519,10 +618,10 @@
                     
                     <div class="color-picker-row">
                         <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">SIGNAL COLOR:</span>
-                        <button class="color-dot-btn color-dot-blue active" onclick="selectSimColor('#0044ff', 'BLUE', this)"></button>
-                        <button class="color-dot-btn color-dot-red" onclick="selectSimColor('#e60000', 'RED', this)"></button>
-                        <button class="color-dot-btn color-dot-green" onclick="selectSimColor('#00a843', 'GREEN', this)"></button>
-                        <button class="color-dot-btn color-dot-black" onclick="selectSimColor('#111111', 'BLACK', this)"></button>
+                        <button class="color-dot-btn color-dot-blue active" id="dot-blue" onclick="selectSimColor('#0044ff', 'BLUE', this)"></button>
+                        <button class="color-dot-btn color-dot-red" id="dot-red" onclick="selectSimColor('#e60000', 'RED', this)"></button>
+                        <button class="color-dot-btn color-dot-green" id="dot-green" onclick="selectSimColor('#00a843', 'GREEN', this)"></button>
+                        <button class="color-dot-btn color-dot-black" id="dot-black" onclick="selectSimColor('#111111', 'BLACK', this)"></button>
                     </div>
 
                     <div class="preview-card-frame">
@@ -551,14 +650,13 @@
                 </button>
             </div>
 
-            <!-- ✨ 实时 7 天公开留言画廊 (Live Ledger Signal Stream) -->
+            <!-- 实时 7 天公开留言画廊 -->
             <div class="ledger-terminal">
                 <div class="terminal-bar">
                     <span>LIVE LEDGER TERMINAL</span>
                     <span>EPHEMERALITY: 7-DAYS</span>
                 </div>
                 
-                <!-- 留言展示卡片流容器 -->
                 <div id="terminal-viewport">
                     <div class="status-dot idle-mode">CONNECTING TO EDGE MESH...</div>
                 </div>
@@ -620,7 +718,7 @@
 <script>
     let chosenSize = '';
 
-    /* 🚪 1. 拱门满屏 Portal 逻辑与粒子 Canvas */
+    /* 🔒 1. 拱门满屏 Portal 粒子与透视 */
     const portalOverlay = document.getElementById('portal-overlay');
     const portalGate = document.getElementById('portal-gate');
     const portalCanvas = document.getElementById('portal-canvas');
@@ -682,7 +780,6 @@
     }
     animatePortalCanvas();
 
-    /* 3D 拱门引力透视 */
     portalOverlay.addEventListener('mousemove', (e) => {
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
@@ -691,14 +788,32 @@
         portalGate.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
 
+    /* 点击拱门进入阵营选择 overlay */
     function enterArchwayPortal() {
         portalOverlay.classList.add('portal-open');
         setTimeout(() => {
             portalOverlay.style.display = 'none';
-        }, 800);
+            document.getElementById('faction-overlay').classList.add('faction-enter');
+        }, 600);
     }
 
-    /* 三重概念切换与数据 */
+    /* 🔴🟢🔵 2. 阵营选择逻辑：染色全站 UI */
+    function selectFaction(factionName, colorHex) {
+        document.documentElement.style.setProperty('--brand-active', colorHex);
+        
+        // 自动将 Simulator 选为该颜色
+        if (factionName === 'RED') selectSimColor(colorHex, 'RED', document.getElementById('dot-red'));
+        if (factionName === 'GREEN') selectSimColor(colorHex, 'GREEN', document.getElementById('dot-green'));
+        if (factionName === 'BLUE') selectSimColor(colorHex, 'BLUE', document.getElementById('dot-blue'));
+
+        const factionOverlay = document.getElementById('faction-overlay');
+        factionOverlay.style.opacity = '0';
+        setTimeout(() => {
+            factionOverlay.style.display = 'none';
+        }, 600);
+    }
+
+    /* 三重概念数据 */
     const conceptData = {
         'dystopia': {
             series: 'LIMITED EDITION // 777 UNITS (DYSTOPIA ARCHIVE)',
@@ -735,7 +850,6 @@
         document.getElementById('manifesto-text-target').textContent = item.manifesto;
     }
 
-    /* 交易与 UI 逻辑 */
     function updateStage(imgSrc, btnElement) {
         document.getElementById('stage-image').src = imgSrc;
         document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
@@ -781,7 +895,6 @@
         document.getElementById('garment-search-block').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    /* Private Preview 交互 */
     function updateSimPreview(val) {
         const target = document.getElementById('sim-text-target');
         const eyeLeft = document.getElementById('eye-left');
@@ -800,11 +913,10 @@
 
     function selectSimColor(colorHex, colorName, btnEl) {
         document.querySelectorAll('.color-dot-btn').forEach(b => b.classList.remove('active'));
-        btnEl.classList.add('active');
+        if (btnEl) btnEl.classList.add('active');
         document.getElementById('face-stroke-circle').setAttribute('stroke', colorHex);
     }
 
-    /* ✨ 3. 核心升级：高奢公开留言画廊渲染 (XSS-Free Card Stream) */
     const colorHexMap = {
         'BLUE': 'var(--brand-blue)',
         'RED': 'var(--brand-red)',
@@ -823,7 +935,6 @@
             const data = await res.json();
 
             if (Array.isArray(data) && data.length > 0) {
-                // 状态指示标
                 const statusRow = document.createElement('div');
                 statusRow.className = 'status-dot live-mode';
                 statusRow.style.marginBottom = '16px';
@@ -833,20 +944,16 @@
                 statusRow.appendChild(document.createTextNode(` SIGNAL BROADCASTING (${data.length} ACTIVE)`));
                 viewport.appendChild(statusRow);
 
-                // 卡片容器
                 const cardsStream = document.createElement('div');
                 cardsStream.className = 'signal-cards-container';
 
-                // 遍历全量活跃留言并生成卡片
                 data.forEach(active => {
                     const card = document.createElement('div');
                     card.className = 'signal-card';
                     
-                    // 根据用户设定的颜色高亮左边框
                     const cardColor = (active.color || 'BLUE').toUpperCase();
                     card.style.borderLeftColor = colorHexMap[cardColor] || 'var(--brand-blue)';
 
-                    // Card Header
                     const cardHeader = document.createElement('div');
                     cardHeader.className = 'signal-card-header';
 
@@ -873,12 +980,10 @@
                     cardHeader.appendChild(numSpan);
                     cardHeader.appendChild(badgeWrap);
 
-                    // Card Body Text (100% XSS-Safe)
                     const textBody = document.createElement('div');
                     textBody.className = 'signal-text-body';
                     textBody.textContent = `"${active.statement_text}"`;
 
-                    // Card Footer Time
                     const cardFooter = document.createElement('div');
                     cardFooter.className = 'signal-time-footer';
 
