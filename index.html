@@ -977,3 +977,28 @@
 
 </body>
 </html>
+<!-- 官方完整 Snipcart 初始化程序（自建 #snipcart 容器与侧栏绑定） -->
+<script>
+  window.SnipcartSettings = {
+    publicApiKey: "ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz",
+    loadStrategy: "on-user-interaction",
+    currency: "cad",
+    modalStyle: "side"
+  };
+
+  (() => {
+    var c, d;
+    (d = (c = window.SnipcartSettings).version) || (c.version = "3.0");
+    var a = window.Snipcart ? window.Snipcart.configs.scriptUrl : "https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js";
+    function b() {
+      if (window.Snipcart) return;
+      window.Snipcart = !0;
+      var e = document.createElement("script");
+      (e.src = a), (e.async = !0), document.body.appendChild(e);
+    }
+    window.SnipcartSettings.loadStrategy
+      ? window.addEventListener(window.SnipcartSettings.loadStrategy, b, { once: !0 })
+      : b();
+  })();
+</script>
+<div id="snipcart" data-api-key="ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz" hidden></div>
