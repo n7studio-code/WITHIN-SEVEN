@@ -36,7 +36,7 @@ export default {
     if (apiGarmentMatch) {
       const serialNum = Number(apiGarmentMatch[1]);
       if (serialNum < 1 || serialNum > 777) {
-        return new Response(JSON.stringify({ error: "GARMENT_NOT_ISSUED" }), { status: 404 });
+        return new Response(JSON.stringify({ error: "NUMBER NOT ISSUED" }), { status: 404 });
       }
 
       const rpcRes = await fetch(`${env.SUPABASE_URL}/rest/v1/rpc/get_garment_state`, {
@@ -55,24 +55,27 @@ export default {
       });
     }
 
-    // 3. NFC 认领落地网页分流 (/g/0001 - /g/0777) -> 返回 garment.html
+    // 3. 独立 HOW IT WORKS 页面 (/how-it-works)
+    if (pathname === '/how-it-works' || pathname === '/how-it-works/') {
+      return env.ASSETS.fetch(new Request(`${url.origin}/how-it-works.html`));
+    }
+
+    // 4. NFC 认领落地网页分流 (/g/0001 - /g/0777) -> 返回 garment.html 模板
     const htmlRouteMatch = pathname.match(/^\/g\/(\d{4})\/?$/);
     if (htmlRouteMatch) {
       const serialNum = Number(htmlRouteMatch[1]);
       if (serialNum < 1 || serialNum > 777) {
-        return new Response("404 GARMENT NOT ISSUED (MUST BE BETWEEN 0001 AND 0777)", { status: 404 });
+        return new Response("NUMBER NOT ISSUED", { status: 404 });
       }
-      
-      const garmentHtml = await env.ASSETS.fetch(new Request(`${url.origin}/garment.html`));
-      return garmentHtml;
+      return env.ASSETS.fetch(new Request(`${url.origin}/garment.html`));
     }
 
-    // 4. 超出范围的非法路径直接拦截 404 (如 /g/9999)
+    // 5. 超出范围的非法路径直接拦截 404 (如 /g/9999)
     if (pathname.startsWith('/g/')) {
-      return new Response("404 GARMENT NOT ISSUED (MUST BE BETWEEN 0001 AND 0777)", { status: 404 });
+      return new Response("NUMBER NOT ISSUED", { status: 404 });
     }
 
-    // 5. 其余默认静态文件 (index.html, front.png, garment.html 等) 正常穿透
+    // 6. 其余静态资源 (index.html, front.png, LOGO.png 等) 正常穿透
     return env.ASSETS.fetch(request);
   }
 };
