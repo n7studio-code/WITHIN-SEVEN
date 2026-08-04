@@ -1,627 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <!-- SEO & Identity Metadata -->
-  <title>WITHIN SEVEN — Form 01 Heavyweight Uniform</title>
-  <meta name="description" content="A numbered garment. A meaning only you can assign. 777 limited pieces, NFC entry & 7-day digital expression." />
-  <link rel="icon" type="image/png" href="LOGO.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WITHIN SEVEN — DROP 01</title>
+    <!-- Snipcart 官方 CSS -->
+    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
+    <style>
+        :root {
+            --bg: #080808;
+            --panel: #111111;
+            --border: #222222;
+            --text: #e5e5e5;
+            --muted: #777777;
+            --accent: #ff3333;
+            --live: #10b981;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
 
-  <!-- Tailwind CSS Engine -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- High Fashion Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@300;400;700&family=Syncopate:wght@300;400;700&display=swap" rel="stylesheet">
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            padding: 20px;
+        }
 
-  <!-- Snipcart v3 Integration with Explicit CAD Currency -->
-  <script>
-    window.SnipcartSettings = {
-      publicApiKey: 'ZDJmZTZIY2ItNzEwOC00NzQxLWFHNWUtOGFhNDQxNzM2NjM5M2E2MTg0MzQxNzMz',
-      currency: 'cad',
-      modalTemplate: 'custom',
-    };
-  </script>
-  <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
-  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-  <style>
-    .font-sans { font-family: 'Inter', sans-serif; }
-    .font-mono { font-family: 'JetBrains Mono', monospace; }
-    .font-brand { font-family: 'Syncopate', sans-serif; }
-    .border-subtle { border-color: rgba(255, 255, 255, 0.14); }
-    .bg-card { background-color: #0a0a0a; }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
 
-    /* CSS Mask Alpha Logo */
-    .white-logo-mask {
-      background-color: #ffffff;
-      -webkit-mask: url('LOGO.png') no-repeat center / contain;
-      mask: url('LOGO.png') no-repeat center / contain;
-      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
-    }
+        .logo {
+            font-weight: 800;
+            letter-spacing: 3px;
+            font-size: 1.2rem;
+        }
 
-    /* Core Pulsing Nebula Background */
-    @keyframes nebulaPulse {
-      0%, 100% { transform: scale(1); opacity: 0.18; }
-      50% { transform: scale(1.2); opacity: 0.32; }
-    }
-    .nebula-pulse { animation: nebulaPulse 6s ease-in-out infinite; }
+        .cart-summary {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            background: var(--panel);
+            color: var(--text);
+        }
 
-    /* Laser Scanning Beam for Terminal */
-    @keyframes scanBeam {
-      0% { top: -10%; opacity: 0; }
-      50% { opacity: 1; }
-      100% { top: 110%; opacity: 0; }
-    }
-    .laser-beam {
-      position: absolute;
-      left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, #3b82f6, #f59e0b, transparent);
-      box-shadow: 0 0 12px #3b82f6;
-      animation: scanBeam 1.5s ease-in-out infinite;
-    }
+        /* 商品网格布局 */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
 
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  </style>
+        @media (min-width: 768px) {
+            .grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* 3 图轮播画廊 (4:5 比例) */
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .main-img-container {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .main-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        .thumbs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .thumb-btn {
+            width: 80px;
+            aspect-ratio: 4 / 5;
+            border: 1px solid var(--border);
+            background: var(--panel);
+            cursor: pointer;
+            overflow: hidden;
+            padding: 0;
+            opacity: 0.5;
+            transition: 0.2s;
+        }
+
+        .thumb-btn.active, .thumb-btn:hover {
+            opacity: 1;
+            border-color: var(--text);
+        }
+
+        .thumb-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 商品详情区 */
+        .product-info h1 {
+            font-size: 2rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-family: var(--font-mono);
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .currency-tag {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-left: 5px;
+        }
+
+        .desc {
+            color: var(--muted);
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        /* 尺码选择区 */
+        .size-section {
+            margin-bottom: 25px;
+        }
+
+        .label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .size-btn {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--border);
+            background: var(--panel);
+            color: var(--text);
+            font-family: var(--font-mono);
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .size-btn:hover {
+            border-color: var(--muted);
+        }
+
+        .size-btn.active {
+            border-color: var(--text);
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        .error-msg {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            margin-top: 8px;
+            display: none;
+        }
+
+        /* 购买按钮 */
+        .buy-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            font-family: var(--font-mono);
+            font-weight: bold;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-bottom: 40px;
+        }
+
+        .buy-btn:hover {
+            background: #ffffff;
+            box-shadow: 0 0 15px rgba(255,255,255,0.2);
+        }
+
+        /* PLG 实时终端面板 */
+        .terminal-box {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 25px;
+            font-family: var(--font-mono);
+            margin-top: 20px;
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            border-radius: 2px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .status-badge.live { background: rgba(16, 185, 129, 0.1); color: var(--live); }
+        .status-badge.idle { background: rgba(255, 255, 255, 0.05); color: var(--muted); }
+
+        .garment-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .garment-meta .num { color: var(--accent); font-weight: bold; }
+        .garment-meta .tag { background: #222; padding: 2px 6px; font-size: 0.75rem; }
+
+        .statement-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--text);
+            word-break: break-word;
+        }
+
+        .terminal-footer {
+            font-size: 0.75rem;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-top: 1px dashed var(--border);
+            padding-top: 12px;
+        }
+
+        .grace-tag {
+            color: #f59e0b;
+            font-size: 0.75rem;
+            margin-top: 10px;
+        }
+
+        .anchor-cta-btn {
+            background: transparent;
+            border: 1px solid var(--text);
+            color: var(--text);
+            padding: 10px 16px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+            transition: 0.2s;
+        }
+
+        .anchor-cta-btn:hover {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        /* 消费者保护合规条款声明区 */
+        .legal-section {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--muted);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .legal-section { grid-template-columns: 1fr 1fr; }
+        }
+
+        .legal-card h4 {
+            color: var(--text);
+            margin-bottom: 8px;
+            font-family: var(--font-mono);
+        }
+    </style>
 </head>
-<body class="bg-black text-neutral-200 font-sans antialiased selection:bg-white selection:text-black min-h-screen flex flex-col justify-between overflow-x-hidden">
+<body>
 
-  <!-- TOP NOTICE BAR: Canada Shipping Policy -->
-  <div class="bg-neutral-900 border-b border-subtle py-2 px-4 text-xs font-mono text-center tracking-widest text-neutral-300 z-50">
-    <span>🇨🇦 DROP 01 SHIPS EXCLUSIVELY TO CANADIAN ADDRESSES.</span>
-    <span class="text-neutral-500 ml-2">US & INTERNATIONAL — COMING LATER</span>
-  </div>
-
-  <!-- NAVBAR WITH CSS MASK LOGO & CART -->
-  <nav id="navbar" class="sticky top-0 left-0 w-full z-40 px-6 md:px-12 py-4 flex justify-between items-center border-b border-subtle backdrop-blur-md bg-black/85">
-    <a href="#" class="flex items-center space-x-3 cursor-pointer">
-      <div class="h-7 w-7 white-logo-mask"></div>
-      <span class="font-brand font-light text-sm md:text-base tracking-[0.25em] text-white uppercase whitespace-nowrap">
-        WITHIN SEVEN
-      </span>
-    </a>
-    
-    <div class="flex items-center space-x-4 md:space-x-6 font-mono text-xs">
-      <a href="#about" class="hidden md:inline-block tracking-widest text-neutral-400 hover:text-white transition">PROTOCOL</a>
-      <a href="#archive" class="hidden md:inline-block tracking-widest text-amber-500 hover:text-white border border-amber-500/50 hover:border-white transition px-3 py-1.5 rounded text-xs whitespace-nowrap">
-        LEDGER PREVIEW
-      </a>
-      
-      <!-- SNIPCART TRIGGER -->
-      <button class="snipcart-checkout tracking-widest border border-subtle px-4 py-2 rounded-full hover:bg-white hover:text-black transition-all flex items-center gap-2 cursor-pointer text-xs">
-        <span>INVENTORY</span>
-        <span class="snipcart-items-count bg-neutral-800 text-amber-400 font-bold text-xs px-2 py-0.5 rounded-full border border-neutral-700">0</span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- MAIN HERO & PRODUCT PURCHASING SECTION -->
-  <main class="max-w-7xl mx-auto px-6 md:px-12 pt-6 pb-16 w-full">
-    
-    <!-- BRAND HERO TITLE & SINGLE-LINE RULE -->
-    <div class="flex flex-col items-center text-center my-4 relative">
-      <div class="relative flex items-center justify-center my-1">
-        <div class="absolute w-32 h-32 md:w-44 md:h-44 bg-white/15 rounded-full blur-2xl pointer-events-none -z-10 nebula-pulse"></div>
-        <div class="w-16 h-16 md:w-24 md:h-24 white-logo-mask"></div>
-      </div>
-      
-      <h1 class="text-lg md:text-2xl font-brand font-light tracking-[0.3em] uppercase text-white mt-1">
-        WITHIN SEVEN
-      </h1>
-      
-      <!-- CLEAN RULE SLOGAN -->
-      <p class="text-xs md:text-sm font-mono tracking-[0.2em] text-amber-400 mt-2 uppercase font-bold">
-        777 UNIFORMS · TAP OR SCAN · REVEAL YOUR KEY · SPEAK FOR 7 DAYS
-      </p>
-    </div>
-
-    <!-- PRODUCT SECTION: 3-IMAGE CAROUSEL + SELECTION -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-8">
-      
-      <!-- LEFT: 3-IMAGE CAROUSEL DISPLAY (4:5 CONTAIN) -->
-      <div class="lg:col-span-7 space-y-4">
-        <div class="aspect-[4/5] bg-neutral-950 border border-subtle relative overflow-hidden flex flex-col justify-between p-6 rounded-xl">
-          <div class="flex justify-between items-start text-xs font-mono tracking-widest text-neutral-400 z-10">
-            <span>FORM 01 // UNIFORM</span>
-            <span>LIMIT: 777 PIECES</span>
-          </div>
-          
-          <!-- IMAGE DISPLAY AREA -->
-          <div class="my-auto w-full h-full flex items-center justify-center relative py-4">
-            <img 
-              id="main-product-img" 
-              src="product-front.jpg" 
-              alt="WITHIN SEVEN Form 01 Uniform Front View" 
-              class="max-w-full max-h-[460px] object-contain transition-opacity duration-300"
-              onerror="showImagePlaceholder(this)" 
-            />
-            
-            <!-- FALLBACK HIGH-FASHION WIREFRAME PLACEHOLDER -->
-            <div id="img-placeholder" class="hidden flex-col items-center justify-center text-center p-8 space-y-3">
-              <div id="product-color-preview-circle" class="w-32 h-32 rounded-full border border-subtle bg-white transition-all duration-300 flex items-center justify-center shadow-2xl">
-                <div class="w-14 h-14 bg-black/80 black-logo-mask"></div>
-              </div>
-              <p id="placeholder-view-name" class="text-xs font-mono uppercase tracking-widest text-neutral-400 pt-2">FRONT VIEW — BOXYS CUT</p>
-            </div>
-          </div>
-
-          <div class="text-xs font-mono text-neutral-400 flex justify-between z-10">
-            <span>HEAVYWEIGHT RAW COTTON</span>
-            <span>MADE IN CANADA</span>
-          </div>
-        </div>
-
-        <!-- CAROUSEL THUMBNAIL SELECTOR -->
-        <div class="grid grid-cols-3 gap-3 font-mono text-xs">
-          <button onclick="switchProductView('front', 'product-front.jpg', 'FRONT VIEW — BOXYS CUT', this)" class="thumb-btn border border-white bg-neutral-900 text-white p-3 text-center rounded hover:border-white transition-all">
-            <span class="block font-bold">01 / FRONT</span>
-            <span class="text-xs text-neutral-400">Silhouette</span>
-          </button>
-          <button onclick="switchProductView('back', 'product-back.jpg', 'BACK VIEW — SERIAL NUMBER POSITION', this)" class="thumb-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-center rounded hover:border-white transition-all">
-            <span class="block font-bold">02 / BACK</span>
-            <span class="text-xs text-neutral-400">Serial & Frame</span>
-          </button>
-          <button onclick="switchProductView('details', 'product-details.jpg', 'HARDWARE DETAILS — NFC & CLAIM CARD', this)" class="thumb-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-center rounded hover:border-white transition-all">
-            <span class="block font-bold">03 / DETAILS</span>
-            <span class="text-xs text-neutral-400">NFC & Sealed Key</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- RIGHT: SPEC & PURCHASING CONTROLLER -->
-      <div class="lg:col-span-5 space-y-6 font-mono">
-        <div>
-          <span class="text-xs text-amber-500 tracking-widest uppercase">// FORM 01 UNIFORM</span>
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-white mt-1 font-sans">A NUMBERED UNIFORM.</h2>
-          <p class="text-sm text-neutral-300 mt-2 font-sans font-light">One iconic silhouette. Four alignments. 777 unique numbered pieces.</p>
-          
-          <div class="mt-4 text-2xl font-mono text-white">
-            C$154.00 <span class="text-xs text-neutral-400 font-normal">CAD</span>
-          </div>
-          <p class="text-xs text-neutral-400 mt-1">
-            Complimentary tracked shipping across Canada. Taxes calculated at checkout. Dispatches in 3–5 business days.
-          </p>
-        </div>
-
-        <hr class="border-subtle" />
-
-        <!-- 1. ALIGNMENT COLOR SELECTOR -->
-        <div class="space-y-3">
-          <label class="text-xs uppercase tracking-widest text-neutral-300 block">1. SELECT ALIGNMENT (COLOR)</label>
-          <div class="grid grid-cols-2 gap-3 text-xs">
-            <button onclick="selectColor('Utopia (White)', '#ffffff', this)" class="color-btn border border-white bg-neutral-900 text-white p-3 text-left hover:border-white transition-all">
-              <span class="block font-bold">UTOPIA</span>
-              <span class="text-xs text-neutral-400">Pure White</span>
-            </button>
-            <button onclick="selectColor('Lost Paradise (Amber)', '#d97706', this)" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
-              <span class="block font-bold">LOST PARADISE</span>
-              <span class="text-xs text-neutral-400">Deep Amber</span>
-            </button>
-            <button onclick="selectColor('Dystopia (Red)', '#dc2626', this)" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
-              <span class="block font-bold">DYSTOPIA</span>
-              <span class="text-xs text-neutral-400">Crimson Red</span>
-            </button>
-            <button onclick="selectColor('Cyber Blue', '#2563eb', this)" class="color-btn border border-subtle bg-neutral-900 text-neutral-400 p-3 text-left hover:border-white transition-all">
-              <span class="block font-bold">CYBER BLUE</span>
-              <span class="text-xs text-neutral-400">Electric Blue</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 2. SIZE SELECTOR (REQUIRES EXPLICIT SELECTION) -->
-        <div class="space-y-3">
-          <div class="flex justify-between items-center">
-            <label class="text-xs uppercase tracking-widest text-neutral-300">2. SELECT SIZE (UNISEX BOXY FIT)</label>
-            <button onclick="openSizeGuideModal()" class="text-xs text-amber-400 hover:text-white underline cursor-pointer">
-              SIZE GUIDE & SPECS →
-            </button>
-          </div>
-          <div class="grid grid-cols-5 gap-2 text-xs">
-            <button onclick="selectSize('S', this)" class="size-btn border border-subtle p-3 text-center text-neutral-300 hover:border-white transition-all">S</button>
-            <button onclick="selectSize('M', this)" class="size-btn border border-subtle p-3 text-center text-neutral-300 hover:border-white transition-all">M</button>
-            <button onclick="selectSize('L', this)" class="size-btn border border-subtle p-3 text-center text-neutral-300 hover:border-white transition-all">L</button>
-            <button onclick="selectSize('XL', this)" class="size-btn border border-subtle p-3 text-center text-neutral-300 hover:border-white transition-all">XL</button>
-            <button onclick="selectSize('XXL', this)" class="size-btn border border-subtle p-3 text-center text-neutral-300 hover:border-white transition-all">XXL</button>
-          </div>
-          <p id="size-warning" class="text-xs text-amber-500 hidden font-bold">⚠️ Please select a size before adding to inventory.</p>
-        </div>
-
-        <!-- PURCHASE BUTTON CONTAINER -->
-        <div class="pt-2 space-y-3">
-          <button 
-            id="buy-button"
-            onclick="handleAddToCart(event)"
-            class="snipcart-add-item w-full bg-neutral-800 text-neutral-400 font-bold py-4 px-6 text-xs tracking-widest uppercase transition-all cursor-not-allowed rounded-lg"
-            data-item-id="form-01-uniform"
-            data-item-name="WITHIN SEVEN — FORM 01 UNIFORM"
-            data-item-price="154.00"
-            data-item-url="/"
-            data-item-description="Heavyweight Premium Raw Cotton Uniform. Includes sealed physical claim key & embedded NTAG213 entry."
-            data-item-custom1-name="Alignment / Color"
-            data-item-custom1-options="Utopia (White)|Lost Paradise (Amber)|Dystopia (Red)|Cyber Blue"
-            data-item-custom1-value="Utopia (White)"
-            data-item-custom2-name="Size"
-            data-item-custom2-options="S|M|L|XL|XXL"
-            data-item-custom2-value="">
-            SELECT SIZE TO PURCHASE
-          </button>
-        </div>
-
-        <!-- PRODUCT SPECIFICATION DRAWER -->
-        <div class="border-t border-subtle pt-4 space-y-2 text-xs text-neutral-400">
-          <div class="flex justify-between py-1">
-            <span class="text-white">COMPOSITION:</span>
-            <span>100% Heavyweight Premium Raw Cotton</span>
-          </div>
-          <div class="flex justify-between py-1">
-            <span class="text-white">FABRIC WEIGHT:</span>
-            <span>300 GSM Architectural Structure</span>
-          </div>
-          <div class="flex justify-between py-1">
-            <span class="text-white">HARDWARE:</span>
-            <span>Washable NTAG213 NFC Label + Back QR</span>
-          </div>
-          <div class="flex justify-between py-1">
-            <span class="text-white">CLAIM SYSTEM:</span>
-            <span>Sealed Physical Claim Key Card Included</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </main>
-
-  <!-- PROTOCOL & INTERACTIVE TERMINAL SECTION -->
-  <section id="about" class="border-t border-subtle bg-card py-16 px-6 md:px-12 w-full">
-    <div class="max-w-6xl mx-auto space-y-12 font-mono">
-      <div class="text-center max-w-2xl mx-auto space-y-3">
-        <span class="text-xs text-amber-500 tracking-widest uppercase">// SYSTEM PROTOCOL //</span>
-        <h2 class="text-2xl font-bold text-white font-sans">TAP. REVEAL. EXPRESS.</h2>
-        <p class="text-xs text-neutral-300 leading-relaxed">
-          Each garment carries a unique serial number (#0001–#0777). Technology is invisible; the meaning is entirely yours.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-xs">
-        <div class="bg-black border border-subtle p-6 space-y-3 rounded-xl">
-          <div class="text-amber-500 font-bold">01 / TAP OR SCAN</div>
-          <p class="text-neutral-300 leading-normal">
-            Tap the NFC label inside the lower hem with your smartphone, or scan the high-contrast QR code on the back of the label to open the garment entry.
-          </p>
-        </div>
-        <div class="bg-black border border-subtle p-6 space-y-3 rounded-xl">
-          <div class="text-amber-500 font-bold">02 / REVEAL KEY</div>
-          <p class="text-neutral-300 leading-normal">
-            Unseal the physical card included in your package to reveal your 12-character Claim Key. This key unlocks the garment's digital record.
-          </p>
-        </div>
-        <div class="bg-black border border-subtle p-6 space-y-3 rounded-xl">
-          <div class="text-amber-500 font-bold">03 / 7-DAY SENTENCE</div>
-          <p class="text-neutral-300 leading-normal">
-            Publish one statement (up to 140 chars). It remains on the active public ledger for exactly 7 days before fading from the public feed.
-          </p>
-        </div>
-      </div>
-
-      <!-- INTERACTIVE TERMINAL SIMULATOR -->
-      <div class="mt-12 p-6 md:p-8 bg-neutral-950 border border-subtle hover:border-amber-500/80 rounded-2xl max-w-xl mx-auto text-center relative shadow-2xl transition duration-500 overflow-hidden">
-        <div class="laser-beam"></div>
-        
-        <div class="text-xs text-amber-500 uppercase tracking-widest mb-1">// INTERACTIVE TERMINAL // SIMULATE YOUR STATEMENT</div>
-        <div id="assigned-prompt-msg" class="text-xs text-neutral-400 mb-4">
-          [ SYSTEM INFO ]: Session protocol re-anchored: #0234
-        </div>
-        
-        <div class="space-y-4">
-          <input type="text" id="custom-statement" oninput="updateLiveCard()" placeholder="TYPE YOUR 1-SENTENCE STATEMENT HERE..." maxlength="140" value="We build digital armor not to hide who we are, but to decide when we speak." class="w-full bg-black border border-neutral-700 px-4 py-3 text-xs text-neutral-200 focus:outline-none focus:border-amber-500 rounded font-mono text-center">
-        </div>
-
-        <div id="live-demo-card" class="mt-6 p-6 bg-black border border-amber-500/40 rounded-xl transition-all duration-300 relative text-left">
-          <div class="flex justify-between items-center mb-2">
-            <span class="text-xs text-neutral-400 uppercase">PREVIEW ENTRY</span>
-            <span class="text-xs px-2 py-0.5 rounded border border-neutral-700 bg-neutral-800 text-neutral-300">CLAIMED VIA SEALED KEY</span>
-          </div>
-          <div id="live-card-code" class="text-xl font-bold text-amber-500">FORM 01 — #0234 / 0777</div>
-          <blockquote id="live-card-text" class="text-sm italic text-neutral-200 my-3 leading-relaxed">“We build digital armor not to hide who we are, but to decide when we speak.”</blockquote>
-          <div class="text-xs text-neutral-400 uppercase">ACTIVE CYCLE: <span class="text-white font-bold">6D 23H REMAINING</span></div>
-          
-          <button onclick="openManifesto()" class="mt-4 w-full py-2.5 bg-neutral-900 border border-neutral-700 hover:border-amber-500 text-amber-500 text-xs font-bold uppercase transition rounded cursor-pointer">
-            READ BRAND MANIFESTO ➔
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PUBLIC LEDGER PREVIEW SECTION -->
-  <section id="archive" class="py-16 px-6 md:px-12 max-w-7xl mx-auto w-full space-y-8 font-mono">
-    <div class="flex justify-between items-end border-b border-subtle pb-4">
-      <div>
-        <span class="text-xs text-amber-500 tracking-widest uppercase">// PUBLIC LEDGER PREVIEW</span>
-        <h2 class="text-xl font-bold text-white font-sans mt-1">SAMPLE EXPRESSIONS</h2>
-      </div>
-      <span class="text-xs text-neutral-400">DEMO ARCHIVE</span>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- ENTRY 1 -->
-      <div class="border border-subtle bg-card p-6 rounded-xl space-y-4">
-        <div class="flex justify-between items-center text-xs">
-          <div class="flex items-center gap-3">
-            <span class="font-bold text-white">FORM 01 — #0234 / 0777</span>
-            <span class="bg-neutral-800 text-neutral-300 text-xs px-2 py-0.5 border border-neutral-700 rounded">CLAIMED VIA SEALED KEY</span>
-          </div>
-          <span class="text-neutral-400 text-xs">4D 12H REMAINING</span>
-        </div>
-        <blockquote class="text-sm md:text-base font-sans text-white italic py-1">
-          "We build digital armor not to hide who we are, but to decide when we speak."
-        </blockquote>
-        <div class="flex justify-between items-center text-xs text-neutral-400 pt-2 border-t border-subtle">
-          <span>ALIGNMENT: <strong class="text-red-500">DYSTOPIA (RED)</strong></span>
-          <span>ANONYMOUS OWNER</span>
-        </div>
-      </div>
-
-      <!-- ENTRY 2 -->
-      <div class="border border-subtle bg-card p-6 rounded-xl space-y-4">
-        <div class="flex justify-between items-center text-xs">
-          <div class="flex items-center gap-3">
-            <span class="font-bold text-white">FORM 01 — #0088 / 0777</span>
-            <span class="bg-neutral-800 text-neutral-300 text-xs px-2 py-0.5 border border-neutral-700 rounded">CLAIMED VIA SEALED KEY</span>
-          </div>
-          <span class="text-neutral-400 text-xs">6D 22H REMAINING</span>
-        </div>
-        <blockquote class="text-sm md:text-base font-sans text-white italic py-1">
-          "Order is the only architecture that survives chaos."
-        </blockquote>
-        <div class="flex justify-between items-center text-xs text-neutral-400 pt-2 border-t border-subtle">
-          <span>ALIGNMENT: <strong class="text-white">UTOPIA (WHITE)</strong></span>
-          <span>ANONYMOUS OWNER</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER & BC CONSUMER PROTECTION LEGAL DISCLOSURE -->
-  <footer class="border-t border-subtle py-12 px-6 md:px-12 bg-black text-xs font-mono text-neutral-400 space-y-8">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div class="space-y-3">
-        <div class="flex items-center space-x-2">
-          <div class="h-5 w-5 white-logo-mask"></div>
-          <span class="font-brand font-light text-white tracking-widest">WITHIN SEVEN</span>
-        </div>
-        <p class="text-xs leading-relaxed">
-          Richmond, BC, Canada.<br />
-          A meaning only you can assign.
-        </p>
-      </div>
-
-      <div class="space-y-2">
-        <div class="text-white font-bold">SHIPPING & DISPATCH</div>
-        <p class="text-xs leading-relaxed">
-          Ships exclusively to Canadian addresses.<br />
-          Orders processed in 3–5 business days.<br />
-          Full legal invoice & contract sent via email upon order.
-        </p>
-      </div>
-
-      <div class="space-y-2">
-        <div class="text-white font-bold">RETURN POLICY</div>
-        <p class="text-xs leading-relaxed">
-          14-day policy: Accepted ONLY if the physical Claim Key scratch-seal remains UNSCRATCHED and INTACT.
-        </p>
-      </div>
-
-      <div class="space-y-2">
-        <div class="text-white font-bold">TERMS & POLICIES</div>
-        <button onclick="openPolicyModal()" class="text-amber-400 hover:text-white underline block text-left cursor-pointer">
-          Pre-Purchase Disclosure & Terms →
+<div class="container">
+    <header>
+        <div class="logo">WITHIN SEVEN</div>
+        <!-- Snipcart 购物车触发按钮 -->
+        <button class="cart-summary snipcart-checkout">
+            CART (<span class="snipcart-items-count">0</span>)
         </button>
-        <p class="text-xs text-neutral-400 pt-1">Contact: support@withinseven.com</p>
-      </div>
+    </header>
+
+    <div class="grid">
+        <!-- 3 图画廊区 -->
+        <div class="gallery">
+            <div class="main-img-container">
+                <img id="main-product-img" src="front.jpg" alt="WITHIN SEVEN Garment Front" onerror="this.src='https://via.placeholder.com/600x750/111/fff?text=FRONT+VIEW'">
+            </div>
+            <div class="thumbs">
+                <button class="thumb-btn active" onclick="switchImage('front.jpg', this)">
+                    <img src="front.jpg" alt="Front" onerror="this.src='https://via.placeholder.com/150x187/111/fff?text=FRONT'">
+                </button>
+                <button class="thumb-btn" onclick="switchImage('back.jpg', this)">
+                    <img src="back.jpg" alt="Back" onerror="this.src='https://via.placeholder.com/150x187/111/fff?text=BACK'">
+                </button>
+                <button class="thumb-btn" onclick="switchImage('detail.jpg', this)">
+                    <img src="detail.jpg" alt="Detail" onerror="this.src='https://via.placeholder.com/150x187/111/fff?text=DETAIL'">
+                </button>
+            </div>
+        </div>
+
+        <!-- 商品购买信息与 PLG 终端 -->
+        <div class="product-info">
+            <h1>DROP 01 — DYSTOPIA ARMOR</h1>
+            <div class="price">$180.00 <span class="currency-tag">CAD (Excl. Tax & Shipping)</span></div>
+            <p class="desc">
+                Limited edition of 777 serialized heavy-gauge garments. Integrated with NTAG213 NFC claim tag & encrypted ledger key. Enables 7-day ephemerality terminal statement publishing.
+            </p>
+
+            <!-- 尺码选择器 -->
+            <div class="size-section">
+                <div class="label">SELECT SIZE [REQUIRED]</div>
+                <div class="size-options">
+                    <button class="size-btn" onclick="selectSize('S', this)">S</button>
+                    <button class="size-btn" onclick="selectSize('M', this)">M</button>
+                    <button class="size-btn" onclick="selectSize('L', this)">L</button>
+                    <button class="size-btn" onclick="selectSize('XL', this)">XL</button>
+                </div>
+                <div id="size-error" class="error-msg">⚠️ SELECT SIZE TO PURCHASE</div>
+            </div>
+
+            <!-- Snipcart 购买加购按钮 -->
+            <button 
+                id="add-to-cart-btn"
+                class="buy-btn snipcart-add-item"
+                data-item-id="withinseven-drop01"
+                data-item-price="180.00"
+                data-item-url="/"
+                data-item-description="DROP 01 Serialized Heavyweight Garment with NFC Key"
+                data-item-image="front.jpg"
+                data-item-name="DROP 01 — DYSTOPIA ARMOR"
+                data-item-custom1-name="Size"
+                data-item-custom1-options="S|M|L|XL"
+                data-item-custom1-required="true"
+                onclick="validateSizeSelection(event)">
+                ADD TO CART
+            </button>
+
+            <!-- PLG 实时动态终端区 -->
+            <div class="terminal-box">
+                <div class="terminal-header">
+                    <span>LIVE LEDGER TERMINAL</span>
+                    <span>7-DAY EPHEMERALITY</span>
+                </div>
+                <div id="terminal-content">
+                    <div class="status-badge idle">CONNECTING TO EDGE WORKER...</div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="max-w-7xl mx-auto border-t border-subtle pt-6 flex justify-between text-xs text-neutral-400">
-      <span>© 2026 WITHIN SEVEN OPERATING SYSTEM. ALL RIGHTS RESERVED.</span>
-      <span>id.withinseven.com</span>
+    <!-- BC 省消费者保护法 (Consumer Protection BC 2026) 示警声明 -->
+    <div class="legal-section">
+        <div class="legal-card">
+            <h4>BC PRE-ORDER & DELIVERY NOTICE</h4>
+            <p>In compliance with BC Business Practices and Consumer Protection Code (2026): All Drop 01 orders are fulfilled within 30 days of pre-order confirmation. Full itemized invoice provided upon transaction.</p>
+        </div>
+        <div class="legal-card">
+            <h4>CANCELLATION & RETURN POLICY</h4>
+            <p>Unclaimed key items with intact scratch-off seals are eligible for return within 14 days of receipt. Once the Claim Key tag seal is broken, digital ledger access is permanently assigned.</p>
+        </div>
     </div>
-  </footer>
+</div>
 
-  <!-- SIZE GUIDE & SPECS MODAL -->
-  <div id="size-guide-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md items-center justify-center p-6 font-mono">
-    <div class="bg-neutral-950 border border-subtle p-8 max-w-xl w-full space-y-6 relative rounded-2xl max-h-[90vh] overflow-y-auto">
-      <button onclick="closeSizeGuideModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white cursor-pointer">✕</button>
-      <div class="space-y-2">
-        <span class="text-xs text-amber-500 tracking-widest uppercase">// SIZE GUIDE & GARMENT SPECS</span>
-        <h3 class="text-lg font-bold text-white font-sans">FORM 01 UNIFORM (BOXY FIT)</h3>
-      </div>
-      
-      <div class="space-y-4 text-xs text-neutral-300">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="border-b border-subtle text-neutral-400">
-              <th class="py-2">SIZE</th>
-              <th class="py-2">CHEST (PIT-TO-PIT)</th>
-              <th class="py-2">LENGTH</th>
-              <th class="py-2">SHOULDER</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-neutral-900 text-neutral-300">
-            <tr><td class="py-2 font-bold text-white">S</td><td>57 cm</td><td>70 cm</td><td>54 cm</td></tr>
-            <tr><td class="py-2 font-bold text-white">M</td><td>60 cm</td><td>73 cm</td><td>57 cm</td></tr>
-            <tr><td class="py-2 font-bold text-white">L</td><td>63 cm</td><td>76 cm</td><td>60 cm</td></tr>
-            <tr><td class="py-2 font-bold text-white">XL</td><td>66 cm</td><td>79 cm</td><td>63 cm</td></tr>
-            <tr><td class="py-2 font-bold text-white">XXL</td><td>69 cm</td><td>81 cm</td><td>66 cm</td></tr>
-          </tbody>
-        </table>
+<!-- Snipcart 核心 HTML (已锁定 CAD 币种) -->
+<!-- 💡 提示：请将下面的 YOUR_SNIPCART_API_KEY 替换为你自己的 Snipcart API Key -->
+<div id="snipcart" data-api-key="ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz" data-currency="cad" hidden></div>
+<script src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 
-        <div class="border-t border-subtle pt-4 space-y-2">
-          <p class="font-bold text-white">GARMENT CARE & MAINTENANCE:</p>
-          <ul class="list-disc pl-4 space-y-1 text-neutral-400">
-            <li>Machine wash cold inside out with like colors.</li>
-            <li>Line dry in shade. Do not tumble dry hot (preserves NFC antenna & solder).</li>
-            <li>Do not iron directly over the internal NFC hem label or back serial code.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<script>
+    let currentSelectedSize = '';
 
-  <!-- BC CONSUMER PROTECTION DISCLOSURE MODAL -->
-  <div id="policy-modal" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-md items-center justify-center p-6 font-mono">
-    <div class="bg-neutral-950 border border-subtle p-8 max-w-2xl w-full space-y-6 relative rounded-2xl max-h-[85vh] overflow-y-auto">
-      <button onclick="closePolicyModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white cursor-pointer">✕</button>
-      
-      <div class="space-y-2 border-b border-subtle pb-4">
-        <span class="text-xs text-amber-500 tracking-widest uppercase">// BC CONSUMER PROTECTION DISCLOSURE</span>
-        <h3 class="text-lg font-bold text-white font-sans">PRE-PURCHASE TERMS & CONTRACT RULES</h3>
-      </div>
+    // 1. 三图画廊平滑切换
+    function switchImage(src, btnEl) {
+        const mainImg = document.getElementById('main-product-img');
+        mainImg.style.opacity = '0.3';
+        setTimeout(() => {
+            mainImg.src = src;
+            mainImg.style.opacity = '1';
+        }, 150);
 
-      <div class="space-y-4 text-xs text-neutral-300 leading-relaxed">
-        <div>
-          <h4 class="font-bold text-white uppercase">1. Business Information & Legal Entity</h4>
-          <p class="text-neutral-400">WITHIN SEVEN System Operations, Richmond, BC, Canada. Contact: support@withinseven.com. Customer service queries reviewed twice daily on business days.</p>
-        </div>
-
-        <div>
-          <h4 class="font-bold text-white uppercase">2. Pricing, Taxes & Currency</h4>
-          <p class="text-neutral-400">All prices are quoted in Canadian Dollars (CAD). Form 01 Uniform is priced at C$154.00 CAD. Goods and Services Tax (GST/PST) calculated precisely based on destination shipping province at checkout.</p>
-        </div>
-
-        <div>
-          <h4 class="font-bold text-white uppercase">3. Shipping & Delivery Terms</h4>
-          <p class="text-neutral-400">Orders ship exclusively to valid Canadian addresses via tracked courier. Orders process and dispatch within 3–5 business days. Delivery tracking provided via email confirmation.</p>
-        </div>
-
-        <div>
-          <h4 class="font-bold text-white uppercase">4. Return, Cancellation & Key Integrity Policy</h4>
-          <p class="text-neutral-400">Complimentary 14-day return window from carrier delivery date. Returns accepted ONLY if the garment is unworn, unwashed, and the physical Claim Key card scratch-seal remains completely UNSCRATCHED and INTACT. Once a Claim Key is revealed or redeemed, voluntary change-of-mind refunds are voided.</p>
-        </div>
-
-        <div>
-          <h4 class="font-bold text-white uppercase">5. Electronic Contract Copy</h4>
-          <p class="text-neutral-400">Upon checkout completion, an official order summary invoice serving as your binding electronic sales contract will be instantly dispatched to your provided email address.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BRAND MANIFESTO MODAL -->
-  <div id="modal-manifesto" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl items-center justify-center p-6 font-mono">
-    <div class="max-w-2xl w-full bg-neutral-950 border border-subtle p-8 rounded-2xl shadow-2xl relative text-neutral-300 space-y-6 max-h-[85vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-subtle pb-4">
-        <span class="text-xs text-amber-500 tracking-widest uppercase">// SYSTEM MANIFESTO // WITHIN SEVEN</span>
-        <button onclick="closeManifesto()" class="text-neutral-400 hover:text-white text-lg p-1 cursor-pointer">✕</button>
-      </div>
-      
-      <div class="text-xs text-neutral-300 leading-relaxed space-y-4">
-        <p class="font-bold text-white text-sm">WE REJECT PERMANENT LABELS.</p>
-        <p>In an era of hyper-surveillance and relentless identity categorizations, true autonomy is not about explaining yourself—it is about choosing when to speak, and when to dissolve back into silence.</p>
-        <p>WITHIN SEVEN is a Wearable Identity System. We produce 777 individually numbered physical garments. Each piece carries a unique number and an embedded NFC entry.</p>
-        <p>Upon verification via your sealed physical Claim Key, the owner unlocks the garment's digital record to publish one sentence. This message stands on the active public ledger for exactly seven days. Once the cycle expires, the signal fades, resetting the canvas for your next evolution.</p>
-        <p class="text-amber-500 font-bold border-l-2 border-amber-500 pl-3 py-1">
-          “A NUMBERED GARMENT. A MEANING ONLY YOU CAN ASSIGN. HELD FOR SEVEN DAYS.”
-        </p>
-      </div>
-      <button onclick="closeManifesto()" class="w-full py-3 bg-white text-black font-bold text-xs rounded mt-4 cursor-pointer">
-        ACKNOWLEDGE MANIFESTO
-      </button>
-    </div>
-  </div>
-
-  <!-- EXPLICIT SNIPCART CONTAINER WITH CAD CURRENCY -->
-  <div id="snipcart" data-api-key="ZDJmZTZIY2ItNzEwOC00NzQxLWFHNWUtOGFhNDQxNzM2NjM5M2E2MTg0MzQxNzMz" data-currency="cad" hidden></div>
-
-  <!-- JS CONTROLLER -->
-  <script>
-    let selectedColor = 'Utopia (White)';
-    let selectedSize = null;
-
-    function selectColor(colorName, hexColor, element) {
-      selectedColor = colorName;
-      const previewCircle = document.getElementById('product-color-preview-circle');
-      if (previewCircle) previewCircle.style.backgroundColor = hexColor;
-
-      const btn = document.getElementById('buy-button');
-      btn.setAttribute('data-item-custom1-value', colorName);
-
-      document.querySelectorAll('.color-btn').forEach(b => {
-        b.classList.remove('border-white', 'text-white');
-        b.classList.add('border-subtle', 'text-neutral-400');
-      });
-      element.classList.remove('border-subtle', 'text-neutral-400');
-      element.classList.add('border-white', 'text-white');
+        document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
     }
 
-    function selectSize(size, element) {
-      selectedSize = size;
-      document.getElementById('size-warning').classList.add('hidden');
-      
-      const btn = document.getElementById('buy-button');
-      btn.setAttribute('data-item-custom2-value', size);
-      btn.innerText = `ADD TO INVENTORY — C$154.00 CAD (${size})`;
-      btn.classList.remove('bg-neutral-800', 'text-neutral-400', 'cursor-not-allowed');
-      btn.classList.add('bg-white', 'text-black', 'hover:bg-neutral-200', 'cursor-pointer');
+    // 2. 选择尺码逻辑
+    function selectSize(size, btnEl) {
+        currentSelectedSize = size;
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
+        
+        // 隐藏未选择尺码的报错
+        document.getElementById('size-error').style.display = 'none';
 
-      document.querySelectorAll('.size-btn').forEach(b => {
-        b.classList.remove('border-white', 'bg-white', 'text-black', 'font-bold');
-        b.classList.add('border-subtle', 'text-neutral-300');
-      });
-      element.classList.remove('border-subtle', 'text-neutral-300');
-      element.classList.add('border-white', 'bg-white', 'text-black', 'font-bold');
+        // 动态绑定选择的尺码到 Snipcart 属性
+        const addBtn = document.getElementById('add-to-cart-btn');
+        addBtn.setAttribute('data-item-custom1-value', size);
     }
 
-    function handleAddToCart(event) {
-      if (!selectedSize) {
-        event.preventDefault();
-        event.stopPropagation();
-        document.getElementById('size-warning').classList.remove('hidden');
-      }
+    // 3. 拦截未选择尺码直接加购的动作
+    function validateSizeSelection(e) {
+        if (!currentSelectedSize) {
+            e.preventDefault();
+            e.stopPropagation();
+            const errEl = document.getElementById('size-error');
+            errEl.style.display = 'block';
+            errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return false;
+        }
     }
 
-    function switchProductView(viewType, imgSrc, labelText, btnElement) {
-      const imgEl = document.getElementById('main-product-img');
-      const labelEl = document.getElementById('placeholder-view-name');
-      
-      if (imgEl && imgEl.style.display !== 'none') {
-        imgEl.src = imgSrc;
-      }
-      if (labelEl) labelEl.innerText = labelText;
-
-      document.querySelectorAll('.thumb-btn').forEach(b => {
-        b.classList.remove('border-white', 'text-white');
-        b.classList.add('border-subtle', 'text-neutral-400');
-      });
-      btnElement.classList.remove('border-subtle', 'text-neutral-400');
-      btnElement.classList.add('border-white', 'text-white');
+    // 4. 从 PLG 未锚定提示区域一键平滑滚动到购买区
+    function scrollToBuy() {
+        document.querySelector('.size-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    function showImagePlaceholder(imgEl) {
-      imgEl.style.display = 'none';
-      document.getElementById('img-placeholder').classList.remove('hidden');
-      document.getElementById('img-placeholder').classList.add('flex');
+    // 5. 拉取 Supabase / Cloudflare Worker 边缘节点数据
+    async function fetchLiveTerminalData() {
+        const container = document.getElementById('terminal-content');
+        try {
+            const res = await fetch('https://id.withinseven.com/api/archive');
+            if (!res.ok) throw new Error("API Response Error");
+            const data = await res.json();
+
+            if (data && data.length > 0) {
+                const active = data[0];
+                const pubDate = new Date(active.published_at).toLocaleString();
+                const expDate = new Date(active.expires_at).toLocaleString();
+
+                container.innerHTML = `
+                    <div class="status-badge live">● LIVE SIGNAL DETECTED</div>
+                    <div class="garment-meta" style="margin-top:15px;">
+                        <span class="num">#${String(active.garment_number).padStart(4, '0')}</span>
+                        <span class="tag">${active.color}</span>
+                    </div>
+                    <div class="statement-text">"${active.statement_text}"</div>
+                    <div class="terminal-footer">
+                        <span>PUBLISHED: ${pubDate}</span>
+                        <span>VANISHES: ${expDate}</span>
+                    </div>
+                    ${active.is_in_grace_period ? '<div class="grace-tag">⚡ 7-MINUTE EDIT WINDOW ACTIVE FOR OWNER</div>' : ''}
+                `;
+            } else {
+                renderUnanchoredState(container);
+            }
+        } catch (err) {
+            console.warn("Terminal live fetch fallback:", err);
+            renderUnanchoredState(container);
+        }
     }
 
-    function updateLiveCard() {
-      const inputVal = document.getElementById('custom-statement').value.trim();
-      const textEl = document.getElementById('live-card-text');
-      if (inputVal.length > 0) {
-        textEl.innerText = `“${inputVal}”`;
-      } else {
-        textEl.innerText = `“Your 1-sentence statement will publish here.”`;
-      }
+    function renderUnanchoredState(container) {
+        container.innerHTML = `
+            <div class="status-badge idle">○ UNANCHORED SIGNAL</div>
+            <div class="statement-text" style="color: var(--muted); font-size: 0.95rem; margin-top: 15px;">
+                "NO ACTIVE STATEMENT RECORDED IN THE PAST 7 DAYS. BE THE FIRST TO ANCHOR YOUR VOICE TO THE LEDGER."
+            </div>
+            <button class="anchor-cta-btn" onclick="scrollToBuy()">ANCHOR YOUR STATEMENT — BUY DROP 01</button>
+        `;
     }
 
-    function openSizeGuideModal() { document.getElementById('size-guide-modal').style.display = 'flex'; }
-    function closeSizeGuideModal() { document.getElementById('size-guide-modal').style.display = 'none'; }
-    function openPolicyModal() { document.getElementById('policy-modal').style.display = 'flex'; }
-    function closePolicyModal() { document.getElementById('policy-modal').style.display = 'none'; }
-    function openManifesto() { document.getElementById('modal-manifesto').style.display = 'flex'; }
-    function closeManifesto() { document.getElementById('modal-manifesto').style.display = 'none'; }
-  </script>
+    // 页面加载完成后自动拉取数据
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchLiveTerminalData();
+    });
+</script>
+
 </body>
 </html>
