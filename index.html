@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WITHIN SEVEN — TRIAD ARCHIVE</title>
+    <title>WITHIN SEVEN — UTOPIA MIRROR</title>
     <link rel="icon" type="image/png" href="/LOGO.png">
     
     <!-- Google Fonts: Inter & JetBrains Mono -->
@@ -47,7 +47,7 @@
 
         .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-        /* 🔒 1. 拱门满屏入口 Portal Overlay (永久锁死不动) */
+        /* 🔒 1. 拱门满屏入口 Portal Overlay (最高铁律：打死不动) */
         #portal-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -135,12 +135,12 @@
             50% { opacity: 1; }
         }
 
-        /* 💥 2. 高奢全屏流体极光门界 (The Chromatic Spectrum Canvas) */
+        /* 🪞 2. 乌托邦 — 镜子空间门界 (The Mirror Space Realm) */
         #faction-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background-color: #060608;
+            background-color: #030305;
             z-index: 999998;
             display: flex;
             flex-direction: column;
@@ -148,10 +148,10 @@
             align-items: center;
             padding: 30px 24px;
             overflow: hidden;
-            transition: background 0.6s ease, opacity 0.6s ease;
+            transition: background 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         }
 
-        /* 顶部高奢地理与倒计时坐标线 (取代丑时钟) */
+        /* 顶部高奢地理坐标 */
         .telemetry-bar {
             display: flex;
             justify-content: space-between;
@@ -170,82 +170,122 @@
         .telemetry-title { font-weight: 800; color: #ffffff; letter-spacing: 4px; }
         .telemetry-clock { color: #ffffff; font-weight: 700; }
 
-        /* 7 色水平先锋折页网格 */
-        .spectrum-accordion-wrap {
+        /* 中央悬浮巨幅镜面投影 (Mirror Echo Projection) */
+        .mirror-projection-stage {
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+            z-index: 10;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        .projection-meta {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .projection-quote {
+            font-size: 1.4rem;
+            font-weight: 500;
+            font-style: italic;
+            color: #ffffff;
+            line-height: 1.5;
+            letter-spacing: 1px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            max-width: 850px;
+            transition: all 0.3s ease;
+        }
+
+        /* 7 根镜面折射晶体 (7 Mirror Monolith Prisms) */
+        .mirror-prisms-container {
             display: flex;
             width: 100%;
             max-width: 1400px;
-            height: 70vh;
-            gap: 8px;
+            height: 48vh;
+            min-height: 320px;
+            gap: 14px;
             z-index: 10;
-            margin: 20px 0;
+            perspective: 1200px;
         }
 
         @media (max-width: 900px) {
-            .spectrum-accordion-wrap {
+            .mirror-prisms-container {
                 flex-direction: column;
                 height: auto;
-                overflow-y: auto;
             }
         }
 
-        .spectrum-slice {
+        .mirror-prism {
             flex: 1;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 24px 16px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 24px 14px;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            align-items: center;
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.03);
+            transform-style: preserve-3d;
         }
 
-        .spectrum-slice:hover {
-            flex: 2.2;
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        /* 镜面反光光刃 */
+        .mirror-reflection-edge {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.25) 50%, transparent 60%);
+            background-size: 200% 200%;
+            background-position: 0% 0%;
+            transition: background-position 0.6s ease;
+            pointer-events: none;
         }
 
-        .slice-num { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 2px; }
-        .slice-title { font-size: 1.2rem; font-weight: 800; letter-spacing: 3px; color: #ffffff; margin-top: 6px; }
-
-        .slice-quote-box {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px;
-            font-size: 0.78rem;
-            color: #eeeeee;
-            font-style: italic;
-            line-height: 1.5;
-            margin: 20px 0;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
+        .mirror-prism:hover {
+            flex: 1.8;
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateZ(25px) rotateY(-4deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(255, 255, 255, 0.15);
         }
 
-        .spectrum-slice:hover .slice-quote-box { opacity: 1; border-color: rgba(255,255,255,0.3); }
+        .mirror-prism:hover .mirror-reflection-edge {
+            background-position: 100% 100%;
+        }
 
-        .slice-cta-btn {
+        .prism-tag { font-family: var(--font-mono); font-size: 0.68rem; color: rgba(255,255,255,0.5); letter-spacing: 2px; }
+        .prism-title { font-size: 1.15rem; font-weight: 800; letter-spacing: 2.5px; color: #ffffff; margin-top: 6px; text-transform: uppercase; }
+
+        .prism-select-btn {
             width: 100%;
-            padding: 12px;
-            background: transparent;
+            padding: 12px 6px;
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #ffffff;
             font-family: var(--font-mono);
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             transition: all 0.25s ease;
         }
 
-        .spectrum-slice:hover .slice-cta-btn {
+        .mirror-prism:hover .prism-select-btn {
             background: #ffffff;
             color: #000000;
             border-color: #ffffff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.5);
         }
 
         /* Header */
@@ -398,7 +438,7 @@
 </head>
 <body>
 
-<!-- 🔒 1. 拱门满屏入口 Portal Overlay (100vh - 锁死不动) -->
+<!-- 🔒 1. 拱门满屏入口 Portal Overlay (100vh - 打死不动最高铁律) -->
 <div id="portal-overlay">
     <canvas id="portal-canvas"></canvas>
     <div class="portal-aura"></div>
@@ -408,104 +448,110 @@
     <div class="portal-enter-prompt" onclick="enterArchwayPortal()">[ TAP LOGO TO ENTER THE ARCHIVE ]</div>
 </div>
 
-<!-- 💥 2. 7 色全屏流体极光门界 (The Chromatic Void Overlay) -->
+<!-- 🪞 2. 乌托邦 — 镜子空间门界 (The Mirror Space Realm Overlay) -->
 <div id="faction-overlay">
-    <!-- 顶部高奢地理与时间坐标 (替换旧丑时钟) -->
+    <!-- 顶部高奢坐标线 -->
     <div class="telemetry-bar">
-        <span class="telemetry-title">SELECT YOUR FREQUENCY</span>
+        <span class="telemetry-title">UTOPIA MIRROR // SELECT YOUR FREQUENCY</span>
         <span>VANCOUVER PST // 49°15'N 123°06'W</span>
         <span class="telemetry-clock" id="telemetry-clock-display">000D 00H 00M 00S</span>
     </div>
 
-    <!-- 7 色先锋折页网格 -->
-    <div class="spectrum-accordion-wrap">
+    <!-- 中央悬浮巨幅镜面投影 (根据悬停的晶体实时渲染消费者的声音) -->
+    <div class="mirror-projection-stage">
+        <div class="projection-meta" id="projection-meta-target">HOVER A MIRROR PRISM TO REFLECT VOICES</div>
+        <div class="projection-quote" id="projection-quote-target">"The garment is a blank canvas. Hover over a color frequency to reflect the voices of the ledger."</div>
+    </div>
+
+    <!-- 7 根镜面折射晶体 -->
+    <div class="mirror-prisms-container">
         <!-- 01 RED -->
-        <div class="spectrum-slice" onmouseenter="setFluidGlow('#33000b')" onclick="selectFaction('RED', '#ff0033')">
+        <div class="mirror-prism" 
+             onmouseenter="reflectVoice('#3d000a', '01 // RED RESISTANCE', '#0142', 'In an ocean of digital noise, I choose to be a flame that burns out in 7 days.')" 
+             onclick="selectFaction('RED', '#ff0033')">
+            <div class="mirror-reflection-edge"></div>
             <div>
-                <div class="slice-num">01 // RED</div>
-                <div class="slice-title">RESISTANCE</div>
+                <div class="prism-tag">01 // RED</div>
+                <div class="prism-title">RESISTANCE</div>
             </div>
-            <div class="slice-quote-box">
-                "In an ocean of digital noise, I choose to be a flame that burns out in 7 days."
-            </div>
-            <button class="slice-cta-btn">ALIGN RED</button>
+            <button class="prism-select-btn">REFLECT RED</button>
         </div>
 
         <!-- 02 GREEN -->
-        <div class="spectrum-slice" onmouseenter="setFluidGlow('#002611')" onclick="selectFaction('GREEN', '#00ff66')">
+        <div class="mirror-prism" 
+             onmouseenter="reflectVoice('#003314', '02 // GREEN SYNTHESIS', '#0088', 'Growth is silent. The roots expand long before the noise begins.')" 
+             onclick="selectFaction('GREEN', '#00ff66')">
+            <div class="mirror-reflection-edge"></div>
             <div>
-                <div class="slice-num">02 // GREEN</div>
-                <div class="slice-title">SYNTHESIS</div>
+                <div class="prism-tag">02 // GREEN</div>
+                <div class="prism-title">SYNTHESIS</div>
             </div>
-            <div class="slice-quote-box">
-                "Growth is silent. The roots expand long before the noise begins."
-            </div>
-            <button class="slice-cta-btn">ALIGN GREEN</button>
+            <button class="prism-select-btn">REFLECT GREEN</button>
         </div>
 
         <!-- 03 BLUE -->
-        <div class="spectrum-slice" onmouseenter="setFluidGlow('#001133')" onclick="selectFaction('BLUE', '#0055ff')">
+        <div class="mirror-prism" 
+             onmouseenter="reflectVoice('#001847', '03 // BLUE AWAKENING', '#0234', 'Today, blue means becoming visible in the void.')" 
+             onclick="selectFaction('BLUE', '#0055ff')">
+            <div class="mirror-reflection-edge"></div>
             <div>
-                <div class="slice-num">03 // BLUE</div>
-                <div class="slice-title">AWAKENING</div>
+                <div class="prism-tag">03 // BLUE</div>
+                <div class="prism-title">AWAKENING</div>
             </div>
-            <div class="slice-quote-box">
-                "Today, blue means becoming visible in the void."
-            </div>
-            <button class="slice-cta-btn">ALIGN BLUE</button>
+            <button class="prism-select-btn">REFLECT BLUE</button>
         </div>
 
         <!-- 04 YELLOW -->
-        <div class="spectrum-slice" onmouseenter="setFluidGlow('#2b2200')" onclick="selectFaction('YELLOW', '#ffcc00')">
+        <div class="mirror-prism" 
+             onmouseenter="reflectVoice('#3d3200', '04 // YELLOW ILLUMINATION', '#0307', 'A temporary blinding light is worth a lifetime of dim shadows.')" 
+             onclick="selectFaction('YELLOW', '#ffcc00')">
+            <div class="mirror-reflection-edge"></div>
             <div>
-                <div class="slice-num">04 // YELLOW</div>
-                <div class="slice-title">ILLUMINATION</div>
+                <div class="prism-tag">04 // YELLOW</div>
+                <div class="prism-title">ILLUMINATION</div>
             </div>
-            <div class="slice-quote-box">
-                "A temporary blinding light is worth a lifetime of dim shadows."
-            </div>
-            <button class="slice-cta-btn">ALIGN YELLOW</button>
+            <button class="prism-select-btn">REFLECT YELLOW</button>
         </div>
 
         <!-- 05 BLACK -->
-        <div class="spectrum-slice" onmouseenter="setFluidGlow('#000000')" onclick="selectFaction('BLACK', '#111111')">
+        <div class="mirror-prism" 
+             onmouseenter="reflectVoice('#000000', '05 // BLACK ECLIPSE', '#0007', 'True luxury is having nothing to prove and no identity to broadcast.')" 
+             onclick="selectFaction('BLACK', '#111111')">
+            <div class="mirror-reflection-edge"></div>
             <div>
-                <div class="slice-num">05 // BLACK</div>
-                <div class="slice-title">ECLIPSE</div>
+                <div class="prism-tag">05 // BLACK</div>
+                <div class="prism-title">ECLIPSE</div>
             </div>
-            <div class="slice-quote-box">
-                "True luxury is having nothing to prove and no identity to broadcast."
-            </div>
-            <button class="slice-cta-btn">ALIGN BLACK</button>
+            <button class="prism-select-btn">REFLECT BLACK</button>
         </div>
 
         <!-- 06 WHITE -->
-        <div class="spectrum-slice" onmouseenter="setFluidGlow('#222226')" onclick="selectFaction('WHITE', '#ffffff')">
+        <div class="mirror-prism" 
+             onmouseenter="reflectVoice('#282830', '06 // WHITE PURITY', '#0101', 'Clean slate. No history. Pure unconditioned voice.')" 
+             onclick="selectFaction('WHITE', '#ffffff')">
+            <div class="mirror-reflection-edge"></div>
             <div>
-                <div class="slice-num" style="color:#aaa;">06 // WHITE</div>
-                <div class="slice-title">PURITY</div>
+                <div class="prism-tag" style="color:#aaa;">06 // WHITE</div>
+                <div class="prism-title">PURITY</div>
             </div>
-            <div class="slice-quote-box">
-                "Clean slate. No history. Pure unconditioned voice."
-            </div>
-            <button class="slice-cta-btn">ALIGN WHITE</button>
+            <button class="prism-select-btn">REFLECT WHITE</button>
         </div>
 
         <!-- 07 VIOLET -->
-        <div class="spectrum-slice" onmouseenter="setFluidGlow('#1f0033')" onclick="selectFaction('VIOLET', '#b026ff')">
+        <div class="mirror-prism" 
+             onmouseenter="reflectVoice('#2b0047', '07 // VIOLET TRANSCENDENCE', '#0707', 'Vibrate at a frequency only the quiet ones can decode.')" 
+             onclick="selectFaction('VIOLET', '#b026ff')">
+            <div class="mirror-reflection-edge"></div>
             <div>
-                <div class="slice-num">07 // VIOLET</div>
-                <div class="slice-title">TRANSCENDENCE</div>
+                <div class="prism-tag">07 // VIOLET</div>
+                <div class="prism-title">TRANSCENDENCE</div>
             </div>
-            <div class="slice-quote-box">
-                "Vibrate at a frequency only the quiet ones can decode."
-            </div>
-            <button class="slice-cta-btn">ALIGN VIOLET</button>
+            <button class="prism-select-btn">REFLECT VIOLET</button>
         </div>
     </div>
 
-    <div style="font-family: var(--font-mono); font-size: 0.65rem; color: #666; letter-spacing: 2px;">
-        SELECT A SPECTRUM TO ENTER THE ARCHIVE
+    <div style="font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.4); letter-spacing: 2.5px;">
+        SELECT A FREQUENCY TO ENTER THE STORE
     </div>
 </div>
 
@@ -602,7 +648,7 @@
         <img src="/LOGO.png" alt="Watermark" class="watermark-img" onerror="this.style.display='none';">
     </section>
 
-    <!-- Screen 2: Interactive Private Preview & Live Ledger Signal Stream -->
+    <!-- Screen 2: Private Preview & Live Ledger Signal Stream -->
     <section class="screen-interactive">
         <div class="section-heading">// SYSTEM INTERACTION & LIVE SIGNAL STREAM</div>
         
@@ -722,7 +768,7 @@
 <script>
     let chosenSize = '';
 
-    /* 🔒 1. 拱门满屏 Portal 粒子与透视 */
+    /* 🔒 1. 拱门满屏 Portal 粒子与透视 (打死不动) */
     const portalOverlay = document.getElementById('portal-overlay');
     const portalGate = document.getElementById('portal-gate');
     const portalCanvas = document.getElementById('portal-canvas');
@@ -799,9 +845,11 @@
         }, 600);
     }
 
-    /* 💥 2. 7 色流体背景切换 */
-    function setFluidGlow(bgHex) {
+    /* 🪞 2. 镜子空间：悬停晶体实时在全屏巨幕反射消费者的声音 */
+    function reflectVoice(bgHex, metaText, garmentNum, statementText) {
         document.getElementById('faction-overlay').style.backgroundColor = bgHex;
+        document.getElementById('projection-meta-target').textContent = `${metaText} // ${garmentNum}`;
+        document.getElementById('projection-quote-target').textContent = `"${statementText}"`;
     }
 
     function selectFaction(factionName, colorHex) {
