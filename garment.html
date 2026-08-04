@@ -45,12 +45,10 @@
         <span class="tag-id" id="garment-tag">#----</span>
     </div>
     
-    <!-- 纯 DOM 视口节点 -->
     <div id="viewport"></div>
 </div>
 
 <script>
-    // 凭证配置
     const SUPABASE_URL = "https://dfyigdgknxfqwnaykmfw.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_H-TTFizO1CEVpXJub6fiyA_clCGrSki";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -59,7 +57,6 @@
     let currentUser = null;
     let serialNum = null;
 
-    // 1. 严格正则匹配 URL (/g/0001 - /g/0777)
     function parseRoute() {
         const match = window.location.pathname.match(/^\/g\/(\d{4})\/?$/);
         if (!match) return null;
@@ -68,7 +65,6 @@
         return num;
     }
 
-    // DOM 构建辅助器 (防 XSS)
     function createEl(tag, text = "", className = "") {
         const el = document.createElement(tag);
         if (text) el.textContent = text;
@@ -76,10 +72,9 @@
         return el;
     }
 
-    // 2. 初始化核心逻辑
     async function init() {
         const viewport = document.getElementById('viewport');
-        viewport.innerHTML = ""; // 清空
+        viewport.innerHTML = "";
         
         serialNum = parseRoute();
         if (!serialNum) {
@@ -89,11 +84,9 @@
 
         document.getElementById('garment-tag').textContent = `#${String(serialNum).padStart(4, '0')}`;
 
-        // 获取当前 Auth 状态
         const { data: { user } } = await supabaseClient.auth.getUser();
         currentUser = user;
 
-        // 调用净化 RPC
         const { data, error } = await supabaseClient.rpc('get_garment_state', { p_serial: serialNum });
 
         if (error || !data || data.error) {
@@ -105,17 +98,14 @@
         renderView(viewport);
     }
 
-    // 3. 安全 DOM 渲染引擎
     function renderView(container) {
         container.innerHTML = "";
 
-        // A. 基础属性显示
         const metaDiv = createEl("div", `COLOR: ${stateData.color} // SIZE: ${stateData.size}`, "msg-ok");
         metaDiv.style.color = "var(--muted)";
         metaDiv.style.fontSize = "0.75rem";
         container.appendChild(metaDiv);
 
-        // B. 动态显示当前 7 天宣言
         if (stateData.statement_body) {
             const stmtDiv = createEl("div", `"${stateData.statement_body}"`, "statement-display");
             container.appendChild(stmtDiv);
@@ -129,7 +119,6 @@
             container.appendChild(silentDiv);
         }
 
-        // C. 未认领状态：输入 Key 绑定
         if (!stateData.is_claimed) {
             const unclaimedBox = createEl("div");
             unclaimedBox.style.marginTop = "20px";
@@ -152,7 +141,6 @@
             return;
         }
 
-        // D. 已认领状态 ➔ 用户是服装拥有者 (Owner)
         if (stateData.is_owner) {
             const ownerSection = createEl("div");
             ownerSection.style.marginTop = "25px";
@@ -168,7 +156,6 @@
                 const coolBox = createEl("div", `⚡ 7-DAY CYCLE COOLDOWN ACTIVE.\nNEXT PUBLISH WINDOW OPENS: ${nextPostDate.toLocaleString()}`, "cooldown-box");
                 ownerSection.appendChild(coolBox);
 
-                // 如果在 7 分钟改错黄金期，显示编辑按钮
                 if (stateData.is_in_grace_period && stateData.statement_id) {
                     const editBox = createEl("div");
                     editBox.style.marginTop = "15px";
@@ -185,14 +172,12 @@
                     ownerSection.appendChild(editBox);
                 }
 
-                // 隐藏按钮
                 if (stateData.statement_body) {
                     const hideBtn = createEl("button", "HIDE STATEMENT FROM PUBLIC VIEW", "btn btn-sub");
                     hideBtn.onclick = () => executeHide(stateData.statement_id);
                     ownerSection.appendChild(hideBtn);
                 }
             } else {
-                // 允许发布新 7 天宣言
                 const pubInput = createEl("input", "", "input-box");
                 pubInput.placeholder = "Write a statement for the next 7 days...";
                 pubInput.id = "pub-input-field";
@@ -209,7 +194,6 @@
             return;
         }
 
-        // E. 已认领状态 ➔ 但用户尚未登录或非拥有者 (提供重新登录入口)
         const reAuthBox = createEl("div", "", "auth-bar");
         if (!currentUser) {
             reAuthBox.appendChild(createEl("div", "ARE YOU THE OWNER OF THIS GARMENT?", "msg-ok"));
@@ -220,7 +204,6 @@
         container.appendChild(reAuthBox);
     }
 
-    // 辅助 Auth 表单渲染
     function renderAuthForm(parent, btnText) {
         const emailInput = createEl("input", "", "input-box");
         emailInput.placeholder = "Enter your email...";
@@ -238,12 +221,10 @@
         parent.appendChild(statusMsg);
     }
 
-    // 4. 操作函数集
     async function sendMagicLink(email) {
         const msgEl = document.getElementById('auth-status-msg');
         if (!email.trim()) return;
 
-        // 固定安全的 Magic Link 回调地址
         const redirectUrl = `${window.location.origin}/g/${String(serialNum).padStart(4, '0')}`;
 
         const { error } = await supabaseClient.auth.signInWithOtp({
