@@ -60,7 +60,6 @@
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* 拱门穿越动画 */
         #portal-overlay.portal-open {
             opacity: 0;
             transform: scale(2.5);
@@ -142,7 +141,7 @@
             letter-spacing: 2px;
         }
 
-        /* Top Header Nav (进入后的顶栏) */
+        /* Top Header Nav */
         header {
             display: flex;
             justify-content: space-between;
@@ -280,7 +279,7 @@
         .manifesto-text { font-size: 1.1rem; line-height: 1.7; font-style: italic; font-weight: 500; }
         .watermark-img { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 220px; opacity: 0.06; pointer-events: none; }
 
-        /* Interactive Screen 2: Private Preview & Live Ledger */
+        /* 💬 Interactive Screen 2: Private Preview & Live Ledger Signal Stream */
         .screen-interactive { border-top: 1px solid var(--border-subtle); padding-top: 56px; margin-bottom: 64px; }
         .section-heading { font-size: 0.82rem; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 28px; text-transform: uppercase; }
         .interactive-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -316,12 +315,60 @@
         .pulse-led { width: 8px; height: 8px; border-radius: 50%; background-color: var(--brand-green); box-shadow: 0 0 6px var(--brand-green); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        .statement-display { font-size: 1rem; line-height: 1.6; margin-bottom: 16px; font-style: italic; }
-        .statement-meta-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font-family: var(--font-mono); font-size: 0.8rem; }
-        .garment-id { color: var(--brand-red); font-weight: 700; }
-        .garment-tag { background: #fff; padding: 2px 8px; border: 1px solid var(--border-subtle); color: var(--text-secondary); }
-        .demo-tag { background: #fef3c7; color: #92400e; padding: 2px 8px; font-size: 0.65rem; font-weight: 700; border: 1px solid #fcd34d; }
-        .terminal-time-info { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); border-top: 1px dashed var(--border-subtle); padding-top: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+        /* ✨ 首页高级信号卡片流 (Signal Card Gallery) */
+        .signal-cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .signal-card {
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--brand-blue); /* 动态颜色边框 */
+            padding: 16px 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .signal-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .signal-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+        }
+
+        .signal-garment-num { font-weight: 800; color: var(--brand-red); }
+        .signal-color-badge { background: var(--panel-bg); padding: 2px 8px; border: 1px solid var(--border-subtle); font-weight: 700; font-size: 0.7rem; }
+        .signal-demo-badge { background: #fef3c7; color: #92400e; padding: 2px 6px; font-size: 0.65rem; font-weight: 700; border: 1px solid #fcd34d; }
+
+        .signal-text-body {
+            font-size: 0.92rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+            font-style: italic;
+            margin-bottom: 12px;
+            word-break: break-word;
+        }
+
+        .signal-time-footer {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px dashed var(--border-subtle);
+            padding-top: 8px;
+        }
 
         /* Garment Search Block */
         .search-section { background: var(--panel-bg); border: 1px solid var(--border-subtle); padding: 28px; margin-top: 32px; }
@@ -452,9 +499,9 @@
         <img src="/LOGO.png" alt="Watermark" class="watermark-img" onerror="this.style.display='none';">
     </section>
 
-    <!-- Screen 2: Interactive Private Preview & Live Ledger -->
+    <!-- Screen 2: Interactive Private Preview & Live Ledger Signal Stream -->
     <section class="screen-interactive">
-        <div class="section-heading">// SYSTEM INTERACTION & SIGNAL FEED</div>
+        <div class="section-heading">// SYSTEM INTERACTION & LIVE SIGNAL STREAM</div>
         
         <div class="interactive-grid">
             <!-- Private Preview Box -->
@@ -504,12 +551,14 @@
                 </button>
             </div>
 
-            <!-- Live Ledger Terminal Box -->
+            <!-- ✨ 实时 7 天公开留言画廊 (Live Ledger Signal Stream) -->
             <div class="ledger-terminal">
                 <div class="terminal-bar">
                     <span>LIVE LEDGER TERMINAL</span>
                     <span>EPHEMERALITY: 7-DAYS</span>
                 </div>
+                
+                <!-- 留言展示卡片流容器 -->
                 <div id="terminal-viewport">
                     <div class="status-dot idle-mode">CONNECTING TO EDGE MESH...</div>
                 </div>
@@ -649,7 +698,7 @@
         }, 800);
     }
 
-    /* ✨ 2. 三重概念 (DYSTOPIA / PARADISE / UTOPIA) 数据 */
+    /* 三重概念切换与数据 */
     const conceptData = {
         'dystopia': {
             series: 'LIMITED EDITION // 777 UNITS (DYSTOPIA ARCHIVE)',
@@ -732,7 +781,7 @@
         document.getElementById('garment-search-block').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    /* Dynamic Private Preview & Face Interaction */
+    /* Private Preview 交互 */
     function updateSimPreview(val) {
         const target = document.getElementById('sim-text-target');
         const eyeLeft = document.getElementById('eye-left');
@@ -755,7 +804,14 @@
         document.getElementById('face-stroke-circle').setAttribute('stroke', colorHex);
     }
 
-    /* Terminal Feed & Search */
+    /* ✨ 3. 核心升级：高奢公开留言画廊渲染 (XSS-Free Card Stream) */
+    const colorHexMap = {
+        'BLUE': 'var(--brand-blue)',
+        'RED': 'var(--brand-red)',
+        'GREEN': 'var(--brand-green)',
+        'BLACK': '#111111'
+    };
+
     async function initTerminalFeed() {
         const viewport = document.getElementById('terminal-viewport');
         if (!viewport) return;
@@ -767,48 +823,77 @@
             const data = await res.json();
 
             if (Array.isArray(data) && data.length > 0) {
-                const active = data[0];
-
+                // 状态指示标
                 const statusRow = document.createElement('div');
                 statusRow.className = 'status-dot live-mode';
+                statusRow.style.marginBottom = '16px';
                 const pulseLed = document.createElement('span');
                 pulseLed.className = 'pulse-led';
                 statusRow.appendChild(pulseLed);
-                statusRow.appendChild(document.createTextNode(' SIGNAL BROADCASTING'));
-
-                const metaRow = document.createElement('div');
-                metaRow.className = 'statement-meta-row';
-
-                const idSpan = document.createElement('span');
-                idSpan.className = 'garment-id';
-                idSpan.textContent = `#${String(active.garment_number).padStart(4, '0')}`;
-
-                const tagSpan = document.createElement('span');
-                tagSpan.className = 'garment-tag';
-                tagSpan.textContent = active.color;
-
-                metaRow.appendChild(idSpan);
-                metaRow.appendChild(tagSpan);
-
-                if (active.is_demo || active.garment_number === 234) {
-                    const demoSpan = document.createElement('span');
-                    demoSpan.className = 'demo-tag';
-                    demoSpan.textContent = 'DEMO SIGNAL — NOT A CUSTOMER STATEMENT';
-                    metaRow.appendChild(demoSpan);
-                }
-
-                const textDiv = document.createElement('div');
-                textDiv.className = 'statement-display';
-                textDiv.textContent = `"${active.statement_text}"`;
-
-                const timeDiv = document.createElement('div');
-                timeDiv.className = 'terminal-time-info';
-                timeDiv.innerHTML = `<span>ANCHORED: ${new Date(active.published_at).toLocaleString()}</span><span>VANISHES: ${new Date(active.expires_at).toLocaleString()}</span>`;
-
+                statusRow.appendChild(document.createTextNode(` SIGNAL BROADCASTING (${data.length} ACTIVE)`));
                 viewport.appendChild(statusRow);
-                viewport.appendChild(metaRow);
-                viewport.appendChild(textDiv);
-                viewport.appendChild(timeDiv);
+
+                // 卡片容器
+                const cardsStream = document.createElement('div');
+                cardsStream.className = 'signal-cards-container';
+
+                // 遍历全量活跃留言并生成卡片
+                data.forEach(active => {
+                    const card = document.createElement('div');
+                    card.className = 'signal-card';
+                    
+                    // 根据用户设定的颜色高亮左边框
+                    const cardColor = (active.color || 'BLUE').toUpperCase();
+                    card.style.borderLeftColor = colorHexMap[cardColor] || 'var(--brand-blue)';
+
+                    // Card Header
+                    const cardHeader = document.createElement('div');
+                    cardHeader.className = 'signal-card-header';
+
+                    const numSpan = document.createElement('span');
+                    numSpan.className = 'signal-garment-num';
+                    numSpan.textContent = `#${String(active.garment_number).padStart(4, '0')}`;
+
+                    const badgeWrap = document.createElement('div');
+                    badgeWrap.style.display = 'flex';
+                    badgeWrap.style.gap = '6px';
+
+                    const colorBadge = document.createElement('span');
+                    colorBadge.className = 'signal-color-badge';
+                    colorBadge.textContent = cardColor;
+                    badgeWrap.appendChild(colorBadge);
+
+                    if (active.is_demo || active.garment_number === 234) {
+                        const demoBadge = document.createElement('span');
+                        demoBadge.className = 'signal-demo-badge';
+                        demoBadge.textContent = 'DEMO SIGNAL';
+                        badgeWrap.appendChild(demoBadge);
+                    }
+
+                    cardHeader.appendChild(numSpan);
+                    cardHeader.appendChild(badgeWrap);
+
+                    // Card Body Text (100% XSS-Safe)
+                    const textBody = document.createElement('div');
+                    textBody.className = 'signal-text-body';
+                    textBody.textContent = `"${active.statement_text}"`;
+
+                    // Card Footer Time
+                    const cardFooter = document.createElement('div');
+                    cardFooter.className = 'signal-time-footer';
+
+                    const vanSpan = document.createElement('span');
+                    vanSpan.textContent = `VANISHES: ${new Date(active.expires_at).toLocaleString()}`;
+                    cardFooter.appendChild(vanSpan);
+
+                    card.appendChild(cardHeader);
+                    card.appendChild(textBody);
+                    card.appendChild(cardFooter);
+
+                    cardsStream.appendChild(card);
+                });
+
+                viewport.appendChild(cardsStream);
             } else {
                 renderUnanchoredTerminal(viewport);
             }
@@ -817,8 +902,8 @@
 
     function renderUnanchoredTerminal(viewport) {
         viewport.innerHTML = `
-            <div class="status-dot idle-mode">○ UNANCHORED SIGNAL</div>
-            <div class="statement-display" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 10px;">
+            <div class="status-dot idle-mode" style="margin-bottom: 12px;">○ UNANCHORED SIGNAL</div>
+            <div class="statement-display" style="color: var(--text-muted); font-size: 0.85rem;">
                 "No active statement recorded in the past 7 days. Be the first to anchor your voice to the ledger."
             </div>`;
     }
@@ -890,7 +975,7 @@
         'shipping': `<h3>SHIPPING POLICY</h3><br><p>Canada Only Launch. Tracked express shipping across all Canadian provinces (3-5 business days). Ships directly from Richmond, BC.</p>`,
         'returns': `<h3>RETURN POLICY</h3><br><p>14-day return window. Garments must be unworn with unbroken Claim Card scratch seals. Unsealing the Claim Card permanently assigns ledger ownership and renders the garment final sale.</p>`,
         'privacy': `<h3>PRIVACY POLICY</h3><br><p>Operated by N7 STUDIO INC. Email addresses are strictly used for Magic Link authentication and transactional receipts. Personal identity is NEVER broadcast on the public ledger.</p>`,
-        'terms': `<h3>TERMS OF SALE</h3><br><p>All purchases are subject to terms governed by N7 STUDIO INC. under British Columbia law.</p>`,
+        'terms': '<h3>TERMS OF SALE</h3><br><p>All purchases are subject to terms governed by N7 STUDIO INC. under British Columbia law.</p>',
         'contact': `<h3>CONTACT</h3><br><p>Legal Entity: N7 STUDIO INC.<br>Email: support@withinseven.com<br>Richmond, British Columbia, Canada</p>`
     };
 
