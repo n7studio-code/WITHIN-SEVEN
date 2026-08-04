@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WITHIN SEVEN — DROP 01</title>
+    <title>WITHIN SEVEN — TRIAD ARCHIVE</title>
     <link rel="icon" type="image/png" href="/LOGO.png">
     
-    <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Snipcart v3 CSS -->
+    <!-- Snipcart CSS -->
     <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
 
     <style>
@@ -19,14 +18,12 @@
             --bg-main: #ffffff;
             --panel-bg: #f9f9f9;
             --border-subtle: #e5e5e5;
-            --border-dark: #111111;
             --text-primary: #111111;
             --text-secondary: #525252;
             --text-muted: #737373;
             --brand-blue: #0044ff;
             --brand-red: #e60000;
-            --brand-green: #00a843;
-            --brand-black: #111111;
+            --brand-gold: #d97706;
             --font-sans: 'Inter', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -41,19 +38,15 @@
             padding: 0 24px 80px 24px;
         }
 
-        .container {
-            max-width: 1240px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1240px; margin: 0 auto; }
 
-        /* Top Header Nav */
+        /* 顶栏 Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 28px 0;
+            padding: 24px 0;
             border-bottom: 1px solid var(--border-subtle);
-            margin-bottom: 40px;
         }
 
         .brand-logo-wrap {
@@ -64,60 +57,108 @@
             color: var(--text-primary);
         }
 
-        .official-logo-img {
-            width: 50px;
+        .official-logo-img { width: 44px; height: auto; }
+        .text-logo { font-weight: 800; font-size: 1.2rem; letter-spacing: 5px; }
+
+        .nav-right { display: flex; align-items: center; gap: 24px; }
+        .nav-btn {
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px;
+            background: transparent; border: none; cursor: pointer; color: var(--text-primary);
+        }
+        .cart-trigger {
+            border: 1px solid var(--text-primary); padding: 10px 20px; font-weight: 700;
+            background: transparent; cursor: pointer; transition: all 0.2s;
+        }
+        .cart-trigger:hover { background: var(--text-primary); color: #fff; }
+
+        /* ✨ 玄幻巨幕 Hero 艺术光晕区 */
+        .hero-curation-stage {
+            position: relative;
+            padding: 60px 20px 40px 20px;
+            text-align: center;
+            overflow: hidden;
+            margin-bottom: 40px;
+            background: radial-gradient(circle at 50% 40%, rgba(0, 68, 255, 0.05) 0%, rgba(255,255,255,0) 70%);
+        }
+
+        /* 动态呼吸光晕背景 */
+        .quantum-aura {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, rgba(0,68,255,0.15) 0%, rgba(230,0,0,0.08) 50%, transparent 70%);
+            filter: blur(40px);
+            border-radius: 50%;
+            animation: auraBreathing 8s infinite alternate ease-in-out;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes auraBreathing {
+            0% { transform: translate(-50%, -50%) scale(0.8) rotate(0deg); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); opacity: 0.9; }
+        }
+
+        .hero-face-container {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+        }
+
+        .hero-face-logo {
+            width: 140px;
             height: auto;
-            object-fit: contain;
-            display: block;
+            filter: drop-shadow(0 0 20px rgba(0, 68, 255, 0.2));
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .text-logo {
-            font-weight: 800;
-            font-size: 1.25rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
+        .hero-face-container:hover .hero-face-logo {
+            transform: scale(1.06);
+            filter: drop-shadow(0 0 30px rgba(0, 68, 255, 0.4));
         }
 
-        .nav-links-right {
+        .hero-tagline {
+            position: relative; z-index: 2;
+            font-size: 0.85rem; font-weight: 800; letter-spacing: 4px;
+            margin-top: 20px; color: var(--text-primary);
+        }
+
+        .hero-subtag {
+            font-size: 0.75rem; color: var(--text-muted); letter-spacing: 2px; margin-top: 6px;
+        }
+
+        /* 三概念切换 Tab (Triad Concept Switcher) */
+        .triad-tab-bar {
             display: flex;
-            align-items: center;
-            gap: 24px;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 48px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 16px;
         }
 
-        .nav-link-btn {
-            font-size: 0.8rem;
+        .concept-tab {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            padding: 12px 24px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
             font-weight: 700;
             letter-spacing: 1.5px;
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: color 0.2s ease;
             cursor: pointer;
-            background: transparent;
-            border: none;
-            text-transform: uppercase;
+            transition: all 0.25s ease;
+            color: var(--text-secondary);
         }
 
-        .nav-link-btn:hover { color: var(--brand-blue); }
-
-        .cart-trigger {
-            font-family: var(--font-sans);
-            font-size: 0.82rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--text-primary);
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .cart-trigger:hover {
+        .concept-tab.active {
             background: var(--text-primary);
             color: #ffffff;
+            border-color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* Screen 1: Product Gallery & Meta */
+        /* 商品展示区 */
         .screen-product {
             display: grid;
             grid-template-columns: 1fr;
@@ -129,760 +170,113 @@
             .screen-product { grid-template-columns: 1.1fr 0.9fr; }
         }
 
-        .gallery-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
+        .gallery-wrap { display: flex; flex-direction: column; gap: 16px; }
         .main-stage {
-            width: 100%;
-            aspect-ratio: 4 / 5;
+            width: 100%; aspect-ratio: 4 / 5;
             background-color: #0d0d0d;
             border: 1px solid var(--border-subtle);
+            overflow: hidden;
             position: relative;
-            overflow: hidden;
         }
+        .main-stage img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
 
-        .main-stage img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.25s ease;
-        }
-
-        .thumbs-row {
-            display: flex;
-            gap: 14px;
-        }
-
+        .thumbs-row { display: flex; gap: 14px; }
         .thumb-btn {
-            width: 90px;
-            aspect-ratio: 4 / 5;
-            background: #0d0d0d;
-            border: 1px solid var(--border-subtle);
-            cursor: pointer;
-            overflow: hidden;
-            opacity: 0.5;
-            transition: all 0.2s ease;
-            padding: 0;
+            width: 90px; aspect-ratio: 4 / 5; background: #0d0d0d;
+            border: 1px solid var(--border-subtle); cursor: pointer; opacity: 0.5; transition: 0.2s;
         }
+        .thumb-btn.active, .thumb-btn:hover { opacity: 1; border-color: var(--text-primary); }
+        .thumb-btn img { width: 100%; height: 100%; object-fit: cover; }
 
-        .thumb-btn.active, .thumb-btn:hover {
-            opacity: 1;
-            border-color: var(--text-primary);
-        }
+        .product-meta { display: flex; flex-direction: column; }
+        .item-series { font-family: var(--font-mono); font-size: 0.75rem; color: var(--brand-blue); letter-spacing: 2px; margin-bottom: 8px; font-weight: 700; }
+        .item-title { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px; }
+        .item-price { font-size: 1.35rem; font-weight: 700; margin-bottom: 20px; }
+        .item-desc { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; }
 
-        .thumb-btn img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .product-meta {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .banner-slogan-box {
-            background: var(--panel-bg);
-            border-left: 3px solid var(--brand-blue);
-            padding: 18px 20px;
-            margin-bottom: 24px;
-        }
-
-        .banner-title {
-            font-size: 0.88rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-            text-transform: uppercase;
-        }
-
-        .banner-sub {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .item-series {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--brand-blue);
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .item-title {
-            font-size: 2.1rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 12px;
-            line-height: 1.15;
-            color: var(--text-primary);
-        }
-
-        .item-price {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-
-        .item-price span {
-            font-size: 0.8rem;
-            font-weight: 400;
-            color: var(--text-muted);
-            margin-left: 8px;
-        }
-
-        .item-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-
-        .color-philosophy-tag {
-            background: #f0f4ff;
-            border: 1px solid #c7d2fe;
-            color: var(--brand-blue);
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            padding: 10px 14px;
-            margin-bottom: 28px;
-            display: inline-block;
-        }
-
-        /* Size Selector with Direct Size Guide Button */
-        .selector-box {
-            margin-bottom: 24px;
-        }
-
-        .selector-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .selector-label {
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        .size-guide-trigger-btn {
-            background: transparent;
-            border: none;
-            color: var(--brand-blue);
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 0;
-            text-transform: uppercase;
-        }
-
-        .size-guide-trigger-btn:hover { text-decoration: underline; }
-
-        .size-grid {
-            display: flex;
-            gap: 12px;
-        }
-
+        .size-grid { display: flex; gap: 12px; margin-bottom: 24px; }
         .size-chip {
-            width: 52px;
-            height: 52px;
-            background: #ffffff;
-            border: 1px solid var(--border-subtle);
-            color: var(--text-primary);
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            width: 52px; height: 52px; background: #fff; border: 1px solid var(--border-subtle);
+            font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.2s;
         }
-
-        .size-chip:hover { border-color: var(--text-secondary); }
-
-        .size-chip.active {
-            background: var(--text-primary);
-            color: #ffffff;
-            border-color: var(--text-primary);
-        }
-
-        .size-alert {
-            color: var(--brand-red);
-            font-size: 0.8rem;
-            margin-top: 10px;
-            display: none;
-            font-weight: 500;
-        }
+        .size-chip.active { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
 
         .action-buy-btn {
-            width: 100%;
-            padding: 20px;
-            background: var(--text-primary);
-            color: #ffffff;
-            border: none;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            width: 100%; padding: 20px; background: var(--text-primary); color: #fff;
+            border: none; font-size: 0.9rem; font-weight: 700; letter-spacing: 3px; cursor: pointer; transition: 0.2s;
         }
-
         .action-buy-btn:hover { background: var(--brand-blue); }
 
-        /* Brand Manifesto Section with Background Watermark */
-        .manifesto-watermark-section {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-subtle);
-            padding: 40px;
-            margin-bottom: 64px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .manifesto-content {
-            position: relative;
-            z-index: 2;
-            max-width: 780px;
-        }
-
-        .manifesto-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
-
-        .manifesto-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--text-primary);
-            font-style: italic;
-            font-weight: 500;
-        }
-
-        .watermark-img {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 200px;
-            height: auto;
-            opacity: 0.06;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Screen 2: Interactive Private Preview & Live Ledger */
-        .screen-interactive {
-            border-top: 1px solid var(--border-subtle);
-            padding-top: 56px;
-            margin-bottom: 64px;
-        }
-
-        .section-heading {
-            font-size: 0.82rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 28px;
-            text-transform: uppercase;
-        }
-
-        .interactive-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 32px;
-        }
-
-        @media (min-width: 880px) {
-            .interactive-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        /* Private Preview Box with Dynamic Face Avatar */
-        .preview-box {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-subtle);
-            padding: 28px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .preview-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .preview-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: var(--text-primary);
-            text-transform: uppercase;
-        }
-
-        .preview-input {
-            width: 100%;
-            background: #ffffff;
-            border: 1px solid var(--border-subtle);
-            padding: 12px 14px;
-            color: var(--text-primary);
-            font-size: 0.88rem;
-            margin-bottom: 16px;
-            outline: none;
-            font-family: var(--font-sans);
-            transition: border-color 0.2s ease;
-        }
-
-        .preview-input:focus { border-color: var(--text-primary); }
-
-        /* Signal Color Selector Bar */
-        .color-picker-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .color-picker-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .color-dot-btn {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: transform 0.15s ease;
-            padding: 0;
-        }
-
-        .color-dot-btn:hover { transform: scale(1.15); }
-        .color-dot-btn.active { border-color: var(--text-primary); }
-
-        .color-dot-red { background-color: var(--brand-red); }
-        .color-dot-green { background-color: var(--brand-green); }
-        .color-dot-blue { background-color: var(--brand-blue); }
-        .color-dot-black { background-color: var(--brand-black); }
-
-        .preview-card-frame {
-            background: #ffffff;
-            border: 1px dashed var(--border-subtle);
-            padding: 20px;
-            position: relative;
-        }
-
-        .preview-badge-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .sim-badge {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            letter-spacing: 1px;
-            padding: 3px 8px;
-            border: 1px solid var(--border-subtle);
-            font-weight: 600;
-        }
-
-        .sim-badge.priv { color: #d97706; background: #fffbe0; border-color: #fef08a; }
-        .sim-badge.local { color: var(--text-muted); }
-        .sim-badge.not-published { color: var(--brand-red); background: #fef2f2; border-color: #fecaca; }
-
-        .preview-body-layout {
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-        }
-
-        .interactive-face-svg {
-            width: 40px;
-            height: 40px;
-            flex-shrink: 0;
-            transition: all 0.25s ease;
-        }
-
-        .preview-statement-text {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: var(--text-primary);
-            min-height: 48px;
-            font-style: italic;
-            word-break: break-word;
-        }
-
-        .preview-claim-cta {
-            width: 100%;
-            background: transparent;
-            border: 1px solid var(--text-primary);
-            color: var(--text-primary);
-            padding: 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            margin-top: 20px;
-        }
-
-        .preview-claim-cta:hover {
-            background: var(--text-primary);
-            color: #ffffff;
-        }
-
-        /* Live Ledger Box */
-        .ledger-terminal {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-subtle);
-            padding: 28px;
-        }
-
-        .terminal-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 12px;
-            margin-bottom: 18px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            letter-spacing: 1.5px;
-        }
-
-        .status-dot {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            font-family: var(--font-mono);
-        }
-
-        .status-dot.live-mode { color: var(--brand-green); }
-        .status-dot.idle-mode { color: var(--text-muted); }
-
-        .pulse-led {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--brand-green);
-            box-shadow: 0 0 6px var(--brand-green);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-
-        .statement-display {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-            font-style: italic;
-        }
-
-        .statement-meta-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-        }
-
-        .garment-id { color: var(--brand-red); font-weight: 700; }
-        .garment-tag { background: #ffffff; padding: 2px 8px; border: 1px solid var(--border-subtle); color: var(--text-secondary); }
-        .demo-tag { background: #fef3c7; color: #92400e; padding: 2px 8px; font-size: 0.65rem; font-weight: 700; border: 1px solid #fcd34d; }
-
-        .terminal-time-info {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            border-top: 1px dashed var(--border-subtle);
-            padding-top: 12px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        /* Garment Search Section */
-        .search-section {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-subtle);
-            padding: 28px;
-            margin-top: 32px;
-        }
-
-        .search-bar-row {
-            display: flex;
-            gap: 12px;
-            margin-top: 14px;
-        }
-
-        .search-input {
-            flex: 1;
-            background: #ffffff;
-            border: 1px solid var(--border-subtle);
-            padding: 12px 16px;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            outline: none;
-        }
-
-        .search-btn {
-            background: var(--text-primary);
-            color: #ffffff;
-            border: none;
-            padding: 12px 24px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .search-btn:hover { background: var(--brand-blue); }
-
-        .search-result-display {
-            margin-top: 18px;
-            padding-top: 16px;
-            border-top: 1px dashed var(--border-subtle);
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            display: none;
-        }
-
-        /* Screen 3: Protocol & Manifesto */
-        .screen-protocol {
-            border-top: 1px solid var(--border-subtle);
-            padding-top: 56px;
-        }
-
-        .rules-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 28px;
-            margin-bottom: 48px;
-        }
-
-        @media (min-width: 768px) {
-            .rules-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-
-        .rule-card {
-            background: var(--panel-bg);
-            padding: 24px;
-        }
-
-        .rule-num {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--brand-blue);
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .rule-title {
-            font-weight: 700;
-            font-size: 1.05rem;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .rule-desc {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Footer & Legal Entity */
-        .legal-footer {
-            margin-top: 80px;
-            padding-top: 36px;
-            border-top: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            line-height: 1.6;
-        }
-
-        .footer-links-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-
-        .footer-link {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-
-        .footer-link:hover { color: var(--brand-blue); }
-
-        .legal-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 28px;
-        }
-
-        @media (min-width: 768px) {
-            .legal-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        .legal-block h5 {
-            color: var(--text-primary);
-            font-size: 0.82rem;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .legal-entity-note {
-            margin-top: 28px;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* Policy Modal Window */
-        .modal-backdrop {
-            position: fixed;
-            top:0; left:0; width:100vw; height:100vh;
-            background: rgba(0,0,0,0.4);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            backdrop-filter: blur(4px);
-        }
-
-        .modal-card {
-            background: #ffffff;
-            max-width: 620px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: 36px;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .modal-close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
+        /* 页脚 */
+        footer { margin-top: 80px; padding-top: 36px; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-secondary); }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Header with Official Face Logo & Nav Links -->
     <header>
         <a href="/" class="brand-logo-wrap">
-            <img src="/LOGO.png" alt="WITHIN SEVEN" class="official-logo-img" onerror="this.onerror=null;this.src='https://via.placeholder.com/50x50/111/fff?text=W7';">
+            <img src="/LOGO.png" alt="WITHIN SEVEN" class="official-logo-img">
             <span class="text-logo">WITHIN SEVEN</span>
         </a>
-        <div class="nav-links-right">
-            <a href="/how-it-works" class="nav-link-btn">HOW IT WORKS</a>
-            <button class="nav-link-btn" onclick="scrollToSearch()">SEARCH #</button>
+        <div class="nav-right">
+            <a href="/how-it-works" class="nav-btn" style="text-decoration: none;">HOW IT WORKS</a>
             <button class="cart-trigger snipcart-checkout" onclick="openSnipcartCart()">
                 BAG [<span class="snipcart-items-count">0</span>]
             </button>
         </div>
     </header>
 
-    <!-- Screen 1: Product Gallery & Purchase Meta -->
+    <!-- ✨ 1. 玄幻 Hero 入场巨幕 -->
+    <section class="hero-curation-stage">
+        <div class="quantum-aura" id="quantum-aura"></div>
+        <div class="hero-face-container">
+            <img src="/LOGO.png" alt="WITHIN SEVEN FACE LOGO" class="hero-face-logo">
+        </div>
+        <div class="hero-tagline">ONE GARMENT. ONE NUMBER. ONE VOICE FOR SEVEN DAYS.</div>
+        <div class="hero-subtag">TAP. CLAIM. LEAVE YOUR MARK.</div>
+    </section>
+
+    <!-- ✨ 2. 三重概念（乌托邦 - 失乐园 - 反乌托邦）切换器 -->
+    <div class="triad-tab-bar">
+        <button class="concept-tab active" onclick="switchConcept('dystopia', this)">DROP 01 // DYSTOPIA</button>
+        <button class="concept-tab" onclick="switchConcept('paradise', this)">DROP 02 // PARADISE LOST</button>
+        <button class="concept-tab" onclick="switchConcept('utopia', this)">DROP 03 // UTOPIA</button>
+    </div>
+
+    <!-- 3. 动态商品区 -->
     <section class="screen-product">
         <div class="gallery-wrap">
             <div class="main-stage">
-                <img id="stage-image" src="https://withinseven.com/front.png" alt="DROP 01 — THE NUMBERED BLANK" onerror="this.onerror=null;this.src='https://via.placeholder.com/800x1000/0d0d0d/737373?text=DROP+01+FRONT';">
+                <img id="stage-image" src="https://withinseven.com/front.png" alt="THE NUMBERED BLANK">
             </div>
             <div class="thumbs-row">
                 <button class="thumb-btn active" onclick="updateStage('https://withinseven.com/front.png', this)">
-                    <img src="https://withinseven.com/front.png" alt="Front" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/0d0d0d/737373?text=01';">
+                    <img src="https://withinseven.com/front.png" alt="Front">
                 </button>
                 <button class="thumb-btn" onclick="updateStage('https://withinseven.com/back.png', this)">
-                    <img src="https://withinseven.com/back.png" alt="Back" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/0d0d0d/737373?text=02';">
+                    <img src="https://withinseven.com/back.png" alt="Back">
                 </button>
                 <button class="thumb-btn" onclick="updateStage('https://withinseven.com/detail.png', this)">
-                    <img src="https://withinseven.com/detail.png" alt="Detail" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/0d0d0d/737373?text=03';">
+                    <img src="https://withinseven.com/detail.png" alt="Detail">
                 </button>
             </div>
         </div>
 
         <div class="product-meta">
-            <div class="banner-slogan-box">
-                <div class="banner-title">ONE GARMENT. ONE NUMBER. ONE VOICE FOR SEVEN DAYS.</div>
-                <div class="banner-sub">TAP. CLAIM. LEAVE YOUR MARK.</div>
-            </div>
-
-            <div class="item-series">LIMITED EDITION // 777 UNITS (CANADA LAUNCH)</div>
-            <h1 class="item-title">DROP 01 — THE NUMBERED BLANK</h1>
-            <div class="item-price">CA$180.00 <span>(Excluding Shipping & Taxes)</span></div>
+            <div class="item-series" id="concept-series-tag">LIMITED EDITION // 777 UNITS (DYSTOPIA ARCHIVE)</div>
+            <h1 class="item-title" id="concept-title">DROP 01 — THE NUMBERED BLANK</h1>
+            <div class="item-price">CA$180.00 <span style="font-size: 0.8rem; font-weight: 400; color: #737373;">(Excluding Shipping & Taxes)</span></div>
             
-            <p class="item-description">
-                A numbered heavyweight T-shirt with an NFC access tag and sealed Claim Card. Tap to unlock your private page and publish one anonymous statement for seven days.
+            <p class="item-desc" id="concept-desc">
+                A numbered heavyweight T-shirt with an NFC access tag and sealed Claim Card. Cut from 420GSM heavy cotton. Tap to unlock your private page and publish one anonymous statement for seven days.
             </p>
 
-            <div class="color-philosophy-tag">
-                THE GARMENT IS BLANK. THE COLOR IS YOURS TO ASSIGN.
-            </div>
-
-            <!-- Size Selector with Size Guide Button -->
-            <div class="selector-box">
-                <div class="selector-header-row">
-                    <span class="selector-label">Select Size</span>
-                    <button class="size-guide-trigger-btn" onclick="openPolicyModal('size-guide')">SIZE GUIDE ↗</button>
-                </div>
-                <div class="size-grid">
-                    <button class="size-chip" onclick="applySize('S', this)">S</button>
-                    <button class="size-chip" onclick="applySize('M', this)">M</button>
-                    <button class="size-chip" onclick="applySize('L', this)">L</button>
-                    <button class="size-chip" onclick="applySize('XL', this)">XL</button>
-                </div>
-                <div id="size-warning" class="size-alert">Please select a size before adding to bag.</div>
+            <div class="size-grid">
+                <button class="size-chip" onclick="applySize('S', this)">S</button>
+                <button class="size-chip" onclick="applySize('M', this)">M</button>
+                <button class="size-chip" onclick="applySize('L', this)">L</button>
+                <button class="size-chip" onclick="applySize('XL', this)">XL</button>
             </div>
 
             <button 
@@ -896,181 +290,59 @@
                 data-item-name="DROP 01 — THE NUMBERED BLANK"
                 data-item-custom1-name="Size"
                 data-item-custom1-options="S|M|L|XL"
-                data-item-custom1-required="true"
                 onclick="handlePurchase(event)">
                 PURCHASE DROP 01
             </button>
         </div>
     </section>
 
-    <!-- Brand Manifesto Box with Face Logo Watermark -->
-    <section class="manifesto-watermark-section">
-        <div class="manifesto-content">
-            <div class="manifesto-title">// BRAND MANIFESTO</div>
-            <div class="manifesto-text">
-                "Today, blue means becoming visible. The garment arrives as a blank canvas — you decide the color, the words, and when to speak."
-            </div>
-        </div>
-        <img src="/LOGO.png" alt="Watermark" class="watermark-img" onerror="this.style.display='none';">
-    </section>
-
-    <!-- Screen 2: Interactive Private Preview & Live Ledger -->
-    <section class="screen-interactive">
-        <div class="section-heading">// SYSTEM INTERACTION & SIGNAL FEED</div>
-        
-        <div class="interactive-grid">
-            <!-- Private Preview Box (No DB, Local Only) -->
-            <div class="preview-box">
-                <div>
-                    <div class="preview-header">
-                        <span class="preview-title">PRIVATE PREVIEW</span>
-                    </div>
-
-                    <input 
-                        type="text" 
-                        class="preview-input" 
-                        id="guest-sim-input" 
-                        placeholder="Type your statement here to simulate..."
-                        maxlength="140"
-                        oninput="updateSimPreview(this.value)">
-                    
-                    <!-- Color Picker Row -->
-                    <div class="color-picker-row">
-                        <span class="color-picker-label">SIGNAL COLOR:</span>
-                        <button class="color-dot-btn color-dot-blue active" onclick="selectSimColor('#0044ff', 'BLUE', this)"></button>
-                        <button class="color-dot-btn color-dot-red" onclick="selectSimColor('#e60000', 'RED', this)"></button>
-                        <button class="color-dot-btn color-dot-green" onclick="selectSimColor('#00a843', 'GREEN', this)"></button>
-                        <button class="color-dot-btn color-dot-black" onclick="selectSimColor('#111111', 'BLACK', this)"></button>
-                    </div>
-
-                    <div class="preview-card-frame">
-                        <div class="preview-badge-row">
-                            <span class="sim-badge priv">PRIVATE PREVIEW</span>
-                            <span class="sim-badge local">VISIBLE ONLY TO YOU</span>
-                            <span class="sim-badge local">NOT SAVED TO THE LEDGER</span>
-                            <span class="sim-badge not-published">NOT PUBLISHED</span>
-                        </div>
-                        <div class="preview-body-layout">
-                            <!-- Dynamic SVG Face Avatar with closed/open eyes & outline color -->
-                            <svg id="interactive-face-avatar" class="interactive-face-svg" viewBox="0 0 42 42">
-                                <circle cx="21" cy="21" r="18" fill="none" id="face-stroke-circle" stroke="#0044ff" stroke-width="1.8"/>
-                                <path id="eye-left" d="M 14 17 L 18 17" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
-                                <path id="eye-right" d="M 24 17 L 28 17" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
-                                <path d="M 16 28 C 18 30 24 30 26 28" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
-                            </svg>
-                            <div class="preview-statement-text" id="sim-text-target">
-                                "Today, blue means becoming visible."
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <button class="preview-claim-cta" onclick="jumpToPurchase()">
-                    CLAIM A NUMBER TO PUBLISH FOR 7 DAYS
-                </button>
-            </div>
-
-            <!-- Live Ledger Terminal Box -->
-            <div class="ledger-terminal">
-                <div class="terminal-bar">
-                    <span>LIVE LEDGER TERMINAL</span>
-                    <span>EPHEMERALITY: 7-DAYS</span>
-                </div>
-                <div id="terminal-viewport">
-                    <div class="status-dot idle-mode">CONNECTING TO EDGE MESH...</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Garment Number Search Block -->
-        <div class="search-section" id="garment-search-block">
-            <div class="section-heading" style="margin-bottom: 6px;">SEARCH A GARMENT NUMBER</div>
-            <p style="font-size: 0.85rem; color: var(--text-secondary);">Enter a 4-digit serial number (0001 - 0777) to query its current public signal state.</p>
-            
-            <div class="search-bar-row">
-                <input type="text" class="search-input" id="search-serial-input" placeholder="#0234" maxlength="4">
-                <button class="search-btn" onclick="executeGarmentSearch()">VIEW SIGNAL</button>
-            </div>
-
-            <div class="search-result-display" id="search-result-box"></div>
-        </div>
-    </section>
-
-    <!-- Screen 3: Protocol Rules -->
-    <section class="screen-protocol">
-        <div class="section-heading">// PROTOCOL & SYSTEM RULES</div>
-        
-        <div class="rules-grid">
-            <div class="rule-card">
-                <div class="rule-num">01 / UNBOXING</div>
-                <div class="rule-title">SEALED CLAIM CARD</div>
-                <div class="rule-desc">Each garment ships with a sealed physical Claim Card inside the packaging. Scratch to reveal your unique access code.</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-num">02 / AUTHENTICATION</div>
-                <div class="rule-title">ONE-TIME BURN</div>
-                <div class="rule-desc">The Claim Card burns permanently after initial setup. Subsequent access uses seamless Magic Link authentication.</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-num">03 / 7-DAY SIGNAL</div>
-                <div class="rule-title">EPHEMERAL VOICE</div>
-                <div class="rule-desc">Publish one statement for exactly seven days. When the cycle ends, it disappears from public view and the garment becomes ready to speak again.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Legal Footer with N7 STUDIO INC. -->
-    <footer class="legal-footer">
-        <div class="footer-links-row">
-            <span class="footer-link" onclick="openPolicyModal('size-guide')">Size Guide</span>
-            <span class="footer-link" onclick="openPolicyModal('shipping')">Shipping</span>
-            <span class="footer-link" onclick="openPolicyModal('returns')">Returns</span>
-            <span class="footer-link" onclick="openPolicyModal('privacy')">Privacy Policy</span>
-            <span class="footer-link" onclick="openPolicyModal('terms')">Terms of Sale</span>
-            <span class="footer-link" onclick="openPolicyModal('contact')">Contact</span>
-        </div>
-
-        <div class="legal-grid">
-            <div class="legal-block">
-                <h5>PRE-ORDER & FULFILLMENT (CANADA ONLY)</h5>
-                <p>In accordance with BC Business Practices & Consumer Protection Act (2026): Orders are dispatched within 3-5 business days from Richmond, BC. Itemized receipts provided upon transaction completion.</p>
-            </div>
-            <div class="legal-block">
-                <h5>CLAIM CARD & RETURN POLICY</h5>
-                <p>A 14-day return window applies to unworn garments with unbroken Claim Card physical seals. Unsealing the Claim Card permanently assigns ledger ownership and renders the item final sale.</p>
-            </div>
-        </div>
-
-        <div class="legal-entity-note">
-            © 2026 N7 STUDIO INC. WITHIN SEVEN™. All rights reserved. Richmond, BC, Canada.
-        </div>
+    <footer>
+        © 2026 N7 STUDIO INC. WITHIN SEVEN™. All rights reserved. Richmond, BC, Canada.
     </footer>
 </div>
 
-<!-- Policy Modal Container -->
-<div class="modal-backdrop" id="policy-modal">
-    <div class="modal-card">
-        <button class="modal-close-btn" onclick="closePolicyModal()">✕</button>
-        <div id="modal-content-target"></div>
-    </div>
-</div>
-
-<!-- Snipcart v3 Direct Script & Container -->
+<!-- Snipcart Script -->
 <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 <div id="snipcart" data-api-key="ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz" data-config-modal-style="side" hidden></div>
 
 <script>
     let chosenSize = '';
-    let currentSimColor = '#0044ff';
+
+    // 三重概念切换控制逻辑
+    const conceptData = {
+        'dystopia': {
+            series: 'LIMITED EDITION // 777 UNITS (DYSTOPIA ARCHIVE)',
+            title: 'DROP 01 — THE NUMBERED BLANK',
+            desc: 'A numbered heavyweight T-shirt with an NFC access tag and sealed Claim Card. Cut from 420GSM heavy cotton. Tap to unlock your private page and publish one anonymous statement for seven days.',
+            aura: 'radial-gradient(circle, rgba(0,68,255,0.2) 0%, rgba(230,0,0,0.12) 50%, transparent 70%)'
+        },
+        'paradise': {
+            series: 'CONCEPT ARCHIVE // PARADISE LOST',
+            title: 'DROP 02 — THE SILENT FLESH',
+            desc: 'Washed charcoal loopback fleece with a subtle amber stitch. Reflects the erasure of self in the noise of digital hyper-connectivity. Releases Q4 2026.',
+            aura: 'radial-gradient(circle, rgba(217,119,6,0.25) 0%, rgba(100,100,100,0.1) 50%, transparent 70%)'
+        },
+        'utopia': {
+            series: 'CONCEPT ARCHIVE // UTOPIA',
+            title: 'DROP 03 — THE UNBOUND ETHER',
+            desc: 'Pure optic white high-gauge jersey with translucent brand markings. Freedom beyond identity — absolute anonymity in pure void. Pre-order preview.',
+            aura: 'radial-gradient(circle, rgba(0,200,255,0.25) 0%, rgba(255,255,255,0.2) 50%, transparent 70%)'
+        }
+    };
+
+    function switchConcept(key, btnEl) {
+        document.querySelectorAll('.concept-tab').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
+
+        const item = conceptData[key];
+        document.getElementById('concept-series-tag').textContent = item.series;
+        document.getElementById('concept-title').textContent = item.title;
+        document.getElementById('concept-desc').textContent = item.desc;
+        document.getElementById('quantum-aura').style.background = item.aura;
+    }
 
     function updateStage(imgSrc, btnElement) {
-        const stageImg = document.getElementById('stage-image');
-        stageImg.style.opacity = '0.3';
-        setTimeout(() => {
-            stageImg.src = imgSrc;
-            stageImg.style.opacity = '1';
-        }, 120);
-
+        document.getElementById('stage-image').src = imgSrc;
         document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
         btnElement.classList.add('active');
     }
@@ -1079,42 +351,15 @@
         chosenSize = size;
         document.querySelectorAll('.size-chip').forEach(b => b.classList.remove('active'));
         btnElement.classList.add('active');
-        document.getElementById('size-warning').style.display = 'none';
-
-        const buyBtn = document.getElementById('snipcart-btn');
-        buyBtn.setAttribute('data-item-custom1-value', size);
     }
 
-    /* Guaranteed Purchase Handler & Cart Opening */
     async function handlePurchase(e) {
         if (!chosenSize) {
-            e.preventDefault();
-            e.stopPropagation();
-            const warningEl = document.getElementById('size-warning');
-            warningEl.style.display = 'block';
-            warningEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            alert("Please select a size first.");
             return;
         }
-
-        // Trigger Snipcart API programmatically if needed
         if (window.Snipcart && window.Snipcart.api) {
-            try {
-                await window.Snipcart.api.cart.items.add({
-                    id: 'withinseven-drop01',
-                    name: 'DROP 01 — THE NUMBERED BLANK',
-                    price: 180.00,
-                    url: '/',
-                    description: 'DROP 01 Heavyweight Garment with NFC Tag & Claim Card',
-                    image: 'https://withinseven.com/front.png',
-                    customFields: [{
-                        name: 'Size',
-                        value: chosenSize
-                    }]
-                });
-                window.Snipcart.api.theme.cart.open();
-            } catch (err) {
-                console.log("Snipcart auto-handled native add.", err);
-            }
+            window.Snipcart.api.theme.cart.open();
         }
     }
 
@@ -1123,298 +368,7 @@
             window.Snipcart.api.theme.cart.open();
         }
     }
-
-    function jumpToPurchase() {
-        document.querySelector('.selector-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    function scrollToSearch() {
-        document.getElementById('garment-search-block').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    /* Dynamic Private Preview & Face Interaction */
-    function updateSimPreview(val) {
-        const target = document.getElementById('sim-text-target');
-        const eyeLeft = document.getElementById('eye-left');
-        const eyeRight = document.getElementById('eye-right');
-
-        if (val.trim().length > 0) {
-            target.textContent = `"${val}"`;
-            eyeLeft.setAttribute('d', 'M 16 17 A 1 1 0 1 0 16 17.1');
-            eyeRight.setAttribute('d', 'M 26 17 A 1 1 0 1 0 26 17.1');
-        } else {
-            target.textContent = '"Today, blue means becoming visible."';
-            eyeLeft.setAttribute('d', 'M 14 17 L 18 17');
-            eyeRight.setAttribute('d', 'M 24 17 L 28 17');
-        }
-    }
-
-    function selectSimColor(colorHex, colorName, btnEl) {
-        currentSimColor = colorHex;
-        document.querySelectorAll('.color-dot-btn').forEach(b => b.classList.remove('active'));
-        btnEl.classList.add('active');
-
-        document.getElementById('face-stroke-circle').setAttribute('stroke', colorHex);
-    }
-
-    /* XSS-Free Terminal Feed */
-    async function initTerminalFeed() {
-        const viewport = document.getElementById('terminal-viewport');
-        if (!viewport) return;
-
-        while (viewport.firstChild) {
-            viewport.removeChild(viewport.firstChild);
-        }
-
-        try {
-            const res = await fetch('https://id.withinseven.com/api/archive');
-            if (!res.ok) throw new Error("API Unreachable");
-            const data = await res.json();
-
-            if (Array.isArray(data) && data.length > 0) {
-                const active = data[0];
-
-                const statusRow = document.createElement('div');
-                statusRow.className = 'status-dot live-mode';
-                const pulseLed = document.createElement('span');
-                pulseLed.className = 'pulse-led';
-                statusRow.appendChild(pulseLed);
-                statusRow.appendChild(document.createTextNode(' SIGNAL BROADCASTING'));
-
-                const metaRow = document.createElement('div');
-                metaRow.className = 'statement-meta-row';
-
-                const idSpan = document.createElement('span');
-                idSpan.className = 'garment-id';
-                idSpan.textContent = `#${String(active.garment_number).padStart(4, '0')}`;
-
-                const tagSpan = document.createElement('span');
-                tagSpan.className = 'garment-tag';
-                tagSpan.textContent = active.color;
-
-                metaRow.appendChild(idSpan);
-                metaRow.appendChild(tagSpan);
-
-                if (active.is_demo || active.garment_number === 234) {
-                    const demoSpan = document.createElement('span');
-                    demoSpan.className = 'demo-tag';
-                    demoSpan.textContent = 'DEMO SIGNAL — NOT A CUSTOMER STATEMENT';
-                    metaRow.appendChild(demoSpan);
-                }
-
-                const textDiv = document.createElement('div');
-                textDiv.className = 'statement-display';
-                textDiv.textContent = `"${active.statement_text}"`;
-
-                const timeDiv = document.createElement('div');
-                timeDiv.className = 'terminal-time-info';
-
-                const anchSpan = document.createElement('span');
-                anchSpan.textContent = `ANCHORED: ${new Date(active.published_at).toLocaleString()}`;
-
-                const vanSpan = document.createElement('span');
-                vanSpan.textContent = `VANISHES: ${new Date(active.expires_at).toLocaleString()}`;
-
-                timeDiv.appendChild(anchSpan);
-                timeDiv.appendChild(vanSpan);
-
-                viewport.appendChild(statusRow);
-                viewport.appendChild(metaRow);
-                viewport.appendChild(textDiv);
-                viewport.appendChild(timeDiv);
-            } else {
-                renderUnanchoredTerminal(viewport);
-            }
-        } catch (err) {
-            renderUnanchoredTerminal(viewport);
-        }
-    }
-
-    function renderUnanchoredTerminal(viewport) {
-        while (viewport.firstChild) {
-            viewport.removeChild(viewport.firstChild);
-        }
-
-        const idleRow = document.createElement('div');
-        idleRow.className = 'status-dot idle-mode';
-        idleRow.textContent = '○ UNANCHORED SIGNAL';
-
-        const textDiv = document.createElement('div');
-        textDiv.className = 'statement-display';
-        textDiv.style.color = 'var(--text-muted)';
-        textDiv.style.fontSize = '0.85rem';
-        textDiv.style.marginTop = '10px';
-        textDiv.textContent = '"No active statement recorded in the past 7 days. Be the first to anchor your voice to the ledger."';
-
-        viewport.appendChild(idleRow);
-        viewport.appendChild(textDiv);
-    }
-
-    /* Garment Number Search Engine */
-    async function executeGarmentSearch() {
-        const inputVal = document.getElementById('search-serial-input').value.trim();
-        const resultBox = document.getElementById('search-result-box');
-        resultBox.style.display = 'block';
-
-        if (!/^\d{1,4}$/.test(inputVal)) {
-            resultBox.style.color = 'var(--brand-red)';
-            resultBox.textContent = '⚠️ INVALID FORMAT. PLEASE ENTER A NUMBER BETWEEN 0001 AND 0777.';
-            return;
-        }
-
-        const num = Number(inputVal);
-        if (num < 1 || num > 777) {
-            resultBox.style.color = 'var(--brand-red)';
-            resultBox.textContent = 'NUMBER NOT ISSUED';
-            return;
-        }
-
-        const formatted = String(num).padStart(4, '0');
-        resultBox.style.color = 'var(--text-primary)';
-        resultBox.textContent = `SEARCHING LEDGER FOR #${formatted}...`;
-
-        try {
-            const res = await fetch(`https://id.withinseven.com/api/garment/${formatted}`);
-            if (res.status === 404) {
-                resultBox.style.color = 'var(--brand-red)';
-                resultBox.textContent = 'NUMBER NOT ISSUED';
-                return;
-            }
-
-            const data = await res.json();
-            if (data.statement_body) {
-                resultBox.style.color = 'var(--brand-green)';
-                resultBox.innerHTML = `
-                    <div style="font-weight: bold; margin-bottom: 6px;">#${formatted} // COLOR: ${data.color || 'BLUE'}</div>
-                    <div style="font-style: italic; margin-bottom: 6px;">"${data.statement_body}"</div>
-                    <div style="font-size: 0.75rem; color: var(--text-muted);">VANISHES AT: ${new Date(data.expires_at).toLocaleString()}</div>
-                `;
-            } else {
-                resultBox.style.color = 'var(--text-muted)';
-                resultBox.textContent = `#${formatted} IS CURRENTLY SILENT`;
-            }
-        } catch (e) {
-            resultBox.style.color = 'var(--text-muted)';
-            resultBox.textContent = `#${formatted} IS CURRENTLY SILENT`;
-        }
-    }
-
-    /* Comprehensive Size Guide & Legal Policies */
-    const policies = {
-        'size-guide': `
-            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">SIZE GUIDE — DROP 01 HEAVYWEIGHT BLANK</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">
-                <b>FIT PROFILE:</b> Heavyweight Boxy / Oversized Fit. Engineered with dropped shoulders and a thick 1.25" rib collar. Cut from 420GSM custom loopback cotton.
-            </p>
-
-            <table style="width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.82rem; margin-bottom: 24px;">
-                <thead>
-                    <tr style="border-bottom: 2px solid var(--text-primary); text-align: left;">
-                        <th style="padding: 8px;">SIZE</th>
-                        <th style="padding: 8px;">CHEST</th>
-                        <th style="padding: 8px;">LENGTH</th>
-                        <th style="padding: 8px;">SHOULDER</th>
-                        <th style="padding: 8px;">SLEEVE</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="border-bottom: 1px solid var(--border-subtle);">
-                        <td style="padding: 10px 8px; font-weight: bold;">S</td>
-                        <td style="padding: 10px 8px;">44"</td>
-                        <td style="padding: 10px 8px;">27"</td>
-                        <td style="padding: 10px 8px;">21.5"</td>
-                        <td style="padding: 10px 8px;">8.5"</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border-subtle);">
-                        <td style="padding: 10px 8px; font-weight: bold;">M</td>
-                        <td style="padding: 10px 8px;">46"</td>
-                        <td style="padding: 10px 8px;">28"</td>
-                        <td style="padding: 10px 8px;">22.5"</td>
-                        <td style="padding: 10px 8px;">9.0"</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border-subtle);">
-                        <td style="padding: 10px 8px; font-weight: bold;">L</td>
-                        <td style="padding: 10px 8px;">48"</td>
-                        <td style="padding: 10px 8px;">29"</td>
-                        <td style="padding: 10px 8px;">23.5"</td>
-                        <td style="padding: 10px 8px;">9.5"</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border-subtle);">
-                        <td style="padding: 10px 8px; font-weight: bold;">XL</td>
-                        <td style="padding: 10px 8px;">50"</td>
-                        <td style="padding: 10px 8px;">30"</td>
-                        <td style="padding: 10px 8px;">24.5"</td>
-                        <td style="padding: 10px 8px;">10.0"</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 8px;">RECOMMENDATION:</h4>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">
-                • Order your <b>TRUE TO SIZE</b> for an intentional relaxed oversized silhouette.<br>
-                • Order <b>ONE SIZE DOWN</b> if you prefer a traditional standard fit.
-            </p>
-
-            <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 8px;">HOW TO MEASURE:</h4>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
-                <b>Chest:</b> Measure around the fullest part of your chest, keeping the tape horizontal.<br>
-                <b>Length:</b> Measure from the highest point of the shoulder collar down to the bottom hem.
-            </p>
-        `,
-        'shipping': `
-            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">SHIPPING POLICY</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                <b>CANADA ONLY LAUNCH:</b> Orders ship tracked express via Canada Post / FedEx directly from our fulfillment facility in Richmond, British Columbia.<br><br>
-                • <b>Processing:</b> 1-2 business days.<br>
-                • <b>Delivery:</b> 3-5 business days across Canadian provinces.<br>
-                • Itemized electronic sales contracts and shipping confirmations are issued instantly via email.
-            </p>
-        `,
-        'returns': `
-            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">RETURN & REFUND POLICY</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                <b>14-DAY RETURN WINDOW:</b> Unworn garments in original condition with intact packaging are eligible for return within 14 days of receipt.<br><br>
-                <b>CRITICAL CLAIM CARD SEAL RULE:</b> Each garment includes a sealed Claim Card. Unsealing or scratching off the Claim Card permanently transfers digital ownership on the ledger and renders the physical garment <b>FINAL SALE</b>.
-            </p>
-        `,
-        'privacy': `
-            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">PRIVACY POLICY</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                Operated by <b>N7 STUDIO INC.</b> We collect minimal telemetry required to facilitate checkout and ledger authentication. Email addresses are used strictly for Magic Link authentication and transactional receipts. Personal customer identity is NEVER associated with or broadcast on the public ledger.
-            </p>
-        `,
-        'terms': `
-            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">TERMS OF SALE</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                All purchases are subject to terms governed by N7 STUDIO INC. under British Columbia law. Statements published to the public ledger violating illegal content laws are subject to edge moderation filtering.
-            </p>
-        `,
-        'contact': `
-            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">CONTACT INFORMATION</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                WITHIN SEVEN is a digital apparel brand operated by N7 STUDIO INC.<br><br>
-                <b>Legal Entity:</b> N7 STUDIO INC.<br>
-                <b>Direct Inquiry:</b> support@withinseven.com<br>
-                <b>Jurisdiction:</b> Richmond, British Columbia, Canada
-            </p>
-        `
-    };
-
-    function openPolicyModal(key) {
-        const modal = document.getElementById('policy-modal');
-        const target = document.getElementById('modal-content-target');
-        target.innerHTML = policies[key] || '';
-        modal.style.display = 'flex';
-    }
-
-    function closePolicyModal() {
-        document.getElementById('policy-modal').style.display = 'none';
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        initTerminalFeed();
-    });
 </script>
 
 </body>
-</htm
+</html>
