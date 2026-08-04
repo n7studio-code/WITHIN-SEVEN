@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WITHIN SEVEN — UTOPIA MIRROR REALM</title>
+    <title>WITHIN SEVEN — UTOPIA WHITE MIRROR</title>
     <link rel="icon" type="image/png" href="/LOGO.png">
     
     <!-- Google Fonts: Inter & JetBrains Mono -->
@@ -24,11 +24,11 @@
             --text-muted: #737373;
             --brand-blue: #0055ff;
             --brand-red: #ff0033;
-            --brand-green: #00ff66;
-            --brand-yellow: #ffcc00;
+            --brand-green: #00cc55;
+            --brand-yellow: #e6b800;
             --brand-black: #111111;
             --brand-white: #ffffff;
-            --brand-violet: #b026ff;
+            --brand-violet: #a855f7;
             --brand-active: #0055ff;
             --font-sans: 'Inter', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
@@ -135,12 +135,12 @@
             50% { opacity: 1; }
         }
 
-        /* 🪞 2. 乌托邦 — 通透镜子空间门界 (The Mirror Space Realm Overlay) */
+        /* 🪞 2. ✨ 乌托邦 — 纯白无界镜域 (The Optic White Mirror Realm) */
         #faction-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background-color: #030306;
+            background-color: #f6f7fa; /* 纯白偏高奢冷灰基底 */
             z-index: 999998;
             display: flex;
             flex-direction: column;
@@ -148,10 +148,10 @@
             align-items: center;
             padding: 24px 20px;
             overflow: hidden;
-            transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+            transition: background-color 0.6s ease, opacity 0.6s ease;
         }
 
-        /* 3D 空间镜面隧道 Canvas */
+        /* 3D 银晶空间 Canvas */
         #mirror-tunnel-canvas {
             position: absolute;
             top: 0; left: 0;
@@ -160,7 +160,7 @@
             z-index: 1;
         }
 
-        /* 顶部高奢坐标线 */
+        /* 顶部高奢极黑坐标线 */
         .telemetry-bar {
             display: flex;
             justify-content: space-between;
@@ -169,17 +169,17 @@
             max-width: 1400px;
             font-family: var(--font-mono);
             font-size: 0.72rem;
-            color: rgba(255, 255, 255, 0.65);
+            color: #525252;
             letter-spacing: 2px;
             z-index: 10;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
             padding-bottom: 14px;
         }
 
-        .telemetry-title { font-weight: 800; color: #ffffff; letter-spacing: 4px; }
-        .telemetry-clock { color: #ffffff; font-weight: 700; }
+        .telemetry-title { font-weight: 800; color: #111111; letter-spacing: 4px; }
+        .telemetry-clock { color: #111111; font-weight: 700; }
 
-        /* 中央悬浮全息镜面投影 */
+        /* 中央悬浮全息镜面投影 (在白背景上清晰醒目) */
         .mirror-projection-stage {
             width: 100%;
             max-width: 1000px;
@@ -193,32 +193,29 @@
             transition: all 0.3s ease;
         }
 
-        /* 修复硬伤 1：动态颜色的顶部小字 */
         .projection-meta {
             font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 700;
+            font-size: 0.78rem;
+            font-weight: 800;
             letter-spacing: 3px;
             margin-bottom: 10px;
             text-transform: uppercase;
             color: var(--brand-blue);
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-            text-shadow: 0 0 12px var(--brand-blue);
+            transition: color 0.3s ease;
         }
 
         .projection-quote {
-            font-size: 1.35rem;
-            font-weight: 500;
+            font-size: 1.4rem;
+            font-weight: 600;
             font-style: italic;
-            color: #ffffff;
+            color: #111111;
             line-height: 1.5;
-            letter-spacing: 1px;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.85);
+            letter-spacing: 0.5px;
             max-width: 880px;
             transition: all 0.3s ease;
         }
 
-        /* 7 根独立色彩晶体面板 (7 Spectral Prisms) */
+        /* 7 根磨砂透明水晶折射柱 (7 Frosted Specular Prisms) */
         .mirror-prisms-container {
             display: flex;
             width: 100%;
@@ -239,8 +236,8 @@
 
         .mirror-prism {
             flex: 1;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(10, 10, 15, 0.85) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(0, 0, 0, 0.12);
             padding: 22px 12px;
             cursor: pointer;
             display: flex;
@@ -249,75 +246,67 @@
             align-items: center;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
-            backdrop-filter: blur(16px);
-            box-shadow: inset 0 0 20px rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), inset 0 0 15px rgba(255, 255, 255, 0.8);
             transform-style: preserve-3d;
             overflow: hidden;
         }
 
-        /* 顶部分色指示线 */
         .prism-top-indicator {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
+            top: 0; left: 0; width: 100%; height: 5px;
             transition: background 0.3s, box-shadow 0.3s;
         }
 
-        /* 修复硬伤 2：7 色晶体面板专属色彩与渐变 */
-        .p-red .prism-top-indicator { background: var(--brand-red); box-shadow: 0 0 12px var(--brand-red); }
-        .p-red { background: linear-gradient(180deg, rgba(255, 0, 51, 0.12) 0%, rgba(10, 10, 15, 0.9) 100%); }
-        .p-red:hover { border-color: var(--brand-red); box-shadow: 0 0 35px rgba(255, 0, 51, 0.4); }
+        /* 7 种专属色彩阵营玻璃质感 */
+        .p-red .prism-top-indicator { background: var(--brand-red); }
+        .p-red:hover { border-color: var(--brand-red); background: rgba(255, 235, 238, 0.9); box-shadow: 0 15px 40px rgba(255, 0, 51, 0.25); }
 
-        .p-green .prism-top-indicator { background: var(--brand-green); box-shadow: 0 0 12px var(--brand-green); }
-        .p-green { background: linear-gradient(180deg, rgba(0, 255, 102, 0.12) 0%, rgba(10, 10, 15, 0.9) 100%); }
-        .p-green:hover { border-color: var(--brand-green); box-shadow: 0 0 35px rgba(0, 255, 102, 0.4); }
+        .p-green .prism-top-indicator { background: var(--brand-green); }
+        .p-green:hover { border-color: var(--brand-green); background: rgba(230, 255, 240, 0.9); box-shadow: 0 15px 40px rgba(0, 204, 85, 0.25); }
 
-        .p-blue .prism-top-indicator { background: var(--brand-blue); box-shadow: 0 0 12px var(--brand-blue); }
-        .p-blue { background: linear-gradient(180deg, rgba(0, 85, 255, 0.12) 0%, rgba(10, 10, 15, 0.9) 100%); }
-        .p-blue:hover { border-color: var(--brand-blue); box-shadow: 0 0 35px rgba(0, 85, 255, 0.4); }
+        .p-blue .prism-top-indicator { background: var(--brand-blue); }
+        .p-blue:hover { border-color: var(--brand-blue); background: rgba(235, 243, 255, 0.9); box-shadow: 0 15px 40px rgba(0, 85, 255, 0.25); }
 
-        .p-yellow .prism-top-indicator { background: var(--brand-yellow); box-shadow: 0 0 12px var(--brand-yellow); }
-        .p-yellow { background: linear-gradient(180deg, rgba(255, 204, 0, 0.12) 0%, rgba(10, 10, 15, 0.9) 100%); }
-        .p-yellow:hover { border-color: var(--brand-yellow); box-shadow: 0 0 35px rgba(255, 204, 0, 0.4); }
+        .p-yellow .prism-top-indicator { background: var(--brand-yellow); }
+        .p-yellow:hover { border-color: var(--brand-yellow); background: rgba(255, 250, 230, 0.9); box-shadow: 0 15px 40px rgba(230, 184, 0, 0.25); }
 
-        .p-black .prism-top-indicator { background: #555555; }
-        .p-black { background: linear-gradient(180deg, rgba(30, 30, 30, 0.3) 0%, rgba(5, 5, 5, 0.95) 100%); }
-        .p-black:hover { border-color: #ffffff; box-shadow: 0 0 35px rgba(255, 255, 255, 0.25); }
+        .p-black .prism-top-indicator { background: #111111; }
+        .p-black:hover { border-color: #111111; background: #111111; color: #ffffff; box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .p-black:hover .prism-tag, .p-black:hover .prism-title { color: #ffffff; }
 
-        .p-white .prism-top-indicator { background: #ffffff; box-shadow: 0 0 12px #ffffff; }
-        .p-white { background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(15, 15, 20, 0.9) 100%); }
-        .p-white:hover { border-color: #ffffff; box-shadow: 0 0 45px rgba(255, 255, 255, 0.6); }
+        .p-white .prism-top-indicator { background: #e0e0e0; }
+        .p-white:hover { border-color: #111111; background: #ffffff; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); }
 
-        .p-violet .prism-top-indicator { background: var(--brand-violet); box-shadow: 0 0 12px var(--brand-violet); }
-        .p-violet { background: linear-gradient(180deg, rgba(176, 38, 255, 0.12) 0%, rgba(10, 10, 15, 0.9) 100%); }
-        .p-violet:hover { border-color: var(--brand-violet); box-shadow: 0 0 35px rgba(176, 38, 255, 0.4); }
+        .p-violet .prism-top-indicator { background: var(--brand-violet); }
+        .p-violet:hover { border-color: var(--brand-violet); background: rgba(250, 238, 255, 0.9); box-shadow: 0 15px 40px rgba(168, 85, 247, 0.25); }
 
         .mirror-prism:hover {
             flex: 1.8;
             transform: translateZ(30px) rotateY(-4deg);
         }
 
-        .prism-tag { font-family: var(--font-mono); font-size: 0.68rem; color: rgba(255,255,255,0.6); letter-spacing: 2px; }
-        .prism-title { font-size: 1.1rem; font-weight: 800; letter-spacing: 2px; color: #ffffff; margin-top: 6px; text-transform: uppercase; }
+        .prism-tag { font-family: var(--font-mono); font-size: 0.68rem; color: #737373; letter-spacing: 2px; font-weight: 700; }
+        .prism-title { font-size: 1.1rem; font-weight: 800; letter-spacing: 2px; color: #111111; margin-top: 6px; text-transform: uppercase; }
 
         .prism-select-btn {
             width: 100%;
             padding: 12px 6px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            color: #ffffff;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            color: #111111;
             font-family: var(--font-mono);
             font-size: 0.7rem;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 2px;
             text-transform: uppercase;
             transition: all 0.25s ease;
         }
 
         .mirror-prism:hover .prism-select-btn {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
-            box-shadow: 0 0 25px rgba(255,255,255,0.8);
+            background: #111111;
+            color: #ffffff;
+            border-color: #111111;
         }
 
         /* Header */
@@ -480,28 +469,28 @@
     <div class="portal-enter-prompt" onclick="enterArchwayPortal()">[ TAP LOGO TO ENTER THE ARCHIVE ]</div>
 </div>
 
-<!-- 🪞 2. 乌托邦 — 镜子空间门界 (The Mirror Space Realm Overlay) -->
+<!-- 🪞 2. ✨ 乌托邦 — 纯白无界镜域门界 (The Optic White Mirror Realm) -->
 <div id="faction-overlay">
     <canvas id="mirror-tunnel-canvas"></canvas>
 
-    <!-- 顶部高奢坐标线 -->
+    <!-- 顶部高奢极黑坐标线 -->
     <div class="telemetry-bar">
-        <span class="telemetry-title">UTOPIA MIRROR // INFINITE REFLECTION REALM</span>
+        <span class="telemetry-title">UTOPIA MIRROR // WHITE REFLECTION REALM</span>
         <span>VANCOUVER PST // 49°15'N 123°06'W</span>
         <span class="telemetry-clock" id="telemetry-clock-display">000D 00H 00M 00S</span>
     </div>
 
     <!-- 中央悬浮巨幅全息镜面投影 (实时根据悬停的颜色同步变色) -->
     <div class="mirror-projection-stage">
-        <div class="projection-meta" id="projection-meta-target">HOVER A MIRROR PRISM TO REFLECT VOICES</div>
+        <div class="projection-meta" id="projection-meta-target">HOVER A CRYSTAL PRISM TO REFLECT VOICES</div>
         <div class="projection-quote" id="projection-quote-target">"The garment is a blank canvas. Hover over a color frequency to reflect the voices of the ledger."</div>
     </div>
 
-    <!-- 7 根独立发光的镜面折射晶体 -->
+    <!-- 7 根磨砂透明水晶折射柱 -->
     <div class="mirror-prisms-container">
         <!-- 01 RED -->
         <div class="mirror-prism p-red" 
-             onmouseenter="reflectVoice('rgba(255, 0, 51, 0.35)', '01 // RED RESISTANCE', '#0142', 'In an ocean of digital noise, I choose to be a flame that burns out in 7 days.', '#ff0033')" 
+             onmouseenter="reflectVoice('#ff0033', '01 // RED RESISTANCE', '#0142', 'In an ocean of digital noise, I choose to be a flame that burns out in 7 days.', '#ff0033')" 
              onclick="selectFaction('RED', '#ff0033')">
             <div class="prism-top-indicator"></div>
             <div>
@@ -513,8 +502,8 @@
 
         <!-- 02 GREEN -->
         <div class="mirror-prism p-green" 
-             onmouseenter="reflectVoice('rgba(0, 255, 102, 0.35)', '02 // GREEN SYNTHESIS', '#0088', 'Growth is silent. The roots expand long before the noise begins.', '#00ff66')" 
-             onclick="selectFaction('GREEN', '#00ff66')">
+             onmouseenter="reflectVoice('#00cc55', '02 // GREEN SYNTHESIS', '#0088', 'Growth is silent. The roots expand long before the noise begins.', '#00cc55')" 
+             onclick="selectFaction('GREEN', '#00cc55')">
             <div class="prism-top-indicator"></div>
             <div>
                 <div class="prism-tag">02 // GREEN</div>
@@ -525,7 +514,7 @@
 
         <!-- 03 BLUE -->
         <div class="mirror-prism p-blue" 
-             onmouseenter="reflectVoice('rgba(0, 85, 255, 0.35)', '03 // BLUE AWAKENING', '#0234', 'Today, blue means becoming visible in the void.', '#0055ff')" 
+             onmouseenter="reflectVoice('#0055ff', '03 // BLUE AWAKENING', '#0234', 'Today, blue means becoming visible in the void.', '#0055ff')" 
              onclick="selectFaction('BLUE', '#0055ff')">
             <div class="prism-top-indicator"></div>
             <div>
@@ -537,8 +526,8 @@
 
         <!-- 04 YELLOW -->
         <div class="mirror-prism p-yellow" 
-             onmouseenter="reflectVoice('rgba(255, 204, 0, 0.35)', '04 // YELLOW ILLUMINATION', '#0307', 'A temporary blinding light is worth a lifetime of dim shadows.', '#ffcc00')" 
-             onclick="selectFaction('YELLOW', '#ffcc00')">
+             onmouseenter="reflectVoice('#e6b800', '04 // YELLOW ILLUMINATION', '#0307', 'A temporary blinding light is worth a lifetime of dim shadows.', '#e6b800')" 
+             onclick="selectFaction('YELLOW', '#e6b800')">
             <div class="prism-top-indicator"></div>
             <div>
                 <div class="prism-tag">04 // YELLOW</div>
@@ -549,7 +538,7 @@
 
         <!-- 05 BLACK -->
         <div class="mirror-prism p-black" 
-             onmouseenter="reflectVoice('rgba(255, 255, 255, 0.2)', '05 // BLACK ECLIPSE', '#0007', 'True luxury is having nothing to prove and no identity to broadcast.', '#ffffff')" 
+             onmouseenter="reflectVoice('#111111', '05 // BLACK ECLIPSE', '#0007', 'True luxury is having nothing to prove and no identity to broadcast.', '#111111')" 
              onclick="selectFaction('BLACK', '#111111')">
             <div class="prism-top-indicator"></div>
             <div>
@@ -561,11 +550,11 @@
 
         <!-- 06 WHITE -->
         <div class="mirror-prism p-white" 
-             onmouseenter="reflectVoice('rgba(255, 255, 255, 0.45)', '06 // WHITE PURITY', '#0101', 'Clean slate. No history. Pure unconditioned voice.', '#ffffff')" 
+             onmouseenter="reflectVoice('#555555', '06 // WHITE PURITY', '#0101', 'Clean slate. No history. Pure unconditioned voice.', '#111111')" 
              onclick="selectFaction('WHITE', '#ffffff')">
             <div class="prism-top-indicator"></div>
             <div>
-                <div class="prism-tag" style="color:#aaa;">06 // WHITE</div>
+                <div class="prism-tag">06 // WHITE</div>
                 <div class="prism-title">PURITY</div>
             </div>
             <button class="prism-select-btn">REFLECT WHITE</button>
@@ -573,8 +562,8 @@
 
         <!-- 07 VIOLET -->
         <div class="mirror-prism p-violet" 
-             onmouseenter="reflectVoice('rgba(176, 38, 255, 0.35)', '07 // VIOLET TRANSCENDENCE', '#0707', 'Vibrate at a frequency only the quiet ones can decode.', '#b026ff')" 
-             onclick="selectFaction('VIOLET', '#b026ff')">
+             onmouseenter="reflectVoice('#a855f7', '07 // VIOLET TRANSCENDENCE', '#0707', 'Vibrate at a frequency only the quiet ones can decode.', '#a855f7')" 
+             onclick="selectFaction('VIOLET', '#a855f7')">
             <div class="prism-top-indicator"></div>
             <div>
                 <div class="prism-tag">07 // VIOLET</div>
@@ -584,8 +573,8 @@
         </div>
     </div>
 
-    <div style="font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.5); letter-spacing: 2.5px; z-index: 10;">
-        SELECT A SPECTRUM TO ENTER THE STORE
+    <div style="font-family: var(--font-mono); font-size: 0.65rem; color: #737373; letter-spacing: 2.5px; z-index: 10; font-weight: 700;">
+        SELECT A FREQUENCY TO ENTER THE ARCHIVE
     </div>
 </div>
 
@@ -704,7 +693,7 @@
                         <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">SIGNAL COLOR:</span>
                         <button class="color-dot-btn color-dot-blue active" id="dot-blue" onclick="selectSimColor('#0055ff', 'BLUE', this)"></button>
                         <button class="color-dot-btn color-dot-red" id="dot-red" onclick="selectSimColor('#ff0033', 'RED', this)"></button>
-                        <button class="color-dot-btn color-dot-green" id="dot-green" onclick="selectSimColor('#00ff66', 'GREEN', this)"></button>
+                        <button class="color-dot-btn color-dot-green" id="dot-green" onclick="selectSimColor('#00cc55', 'GREEN', this)"></button>
                         <button class="color-dot-btn color-dot-black" id="dot-black" onclick="selectSimColor('#111111', 'BLACK', this)"></button>
                     </div>
 
@@ -880,10 +869,9 @@
         }, 600);
     }
 
-    /* 🪞 2. 🪞 3D 无限镜面隧道 Canvas 动态光晕与透视 */
+    /* 🪞 2. 🪞 纯白透光镜面 Canvas 3D 银晶隧道 */
     const mirrorCanvas = document.getElementById('mirror-tunnel-canvas');
     const mCtx = mirrorCanvas.getContext('2d');
-    let mirrorGlowColor = 'rgba(0, 85, 255, 0.35)';
 
     function resizeMirrorCanvas() {
         mirrorCanvas.width = window.innerWidth;
@@ -904,25 +892,25 @@
         const cx = mirrorCanvas.width / 2;
         const cy = mirrorCanvas.height / 2;
         
-        tunnelOffset = (tunnelOffset + 0.35) % 40;
+        tunnelOffset = (tunnelOffset + 0.3) % 40;
 
-        // 渲染 14 层极光透视收缩镜框
+        // 渲染 14 层纯白银灰收缩透视框
         for (let i = 14; i >= 1; i--) {
             let scale = Math.pow(1.32, i) + tunnelOffset * 0.05;
             let w = cx / scale * 1.85;
             let h = cy / scale * 1.85;
             
-            mCtx.strokeStyle = i % 2 === 0 ? mirrorGlowColor : 'rgba(255, 255, 255, 0.09)';
-            mCtx.lineWidth = i % 2 === 0 ? 1.8 : 0.8;
+            mCtx.strokeStyle = i % 2 === 0 ? 'rgba(0, 0, 0, 0.08)' : 'rgba(0, 0, 0, 0.03)';
+            mCtx.lineWidth = i % 2 === 0 ? 1.5 : 0.8;
             mCtx.strokeRect(cx - w, cy - h, w * 2, h * 2);
 
-            // 连接到消失点的对角折射线
+            // 消失点极光折射线
             mCtx.beginPath();
             mCtx.moveTo(0, 0); mCtx.lineTo(cx - w, cy - h);
             mCtx.moveTo(mirrorCanvas.width, 0); mCtx.lineTo(cx + w, cy - h);
             mCtx.moveTo(0, mirrorCanvas.height); mCtx.lineTo(cx - w, cy + h);
             mCtx.moveTo(mirrorCanvas.width, mirrorCanvas.height); mCtx.lineTo(cx + w, cy + h);
-            mCtx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+            mCtx.strokeStyle = 'rgba(0, 0, 0, 0.03)';
             mCtx.stroke();
         }
 
@@ -930,14 +918,11 @@
     }
     animateMirrorTunnel();
 
-    /* 修复硬伤 1：把悬停颜色的 Hex 同步传给顶部小字 */
-    function reflectVoice(glowRgba, metaText, garmentNum, statementText, activeHex) {
-        mirrorGlowColor = glowRgba;
-        
+    /* 悬停同步变色与高亮小字 */
+    function reflectVoice(glowHex, metaText, garmentNum, statementText, activeHex) {
         const metaTarget = document.getElementById('projection-meta-target');
         metaTarget.textContent = `${metaText} // ${garmentNum}`;
         metaTarget.style.color = activeHex;
-        metaTarget.style.textShadow = `0 0 16px ${activeHex}`;
 
         document.getElementById('projection-quote-target').textContent = `"${statementText}"`;
     }
@@ -947,7 +932,7 @@
         document.documentElement.style.setProperty('--brand-active', colorHex);
         
         if (factionName === 'RED') selectSimColor('#ff0033', 'RED', document.getElementById('dot-red'));
-        if (factionName === 'GREEN') selectSimColor('#00ff66', 'GREEN', document.getElementById('dot-green'));
+        if (factionName === 'GREEN') selectSimColor('#00cc55', 'GREEN', document.getElementById('dot-green'));
         if (factionName === 'BLUE') selectSimColor('#0055ff', 'BLUE', document.getElementById('dot-blue'));
         if (factionName === 'BLACK') selectSimColor('#111111', 'BLACK', document.getElementById('dot-black'));
 
