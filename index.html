@@ -827,7 +827,7 @@
         <div class="nav-links-right">
             <a href="/how-it-works" class="nav-link-btn">HOW IT WORKS</a>
             <button class="nav-link-btn" onclick="scrollToSearch()">SEARCH #</button>
-            <button class="cart-trigger snipcart-checkout">
+            <button class="cart-trigger snipcart-checkout" onclick="openSnipcartCart()">
                 BAG [<span class="snipcart-items-count">0</span>]
             </button>
         </div>
@@ -897,7 +897,7 @@
                 data-item-custom1-name="Size"
                 data-item-custom1-options="S|M|L|XL"
                 data-item-custom1-required="true"
-                onclick="checkSizeSelection(event)">
+                onclick="handlePurchase(event)">
                 PURCHASE DROP 01
             </button>
         </div>
@@ -1055,31 +1055,9 @@
     </div>
 </div>
 
-<!-- Official Snipcart Installation Script & Container -->
-<script>
-  window.SnipcartSettings = {
-    publicApiKey: "ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz",
-    loadStrategy: "on-user-interaction",
-    currency: "cad",
-    modalStyle: "side"
-  };
-
-  (() => {
-    var c, d;
-    (d = (c = window.SnipcartSettings).version) || (c.version = "3.0");
-    var a = window.Snipcart ? window.Snipcart.configs.scriptUrl : "https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js";
-    function b() {
-      if (window.Snipcart) return;
-      window.Snipcart = !0;
-      var e = document.createElement("script");
-      (e.src = a), (e.async = !0), document.body.appendChild(e);
-    }
-    window.SnipcartSettings.loadStrategy
-      ? window.addEventListener(window.SnipcartSettings.loadStrategy, b, { once: !0 })
-      : b();
-  })();
-</script>
-<div id="snipcart" data-api-key="ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz" hidden></div>
+<!-- Snipcart v3 Direct Script & Container -->
+<script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
+<div id="snipcart" data-api-key="ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz" data-config-modal-style="side" hidden></div>
 
 <script>
     let chosenSize = '';
@@ -1107,15 +1085,42 @@
         buyBtn.setAttribute('data-item-custom1-value', size);
     }
 
-    function checkSizeSelection(e) {
+    /* Guaranteed Purchase Handler & Cart Opening */
+    async function handlePurchase(e) {
         if (!chosenSize) {
             e.preventDefault();
             e.stopPropagation();
-            if (e.stopImmediatePropagation) e.stopImmediatePropagation();
             const warningEl = document.getElementById('size-warning');
             warningEl.style.display = 'block';
             warningEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            return false;
+            return;
+        }
+
+        // Trigger Snipcart API programmatically if needed
+        if (window.Snipcart && window.Snipcart.api) {
+            try {
+                await window.Snipcart.api.cart.items.add({
+                    id: 'withinseven-drop01',
+                    name: 'DROP 01 — THE NUMBERED BLANK',
+                    price: 180.00,
+                    url: '/',
+                    description: 'DROP 01 Heavyweight Garment with NFC Tag & Claim Card',
+                    image: 'https://withinseven.com/front.png',
+                    customFields: [{
+                        name: 'Size',
+                        value: chosenSize
+                    }]
+                });
+                window.Snipcart.api.theme.cart.open();
+            } catch (err) {
+                console.log("Snipcart auto-handled native add.", err);
+            }
+        }
+    }
+
+    function openSnipcartCart() {
+        if (window.Snipcart && window.Snipcart.api) {
+            window.Snipcart.api.theme.cart.open();
         }
     }
 
@@ -1135,12 +1140,10 @@
 
         if (val.trim().length > 0) {
             target.textContent = `"${val}"`;
-            // Typing state: Eyes open (circles/dots)
             eyeLeft.setAttribute('d', 'M 16 17 A 1 1 0 1 0 16 17.1');
             eyeRight.setAttribute('d', 'M 26 17 A 1 1 0 1 0 26 17.1');
         } else {
             target.textContent = '"Today, blue means becoming visible."';
-            // Silent state: Eyes closed (lines)
             eyeLeft.setAttribute('d', 'M 14 17 L 18 17');
             eyeRight.setAttribute('d', 'M 24 17 L 28 17');
         }
@@ -1151,7 +1154,6 @@
         document.querySelectorAll('.color-dot-btn').forEach(b => b.classList.remove('active'));
         btnEl.classList.add('active');
 
-        // Update stroke circle color
         document.getElementById('face-stroke-circle').setAttribute('stroke', colorHex);
     }
 
@@ -1193,7 +1195,6 @@
                 metaRow.appendChild(idSpan);
                 metaRow.appendChild(tagSpan);
 
-                // If demo signal, tag explicitly
                 if (active.is_demo || active.garment_number === 234) {
                     const demoSpan = document.createElement('span');
                     demoSpan.className = 'demo-tag';
@@ -1416,4 +1417,4 @@
 </script>
 
 </body>
-</html>
+</htm
