@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WITHIN SEVEN — DROP 01</title>
+    <link rel="icon" type="image/png" href="/LOGO.png">
     
+    <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
+    <!-- Snipcart v3 CSS -->
     <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
 
     <style>
@@ -21,8 +24,9 @@
             --text-secondary: #525252;
             --text-muted: #737373;
             --brand-blue: #0044ff;
-            --status-green: #00a843;
-            --status-red: #e60000;
+            --brand-red: #e60000;
+            --brand-green: #00a843;
+            --brand-black: #111111;
             --font-sans: 'Inter', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -42,11 +46,12 @@
             margin: 0 auto;
         }
 
+        /* Top Header Nav */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 32px 0;
+            padding: 28px 0;
             border-bottom: 1px solid var(--border-subtle);
             margin-bottom: 40px;
         }
@@ -59,14 +64,11 @@
             color: var(--text-primary);
         }
 
-        .graphic-logo-face {
-            width: 42px;
-            height: 42px;
-            fill: none;
-            stroke: var(--text-primary);
-            stroke-width: 1.8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+        .official-logo-img {
+            width: 50px;
+            height: auto;
+            object-fit: contain;
+            display: block;
         }
 
         .text-logo {
@@ -76,15 +78,36 @@
             text-transform: uppercase;
         }
 
+        .nav-links-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-link-btn {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: color 0.2s ease;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            text-transform: uppercase;
+        }
+
+        .nav-link-btn:hover { color: var(--brand-blue); }
+
         .cart-trigger {
             font-family: var(--font-sans);
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.82rem;
+            font-weight: 700;
             letter-spacing: 2px;
             background: transparent;
             color: var(--text-primary);
             border: 1px solid var(--text-primary);
-            padding: 10px 22px;
+            padding: 10px 20px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -94,18 +117,16 @@
             color: #ffffff;
         }
 
-        /* 第一屏：产品舞台与购买决策 */
+        /* Screen 1: Product Gallery & Meta */
         .screen-product {
             display: grid;
             grid-template-columns: 1fr;
             gap: 48px;
-            margin-bottom: 72px;
+            margin-bottom: 64px;
         }
 
         @media (min-width: 960px) {
-            .screen-product {
-                grid-template-columns: 1.1fr 0.9fr;
-            }
+            .screen-product { grid-template-columns: 1.1fr 0.9fr; }
         }
 
         .gallery-wrap {
@@ -117,7 +138,7 @@
         .main-stage {
             width: 100%;
             aspect-ratio: 4 / 5;
-            background-color: var(--panel-bg);
+            background-color: #0d0d0d;
             border: 1px solid var(--border-subtle);
             position: relative;
             overflow: hidden;
@@ -138,7 +159,7 @@
         .thumb-btn {
             width: 90px;
             aspect-ratio: 4 / 5;
-            background: var(--panel-bg);
+            background: #0d0d0d;
             border: 1px solid var(--border-subtle);
             cursor: pointer;
             overflow: hidden;
@@ -237,8 +258,16 @@
             display: inline-block;
         }
 
+        /* Size Selector with Direct Size Guide Button */
         .selector-box {
             margin-bottom: 24px;
+        }
+
+        .selector-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
         }
 
         .selector-label {
@@ -246,9 +275,25 @@
             font-weight: 600;
             color: var(--text-primary);
             letter-spacing: 1.5px;
-            margin-bottom: 12px;
             text-transform: uppercase;
         }
+
+        .size-guide-trigger-btn {
+            background: transparent;
+            border: none;
+            color: var(--brand-blue);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 0;
+            text-transform: uppercase;
+        }
+
+        .size-guide-trigger-btn:hover { text-decoration: underline; }
 
         .size-grid {
             display: flex;
@@ -276,7 +321,7 @@
         }
 
         .size-alert {
-            color: var(--status-red);
+            color: var(--brand-red);
             font-size: 0.8rem;
             margin-top: 10px;
             display: none;
@@ -296,23 +341,70 @@
             transition: all 0.2s ease;
         }
 
-        .action-buy-btn:hover {
-            background: var(--brand-blue);
+        .action-buy-btn:hover { background: var(--brand-blue); }
+
+        /* Brand Manifesto Section with Background Watermark */
+        .manifesto-watermark-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-subtle);
+            padding: 40px;
+            margin-bottom: 64px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        /* 第二屏：互动体验 (Simulator 与 Live Ledger 左右并排) */
+        .manifesto-content {
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
+        }
+
+        .manifesto-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .manifesto-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .watermark-img {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            height: auto;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Screen 2: Interactive Private Preview & Live Ledger */
         .screen-interactive {
             border-top: 1px solid var(--border-subtle);
             padding-top: 56px;
-            margin-bottom: 72px;
+            margin-bottom: 64px;
         }
 
-        .interactive-heading {
+        .section-heading {
             font-size: 0.82rem;
             font-weight: 700;
             letter-spacing: 2px;
             color: var(--text-muted);
             margin-bottom: 28px;
+            text-transform: uppercase;
         }
 
         .interactive-grid {
@@ -322,12 +414,11 @@
         }
 
         @media (min-width: 880px) {
-            .interactive-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .interactive-grid { grid-template-columns: 1fr 1fr; }
         }
 
-        .simulator-box {
+        /* Private Preview Box with Dynamic Face Avatar */
+        .preview-box {
             background: var(--panel-bg);
             border: 1px solid var(--border-subtle);
             padding: 28px;
@@ -336,17 +427,22 @@
             justify-content: space-between;
         }
 
-        .simulator-title {
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .preview-title {
             font-size: 0.8rem;
             font-weight: 700;
             letter-spacing: 1.5px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            display: flex;
-            justify-content: space-between;
+            color: var(--text-primary);
+            text-transform: uppercase;
         }
 
-        .sim-input {
+        .preview-input {
             width: 100%;
             background: #ffffff;
             border: 1px solid var(--border-subtle);
@@ -356,17 +452,53 @@
             margin-bottom: 16px;
             outline: none;
             font-family: var(--font-sans);
+            transition: border-color 0.2s ease;
         }
 
-        .sim-input:focus { border-color: var(--text-primary); }
+        .preview-input:focus { border-color: var(--text-primary); }
 
-        .sim-card-preview {
+        /* Signal Color Selector Bar */
+        .color-picker-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .color-picker-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .color-dot-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+            padding: 0;
+        }
+
+        .color-dot-btn:hover { transform: scale(1.15); }
+        .color-dot-btn.active { border-color: var(--text-primary); }
+
+        .color-dot-red { background-color: var(--brand-red); }
+        .color-dot-green { background-color: var(--brand-green); }
+        .color-dot-blue { background-color: var(--brand-blue); }
+        .color-dot-black { background-color: var(--brand-black); }
+
+        .preview-card-frame {
             background: #ffffff;
             border: 1px dashed var(--border-subtle);
             padding: 20px;
+            position: relative;
         }
 
-        .sim-badge-row {
+        .preview-badge-row {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
@@ -382,20 +514,33 @@
             font-weight: 600;
         }
 
-        .sim-badge.guest { color: #d97706; background: #fffbe0; border-color: #fef08a; }
-        .sim-badge.unassigned { color: var(--text-muted); }
-        .sim-badge.not-published { color: var(--status-red); background: #fef2f2; border-color: #fecaca; }
+        .sim-badge.priv { color: #d97706; background: #fffbe0; border-color: #fef08a; }
+        .sim-badge.local { color: var(--text-muted); }
+        .sim-badge.not-published { color: var(--brand-red); background: #fef2f2; border-color: #fecaca; }
 
-        .sim-statement-text {
+        .preview-body-layout {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .interactive-face-svg {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+
+        .preview-statement-text {
             font-size: 0.95rem;
             line-height: 1.5;
             color: var(--text-primary);
-            margin-bottom: 18px;
             min-height: 48px;
             font-style: italic;
+            word-break: break-word;
         }
 
-        .sim-claim-cta {
+        .preview-claim-cta {
             width: 100%;
             background: transparent;
             border: 1px solid var(--text-primary);
@@ -407,13 +552,15 @@
             cursor: pointer;
             transition: all 0.2s ease;
             text-transform: uppercase;
+            margin-top: 20px;
         }
 
-        .sim-claim-cta:hover {
+        .preview-claim-cta:hover {
             background: var(--text-primary);
             color: #ffffff;
         }
 
+        /* Live Ledger Box */
         .ledger-terminal {
             background: var(--panel-bg);
             border: 1px solid var(--border-subtle);
@@ -442,15 +589,15 @@
             font-family: var(--font-mono);
         }
 
-        .status-dot.live-mode { color: var(--status-green); }
+        .status-dot.live-mode { color: var(--brand-green); }
         .status-dot.idle-mode { color: var(--text-muted); }
 
         .pulse-led {
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background-color: var(--status-green);
-            box-shadow: 0 0 6px var(--status-green);
+            background-color: var(--brand-green);
+            box-shadow: 0 0 6px var(--brand-green);
             animation: pulse 2s infinite;
         }
 
@@ -470,14 +617,16 @@
 
         .statement-meta-row {
             display: flex;
+            align-items: center;
             gap: 12px;
             margin-bottom: 10px;
             font-family: var(--font-mono);
             font-size: 0.8rem;
         }
 
-        .garment-id { color: var(--status-red); font-weight: 700; }
+        .garment-id { color: var(--brand-red); font-weight: 700; }
         .garment-tag { background: #ffffff; padding: 2px 8px; border: 1px solid var(--border-subtle); color: var(--text-secondary); }
+        .demo-tag { background: #fef3c7; color: #92400e; padding: 2px 8px; font-size: 0.65rem; font-weight: 700; border: 1px solid #fcd34d; }
 
         .terminal-time-info {
             font-family: var(--font-mono);
@@ -491,7 +640,54 @@
             gap: 8px;
         }
 
-        /* 第三屏：Protocol 规则 & 品牌宣言 */
+        /* Garment Search Section */
+        .search-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-subtle);
+            padding: 28px;
+            margin-top: 32px;
+        }
+
+        .search-bar-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .search-input {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            padding: 12px 16px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .search-btn {
+            background: var(--text-primary);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .search-btn:hover { background: var(--brand-blue); }
+
+        .search-result-display {
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px dashed var(--border-subtle);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        /* Screen 3: Protocol & Manifesto */
         .screen-protocol {
             border-top: 1px solid var(--border-subtle);
             padding-top: 56px;
@@ -535,17 +731,7 @@
             line-height: 1.6;
         }
 
-        .manifesto-box {
-            background: var(--panel-bg);
-            border-left: 3px solid var(--text-primary);
-            padding: 24px 28px;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: var(--text-primary);
-            font-style: italic;
-        }
-
-        /* 页脚与 Canada / BC Consumer Protection 2026 合规条款 */
+        /* Footer & Legal Entity */
         .legal-footer {
             margin-top: 80px;
             padding-top: 36px;
@@ -595,6 +781,7 @@
             color: var(--text-muted);
         }
 
+        /* Policy Modal Window */
         .modal-backdrop {
             position: fixed;
             top:0; left:0; width:100vw; height:100vh;
@@ -602,19 +789,19 @@
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 99999;
             backdrop-filter: blur(4px);
         }
 
         .modal-card {
             background: #ffffff;
-            max-width: 600px;
+            max-width: 620px;
             width: 90%;
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
             padding: 36px;
             position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
         .modal-close-btn {
@@ -631,37 +818,36 @@
 <body>
 
 <div class="container">
+    <!-- Header with Official Face Logo & Nav Links -->
     <header>
         <a href="/" class="brand-logo-wrap">
-            <svg class="graphic-logo-face" viewBox="0 0 42 42">
-                <path d="M 21 4 C 11.6 4 4 11.6 4 21 C 4 30.4 11.6 38 21 38 C 30.4 38 38 30.4 38 21 C 38 11.6 30.4 4 21 4 Z" stroke="currentColor"/>
-                <path d="M 14 17 C 14 17 16 19 18 17" stroke="currentColor"/>
-                <path d="M 24 17 C 24 17 26 19 28 17" stroke="currentColor"/>
-                <path d="M 21 21 L 21 25 L 19 26" stroke="currentColor"/>
-                <path d="M 16 30 C 18 32 24 32 26 30" stroke="currentColor"/>
-            </svg>
+            <img src="/LOGO.png" alt="WITHIN SEVEN" class="official-logo-img" onerror="this.onerror=null;this.src='https://via.placeholder.com/50x50/111/fff?text=W7';">
             <span class="text-logo">WITHIN SEVEN</span>
         </a>
-        <button class="cart-trigger snipcart-checkout">
-            BAG [<span class="snipcart-items-count">0</span>]
-        </button>
+        <div class="nav-links-right">
+            <a href="/how-it-works" class="nav-link-btn">HOW IT WORKS</a>
+            <button class="nav-link-btn" onclick="scrollToSearch()">SEARCH #</button>
+            <button class="cart-trigger snipcart-checkout">
+                BAG [<span class="snipcart-items-count">0</span>]
+            </button>
+        </div>
     </header>
 
-    <!-- 第一屏：购买决策 (产品舞台 + 商品详情) -->
+    <!-- Screen 1: Product Gallery & Purchase Meta -->
     <section class="screen-product">
         <div class="gallery-wrap">
             <div class="main-stage">
-                <img id="stage-image" src="https://withinseven.com/front.png" alt="DROP 01 — THE NUMBERED BLANK" onerror="this.onerror=null;this.src='https://via.placeholder.com/800x1000/f9f9f9/737373?text=DROP+01+FRONT';">
+                <img id="stage-image" src="https://withinseven.com/front.png" alt="DROP 01 — THE NUMBERED BLANK" onerror="this.onerror=null;this.src='https://via.placeholder.com/800x1000/0d0d0d/737373?text=DROP+01+FRONT';">
             </div>
             <div class="thumbs-row">
                 <button class="thumb-btn active" onclick="updateStage('https://withinseven.com/front.png', this)">
-                    <img src="https://withinseven.com/front.png" alt="Front" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/f9f9f9/737373?text=01';">
+                    <img src="https://withinseven.com/front.png" alt="Front" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/0d0d0d/737373?text=01';">
                 </button>
                 <button class="thumb-btn" onclick="updateStage('https://withinseven.com/back.png', this)">
-                    <img src="https://withinseven.com/back.png" alt="Back" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/f9f9f9/737373?text=02';">
+                    <img src="https://withinseven.com/back.png" alt="Back" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/0d0d0d/737373?text=02';">
                 </button>
                 <button class="thumb-btn" onclick="updateStage('https://withinseven.com/detail.png', this)">
-                    <img src="https://withinseven.com/detail.png" alt="Detail" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/f9f9f9/737373?text=03';">
+                    <img src="https://withinseven.com/detail.png" alt="Detail" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x250/0d0d0d/737373?text=03';">
                 </button>
             </div>
         </div>
@@ -684,8 +870,12 @@
                 THE GARMENT IS BLANK. THE COLOR IS YOURS TO ASSIGN.
             </div>
 
+            <!-- Size Selector with Size Guide Button -->
             <div class="selector-box">
-                <div class="selector-label">Select Size</div>
+                <div class="selector-header-row">
+                    <span class="selector-label">Select Size</span>
+                    <button class="size-guide-trigger-btn" onclick="openPolicyModal('size-guide')">SIZE GUIDE ↗</button>
+                </div>
                 <div class="size-grid">
                     <button class="size-chip" onclick="applySize('S', this)">S</button>
                     <button class="size-chip" onclick="applySize('M', this)">M</button>
@@ -713,41 +903,74 @@
         </div>
     </section>
 
-    <!-- 第二屏：体验区 (Simulator 模拟器与 Live Ledger 侧栏并排) -->
+    <!-- Brand Manifesto Box with Face Logo Watermark -->
+    <section class="manifesto-watermark-section">
+        <div class="manifesto-content">
+            <div class="manifesto-title">// BRAND MANIFESTO</div>
+            <div class="manifesto-text">
+                "Today, blue means becoming visible. The garment arrives as a blank canvas — you decide the color, the words, and when to speak."
+            </div>
+        </div>
+        <img src="/LOGO.png" alt="Watermark" class="watermark-img" onerror="this.style.display='none';">
+    </section>
+
+    <!-- Screen 2: Interactive Private Preview & Live Ledger -->
     <section class="screen-interactive">
-        <div class="interactive-heading">// SYSTEM INTERACTION & SIGNAL FEED</div>
+        <div class="section-heading">// SYSTEM INTERACTION & SIGNAL FEED</div>
         
         <div class="interactive-grid">
-            <div class="simulator-box">
+            <!-- Private Preview Box (No DB, Local Only) -->
+            <div class="preview-box">
                 <div>
-                    <div class="simulator-title">
-                        <span>STATEMENT SIMULATOR</span>
-                        <span>FREE TRYOUT</span>
+                    <div class="preview-header">
+                        <span class="preview-title">PRIVATE PREVIEW</span>
                     </div>
+
                     <input 
                         type="text" 
-                        class="sim-input" 
+                        class="preview-input" 
                         id="guest-sim-input" 
                         placeholder="Type your statement here to simulate..."
                         maxlength="140"
                         oninput="updateSimPreview(this.value)">
                     
-                    <div class="sim-card-preview">
-                        <div class="sim-badge-row">
-                            <span class="sim-badge guest">GUEST PREVIEW</span>
-                            <span class="sim-badge unassigned">UNASSIGNED SIGNAL</span>
-                            <span class="sim-badge not-published">PREVIEW ONLY — NOT PUBLISHED</span>
+                    <!-- Color Picker Row -->
+                    <div class="color-picker-row">
+                        <span class="color-picker-label">SIGNAL COLOR:</span>
+                        <button class="color-dot-btn color-dot-blue active" onclick="selectSimColor('#0044ff', 'BLUE', this)"></button>
+                        <button class="color-dot-btn color-dot-red" onclick="selectSimColor('#e60000', 'RED', this)"></button>
+                        <button class="color-dot-btn color-dot-green" onclick="selectSimColor('#00a843', 'GREEN', this)"></button>
+                        <button class="color-dot-btn color-dot-black" onclick="selectSimColor('#111111', 'BLACK', this)"></button>
+                    </div>
+
+                    <div class="preview-card-frame">
+                        <div class="preview-badge-row">
+                            <span class="sim-badge priv">PRIVATE PREVIEW</span>
+                            <span class="sim-badge local">VISIBLE ONLY TO YOU</span>
+                            <span class="sim-badge local">NOT SAVED TO THE LEDGER</span>
+                            <span class="sim-badge not-published">NOT PUBLISHED</span>
                         </div>
-                        <div class="sim-statement-text" id="sim-text-target">
-                            "We build digital armor not to hide who we are, but to decide when we speak."
+                        <div class="preview-body-layout">
+                            <!-- Dynamic SVG Face Avatar with closed/open eyes & outline color -->
+                            <svg id="interactive-face-avatar" class="interactive-face-svg" viewBox="0 0 42 42">
+                                <circle cx="21" cy="21" r="18" fill="none" id="face-stroke-circle" stroke="#0044ff" stroke-width="1.8"/>
+                                <path id="eye-left" d="M 14 17 L 18 17" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
+                                <path id="eye-right" d="M 24 17 L 28 17" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M 16 28 C 18 30 24 30 26 28" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                            <div class="preview-statement-text" id="sim-text-target">
+                                "Today, blue means becoming visible."
+                            </div>
                         </div>
                     </div>
                 </div>
-                <button class="sim-claim-cta" style="margin-top: 20px;" onclick="jumpToPurchase()">
-                    CLAIM A NUMBERED GARMENT TO ENTER THE LEDGER
+                
+                <button class="preview-claim-cta" onclick="jumpToPurchase()">
+                    CLAIM A NUMBER TO PUBLISH FOR 7 DAYS
                 </button>
             </div>
 
+            <!-- Live Ledger Terminal Box -->
             <div class="ledger-terminal">
                 <div class="terminal-bar">
                     <span>LIVE LEDGER TERMINAL</span>
@@ -758,11 +981,24 @@
                 </div>
             </div>
         </div>
+
+        <!-- Garment Number Search Block -->
+        <div class="search-section" id="garment-search-block">
+            <div class="section-heading" style="margin-bottom: 6px;">SEARCH A GARMENT NUMBER</div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Enter a 4-digit serial number (0001 - 0777) to query its current public signal state.</p>
+            
+            <div class="search-bar-row">
+                <input type="text" class="search-input" id="search-serial-input" placeholder="#0234" maxlength="4">
+                <button class="search-btn" onclick="executeGarmentSearch()">VIEW SIGNAL</button>
+            </div>
+
+            <div class="search-result-display" id="search-result-box"></div>
+        </div>
     </section>
 
-    <!-- 第三屏：Protocol 规则 & 品牌宣言 -->
+    <!-- Screen 3: Protocol Rules -->
     <section class="screen-protocol">
-        <div class="interactive-heading">// PROTOCOL & SYSTEM RULES</div>
+        <div class="section-heading">// PROTOCOL & SYSTEM RULES</div>
         
         <div class="rules-grid">
             <div class="rule-card">
@@ -781,12 +1017,9 @@
                 <div class="rule-desc">Publish one statement for exactly seven days. When the cycle ends, it disappears from public view and the garment becomes ready to speak again.</div>
             </div>
         </div>
-
-        <div class="manifesto-box">
-            "Once the seven-day cycle expires, the signal disappears from public view. The garment returns to silence, ready for its next expression."
-        </div>
     </section>
 
+    <!-- Legal Footer with N7 STUDIO INC. -->
     <footer class="legal-footer">
         <div class="footer-links-row">
             <span class="footer-link" onclick="openPolicyModal('size-guide')">Size Guide</span>
@@ -809,11 +1042,12 @@
         </div>
 
         <div class="legal-entity-note">
-            © 2026 WITHIN SEVEN STUDIO INC. All rights reserved. Richmond, BC, Canada.
+            © 2026 N7 STUDIO INC. WITHIN SEVEN™. All rights reserved. Richmond, BC, Canada.
         </div>
     </footer>
 </div>
 
+<!-- Policy Modal Container -->
 <div class="modal-backdrop" id="policy-modal">
     <div class="modal-card">
         <button class="modal-close-btn" onclick="closePolicyModal()">✕</button>
@@ -821,7 +1055,7 @@
     </div>
 </div>
 
-<!-- 官方推荐完整安全 Snipcart 初始化安装器（含自建 #snipcart 节点与侧栏支持） -->
+<!-- Official Snipcart Installation Script & Container -->
 <script>
   window.SnipcartSettings = {
     publicApiKey: "ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz",
@@ -830,12 +1064,26 @@
     modalStyle: "side"
   };
 
-  (()=>{var c,d;(d=(c=window.SnipcartSettings).version)||(c.version="3.0");var a=window.Snipcart?window.Snipcart.configs.scriptUrl:"https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js";function b(){if(window.Snipcart)return;window.Snipcart=!0;var e=document.createElement("script");e.src=a,e.async=!0,document.body.appendChild(e)}window.SnipcartSettings.loadStrategy?window.addEventListener(window.SnipcartSettings.loadStrategy,b,{once:!0}):b()})();
+  (() => {
+    var c, d;
+    (d = (c = window.SnipcartSettings).version) || (c.version = "3.0");
+    var a = window.Snipcart ? window.Snipcart.configs.scriptUrl : "https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js";
+    function b() {
+      if (window.Snipcart) return;
+      window.Snipcart = !0;
+      var e = document.createElement("script");
+      (e.src = a), (e.async = !0), document.body.appendChild(e);
+    }
+    window.SnipcartSettings.loadStrategy
+      ? window.addEventListener(window.SnipcartSettings.loadStrategy, b, { once: !0 })
+      : b();
+  })();
 </script>
 <div id="snipcart" data-api-key="ZDJmZTZiY2ItNzEwZS00NzQxLWFhNWUtOGFhNDQxNzMyZjNhNjM5MjEzMTg0MzQyNDc4NzMz" hidden></div>
 
 <script>
     let chosenSize = '';
+    let currentSimColor = '#0044ff';
 
     function updateStage(imgSrc, btnElement) {
         const stageImg = document.getElementById('stage-image');
@@ -875,15 +1123,39 @@
         document.querySelector('.selector-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
+    function scrollToSearch() {
+        document.getElementById('garment-search-block').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    /* Dynamic Private Preview & Face Interaction */
     function updateSimPreview(val) {
         const target = document.getElementById('sim-text-target');
+        const eyeLeft = document.getElementById('eye-left');
+        const eyeRight = document.getElementById('eye-right');
+
         if (val.trim().length > 0) {
             target.textContent = `"${val}"`;
+            // Typing state: Eyes open (circles/dots)
+            eyeLeft.setAttribute('d', 'M 16 17 A 1 1 0 1 0 16 17.1');
+            eyeRight.setAttribute('d', 'M 26 17 A 1 1 0 1 0 26 17.1');
         } else {
-            target.textContent = '"We build digital armor not to hide who we are, but to decide when we speak."';
+            target.textContent = '"Today, blue means becoming visible."';
+            // Silent state: Eyes closed (lines)
+            eyeLeft.setAttribute('d', 'M 14 17 L 18 17');
+            eyeRight.setAttribute('d', 'M 24 17 L 28 17');
         }
     }
 
+    function selectSimColor(colorHex, colorName, btnEl) {
+        currentSimColor = colorHex;
+        document.querySelectorAll('.color-dot-btn').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
+
+        // Update stroke circle color
+        document.getElementById('face-stroke-circle').setAttribute('stroke', colorHex);
+    }
+
+    /* XSS-Free Terminal Feed */
     async function initTerminalFeed() {
         const viewport = document.getElementById('terminal-viewport');
         if (!viewport) return;
@@ -909,7 +1181,6 @@
 
                 const metaRow = document.createElement('div');
                 metaRow.className = 'statement-meta-row';
-                metaRow.style.marginTop = '12px';
 
                 const idSpan = document.createElement('span');
                 idSpan.className = 'garment-id';
@@ -921,6 +1192,14 @@
 
                 metaRow.appendChild(idSpan);
                 metaRow.appendChild(tagSpan);
+
+                // If demo signal, tag explicitly
+                if (active.is_demo || active.garment_number === 234) {
+                    const demoSpan = document.createElement('span');
+                    demoSpan.className = 'demo-tag';
+                    demoSpan.textContent = 'DEMO SIGNAL — NOT A CUSTOMER STATEMENT';
+                    metaRow.appendChild(demoSpan);
+                }
 
                 const textDiv = document.createElement('div');
                 textDiv.className = 'statement-display';
@@ -970,13 +1249,154 @@
         viewport.appendChild(textDiv);
     }
 
+    /* Garment Number Search Engine */
+    async function executeGarmentSearch() {
+        const inputVal = document.getElementById('search-serial-input').value.trim();
+        const resultBox = document.getElementById('search-result-box');
+        resultBox.style.display = 'block';
+
+        if (!/^\d{1,4}$/.test(inputVal)) {
+            resultBox.style.color = 'var(--brand-red)';
+            resultBox.textContent = '⚠️ INVALID FORMAT. PLEASE ENTER A NUMBER BETWEEN 0001 AND 0777.';
+            return;
+        }
+
+        const num = Number(inputVal);
+        if (num < 1 || num > 777) {
+            resultBox.style.color = 'var(--brand-red)';
+            resultBox.textContent = 'NUMBER NOT ISSUED';
+            return;
+        }
+
+        const formatted = String(num).padStart(4, '0');
+        resultBox.style.color = 'var(--text-primary)';
+        resultBox.textContent = `SEARCHING LEDGER FOR #${formatted}...`;
+
+        try {
+            const res = await fetch(`https://id.withinseven.com/api/garment/${formatted}`);
+            if (res.status === 404) {
+                resultBox.style.color = 'var(--brand-red)';
+                resultBox.textContent = 'NUMBER NOT ISSUED';
+                return;
+            }
+
+            const data = await res.json();
+            if (data.statement_body) {
+                resultBox.style.color = 'var(--brand-green)';
+                resultBox.innerHTML = `
+                    <div style="font-weight: bold; margin-bottom: 6px;">#${formatted} // COLOR: ${data.color || 'BLUE'}</div>
+                    <div style="font-style: italic; margin-bottom: 6px;">"${data.statement_body}"</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">VANISHES AT: ${new Date(data.expires_at).toLocaleString()}</div>
+                `;
+            } else {
+                resultBox.style.color = 'var(--text-muted)';
+                resultBox.textContent = `#${formatted} IS CURRENTLY SILENT`;
+            }
+        } catch (e) {
+            resultBox.style.color = 'var(--text-muted)';
+            resultBox.textContent = `#${formatted} IS CURRENTLY SILENT`;
+        }
+    }
+
+    /* Comprehensive Size Guide & Legal Policies */
     const policies = {
-        'size-guide': '<h3>SIZE GUIDE</h3><br><p>All measurements in inches:</p><br><p><b>S:</b> Chest 44" / Length 27"<br><b>M:</b> Chest 46" / Length 28"<br><b>L:</b> Chest 48" / Length 29"<br><b>XL:</b> Chest 50" / Length 30"</p>',
-        'shipping': '<h3>SHIPPING POLICY</h3><br><p>Canada Only Launch. Tracked express shipping across all Canadian provinces (3-5 business days). Ships directly from Richmond, BC.</p>',
-        'returns': '<h3>RETURN POLICY</h3><br><p>14-day return window. Garments must be unworn with unbroken Claim Card scratch seals. Unsealing the Claim Card permanently assigns ledger ownership and renders the garment final sale.</p>',
-        'privacy': '<h3>PRIVACY POLICY</h3><br><p>We collect minimal telemetry required for ledger operation. Email addresses are strictly used for Magic Link authentication and order receipts. No personal data is ever broadcast on the public ledger.</p>',
-        'terms': '<h3>TERMS OF SALE</h3><br><p>Managed via Cloudflare & Supabase infrastructure. Statements violating illegal content boundaries are subject to local moderation filters.</p>',
-        'contact': '<h3>CONTACT</h3><br><p>Direct Inquiry: support@withinseven.com<br>Studio: Within Seven Studio Inc., Richmond, BC, Canada.</p>'
+        'size-guide': `
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">SIZE GUIDE — DROP 01 HEAVYWEIGHT BLANK</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">
+                <b>FIT PROFILE:</b> Heavyweight Boxy / Oversized Fit. Engineered with dropped shoulders and a thick 1.25" rib collar. Cut from 420GSM custom loopback cotton.
+            </p>
+
+            <table style="width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.82rem; margin-bottom: 24px;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--text-primary); text-align: left;">
+                        <th style="padding: 8px;">SIZE</th>
+                        <th style="padding: 8px;">CHEST</th>
+                        <th style="padding: 8px;">LENGTH</th>
+                        <th style="padding: 8px;">SHOULDER</th>
+                        <th style="padding: 8px;">SLEEVE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--border-subtle);">
+                        <td style="padding: 10px 8px; font-weight: bold;">S</td>
+                        <td style="padding: 10px 8px;">44"</td>
+                        <td style="padding: 10px 8px;">27"</td>
+                        <td style="padding: 10px 8px;">21.5"</td>
+                        <td style="padding: 10px 8px;">8.5"</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-subtle);">
+                        <td style="padding: 10px 8px; font-weight: bold;">M</td>
+                        <td style="padding: 10px 8px;">46"</td>
+                        <td style="padding: 10px 8px;">28"</td>
+                        <td style="padding: 10px 8px;">22.5"</td>
+                        <td style="padding: 10px 8px;">9.0"</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-subtle);">
+                        <td style="padding: 10px 8px; font-weight: bold;">L</td>
+                        <td style="padding: 10px 8px;">48"</td>
+                        <td style="padding: 10px 8px;">29"</td>
+                        <td style="padding: 10px 8px;">23.5"</td>
+                        <td style="padding: 10px 8px;">9.5"</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-subtle);">
+                        <td style="padding: 10px 8px; font-weight: bold;">XL</td>
+                        <td style="padding: 10px 8px;">50"</td>
+                        <td style="padding: 10px 8px;">30"</td>
+                        <td style="padding: 10px 8px;">24.5"</td>
+                        <td style="padding: 10px 8px;">10.0"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 8px;">RECOMMENDATION:</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">
+                • Order your <b>TRUE TO SIZE</b> for an intentional relaxed oversized silhouette.<br>
+                • Order <b>ONE SIZE DOWN</b> if you prefer a traditional standard fit.
+            </p>
+
+            <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 8px;">HOW TO MEASURE:</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+                <b>Chest:</b> Measure around the fullest part of your chest, keeping the tape horizontal.<br>
+                <b>Length:</b> Measure from the highest point of the shoulder collar down to the bottom hem.
+            </p>
+        `,
+        'shipping': `
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">SHIPPING POLICY</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                <b>CANADA ONLY LAUNCH:</b> Orders ship tracked express via Canada Post / FedEx directly from our fulfillment facility in Richmond, British Columbia.<br><br>
+                • <b>Processing:</b> 1-2 business days.<br>
+                • <b>Delivery:</b> 3-5 business days across Canadian provinces.<br>
+                • Itemized electronic sales contracts and shipping confirmations are issued instantly via email.
+            </p>
+        `,
+        'returns': `
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">RETURN & REFUND POLICY</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                <b>14-DAY RETURN WINDOW:</b> Unworn garments in original condition with intact packaging are eligible for return within 14 days of receipt.<br><br>
+                <b>CRITICAL CLAIM CARD SEAL RULE:</b> Each garment includes a sealed Claim Card. Unsealing or scratching off the Claim Card permanently transfers digital ownership on the ledger and renders the physical garment <b>FINAL SALE</b>.
+            </p>
+        `,
+        'privacy': `
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">PRIVACY POLICY</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Operated by <b>N7 STUDIO INC.</b> We collect minimal telemetry required to facilitate checkout and ledger authentication. Email addresses are used strictly for Magic Link authentication and transactional receipts. Personal customer identity is NEVER associated with or broadcast on the public ledger.
+            </p>
+        `,
+        'terms': `
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">TERMS OF SALE</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                All purchases are subject to terms governed by N7 STUDIO INC. under British Columbia law. Statements published to the public ledger violating illegal content laws are subject to edge moderation filtering.
+            </p>
+        `,
+        'contact': `
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">CONTACT INFORMATION</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                WITHIN SEVEN is a digital apparel brand operated by N7 STUDIO INC.<br><br>
+                <b>Legal Entity:</b> N7 STUDIO INC.<br>
+                <b>Direct Inquiry:</b> support@withinseven.com<br>
+                <b>Jurisdiction:</b> Richmond, British Columbia, Canada
+            </p>
+        `
     };
 
     function openPolicyModal(key) {

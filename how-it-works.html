@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOW IT WORKS — WITHIN SEVEN</title>
+    <link rel="icon" type="image/png" href="/LOGO.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #ffffff;
+            --panel-bg: #f9f9f9;
+            --border-subtle: #e5e5e5;
+            --text-primary: #111111;
+            --text-secondary: #525252;
+            --text-muted: #737373;
+            --brand-blue: #0044ff;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+            padding: 0 24px 80px 24px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 48px;
+        }
+
+        .brand-logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .official-logo-img {
+            width: 48px;
+            height: auto;
+        }
+
+        .text-logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .back-btn {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            color: var(--brand-blue);
+        }
+
+        .page-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        .steps-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 56px;
+        }
+
+        .step-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-subtle);
+            padding: 28px;
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--brand-blue);
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            padding: 8px 14px;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .clarification-box {
+            background: #f0f4ff;
+            border-left: 4px solid var(--brand-blue);
+            padding: 28px;
+            margin-bottom: 56px;
+        }
+
+        .clarification-box h4 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .clarification-box ul {
+            list-style: none;
+        }
+
+        .clarification-box li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .clarification-box li::before {
+            content: "•";
+            color: var(--brand-blue);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 28px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <a href="/" class="brand-logo-wrap">
+            <img src="/LOGO.png" alt="WITHIN SEVEN" class="official-logo-img">
+            <span class="text-logo">WITHIN SEVEN</span>
+        </a>
+        <a href="/" class="back-btn">← BACK TO STORE</a>
+    </header>
+
+    <h1 class="page-title">HOW THE LEDGER WORKS</h1>
+    <p class="page-subtitle">A simple 6-step protocol linking physical craftsmanship to an ephemeral digital voice.</p>
+
+    <div class="steps-grid">
+        <div class="step-card">
+            <div class="step-num">01</div>
+            <div class="step-content">
+                <h3>TAP NFC / SCAN QR</h3>
+                <p>Locate the wash-tested NFC tag embedded inside your garment. Tap with your smartphone or scan the backup code to instantly open your garment's terminal page.</p>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-num">02</div>
+            <div class="step-content">
+                <h3>REVEAL CLAIM CARD</h3>
+                <p>Unbox your package and find the sealed physical Claim Card. Scratch off the protective layer to reveal your one-time secret access key.</p>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-num">03</div>
+            <div class="step-content">
+                <h3>CLAIM YOUR PERMANENT NUMBER</h3>
+                <p>Enter the scratch key on your garment's terminal page. The key burns permanently, forever linking your account to that garment's unique number (#0001 - #0777).</p>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-num">04</div>
+            <div class="step-content">
+                <h3>CHOOSE A SIGNAL COLOR</h3>
+                <p>Select your statement color for the cycle: Red, Green, Blue, or Black. The garment is a blank canvas — you decide the color identity.</p>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-num">05</div>
+            <div class="step-content">
+                <h3>PUBLISH FOR EXACTLY 7 DAYS</h3>
+                <p>Write an anonymous statement up to 140 characters. Once published, you have a 7-minute grace window to edit typos before it locks for 7 full days.</p>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-num">06</div>
+            <div class="step-content">
+                <h3>RETURN AFTER THE CYCLE</h3>
+                <p>After 168 hours (7 days), your statement automatically vanishes from public view. The garment returns to silence, ready for your next expression.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="clarification-box">
+        <h4>SYSTEM PROTOCOL RULES</h4>
+        <ul>
+            <li><b>Private Preview:</b> Unsaved typing simulations on the homepage are strictly local and visible only to you.</li>
+            <li><b>One Permanent Number:</b> Each garment carries a single permanent number assigned during quality control.</li>
+            <li><b>7-Minute Grace Window:</b> You can fix typos within 7 minutes of publishing. After 7 minutes, the statement locks completely.</li>
+            <li><b>Cooldown Period:</b> Hiding a statement early does not reset your 7-day cooldown timer.</li>
+            <li><b>Multiple Cycles:</b> A single garment can experience infinite 7-day cycles over its lifetime.</li>
+        </ul>
+    </div>
+
+    <footer>
+        © 2026 N7 STUDIO INC. WITHIN SEVEN™. All rights reserved. Richmond, BC, Canada.
+    </footer>
+</div>
+
+</body>
+</html>
