@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WITHIN SEVEN — UTOPIA WHITE MIRROR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WITHIN SEVEN — UTOPIA MIRROR REALM</title>
     <link rel="icon" type="image/png" href="/LOGO.png">
     
     <!-- Google Fonts: Inter & JetBrains Mono -->
@@ -36,22 +36,24 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        body {
+        html, body {
+            width: 100%;
+            height: 100%;
             background-color: var(--bg-main);
             color: var(--text-primary);
             font-family: var(--font-sans);
             -webkit-font-smoothing: antialiased;
-            padding: 0;
             overflow-x: hidden;
         }
 
         .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-        /* 🔒 1. 拱门满屏入口 Portal Overlay (最高铁律：打死不动) */
+        /* 🔒 1. 拱门满屏入口 Portal Overlay (手机端 100dvh 防留白) */
         #portal-overlay {
             position: fixed;
-            top: 0; left: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             width: 100vw; height: 100vh;
+            height: 100dvh; /* 动态响应移动端视口，彻底封死白边 */
             background-color: #050505;
             z-index: 999999;
             display: flex;
@@ -135,12 +137,13 @@
             50% { opacity: 1; }
         }
 
-        /* 🪞 2. ✨ 乌托邦 — 纯白无界镜域 (The Optic White Mirror Realm) */
+        /* 🪞 2. 乌托邦 — 纯白无界镜域门界 (移动端彻底防留白与重叠) */
         #faction-overlay {
             position: fixed;
-            top: 0; left: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             width: 100vw; height: 100vh;
-            background-color: #f6f7fa; /* 纯白偏高奢冷灰基底 */
+            height: 100dvh; /* 彻底封死白边 */
+            background-color: #f6f7fa;
             z-index: 999998;
             display: flex;
             flex-direction: column;
@@ -151,7 +154,6 @@
             transition: background-color 0.6s ease, opacity 0.6s ease;
         }
 
-        /* 3D 银晶空间 Canvas */
         #mirror-tunnel-canvas {
             position: absolute;
             top: 0; left: 0;
@@ -179,13 +181,13 @@
         .telemetry-title { font-weight: 800; color: #111111; letter-spacing: 4px; }
         .telemetry-clock { color: #111111; font-weight: 700; }
 
-        /* 中央悬浮全息镜面投影 (在白背景上清晰醒目) */
+        /* 中央悬浮全息镜面投影 */
         .mirror-projection-stage {
             width: 100%;
             max-width: 1000px;
             text-align: center;
             z-index: 10;
-            min-height: 120px;
+            min-height: 100px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -195,17 +197,17 @@
 
         .projection-meta {
             font-family: var(--font-mono);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 800;
             letter-spacing: 3px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-transform: uppercase;
             color: var(--brand-blue);
             transition: color 0.3s ease;
         }
 
         .projection-quote {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 600;
             font-style: italic;
             color: #111111;
@@ -215,23 +217,16 @@
             transition: all 0.3s ease;
         }
 
-        /* 7 根磨砂透明水晶折射柱 (7 Frosted Specular Prisms) */
+        /* 7 根磨砂透明水晶折射柱 */
         .mirror-prisms-container {
             display: flex;
             width: 100%;
             max-width: 1440px;
             height: 52vh;
-            min-height: 350px;
+            min-height: 340px;
             gap: 12px;
             z-index: 10;
             perspective: 1200px;
-        }
-
-        @media (max-width: 900px) {
-            .mirror-prisms-container {
-                flex-direction: column;
-                height: auto;
-            }
         }
 
         .mirror-prism {
@@ -258,28 +253,28 @@
             transition: background 0.3s, box-shadow 0.3s;
         }
 
-        /* 7 种专属色彩阵营玻璃质感 */
+        /* 7 种专属色彩 */
         .p-red .prism-top-indicator { background: var(--brand-red); }
-        .p-red:hover { border-color: var(--brand-red); background: rgba(255, 235, 238, 0.9); box-shadow: 0 15px 40px rgba(255, 0, 51, 0.25); }
+        .p-red:hover { border-color: var(--brand-red); background: rgba(255, 235, 238, 0.9); }
 
         .p-green .prism-top-indicator { background: var(--brand-green); }
-        .p-green:hover { border-color: var(--brand-green); background: rgba(230, 255, 240, 0.9); box-shadow: 0 15px 40px rgba(0, 204, 85, 0.25); }
+        .p-green:hover { border-color: var(--brand-green); background: rgba(230, 255, 240, 0.9); }
 
         .p-blue .prism-top-indicator { background: var(--brand-blue); }
-        .p-blue:hover { border-color: var(--brand-blue); background: rgba(235, 243, 255, 0.9); box-shadow: 0 15px 40px rgba(0, 85, 255, 0.25); }
+        .p-blue:hover { border-color: var(--brand-blue); background: rgba(235, 243, 255, 0.9); }
 
         .p-yellow .prism-top-indicator { background: var(--brand-yellow); }
-        .p-yellow:hover { border-color: var(--brand-yellow); background: rgba(255, 250, 230, 0.9); box-shadow: 0 15px 40px rgba(230, 184, 0, 0.25); }
+        .p-yellow:hover { border-color: var(--brand-yellow); background: rgba(255, 250, 230, 0.9); }
 
         .p-black .prism-top-indicator { background: #111111; }
-        .p-black:hover { border-color: #111111; background: #111111; color: #ffffff; box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .p-black:hover { border-color: #111111; background: #111111; color: #ffffff; }
         .p-black:hover .prism-tag, .p-black:hover .prism-title { color: #ffffff; }
 
         .p-white .prism-top-indicator { background: #e0e0e0; }
-        .p-white:hover { border-color: #111111; background: #ffffff; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); }
+        .p-white:hover { border-color: #111111; background: #ffffff; }
 
         .p-violet .prism-top-indicator { background: var(--brand-violet); }
-        .p-violet:hover { border-color: var(--brand-violet); background: rgba(250, 238, 255, 0.9); box-shadow: 0 15px 40px rgba(168, 85, 247, 0.25); }
+        .p-violet:hover { border-color: var(--brand-violet); background: rgba(250, 238, 255, 0.9); }
 
         .mirror-prism:hover {
             flex: 1.8;
@@ -307,6 +302,62 @@
             background: #111111;
             color: #ffffff;
             border-color: #111111;
+        }
+
+        /* 📱 手机端专属优化样式（解决重叠与暂时隐去留言） */
+        @media (max-width: 768px) {
+            /* 1. 手机端暂时彻底隐去留言投影，防止挡住界面 */
+            .mirror-projection-stage {
+                display: none !important;
+            }
+
+            /* 2. 第二页手机端布局重构 */
+            #faction-overlay {
+                padding: 16px 12px;
+                justify-content: flex-start;
+                gap: 12px;
+                overflow-y: auto;
+            }
+
+            .telemetry-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+                font-size: 0.6rem;
+                padding-bottom: 8px;
+                text-align: center;
+            }
+
+            .mirror-prisms-container {
+                height: auto;
+                min-height: 0;
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+            }
+
+            /* 3. 手机端转换成优雅平铺的 7 色晶体横条 */
+            .mirror-prism {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 14px;
+                min-height: 48px;
+                background: rgba(255, 255, 255, 0.9);
+            }
+
+            .prism-top-indicator {
+                top: 0; left: 0; width: 4px; height: 100%;
+            }
+
+            .prism-tag { font-size: 0.6rem; }
+            .prism-title { font-size: 0.88rem; margin-top: 0; }
+            .prism-select-btn { width: auto; padding: 6px 12px; font-size: 0.62rem; }
+
+            .mirror-prism:hover {
+                transform: none;
+                flex: none;
+            }
         }
 
         /* Header */
@@ -480,7 +531,7 @@
         <span class="telemetry-clock" id="telemetry-clock-display">000D 00H 00M 00S</span>
     </div>
 
-    <!-- 中央悬浮巨幅全息镜面投影 (实时根据悬停的颜色同步变色) -->
+    <!-- 中央悬浮巨幅全息镜面投影 (手机端暂隐藏) -->
     <div class="mirror-projection-stage">
         <div class="projection-meta" id="projection-meta-target">HOVER A CRYSTAL PRISM TO REFLECT VOICES</div>
         <div class="projection-quote" id="projection-quote-target">"The garment is a blank canvas. Hover over a color frequency to reflect the voices of the ledger."</div>
@@ -894,7 +945,6 @@
         
         tunnelOffset = (tunnelOffset + 0.3) % 40;
 
-        // 渲染 14 层纯白银灰收缩透视框
         for (let i = 14; i >= 1; i--) {
             let scale = Math.pow(1.32, i) + tunnelOffset * 0.05;
             let w = cx / scale * 1.85;
@@ -904,7 +954,6 @@
             mCtx.lineWidth = i % 2 === 0 ? 1.5 : 0.8;
             mCtx.strokeRect(cx - w, cy - h, w * 2, h * 2);
 
-            // 消失点极光折射线
             mCtx.beginPath();
             mCtx.moveTo(0, 0); mCtx.lineTo(cx - w, cy - h);
             mCtx.moveTo(mirrorCanvas.width, 0); mCtx.lineTo(cx + w, cy - h);
@@ -918,7 +967,6 @@
     }
     animateMirrorTunnel();
 
-    /* 悬停同步变色与高亮小字 */
     function reflectVoice(glowHex, metaText, garmentNum, statementText, activeHex) {
         const metaTarget = document.getElementById('projection-meta-target');
         metaTarget.textContent = `${metaText} // ${garmentNum}`;
