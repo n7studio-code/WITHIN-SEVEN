@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WITHIN SEVEN — UTOPIA MIRROR REALM</title>
+    <title>WITHIN SEVEN — COLLECTION 01: UTOPIA</title>
     <link rel="icon" type="image/png" href="/LOGO.png">
     
     <!-- Google Fonts: Inter & JetBrains Mono -->
@@ -47,7 +47,7 @@
 
         .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-        /* 🔒 1. 拱门满屏入口 Portal Overlay (绝对铁律：第一屏永远霸屏) */
+        /* 🔒 1. 拱门满屏入口 Portal Overlay (第一页绝对不可动摇) */
         #portal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             width: 100vw; height: 100vh; height: 100dvh; background-color: #050505;
@@ -90,10 +90,10 @@
             font-family: var(--font-mono); font-size: 0.72rem; color: #525252; letter-spacing: 2px;
             z-index: 10; border-bottom: 1px solid rgba(0, 0, 0, 0.12); padding-bottom: 14px; transition: all 0.5s ease;
         }
-        .telemetry-title { font-weight: 800; color: #111111; letter-spacing: 3px; }
+        .telemetry-title { font-weight: 800; color: #111111; letter-spacing: 2.5px; }
         .telemetry-clock { color: #111111; font-weight: 700; }
 
-        /* Stage 1: 7 色晶体选择 */
+        /* Stage 1: 7 色晶体发售矩阵 */
         #spectrum-selection-stage {
             display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: center; z-index: 10; transition: opacity 0.5s ease;
         }
@@ -111,8 +111,11 @@
         }
         .prism-top-indicator { position: absolute; top: 0; left: 0; width: 100%; height: 5px; transition: background 0.3s; }
         
-        .prism-status-badge { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 1px; padding: 2px 6px; border-radius: 2px; text-transform: uppercase; margin-top: 4px; display: inline-block; }
-        .status-open { background: #111111; color: #ffffff; } .status-next { background: #e0e7ff; color: #0055ff; } .status-sealed { background: #f3f4f6; color: #9ca3af; }
+        .prism-status-badge { font-family: var(--font-mono); font-size: 0.58rem; font-weight: 700; letter-spacing: 1px; padding: 2px 6px; border-radius: 2px; text-transform: uppercase; margin-top: 4px; display: inline-block; }
+        .status-current { background: #ff0033; color: #ffffff; box-shadow: 0 0 8px rgba(255,0,51,0.5); }
+        .status-avail { background: #111111; color: #ffffff; }
+        .status-next { background: #e0e7ff; color: #0055ff; }
+        .status-sealed { background: #f3f4f6; color: #9ca3af; }
 
         .p-red .prism-top-indicator { background: var(--brand-red); } .p-red:hover { border-color: var(--brand-red); background: rgba(255, 235, 238, 0.95); }
         .p-green .prism-top-indicator { background: var(--brand-green); } .p-green:hover { border-color: var(--brand-green); background: rgba(230, 255, 240, 0.95); }
@@ -134,42 +137,40 @@
             width: 100%; height: 100%; z-index: 20; opacity: 0; transition: opacity 0.6s ease;
         }
 
-        .injection-header { text-align: center; margin-bottom: 32px; }
+        .injection-header { text-align: center; margin-bottom: 24px; }
         .inj-code { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 8px; display: block; }
-        .inj-title { font-size: 2rem; font-weight: 800; letter-spacing: 6px; color: #ffffff; text-transform: uppercase; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        .inj-title { font-size: 1.8rem; font-weight: 800; letter-spacing: 6px; color: #ffffff; text-transform: uppercase; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
 
-        .injection-face-svg { width: 64px; height: 64px; margin-bottom: 32px; filter: drop-shadow(0 0 15px currentColor); transition: all 0.3s; }
-        .injection-input-area { width: 100%; max-width: 800px; margin-bottom: 48px; position: relative; }
+        .injection-face-svg { width: 56px; height: 56px; margin-bottom: 24px; filter: drop-shadow(0 0 15px currentColor); transition: all 0.3s; }
+        .injection-input-area { width: 100%; max-width: 800px; margin-bottom: 36px; position: relative; }
 
         #huge-signal-input {
             width: 100%; background: transparent; border: none; outline: none;
             border-bottom: 2px solid rgba(255,255,255,0.2); color: #ffffff;
-            font-size: 2.4rem; font-weight: 300; font-style: italic; text-align: center;
+            font-size: 2.2rem; font-weight: 300; font-style: italic; text-align: center;
             padding: 10px 0 20px 0; font-family: var(--font-sans); transition: border-color 0.3s ease, box-shadow 0.3s ease;
             resize: none; overflow: hidden; line-height: 1.2;
         }
         #huge-signal-input::placeholder { color: rgba(255, 255, 255, 0.2); font-weight: 300; }
         #huge-signal-input:focus { border-bottom-color: currentColor; box-shadow: 0 20px 30px -10px currentColor; }
 
-        .inj-btn-group { display: flex; flex-direction: column; gap: 16px; align-items: center; width: 100%; max-width: 400px; }
+        .inj-btn-group { display: flex; flex-direction: column; gap: 14px; align-items: center; width: 100%; max-width: 400px; }
         .btn-inject { width: 100%; padding: 18px; background: #ffffff; color: #000000; border: none; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 800; letter-spacing: 3px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; }
         .btn-inject:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,255,255,0.4); }
         .btn-skip { background: transparent; border: none; color: rgba(255,255,255,0.5); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 2px; cursor: pointer; transition: color 0.2s; text-transform: uppercase; }
         .btn-skip:hover { color: #ffffff; text-decoration: underline; }
 
-        /* 📱 手机端样式 */
+        /* 📱 手机端适配 */
         @media (max-width: 768px) {
             .mirror-projection-stage { display: none !important; }
             #faction-overlay { padding: 16px 12px; justify-content: flex-start; gap: 12px; overflow-y: auto; }
             .telemetry-bar { flex-direction: column; align-items: center; gap: 4px; font-size: 0.6rem; text-align: center; }
-            
             .mirror-prisms-container { height: auto; min-height: 0; flex-direction: column; gap: 8px; width: 100%; }
             .mirror-prism { flex-direction: row; justify-content: space-between; padding: 12px; min-height: 48px; background: rgba(255, 255, 255, 0.92); }
             .prism-top-indicator { top: 0; left: 0; width: 4px; height: 100%; }
             .prism-title { font-size: 0.85rem; text-align: left; }
             .prism-select-btn { width: auto; padding: 6px 10px; font-size: 0.6rem; }
             .mirror-prism:hover { transform: none; flex: none; }
-
             .inj-title { font-size: 1.3rem; letter-spacing: 3px; }
             #huge-signal-input { font-size: 1.4rem; padding-bottom: 10px; }
             .btn-inject { font-size: 0.75rem; padding: 14px; }
@@ -209,8 +210,11 @@
         .item-price { font-size: 1.35rem; font-weight: 700; margin-bottom: 20px; }
         .item-desc { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; }
 
-        .color-philosophy-tag { background: #f0f4ff; border: 1px solid #c7d2fe; color: var(--brand-active); font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; padding: 10px 14px; margin-bottom: 24px; display: inline-block; transition: color 0.3s, border-color 0.3s; }
-        .signal-rule-tag { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 28px; display: block; border-left: 2px solid var(--brand-active); padding-left: 10px; transition: border-color 0.3s; }
+        .color-philosophy-tag { background: #f0f4ff; border: 1px solid #c7d2fe; color: var(--brand-active); font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; padding: 10px 14px; margin-bottom: 20px; display: inline-block; transition: color 0.3s, border-color 0.3s; }
+        
+        /* 核心动作与表达法加固区 */
+        .holder-rules-card { background: var(--panel-bg); border: 1px solid var(--border-subtle); border-left: 3px solid var(--brand-active); padding: 14px 18px; margin-bottom: 28px; font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.8; color: var(--text-primary); }
+        .holder-rules-card b { color: var(--brand-active); }
 
         .size-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .size-guide-btn { background: transparent; border: none; color: var(--brand-active); font-size: 0.78rem; font-weight: 700; cursor: pointer; letter-spacing: 1px; }
@@ -221,6 +225,7 @@
 
         .action-buy-btn { width: 100%; padding: 20px; background: var(--text-primary); color: #fff; border: none; font-size: 0.9rem; font-weight: 700; letter-spacing: 3px; cursor: pointer; transition: 0.2s; }
         .action-buy-btn:hover { background: var(--brand-active); }
+        .action-buy-btn:disabled { background: #d4d4d4; cursor: not-allowed; }
 
         .future-archives-section { border-top: 1px solid var(--border-subtle); padding-top: 56px; margin-top: 64px; }
         .future-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 24px; }
@@ -294,7 +299,7 @@
 </head>
 <body>
 
-<!-- 🔒 1. 拱门满屏入口 Portal Overlay (第一屏永远不可动摇) -->
+<!-- 🔒 1. 拱门满屏入口 Portal Overlay (绝对铁律：第一屏永远不可撤换) -->
 <div id="portal-overlay">
     <canvas id="portal-canvas"></canvas>
     <div class="portal-aura"></div>
@@ -310,58 +315,71 @@
     <canvas id="mirror-tunnel-canvas"></canvas>
 
     <div class="telemetry-bar">
-        <span class="telemetry-title" id="telemetry-stage-title">COLLECTION 01: UTOPIA // ONE FORM. SEVEN COLORS. RELEASED ONE AT A TIME.</span>
+        <span class="telemetry-title" id="telemetry-stage-title">COLLECTION 01: UTOPIA // ONE FORM. SEVEN COLORS. 111 OF EACH.</span>
         <span class="telemetry-clock" id="telemetry-clock-display">000D 00H 00M 00S</span>
     </div>
 
     <!-- [STAGE 1] 7 根磨砂透明水晶折射柱 -->
     <div id="spectrum-selection-stage">
         <div class="mirror-projection-stage">
-            <div class="projection-meta" id="projection-meta-target">COLOR DROP 01 OF 07 // NOW OPEN</div>
-            <div class="projection-quote" id="projection-quote-target">"The garment is a blank canvas. Select a color drop frequency to inspect its assigned ledger voice."</div>
+            <div class="projection-meta" id="projection-meta-target">COLOR DROP 01 OF 07 // CURRENT DROP (AVAILABLE)</div>
+            <div class="projection-quote" id="projection-quote-target">"The garment is a blank canvas. Select an available color drop to inspect its assigned ledger voice."</div>
         </div>
 
         <div class="mirror-prisms-container">
-            <div class="mirror-prism p-red" onmouseenter="reflectVoice('#ff0033', 'COLOR DROP 01 OF 07 // NOW OPEN', '#0142', 'In an ocean of digital noise, I choose to be a flame that burns out in 7 days.', '#ff0033')" onclick="initiateInjection('RED', '#ff0033')">
+            <!-- DROP 01 RED (CURRENT DROP) -->
+            <div class="mirror-prism p-red" onmouseenter="reflectVoice('#ff0033', 'COLOR DROP 01 OF 07 // CURRENT DROP', '#0142', 'In an ocean of digital noise, I choose to be a flame that burns out in 7 days.', '#ff0033')" onclick="initiateInjection('RED', '#ff0033', 'CURRENT')">
                 <div class="prism-top-indicator"></div>
-                <div><div class="prism-tag">DROP 01</div><div class="prism-title">RED</div><span class="prism-status-badge status-open">NOW OPEN</span></div>
+                <div><div class="prism-tag">DROP 01</div><div class="prism-title">RED</div><span class="prism-status-badge status-current">CURRENT DROP</span></div>
                 <button class="prism-select-btn">SELECT RED</button>
             </div>
-            <div class="mirror-prism p-green" onmouseenter="reflectVoice('#00cc55', 'COLOR DROP 02 OF 07 // NEXT SIGNAL', '#0088', 'Growth is silent. The roots expand long before the noise begins.', '#00cc55')" onclick="initiateInjection('GREEN', '#00cc55')">
+            
+            <!-- DROP 02 GREEN (SEALED / NEXT SIGNAL) -->
+            <div class="mirror-prism p-green" onmouseenter="reflectVoice('#00cc55', 'COLOR DROP 02 OF 07 // SEALED', '#0088', 'Growth is silent. The roots expand long before the noise begins.', '#00cc55')" onclick="initiateInjection('GREEN', '#00cc55', 'SEALED')">
                 <div class="prism-top-indicator"></div>
                 <div><div class="prism-tag">DROP 02</div><div class="prism-title">GREEN</div><span class="prism-status-badge status-next">NEXT SIGNAL</span></div>
                 <button class="prism-select-btn">INSPECT GREEN</button>
             </div>
-            <div class="mirror-prism p-blue" onmouseenter="reflectVoice('#0055ff', 'COLOR DROP 03 OF 07 // SEALED', '#0234', 'Today, blue means becoming visible in the void.', '#0055ff')" onclick="initiateInjection('BLUE', '#0055ff')">
+
+            <!-- DROP 03 BLUE (SEALED) -->
+            <div class="mirror-prism p-blue" onmouseenter="reflectVoice('#0055ff', 'COLOR DROP 03 OF 07 // SEALED', '#0234', 'Today, blue means becoming visible in the void.', '#0055ff')" onclick="initiateInjection('BLUE', '#0055ff', 'SEALED')">
                 <div class="prism-top-indicator"></div>
                 <div><div class="prism-tag">DROP 03</div><div class="prism-title">BLUE</div><span class="prism-status-badge status-sealed">SEALED</span></div>
                 <button class="prism-select-btn">INSPECT BLUE</button>
             </div>
-            <div class="mirror-prism p-yellow" onmouseenter="reflectVoice('#e6b800', 'COLOR DROP 04 OF 07 // SEALED', '#0307', 'A temporary blinding light is worth a lifetime of dim shadows.', '#e6b800')" onclick="initiateInjection('YELLOW', '#e6b800')">
+
+            <!-- DROP 04 YELLOW (SEALED) -->
+            <div class="mirror-prism p-yellow" onmouseenter="reflectVoice('#e6b800', 'COLOR DROP 04 OF 07 // SEALED', '#0307', 'A temporary blinding light is worth a lifetime of dim shadows.', '#e6b800')" onclick="initiateInjection('YELLOW', '#e6b800', 'SEALED')">
                 <div class="prism-top-indicator"></div>
                 <div><div class="prism-tag">DROP 04</div><div class="prism-title">YELLOW</div><span class="prism-status-badge status-sealed">SEALED</span></div>
                 <button class="prism-select-btn">INSPECT YELLOW</button>
             </div>
-            <div class="mirror-prism p-black" onmouseenter="reflectVoice('#111111', 'COLOR DROP 05 OF 07 // SEALED', '#0007', 'True luxury is having nothing to prove and no identity to broadcast.', '#111111')" onclick="initiateInjection('BLACK', '#111111')">
+
+            <!-- DROP 05 BLACK (SEALED) -->
+            <div class="mirror-prism p-black" onmouseenter="reflectVoice('#111111', 'COLOR DROP 05 OF 07 // SEALED', '#0007', 'True luxury is having nothing to prove and no identity to broadcast.', '#111111')" onclick="initiateInjection('BLACK', '#111111', 'SEALED')">
                 <div class="prism-top-indicator"></div>
                 <div><div class="prism-tag">DROP 05</div><div class="prism-title">BLACK</div><span class="prism-status-badge status-sealed">SEALED</span></div>
                 <button class="prism-select-btn">INSPECT BLACK</button>
             </div>
-            <div class="mirror-prism p-white" onmouseenter="reflectVoice('#555555', 'COLOR DROP 06 OF 07 // SEALED', '#0101', 'Clean slate. No history. Pure unconditioned voice.', '#111111')" onclick="initiateInjection('WHITE', '#ffffff')">
+
+            <!-- DROP 06 WHITE (SEALED) -->
+            <div class="mirror-prism p-white" onmouseenter="reflectVoice('#555555', 'COLOR DROP 06 OF 07 // SEALED', '#0101', 'Clean slate. No history. Pure unconditioned voice.', '#111111')" onclick="initiateInjection('WHITE', '#ffffff', 'SEALED')">
                 <div class="prism-top-indicator"></div>
                 <div><div class="prism-tag">DROP 06</div><div class="prism-title">WHITE</div><span class="prism-status-badge status-sealed">SEALED</span></div>
                 <button class="prism-select-btn">INSPECT WHITE</button>
             </div>
-            <div class="mirror-prism p-violet" onmouseenter="reflectVoice('#a855f7', 'COLOR DROP 07 OF 07 // SEALED', '#0707', 'Vibrate at a frequency only the quiet ones can decode.', '#a855f7')" onclick="initiateInjection('VIOLET', '#a855f7')">
+
+            <!-- DROP 07 VIOLET (SEALED) -->
+            <div class="mirror-prism p-violet" onmouseenter="reflectVoice('#a855f7', 'COLOR DROP 07 OF 07 // SEALED', '#0707', 'Vibrate at a frequency only the quiet ones can decode.', '#a855f7')" onclick="initiateInjection('VIOLET', '#a855f7', 'SEALED')">
                 <div class="prism-top-indicator"></div>
                 <div><div class="prism-tag">DROP 07</div><div class="prism-title">VIOLET</div><span class="prism-status-badge status-sealed">SEALED</span></div>
                 <button class="prism-select-btn">INSPECT VIOLET</button>
             </div>
         </div>
-        <div style="font-family: var(--font-mono); font-size: 0.65rem; color: #737373; letter-spacing: 2.5px; z-index: 10; font-weight: 700; margin-top: 20px;">SELECT A COLOR DROP TO ENTER THE STORE</div>
+        <div style="font-family: var(--font-mono); font-size: 0.65rem; color: #737373; letter-spacing: 2.5px; z-index: 10; font-weight: 700; margin-top: 20px;">A NEW COLOR OPENS EVERY SEVEN DAYS. RELEASED COLORS REMAIN AVAILABLE UNTIL GONE.</div>
     </div>
 
-    <!-- 🔥 [STAGE 2] 高能信号注入舱 -->
+    <!-- 🔥 [STAGE 2] 高能信号注入舱 (Signal Injection) -->
     <div id="injection-stage">
         <div class="injection-header">
             <span class="inj-code" id="inj-code-label">FREQUENCY ALIGNED</span>
@@ -404,7 +422,7 @@
     <div class="collection-hero-banner">
         <div>
             <div class="col-badge-title" id="active-drop-badge">COLLECTION 01 // UTOPIA — COLOR DROP 01 OF 07</div>
-            <div class="col-badge-sub" id="active-drop-title">THE NUMBERED BLANK — RED</div>
+            <div class="col-badge-sub" id="active-drop-title">ONE OF 777 — RED</div>
         </div>
         <div class="col-badge-right">
             7 COLORS × 111 PIECES = 777 TOTAL UNITS
@@ -425,21 +443,25 @@
         </div>
 
         <div class="product-meta">
-            <div class="item-series" id="product-units-range">FORM 01 // 420GSM COTTON // UNITS #0001 - #0111</div>
-            <h1 class="item-title" id="product-display-name">THE NUMBERED BLANK — RED</h1>
+            <div class="item-series" id="product-units-range">FORM 01 // 420GSM COTTON // 111 UNITS (#0001 - #0111 HIDDEN DIGITAL ID)</div>
+            <h1 class="item-title" id="product-display-name">ONE OF 777 — RED</h1>
             <div class="item-price">CA$180.00 <span style="font-size: 0.8rem; font-weight: 400; color: #737373;">(Excluding Shipping & Taxes)</span></div>
             
             <p class="item-desc" id="product-display-desc">
-                Cut from 420GSM custom heavy loopback cotton in Crimson Red. Issued with a physical NFC access tag and sealed Claim Card. Tap to unlock your private page and publish one anonymous statement for seven days.
+                Cut from 420GSM custom heavy loopback cotton in Crimson Red. Issued with a hidden digital ID, physical NFC access tag, and sealed Claim Key. Unsealing grants 7-day cyclic public expression rights.
             </p>
 
             <div class="color-philosophy-tag">
                 BLANK IN MEANING. NOT IN COLOR. WE RELEASE THE COLOR. YOU ASSIGN THE MEANING.
             </div>
 
-            <span class="signal-rule-tag">
-                THE GARMENT KEEPS ITS COLOR. YOUR SIGNAL CAN CHANGE.
-            </span>
+            <!-- 持有者三步权能规则卡片 -->
+            <div class="holder-rules-card">
+                <b>HOLDER ACTION PROTOCOL:</b><br>
+                1. OWN THE GARMENT. TAP TO CLAIM.<br>
+                2. LEAVE ONE SIGNAL FOR SEVEN DAYS.<br>
+                3. RETURN WHEN IT FADES.
+            </div>
 
             <div class="size-header-row">
                 <span style="font-size: 0.78rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;">Select Size</span>
@@ -455,12 +477,12 @@
             <button 
                 id="snipcart-btn"
                 class="action-buy-btn snipcart-add-item"
-                data-item-id="utopia-blank-red"
+                data-item-id="utopia-777-red"
                 data-item-price="180.00"
                 data-item-url="/"
-                data-item-description="UTOPIA Collection 01 — THE NUMBERED BLANK (RED)"
+                data-item-description="UTOPIA Collection 01 Color Drop 01 — ONE OF 777 (RED)"
                 data-item-image="https://withinseven.com/front.png"
-                data-item-name="UTOPIA — THE NUMBERED BLANK (RED)"
+                data-item-name="UTOPIA — ONE OF 777 (RED)"
                 data-item-custom1-name="Size"
                 data-item-custom1-options="S|M|L|XL"
                 onclick="handlePurchase(event)">
@@ -480,7 +502,7 @@
         <img src="/LOGO.png" alt="Watermark" class="watermark-img" onerror="this.style.display='none';">
     </section>
 
-    <!-- 未来未发售季度 (Sealed Archives) -->
+    <!-- 未发售季度 (Future Archives - Sealed) -->
     <section class="future-archives-section">
         <div class="section-heading">// FUTURE ARCHIVES (SEALED)</div>
         <div class="future-grid">
@@ -504,7 +526,9 @@
         <div class="interactive-grid">
             <div class="preview-box">
                 <div>
-                    <div style="font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 16px; text-transform: uppercase;">PRIVATE PREVIEW</div>
+                    <div style="font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 4px; text-transform: uppercase;">PRIVATE PREVIEW</div>
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-bottom: 16px;">TRY IT PRIVATELY. NOTHING IS PUBLISHED OR SAVED.</div>
+
                     <input type="text" class="preview-input" id="guest-sim-input" placeholder="Type your statement here to simulate..." maxlength="140" oninput="updateSimPreview(this.value)">
                     
                     <div class="color-picker-row">
@@ -519,7 +543,7 @@
                         <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;">
                             <span class="sim-badge priv">PRIVATE PREVIEW</span>
                             <span class="sim-badge local">VISIBLE ONLY TO YOU</span>
-                            <span class="sim-badge local">NOT SAVED TO THE LEDGER</span>
+                            <span class="sim-badge local">NOT SAVED TO LEDGER</span>
                             <span class="sim-badge not-published">NOT PUBLISHED</span>
                         </div>
                         <div class="preview-body-layout">
@@ -571,8 +595,8 @@
                 <p>In accordance with BC Business Practices & Consumer Protection Act (2026): Orders are dispatched within 3-5 business days from Richmond, BC. Itemized receipts provided upon transaction completion.</p>
             </div>
             <div class="legal-block">
-                <h5>CLAIM CARD & RETURN POLICY</h5>
-                <p>A 14-day return window applies to unworn garments with unbroken Claim Card physical seals. Unsealing the Claim Card permanently assigns ledger ownership and renders the garment final sale.</p>
+                <h5>CLAIM KEY & RETURN POLICY</h5>
+                <p>A 14-day return window applies to unworn garments with unbroken Claim Key physical seals. Unsealing the Claim Key permanently assigns ledger ownership and renders the garment final sale.</p>
             </div>
         </div>
         <div style="margin-top: 28px; font-size: 0.75rem; color: var(--text-muted);">© 2026 N7 STUDIO INC. WITHIN SEVEN™. All rights reserved. Richmond, BC, Canada.</div>
@@ -590,8 +614,9 @@
     let chosenSize = '';
     let pendingFaction = '';
     let pendingHex = '';
+    let pendingStatus = 'CURRENT';
 
-    /* 🔒 1. 拱门满屏 Portal (无任何跳过逻辑，第一眼强行呈现) */
+    /* 🔒 1. 拱门满屏 Portal (无任何隐去逻辑，刷新强行呈现) */
     const portalOverlay = document.getElementById('portal-overlay');
     const portalGate = document.getElementById('portal-gate');
     const portalCanvas = document.getElementById('portal-canvas');
@@ -634,7 +659,7 @@
         setTimeout(() => { portalOverlay.style.display = 'none'; }, 600);
     }
 
-    /* 🪞 2. 镜子隧道背景 */
+    /* 🪞 2. 镜子隧道 Canvas 背景 */
     const mirrorCanvas = document.getElementById('mirror-tunnel-canvas');
     const mCtx = mirrorCanvas.getContext('2d');
     function resizeMirrorCanvas() { mirrorCanvas.width = window.innerWidth; mirrorCanvas.height = window.innerHeight; }
@@ -661,23 +686,24 @@
         document.getElementById('projection-quote-target').textContent = `"${statementText}"`;
     }
 
-    /* 🔥 3. 高能信号注入舱 */
+    /* 🔥 3. 发售数据矩阵 & 高能注入舱 */
     const colorDropsData = {
-        'RED': { dropNum: 'COLOR DROP 01 OF 07', title: 'THE NUMBERED BLANK — RED', units: 'FORM 01 // 420GSM COTTON // UNITS #0001 - #0111', hex: '#ff0033', itemId: 'utopia-blank-red', desc: 'Cut from 420GSM custom heavy loopback cotton in Crimson Red. Issued with a physical NFC access tag and sealed Claim Card.' },
-        'GREEN': { dropNum: 'COLOR DROP 02 OF 07', title: 'THE NUMBERED BLANK — GREEN', units: 'FORM 01 // 420GSM COTTON // UNITS #0112 - #0222', hex: '#00cc55', itemId: 'utopia-blank-green', desc: 'Cut from 420GSM custom heavy loopback cotton in Emerald Green. Issued with a physical NFC access tag and sealed Claim Card.' },
-        'BLUE': { dropNum: 'COLOR DROP 03 OF 07', title: 'THE NUMBERED BLANK — BLUE', units: 'FORM 01 // 420GSM COTTON // UNITS #0223 - #0333', hex: '#0055ff', itemId: 'utopia-blank-blue', desc: 'Cut from 420GSM custom heavy loopback cotton in Cobalt Blue. Issued with a physical NFC access tag and sealed Claim Card.' },
-        'YELLOW': { dropNum: 'COLOR DROP 04 OF 07', title: 'THE NUMBERED BLANK — YELLOW', units: 'FORM 01 // 420GSM COTTON // UNITS #0334 - #0444', hex: '#e6b800', itemId: 'utopia-blank-yellow', desc: 'Cut from 420GSM custom heavy loopback cotton in Amber Yellow. Issued with a physical NFC access tag and sealed Claim Card.' },
-        'BLACK': { dropNum: 'COLOR DROP 05 OF 07', title: 'THE NUMBERED BLANK — BLACK', units: 'FORM 01 // 420GSM COTTON // UNITS #0445 - #0555', hex: '#111111', itemId: 'utopia-blank-black', desc: 'Cut from 420GSM custom heavy loopback cotton in Obsidian Black. Issued with a physical NFC access tag and sealed Claim Card.' },
-        'WHITE': { dropNum: 'COLOR DROP 06 OF 07', title: 'THE NUMBERED BLANK — WHITE', units: 'FORM 01 // 420GSM COTTON // UNITS #0556 - #0666', hex: '#ffffff', itemId: 'utopia-blank-white', desc: 'Cut from 420GSM custom heavy loopback cotton in Optic White. Issued with a physical NFC access tag and sealed Claim Card.' },
-        'VIOLET': { dropNum: 'COLOR DROP 07 OF 07', title: 'THE NUMBERED BLANK — VIOLET', units: 'FORM 01 // 420GSM COTTON // UNITS #0667 - #0777', hex: '#a855f7', itemId: 'utopia-blank-violet', desc: 'Cut from 420GSM custom heavy loopback cotton in Specular Violet. Issued with a physical NFC access tag and sealed Claim Card.' }
+        'RED': { dropNum: 'COLOR DROP 01 OF 07', title: 'ONE OF 777 — RED', units: 'FORM 01 // 420GSM COTTON // 111 UNITS (#0001 - #0111 HIDDEN DIGITAL ID)', hex: '#ff0033', itemId: 'utopia-777-red', status: 'CURRENT', desc: 'Cut from 420GSM custom heavy loopback cotton in Crimson Red. Issued with a hidden digital ID, physical NFC access tag, and sealed Claim Key.' },
+        'GREEN': { dropNum: 'COLOR DROP 02 OF 07', title: 'ONE OF 777 — GREEN', units: 'FORM 01 // 420GSM COTTON // 111 UNITS (#0112 - #0222 HIDDEN DIGITAL ID)', hex: '#00cc55', itemId: 'utopia-777-green', status: 'SEALED', desc: 'Cut from 420GSM custom heavy loopback cotton in Emerald Green. Issued with a hidden digital ID, physical NFC access tag, and sealed Claim Key.' },
+        'BLUE': { dropNum: 'COLOR DROP 03 OF 07', title: 'ONE OF 777 — BLUE', units: 'FORM 01 // 420GSM COTTON // 111 UNITS (#0223 - #0333 HIDDEN DIGITAL ID)', hex: '#0055ff', itemId: 'utopia-777-blue', status: 'SEALED', desc: 'Cut from 420GSM custom heavy loopback cotton in Cobalt Blue. Issued with a hidden digital ID, physical NFC access tag, and sealed Claim Key.' },
+        'YELLOW': { dropNum: 'COLOR DROP 04 OF 07', title: 'ONE OF 777 — YELLOW', units: 'FORM 01 // 420GSM COTTON // 111 UNITS (#0334 - #0444 HIDDEN DIGITAL ID)', hex: '#e6b800', itemId: 'utopia-777-yellow', status: 'SEALED', desc: 'Cut from 420GSM custom heavy loopback cotton in Amber Yellow. Issued with a hidden digital ID, physical NFC access tag, and sealed Claim Key.' },
+        'BLACK': { dropNum: 'COLOR DROP 05 OF 07', title: 'ONE OF 777 — BLACK', units: 'FORM 01 // 420GSM COTTON // 111 UNITS (#0445 - #0555 HIDDEN DIGITAL ID)', hex: '#111111', itemId: 'utopia-777-black', status: 'SEALED', desc: 'Cut from 420GSM custom heavy loopback cotton in Obsidian Black. Issued with a hidden digital ID, physical NFC access tag, and sealed Claim Key.' },
+        'WHITE': { dropNum: 'COLOR DROP 06 OF 07', title: 'ONE OF 777 — WHITE', units: 'FORM 01 // 420GSM COTTON // 111 UNITS (#0556 - #0666 HIDDEN DIGITAL ID)', hex: '#ffffff', itemId: 'utopia-777-white', status: 'SEALED', desc: 'Cut from 420GSM custom heavy loopback cotton in Optic White. Issued with a hidden digital ID, physical NFC access tag, and sealed Claim Key.' },
+        'VIOLET': { dropNum: 'COLOR DROP 07 OF 07', title: 'ONE OF 777 — VIOLET', units: 'FORM 01 // 420GSM COTTON // 111 UNITS (#0667 - #0777 HIDDEN DIGITAL ID)', hex: '#a855f7', itemId: 'utopia-777-violet', status: 'SEALED', desc: 'Cut from 420GSM custom heavy loopback cotton in Specular Violet. Issued with a hidden digital ID, physical NFC access tag, and sealed Claim Key.' }
     };
 
-    function initiateInjection(factionName, colorHex) {
+    function initiateInjection(factionName, colorHex, dropStatus) {
         pendingFaction = factionName;
         pendingHex = colorHex;
+        pendingStatus = dropStatus || 'SEALED';
         
         document.getElementById('spectrum-selection-stage').style.opacity = '0';
-        document.getElementById('telemetry-stage-title').textContent = `SYSTEM OVERRIDE // ALIGNING FREQUENCY: ${factionName}`;
+        document.getElementById('telemetry-stage-title').textContent = `SYSTEM OVERRIDE // ALIGNING FREQUENCY: ${factionName} (${pendingStatus})`;
         
         setTimeout(() => {
             document.getElementById('spectrum-selection-stage').style.display = 'none';
@@ -689,7 +715,7 @@
             const injectionStage = document.getElementById('injection-stage');
             injectionStage.style.display = 'flex';
             
-            document.getElementById('inj-code-label').textContent = `FREQUENCY SELECTED // ${factionName}`;
+            document.getElementById('inj-code-label').textContent = `FREQUENCY SELECTED // ${factionName} (${pendingStatus})`;
             document.getElementById('inj-code-label').style.color = colorHex;
             document.getElementById('inj-face-svg').style.color = colorHex;
             
@@ -725,13 +751,13 @@
     function skipSignalAndEnter() { executeStoreEntry(); }
 
     function executeStoreEntry() {
-        if (!pendingFaction) { pendingFaction = 'RED'; pendingHex = '#ff0033'; }
+        if (!pendingFaction) { pendingFaction = 'RED'; pendingHex = '#ff0033'; pendingStatus = 'CURRENT'; }
         history.pushState({ stage: 'store' }, '', '#store');
         
         document.documentElement.style.setProperty('--brand-active', pendingHex);
         const drop = colorDropsData[pendingFaction];
         
-        document.getElementById('active-drop-badge').textContent = `COLLECTION 01 // UTOPIA — ${drop.dropNum}`;
+        document.getElementById('active-drop-badge').textContent = `COLLECTION 01 // UTOPIA — ${drop.dropNum} (${pendingStatus})`;
         document.getElementById('active-drop-title').textContent = drop.title;
         document.getElementById('product-display-name').textContent = drop.title;
         document.getElementById('product-units-range').textContent = drop.units;
@@ -741,7 +767,15 @@
         snipcartBtn.setAttribute('data-item-id', drop.itemId);
         snipcartBtn.setAttribute('data-item-name', `UTOPIA — ${drop.title}`);
         snipcartBtn.setAttribute('data-item-description', `UTOPIA Collection 01 ${drop.dropNum} — ${drop.title}`);
-        snipcartBtn.textContent = `PURCHASE ${drop.dropNum.split(' OF ')[0]}`;
+
+        // P0 校验：未解锁的 SEALED 选项禁用购买按钮
+        if (pendingStatus === 'SEALED') {
+            snipcartBtn.disabled = true;
+            snipcartBtn.textContent = `${drop.dropNum.split(' OF ')[0]} — SEALED (RELEASE PENDING)`;
+        } else {
+            snipcartBtn.disabled = false;
+            snipcartBtn.textContent = `PURCHASE ${drop.dropNum.split(' OF ')[0]}`;
+        }
 
         if (pendingFaction === 'RED') selectSimColor('#ff0033', 'RED', document.getElementById('dot-red'));
         if (pendingFaction === 'GREEN') selectSimColor('#00cc55', 'GREEN', document.getElementById('dot-green'));
@@ -758,7 +792,7 @@
             document.getElementById('spectrum-selection-stage').style.opacity = '1';
             factionOverlay.style.background = '#f6f7fa';
             factionOverlay.classList.remove('in-injection');
-            document.getElementById('telemetry-stage-title').textContent = "COLLECTION 01: UTOPIA // ONE FORM. SEVEN COLORS. RELEASED ONE AT A TIME.";
+            document.getElementById('telemetry-stage-title').textContent = "COLLECTION 01: UTOPIA // ONE FORM. SEVEN COLORS. 111 OF EACH.";
         }, 600);
     }
 
@@ -798,6 +832,8 @@
         if (window.Snipcart && window.Snipcart.api) {
             try {
                 const activeBtn = document.getElementById('snipcart-btn');
+                if (activeBtn.disabled) return;
+                
                 await window.Snipcart.api.cart.items.add({
                     id: activeBtn.getAttribute('data-item-id'),
                     name: activeBtn.getAttribute('data-item-name'),
@@ -882,7 +918,7 @@
     const policies = {
         'size-guide': `<h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">SIZE GUIDE — FORM 01 HEAVYWEIGHT BLANK</h3><p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;"><b>FIT PROFILE:</b> Heavyweight Boxy / Oversized Fit. Engineered with dropped shoulders and a thick 1.25" rib collar. Cut from 420GSM custom loopback cotton.</p><table style="width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.82rem; margin-bottom: 24px;"><thead><tr style="border-bottom: 2px solid var(--text-primary); text-align: left;"><th style="padding: 8px;">SIZE</th><th style="padding: 8px;">CHEST</th><th style="padding: 8px;">LENGTH</th><th style="padding: 8px;">SHOULDER</th><th style="padding: 8px;">SLEEVE</th></tr></thead><tbody><tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">S</td><td>44"</td><td>27"</td><td>21.5"</td><td>8.5"</td></tr><tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">M</td><td>46"</td><td>28"</td><td>22.5"</td><td>9.0"</td></tr><tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">L</td><td>48"</td><td>29"</td><td>23.5"</td><td>9.5"</td></tr><tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">XL</td><td>50"</td><td>30"</td><td>24.5"</td><td>10.0"</td></tr></tbody></table><h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 8px;">RECOMMENDATION:</h4><p style="font-size: 0.85rem; color: var(--text-secondary);">• Order <b>TRUE TO SIZE</b> for an intentional relaxed oversized silhouette.<br>• Order <b>ONE SIZE DOWN</b> for a standard fit.</p>`,
         'shipping': `<h3>SHIPPING POLICY</h3><br><p>Canada Only Launch. Tracked express shipping across all Canadian provinces (3-5 business days). Ships directly from Richmond, BC.</p>`,
-        'returns': `<h3>RETURN POLICY</h3><br><p>14-day return window. Garments must be unworn with unbroken Claim Card scratch seals. Unsealing the Claim Card permanently assigns ledger ownership and renders the garment final sale.</p>`,
+        'returns': `<h3>RETURN POLICY</h3><br><p>14-day return window. Garments must be unworn with unbroken Claim Key physical seals. Unsealing the Claim Key permanently assigns ledger ownership and renders the garment final sale.</p>`,
         'privacy': `<h3>PRIVACY POLICY</h3><br><p>Operated by N7 STUDIO INC. Email addresses are strictly used for Magic Link authentication and transactional receipts. Personal identity is NEVER broadcast on the public ledger.</p>`,
         'terms': '<h3>TERMS OF SALE</h3><br><p>All purchases are subject to terms governed by N7 STUDIO INC. under British Columbia law.</p>',
         'contact': `<h3>CONTACT</h3><br><p>Legal Entity: N7 STUDIO INC.<br>Email: support@withinseven.com<br>Richmond, British Columbia, Canada</p>`
