@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WITHIN SEVEN — COLLECTION 01: UTOPIA</title>
+    <title>WITHIN SEVEN — UTOPIA MIRROR REALM</title>
     <link rel="icon" type="image/png" href="/LOGO.png">
     
     <!-- Google Fonts: Inter & JetBrains Mono -->
@@ -29,7 +29,7 @@
             --brand-black: #111111;
             --brand-white: #ffffff;
             --brand-violet: #a855f7;
-            --brand-active: #ff0033; /* 默认选中 Drop 01 RED */
+            --brand-active: #ff0033; 
             --font-sans: 'Inter', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -47,248 +47,159 @@
 
         .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-        /* 🔒 1. 拱门满屏入口 Portal Overlay (黑夜圣境门界 - 永久锁死) */
+        /* 🔒 1. 拱门满屏入口 Portal Overlay (黑夜门界 - 打死不动) */
         #portal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            width: 100vw; height: 100vh; height: 100dvh;
-            background-color: #050505;
-            z-index: 999999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-            overflow: hidden;
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100dvh; background-color: #050505;
+            z-index: 999999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; perspective: 1000px;
+            overflow: hidden; transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        #portal-overlay.portal-open {
-            opacity: 0;
-            transform: scale(2.2);
-            pointer-events: none;
-        }
-
-        #portal-canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 1;
-        }
-
+        #portal-overlay.portal-open { opacity: 0; transform: scale(2.2); pointer-events: none; }
+        #portal-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         .portal-aura {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 450px; height: 450px;
-            background: radial-gradient(circle, rgba(0, 68, 255, 0.35) 0%, rgba(230, 0, 0, 0.15) 45%, transparent 70%);
-            filter: blur(60px); border-radius: 50%;
-            animation: auraPulse 6s infinite alternate ease-in-out;
-            pointer-events: none; z-index: 2;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 450px; height: 450px; background: radial-gradient(circle, rgba(0, 68, 255, 0.35) 0%, rgba(230, 0, 0, 0.15) 45%, transparent 70%);
+            filter: blur(60px); border-radius: 50%; animation: auraPulse 6s infinite alternate ease-in-out; pointer-events: none; z-index: 2;
         }
-
-        @keyframes auraPulse {
-            0% { transform: translate(-50%, -50%) scale(0.85) rotate(0deg); opacity: 0.6; }
-            100% { transform: translate(-50%, -50%) scale(1.3) rotate(180deg); opacity: 0.95; }
-        }
-
-        .portal-gate-box {
-            position: relative; z-index: 3; text-align: center;
-            cursor: pointer; transform-style: preserve-3d;
-            transition: transform 0.15s ease-out;
-        }
-
-        .portal-archway-logo {
-            width: 300px; max-width: 75vw; height: auto;
-            filter: invert(1) drop-shadow(0 0 35px rgba(0, 68, 255, 0.5));
-            transition: filter 0.3s ease, transform 0.3s ease;
-        }
-
-        .portal-gate-box:hover .portal-archway-logo {
-            filter: invert(1) drop-shadow(0 0 50px rgba(0, 68, 255, 0.85));
-            transform: scale(1.04);
-        }
-
-        .portal-tagline-sub {
-            position: relative; z-index: 3; margin-top: 24px;
-            font-family: var(--font-mono); font-size: 0.75rem;
-            letter-spacing: 3px; color: #888888; text-transform: uppercase;
-        }
-
-        .portal-enter-prompt {
-            position: relative; z-index: 3; margin-top: 14px;
-            font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700;
-            letter-spacing: 4px; color: #ffffff; text-transform: uppercase;
-            animation: blinkPrompt 2s infinite ease-in-out;
-            text-shadow: 0 0 10px rgba(0, 68, 255, 0.8);
-            cursor: pointer;
-        }
-
-        @keyframes blinkPrompt {
-            0%, 100% { opacity: 0.4; } 50% { opacity: 1; }
-        }
+        @keyframes auraPulse { 0% { transform: translate(-50%, -50%) scale(0.85) rotate(0deg); opacity: 0.6; } 100% { transform: translate(-50%, -50%) scale(1.3) rotate(180deg); opacity: 0.95; } }
+        .portal-gate-box { position: relative; z-index: 3; text-align: center; cursor: pointer; transform-style: preserve-3d; transition: transform 0.15s ease-out; }
+        .portal-archway-logo { width: 300px; max-width: 75vw; height: auto; filter: invert(1) drop-shadow(0 0 35px rgba(0, 68, 255, 0.5)); transition: filter 0.3s ease, transform 0.3s ease; }
+        .portal-gate-box:hover .portal-archway-logo { filter: invert(1) drop-shadow(0 0 50px rgba(0, 68, 255, 0.85)); transform: scale(1.04); }
+        .portal-tagline-sub { position: relative; z-index: 3; margin-top: 24px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 3px; color: #888888; text-transform: uppercase; }
+        .portal-enter-prompt { position: relative; z-index: 3; margin-top: 14px; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; letter-spacing: 4px; color: #ffffff; text-transform: uppercase; animation: blinkPrompt 2s infinite ease-in-out; text-shadow: 0 0 10px rgba(0, 68, 255, 0.8); cursor: pointer; }
+        @keyframes blinkPrompt { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
         /* 🪞 2. 乌托邦 — 纯白无界镜域 (The Optic White Mirror Realm) */
         #faction-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            width: 100vw; height: 100vh; height: 100dvh;
-            background-color: #f6f7fa;
-            z-index: 999998;
-            display: flex; flex-direction: column;
-            justify-content: space-between; align-items: center;
-            padding: 24px 20px; overflow: hidden;
-            transition: background-color 0.6s ease, opacity 0.6s ease;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100dvh; background-color: #f6f7fa;
+            z-index: 999998; display: flex; flex-direction: column;
+            justify-content: space-between; align-items: center; padding: 24px 20px;
+            overflow: hidden; transition: background 0.8s ease, opacity 0.6s ease;
         }
 
-        #mirror-tunnel-canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 1;
-        }
+        #mirror-tunnel-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; transition: opacity 0.6s ease; }
 
+        /* 顶部控制栏 */
         .telemetry-bar {
-            display: flex; justify-content: space-between; align-items: center;
-            width: 100%; max-width: 1440px; font-family: var(--font-mono);
-            font-size: 0.72rem; color: #525252; letter-spacing: 2px;
-            z-index: 10; border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-            padding-bottom: 14px;
+            display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1440px;
+            font-family: var(--font-mono); font-size: 0.72rem; color: #525252; letter-spacing: 2px;
+            z-index: 10; border-bottom: 1px solid rgba(0, 0, 0, 0.12); padding-bottom: 14px; transition: all 0.5s ease;
         }
-
         .telemetry-title { font-weight: 800; color: #111111; letter-spacing: 3px; }
         .telemetry-clock { color: #111111; font-weight: 700; }
 
-        .mirror-projection-stage {
-            width: 100%; max-width: 1000px; text-align: center;
-            z-index: 10; min-height: 100px; display: flex;
-            flex-direction: column; justify-content: center; align-items: center;
-            transition: all 0.3s ease;
+        /* 7 色晶体选择阶段 (Stage 1) */
+        #spectrum-selection-stage {
+            display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: center; z-index: 10; transition: opacity 0.5s ease;
         }
 
-        .projection-meta {
-            font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800;
-            letter-spacing: 3px; margin-bottom: 8px; text-transform: uppercase;
-            color: var(--brand-red); transition: color 0.3s ease;
-        }
+        .mirror-projection-stage { width: 100%; max-width: 1000px; text-align: center; margin-bottom: 24px; min-height: 80px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .projection-meta { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 3px; margin-bottom: 8px; text-transform: uppercase; color: var(--brand-red); transition: color 0.3s ease; }
+        .projection-quote { font-size: 1.3rem; font-weight: 600; font-style: italic; color: #111111; line-height: 1.5; letter-spacing: 0.5px; max-width: 880px; transition: all 0.3s ease; }
 
-        .projection-quote {
-            font-size: 1.3rem; font-weight: 600; font-style: italic;
-            color: #111111; line-height: 1.5; letter-spacing: 0.5px;
-            max-width: 880px; transition: all 0.3s ease;
-        }
-
-        /* 7 根发光晶体折射柱 (修复边缘裁切 Bug) */
-        .mirror-prisms-container {
-            display: flex; width: 100%; max-width: 1440px;
-            height: 50vh; min-height: 330px; gap: 10px;
-            z-index: 10; perspective: 1200px; padding: 0 4px;
-        }
-
+        .mirror-prisms-container { display: flex; width: 100%; max-width: 1440px; height: 50vh; min-height: 330px; gap: 10px; perspective: 1200px; padding: 0 4px; }
         .mirror-prism {
-            flex: 1; min-width: 0; /* 彻底防止 Flex 盒线文字挤压溢出 */
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid rgba(0, 0, 0, 0.12);
-            padding: 18px 8px; cursor: pointer;
-            display: flex; flex-direction: column; justify-content: space-between; align-items: center;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; backdrop-filter: blur(20px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), inset 0 0 15px rgba(255, 255, 255, 0.8);
+            flex: 1; min-width: 0; background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(0, 0, 0, 0.12); padding: 18px 8px; cursor: pointer;
+            display: flex; flex-direction: column; justify-content: space-between; align-items: center; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; backdrop-filter: blur(20px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), inset 0 0 15px rgba(255, 255, 255, 0.8);
             transform-style: preserve-3d; overflow: hidden;
         }
+        .prism-top-indicator { position: absolute; top: 0; left: 0; width: 100%; height: 5px; transition: background 0.3s; }
+        
+        .prism-status-badge { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 1px; padding: 2px 6px; border-radius: 2px; text-transform: uppercase; margin-top: 4px; display: inline-block; }
+        .status-open { background: #111111; color: #ffffff; } .status-next { background: #e0e7ff; color: #0055ff; } .status-sealed { background: #f3f4f6; color: #9ca3af; }
 
-        .prism-top-indicator {
-            position: absolute; top: 0; left: 0; width: 100%; height: 5px;
-            transition: background 0.3s;
-        }
-
-        .prism-status-badge {
-            font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
-            letter-spacing: 1px; padding: 2px 6px; border-radius: 2px; text-transform: uppercase;
-            margin-top: 4px; display: inline-block;
-        }
-
-        .status-open { background: #111111; color: #ffffff; }
-        .status-next { background: #e0e7ff; color: #0055ff; }
-        .status-sealed { background: #f3f4f6; color: #9ca3af; }
-
-        .p-red .prism-top-indicator { background: var(--brand-red); }
-        .p-red:hover { border-color: var(--brand-red); background: rgba(255, 235, 238, 0.95); }
-
-        .p-green .prism-top-indicator { background: var(--brand-green); }
-        .p-green:hover { border-color: var(--brand-green); background: rgba(230, 255, 240, 0.95); }
-
-        .p-blue .prism-top-indicator { background: var(--brand-blue); }
-        .p-blue:hover { border-color: var(--brand-blue); background: rgba(235, 243, 255, 0.95); }
-
-        .p-yellow .prism-top-indicator { background: var(--brand-yellow); }
-        .p-yellow:hover { border-color: var(--brand-yellow); background: rgba(255, 250, 230, 0.95); }
-
-        .p-black .prism-top-indicator { background: #111111; }
-        .p-black:hover { border-color: #111111; background: #111111; color: #ffffff; }
-        .p-black:hover .prism-tag, .p-black:hover .prism-title { color: #ffffff; }
-
-        .p-white .prism-top-indicator { background: #cccccc; }
-        .p-white:hover { border-color: #111111; background: #ffffff; }
-
-        .p-violet .prism-top-indicator { background: var(--brand-violet); }
-        .p-violet:hover { border-color: var(--brand-violet); background: rgba(250, 238, 255, 0.95); }
+        .p-red .prism-top-indicator { background: var(--brand-red); } .p-red:hover { border-color: var(--brand-red); background: rgba(255, 235, 238, 0.95); }
+        .p-green .prism-top-indicator { background: var(--brand-green); } .p-green:hover { border-color: var(--brand-green); background: rgba(230, 255, 240, 0.95); }
+        .p-blue .prism-top-indicator { background: var(--brand-blue); } .p-blue:hover { border-color: var(--brand-blue); background: rgba(235, 243, 255, 0.95); }
+        .p-yellow .prism-top-indicator { background: var(--brand-yellow); } .p-yellow:hover { border-color: var(--brand-yellow); background: rgba(255, 250, 230, 0.95); }
+        .p-black .prism-top-indicator { background: #111111; } .p-black:hover { border-color: #111111; background: #111111; color: #ffffff; } .p-black:hover .prism-tag, .p-black:hover .prism-title { color: #ffffff; }
+        .p-white .prism-top-indicator { background: #cccccc; } .p-white:hover { border-color: #111111; background: #ffffff; }
+        .p-violet .prism-top-indicator { background: var(--brand-violet); } .p-violet:hover { border-color: var(--brand-violet); background: rgba(250, 238, 255, 0.95); }
 
         .mirror-prism:hover { flex: 1.6; transform: translateZ(20px); }
-
         .prism-tag { font-family: var(--font-mono); font-size: 0.65rem; color: #737373; letter-spacing: 1px; font-weight: 700; }
-        .prism-title {
-            font-size: 0.95rem; font-weight: 800; letter-spacing: 1px; color: #111111; margin-top: 4px;
-            text-transform: uppercase; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;
-        }
-
-        .prism-select-btn {
-            width: 100%; padding: 10px 4px; background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.2); color: #111111;
-            font-family: var(--font-mono); font-size: 0.65rem; font-weight: 800;
-            letter-spacing: 1px; text-transform: uppercase; transition: all 0.25s ease;
-        }
-
+        .prism-title { font-size: 0.95rem; font-weight: 800; letter-spacing: 1px; color: #111111; margin-top: 4px; text-transform: uppercase; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+        .prism-select-btn { width: 100%; padding: 10px 4px; background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.2); color: #111111; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; transition: all 0.25s ease; }
         .mirror-prism:hover .prism-select-btn { background: #111111; color: #ffffff; border-color: #111111; }
+
+        /* 🔥 3. 创新：高能信号注入场 (Signal Injection Stage - Stage 2) */
+        #injection-stage {
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; height: 100%; z-index: 20; opacity: 0; transition: opacity 0.6s ease;
+        }
+
+        .injection-header { text-align: center; margin-bottom: 32px; }
+        .inj-code { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .inj-title { font-size: 2rem; font-weight: 800; letter-spacing: 6px; color: #ffffff; text-transform: uppercase; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+
+        .injection-face-svg { width: 64px; height: 64px; margin-bottom: 32px; filter: drop-shadow(0 0 15px currentColor); transition: all 0.3s; }
+
+        .injection-input-area {
+            width: 100%; max-width: 800px; margin-bottom: 48px; position: relative;
+        }
+
+        /* 先锋隐形输入框 */
+        #huge-signal-input {
+            width: 100%; background: transparent; border: none; outline: none;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            color: #ffffff; font-size: 2.4rem; font-weight: 300; font-style: italic;
+            text-align: center; padding: 10px 0 20px 0; font-family: var(--font-sans);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            resize: none; overflow: hidden; line-height: 1.2;
+        }
+        
+        #huge-signal-input::placeholder { color: rgba(255, 255, 255, 0.2); font-weight: 300; }
+        #huge-signal-input:focus { border-bottom-color: currentColor; box-shadow: 0 20px 30px -10px currentColor; }
+
+        .inj-btn-group { display: flex; flex-direction: column; gap: 16px; align-items: center; width: 100%; max-width: 400px; }
+        
+        .btn-inject {
+            width: 100%; padding: 18px; background: #ffffff; color: #000000;
+            border: none; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 800;
+            letter-spacing: 3px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;
+        }
+        .btn-inject:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,255,255,0.4); }
+
+        .btn-skip { background: transparent; border: none; color: rgba(255,255,255,0.5); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 2px; cursor: pointer; transition: color 0.2s; text-transform: uppercase; }
+        .btn-skip:hover { color: #ffffff; text-decoration: underline; }
 
         /* 📱 手机端适配优化 */
         @media (max-width: 768px) {
             .mirror-projection-stage { display: none !important; }
             #faction-overlay { padding: 16px 12px; justify-content: flex-start; gap: 12px; overflow-y: auto; }
             .telemetry-bar { flex-direction: column; align-items: center; gap: 4px; font-size: 0.6rem; text-align: center; }
+            
             .mirror-prisms-container { height: auto; min-height: 0; flex-direction: column; gap: 8px; width: 100%; }
             .mirror-prism { flex-direction: row; justify-content: space-between; padding: 12px; min-height: 48px; background: rgba(255, 255, 255, 0.92); }
             .prism-top-indicator { top: 0; left: 0; width: 4px; height: 100%; }
             .prism-title { font-size: 0.85rem; text-align: left; }
             .prism-select-btn { width: auto; padding: 6px 10px; font-size: 0.6rem; }
             .mirror-prism:hover { transform: none; flex: none; }
+
+            /* 手机端注入区 */
+            .inj-title { font-size: 1.3rem; letter-spacing: 3px; }
+            #huge-signal-input { font-size: 1.4rem; padding-bottom: 10px; }
+            .btn-inject { font-size: 0.75rem; padding: 14px; }
+            
+            /* 如果进入阶段2，居中显示 */
+            #faction-overlay.in-injection { justify-content: center; }
         }
 
-        /* 🛒 3. 商城展示区 */
-        header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 24px 0; border-bottom: 1px solid var(--border-subtle); position: relative; z-index: 100;
-        }
-
+        /* 🛒 4. 主商城 UI 区 */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--border-subtle); position: relative; z-index: 100; }
         .brand-logo-wrap { display: flex; align-items: center; gap: 16px; text-decoration: none; color: var(--text-primary); }
         .official-logo-img { width: 44px; height: auto; object-fit: contain; }
         .text-logo { font-weight: 800; font-size: 1.2rem; letter-spacing: 5px; }
-
         .nav-right { display: flex; align-items: center; gap: 24px; }
-        .nav-btn {
-            font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; background: transparent; border: none;
-            cursor: pointer; color: var(--text-primary); text-transform: uppercase; text-decoration: none; transition: color 0.2s;
-        }
+        .nav-btn { font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; background: transparent; border: none; cursor: pointer; color: var(--text-primary); text-transform: uppercase; text-decoration: none; transition: color 0.2s; }
         .nav-btn:hover { color: var(--brand-active); }
-
-        .cart-trigger {
-            border: 1px solid var(--text-primary); padding: 10px 20px; font-weight: 700;
-            font-size: 0.82rem; letter-spacing: 2px; background: transparent; cursor: pointer; transition: all 0.2s;
-        }
+        .cart-trigger { border: 1px solid var(--text-primary); padding: 10px 20px; font-weight: 700; font-size: 0.82rem; letter-spacing: 2px; background: transparent; cursor: pointer; transition: all 0.2s; }
         .cart-trigger:hover { background: var(--text-primary); color: #fff; }
 
-        /* 修正后的 Collection Badge */
-        .collection-hero-banner {
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 20px 0 24px 0; margin-bottom: 40px;
-            display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;
-        }
-
+        .collection-hero-banner { border-bottom: 1px solid var(--border-subtle); padding: 20px 0 24px 0; margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
         .col-badge-title { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; color: var(--brand-active); letter-spacing: 3px; }
         .col-badge-sub { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px; margin-top: 4px; }
         .col-badge-right { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1.5px; }
@@ -299,25 +210,23 @@
         .gallery-wrap { display: flex; flex-direction: column; gap: 16px; }
         .main-stage { width: 100%; aspect-ratio: 4 / 5; background-color: #0d0d0d; border: 1px solid var(--border-subtle); overflow: hidden; position: relative; }
         .main-stage img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
-
         .thumbs-row { display: flex; gap: 14px; }
         .thumb-btn { width: 90px; aspect-ratio: 4 / 5; background: #0d0d0d; border: 1px solid var(--border-subtle); cursor: pointer; opacity: 0.5; transition: 0.2s; }
         .thumb-btn.active, .thumb-btn:hover { opacity: 1; border-color: var(--text-primary); }
         .thumb-btn img { width: 100%; height: 100%; object-fit: cover; }
 
         .product-meta { display: flex; flex-direction: column; }
-        .item-series { font-family: var(--font-mono); font-size: 0.75rem; color: var(--brand-active); letter-spacing: 2px; margin-bottom: 8px; font-weight: 700; }
+        .item-series { font-family: var(--font-mono); font-size: 0.75rem; color: var(--brand-active); letter-spacing: 2px; margin-bottom: 8px; font-weight: 700; transition: color 0.3s; }
         .item-title { font-size: 2.1rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px; }
         .item-price { font-size: 1.35rem; font-weight: 700; margin-bottom: 20px; }
         .item-desc { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; }
 
-        .color-philosophy-tag { background: #f0f4ff; border: 1px solid #c7d2fe; color: var(--brand-active); font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; padding: 10px 14px; margin-bottom: 24px; display: inline-block; }
-        .signal-rule-tag { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 28px; display: block; border-left: 2px solid var(--brand-active); padding-left: 10px; }
+        .color-philosophy-tag { background: #f0f4ff; border: 1px solid #c7d2fe; color: var(--brand-active); font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; padding: 10px 14px; margin-bottom: 24px; display: inline-block; transition: color 0.3s, border-color 0.3s; }
+        .signal-rule-tag { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 28px; display: block; border-left: 2px solid var(--brand-active); padding-left: 10px; transition: border-color 0.3s; }
 
         .size-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .size-guide-btn { background: transparent; border: none; color: var(--brand-active); font-size: 0.78rem; font-weight: 700; cursor: pointer; letter-spacing: 1px; }
         .size-guide-btn:hover { text-decoration: underline; }
-
         .size-grid { display: flex; gap: 12px; margin-bottom: 24px; }
         .size-chip { width: 52px; height: 52px; background: #fff; border: 1px solid var(--border-subtle); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
         .size-chip.active { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
@@ -325,45 +234,34 @@
         .action-buy-btn { width: 100%; padding: 20px; background: var(--text-primary); color: #fff; border: none; font-size: 0.9rem; font-weight: 700; letter-spacing: 3px; cursor: pointer; transition: 0.2s; }
         .action-buy-btn:hover { background: var(--brand-active); }
 
-        /* 未来季度 (Sealed Archives Block) */
         .future-archives-section { border-top: 1px solid var(--border-subtle); padding-top: 56px; margin-top: 64px; }
         .future-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 24px; }
         @media (min-width: 768px) { .future-grid { grid-template-columns: 1fr 1fr; } }
-        
         .future-card { background: var(--panel-bg); border: 1px solid var(--border-subtle); padding: 32px; opacity: 0.65; position: relative; }
         .future-badge { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; color: var(--text-muted); letter-spacing: 2px; margin-bottom: 8px; }
         .future-title { font-size: 1.3rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 12px; }
         .future-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
 
-        /* Manifesto */
         .manifesto-watermark-section { background: var(--panel-bg); border: 1px solid var(--border-subtle); padding: 40px; margin-bottom: 64px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; }
         .manifesto-content { position: relative; z-index: 2; max-width: 780px; }
         .manifesto-title { font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 12px; }
         .manifesto-text { font-size: 1.1rem; line-height: 1.7; font-style: italic; font-weight: 500; }
         .watermark-img { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 220px; opacity: 0.06; pointer-events: none; }
 
-        /* Interactive Screen 2 */
+        /* Simulator UI */
         .screen-interactive { border-top: 1px solid var(--border-subtle); padding-top: 56px; margin-bottom: 64px; }
         .section-heading { font-size: 0.82rem; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 28px; text-transform: uppercase; }
         .interactive-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
         @media (min-width: 880px) { .interactive-grid { grid-template-columns: 1fr 1fr; } }
-
         .preview-box { background: var(--panel-bg); border: 1px solid var(--border-subtle); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; }
         .preview-input { width: 100%; background: #fff; border: 1px solid var(--border-subtle); padding: 12px 14px; font-size: 0.88rem; margin-bottom: 16px; outline: none; }
         .color-picker-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
         .color-dot-btn { width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: 0.15s; }
         .color-dot-btn.active { border-color: var(--text-primary); }
-        .color-dot-blue { background-color: var(--brand-blue); }
-        .color-dot-red { background-color: var(--brand-red); }
-        .color-dot-green { background-color: var(--brand-green); }
-        .color-dot-black { background-color: #111; }
-
+        .color-dot-blue { background-color: var(--brand-blue); } .color-dot-red { background-color: var(--brand-red); } .color-dot-green { background-color: var(--brand-green); } .color-dot-black { background-color: #111; }
         .preview-card-frame { background: #fff; border: 1px dashed var(--border-subtle); padding: 20px; }
         .sim-badge { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 1px; padding: 3px 8px; border: 1px solid var(--border-subtle); font-weight: 600; }
-        .sim-badge.priv { color: #d97706; background: #fffbe0; border-color: #fef08a; }
-        .sim-badge.local { color: var(--text-muted); }
-        .sim-badge.not-published { color: var(--brand-red); background: #fef2f2; border-color: #fecaca; }
-
+        .sim-badge.priv { color: #d97706; background: #fffbe0; border-color: #fef08a; } .sim-badge.local { color: var(--text-muted); } .sim-badge.not-published { color: var(--brand-red); background: #fef2f2; border-color: #fecaca; }
         .preview-body-layout { display: flex; gap: 16px; align-items: flex-start; margin-top: 14px; }
         .interactive-face-svg { width: 40px; height: 40px; flex-shrink: 0; }
         .preview-statement-text { font-size: 0.95rem; line-height: 1.5; min-height: 48px; font-style: italic; word-break: break-word; }
@@ -373,8 +271,7 @@
         .ledger-terminal { background: var(--panel-bg); border: 1px solid var(--border-subtle); padding: 28px; }
         .terminal-bar { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px; margin-bottom: 18px; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); letter-spacing: 1.5px; }
         .status-dot { display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 700; font-family: var(--font-mono); }
-        .status-dot.live-mode { color: var(--brand-green); }
-        .status-dot.idle-mode { color: var(--text-muted); }
+        .status-dot.live-mode { color: var(--brand-green); } .status-dot.idle-mode { color: var(--text-muted); }
         .pulse-led { width: 8px; height: 8px; border-radius: 50%; background-color: var(--brand-green); box-shadow: 0 0 6px var(--brand-green); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
@@ -388,7 +285,6 @@
         .signal-text-body { font-size: 0.92rem; line-height: 1.5; font-style: italic; margin-bottom: 12px; word-break: break-word; }
         .signal-time-footer { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); display: flex; justify-content: space-between; border-top: 1px dashed var(--border-subtle); padding-top: 8px; }
 
-        /* Garment Search Block */
         .search-section { background: var(--panel-bg); border: 1px solid var(--border-subtle); padding: 28px; margin-top: 32px; }
         .search-bar-row { display: flex; gap: 12px; margin-top: 14px; }
         .search-input { flex: 1; background: #fff; border: 1px solid var(--border-subtle); padding: 12px 16px; font-family: var(--font-mono); font-size: 0.9rem; outline: none; }
@@ -396,7 +292,6 @@
         .search-btn:hover { background: var(--brand-active); }
         .search-result-display { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--border-subtle); font-family: var(--font-mono); font-size: 0.85rem; display: none; }
 
-        /* Legal Footer */
         .legal-footer { margin-top: 80px; padding-top: 36px; border-top: 1px solid var(--border-subtle); color: var(--text-secondary); font-size: 0.8rem; line-height: 1.6; }
         .footer-links-row { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 32px; }
         .footer-link { color: var(--text-primary); text-decoration: none; font-weight: 600; cursor: pointer; }
@@ -405,7 +300,6 @@
         @media (min-width: 768px) { .legal-grid { grid-template-columns: 1fr 1fr; } }
         .legal-block h5 { color: var(--text-primary); font-size: 0.82rem; letter-spacing: 1px; margin-bottom: 8px; }
 
-        /* Policy Modal Window */
         .modal-backdrop { position: fixed; top:0; left:0; width:100vw; height:100vh; background: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center; z-index: 99999; backdrop-filter: blur(4px); }
         .modal-card { background: #ffffff; max-width: 620px; width: 90%; max-height: 85vh; overflow-y: auto; padding: 36px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
         .modal-close-btn { position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; }
@@ -413,7 +307,7 @@
 </head>
 <body>
 
-<!-- 🔒 1. 拱门满屏入口 Portal Overlay (黑夜圣境门界) -->
+<!-- 🔒 1. 拱门满屏入口 Portal Overlay -->
 <div id="portal-overlay">
     <canvas id="portal-canvas"></canvas>
     <div class="portal-aura"></div>
@@ -424,118 +318,84 @@
     <div class="portal-enter-prompt" onclick="enterArchwayPortal()">[ TAP LOGO TO ENTER UTOPIA ]</div>
 </div>
 
-<!-- 🪞 2. 乌托邦 — 纯白无界镜域门界 (The Optic White Mirror Realm) -->
+<!-- 🪞 2. 乌托邦 — 纯白无界镜域 (The Optic White Mirror Realm) -->
 <div id="faction-overlay">
     <canvas id="mirror-tunnel-canvas"></canvas>
 
-    <!-- 顶部坐标与发售时间轴提示 -->
     <div class="telemetry-bar">
-        <span class="telemetry-title">COLLECTION 01: UTOPIA // ONE FORM. SEVEN COLORS. RELEASED ONE AT A TIME.</span>
+        <span class="telemetry-title" id="telemetry-stage-title">COLLECTION 01: UTOPIA // ONE FORM. SEVEN COLORS. RELEASED ONE AT A TIME.</span>
         <span class="telemetry-clock" id="telemetry-clock-display">000D 00H 00M 00S</span>
     </div>
 
-    <!-- 中央悬浮全息镜面投影 -->
-    <div class="mirror-projection-stage">
-        <div class="projection-meta" id="projection-meta-target">COLOR DROP 01 OF 07 // NOW OPEN</div>
-        <div class="projection-quote" id="projection-quote-target">"The garment is a blank canvas. Select a color drop frequency to inspect its assigned ledger voice."</div>
+    <!-- [STAGE 1] 7 根磨砂透明水晶折射柱 -->
+    <div id="spectrum-selection-stage">
+        <div class="mirror-projection-stage">
+            <div class="projection-meta" id="projection-meta-target">COLOR DROP 01 OF 07 // NOW OPEN</div>
+            <div class="projection-quote" id="projection-quote-target">"The garment is a blank canvas. Select a color drop frequency to inspect its assigned ledger voice."</div>
+        </div>
+
+        <div class="mirror-prisms-container">
+            <div class="mirror-prism p-red" onmouseenter="reflectVoice('#ff0033', 'COLOR DROP 01 OF 07 // NOW OPEN', '#0142', 'In an ocean of digital noise, I choose to be a flame that burns out in 7 days.', '#ff0033')" onclick="initiateInjection('RED', '#ff0033')">
+                <div class="prism-top-indicator"></div>
+                <div><div class="prism-tag">DROP 01</div><div class="prism-title">RED</div><span class="prism-status-badge status-open">NOW OPEN</span></div>
+                <button class="prism-select-btn">SELECT RED</button>
+            </div>
+            <div class="mirror-prism p-green" onmouseenter="reflectVoice('#00cc55', 'COLOR DROP 02 OF 07 // NEXT SIGNAL', '#0088', 'Growth is silent. The roots expand long before the noise begins.', '#00cc55')" onclick="initiateInjection('GREEN', '#00cc55')">
+                <div class="prism-top-indicator"></div>
+                <div><div class="prism-tag">DROP 02</div><div class="prism-title">GREEN</div><span class="prism-status-badge status-next">NEXT SIGNAL</span></div>
+                <button class="prism-select-btn">INSPECT GREEN</button>
+            </div>
+            <div class="mirror-prism p-blue" onmouseenter="reflectVoice('#0055ff', 'COLOR DROP 03 OF 07 // SEALED', '#0234', 'Today, blue means becoming visible in the void.', '#0055ff')" onclick="initiateInjection('BLUE', '#0055ff')">
+                <div class="prism-top-indicator"></div>
+                <div><div class="prism-tag">DROP 03</div><div class="prism-title">BLUE</div><span class="prism-status-badge status-sealed">SEALED</span></div>
+                <button class="prism-select-btn">INSPECT BLUE</button>
+            </div>
+            <div class="mirror-prism p-yellow" onmouseenter="reflectVoice('#e6b800', 'COLOR DROP 04 OF 07 // SEALED', '#0307', 'A temporary blinding light is worth a lifetime of dim shadows.', '#e6b800')" onclick="initiateInjection('YELLOW', '#e6b800')">
+                <div class="prism-top-indicator"></div>
+                <div><div class="prism-tag">DROP 04</div><div class="prism-title">YELLOW</div><span class="prism-status-badge status-sealed">SEALED</span></div>
+                <button class="prism-select-btn">INSPECT YELLOW</button>
+            </div>
+            <div class="mirror-prism p-black" onmouseenter="reflectVoice('#111111', 'COLOR DROP 05 OF 07 // SEALED', '#0007', 'True luxury is having nothing to prove and no identity to broadcast.', '#111111')" onclick="initiateInjection('BLACK', '#111111')">
+                <div class="prism-top-indicator"></div>
+                <div><div class="prism-tag">DROP 05</div><div class="prism-title">BLACK</div><span class="prism-status-badge status-sealed">SEALED</span></div>
+                <button class="prism-select-btn">INSPECT BLACK</button>
+            </div>
+            <div class="mirror-prism p-white" onmouseenter="reflectVoice('#555555', 'COLOR DROP 06 OF 07 // SEALED', '#0101', 'Clean slate. No history. Pure unconditioned voice.', '#111111')" onclick="initiateInjection('WHITE', '#ffffff')">
+                <div class="prism-top-indicator"></div>
+                <div><div class="prism-tag">DROP 06</div><div class="prism-title">WHITE</div><span class="prism-status-badge status-sealed">SEALED</span></div>
+                <button class="prism-select-btn">INSPECT WHITE</button>
+            </div>
+            <div class="mirror-prism p-violet" onmouseenter="reflectVoice('#a855f7', 'COLOR DROP 07 OF 07 // SEALED', '#0707', 'Vibrate at a frequency only the quiet ones can decode.', '#a855f7')" onclick="initiateInjection('VIOLET', '#a855f7')">
+                <div class="prism-top-indicator"></div>
+                <div><div class="prism-tag">DROP 07</div><div class="prism-title">VIOLET</div><span class="prism-status-badge status-sealed">SEALED</span></div>
+                <button class="prism-select-btn">INSPECT VIOLET</button>
+            </div>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.65rem; color: #737373; letter-spacing: 2.5px; z-index: 10; font-weight: 700; margin-top: 20px;">SELECT A COLOR DROP TO ENTER THE STORE</div>
     </div>
 
-    <!-- 7 根磨砂透明水晶折射柱 (时间轴发售状态) -->
-    <div class="mirror-prisms-container">
-        <!-- 01 RED (NOW OPEN) -->
-        <div class="mirror-prism p-red" 
-             onmouseenter="reflectVoice('#ff0033', 'COLOR DROP 01 OF 07 // NOW OPEN', '#0142', 'In an ocean of digital noise, I choose to be a flame that burns out in 7 days.', '#ff0033')" 
-             onclick="selectFaction('RED', '#ff0033')">
-            <div class="prism-top-indicator"></div>
-            <div>
-                <div class="prism-tag">DROP 01</div>
-                <div class="prism-title">RED</div>
-                <span class="prism-status-badge status-open">NOW OPEN</span>
-            </div>
-            <button class="prism-select-btn">SELECT RED</button>
+    <!-- 🔥 [STAGE 2] 创新：高能信号注入舱 (Signal Injection Stage) -->
+    <div id="injection-stage">
+        <div class="injection-header">
+            <span class="inj-code" id="inj-code-label">FREQUENCY ALIGNED</span>
+            <h2 class="inj-title" id="inj-title-label">DRAFT YOUR PRIVATE PREVIEW</h2>
         </div>
 
-        <!-- 02 GREEN (NEXT SIGNAL) -->
-        <div class="mirror-prism p-green" 
-             onmouseenter="reflectVoice('#00cc55', 'COLOR DROP 02 OF 07 // NEXT SIGNAL', '#0088', 'Growth is silent. The roots expand long before the noise begins.', '#00cc55')" 
-             onclick="selectFaction('GREEN', '#00cc55')">
-            <div class="prism-top-indicator"></div>
-            <div>
-                <div class="prism-tag">DROP 02</div>
-                <div class="prism-title">GREEN</div>
-                <span class="prism-status-badge status-next">NEXT SIGNAL</span>
-            </div>
-            <button class="prism-select-btn">INSPECT GREEN</button>
+        <svg class="injection-face-svg" viewBox="0 0 42 42" id="inj-face-svg" style="color: #ff0033;">
+            <circle cx="21" cy="21" r="18" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M 14 17 L 18 17" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 24 17 L 28 17" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 16 28 C 18 30 24 30 26 28" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+
+        <div class="injection-input-area">
+            <textarea id="huge-signal-input" placeholder="Type your 7-day statement..." maxlength="140" oninput="liveFaceReact(this.value)"></textarea>
         </div>
 
-        <!-- 03 BLUE (SEALED) -->
-        <div class="mirror-prism p-blue" 
-             onmouseenter="reflectVoice('#0055ff', 'COLOR DROP 03 OF 07 // SEALED', '#0234', 'Today, blue means becoming visible in the void.', '#0055ff')" 
-             onclick="selectFaction('BLUE', '#0055ff')">
-            <div class="prism-top-indicator"></div>
-            <div>
-                <div class="prism-tag">DROP 03</div>
-                <div class="prism-title">BLUE</div>
-                <span class="prism-status-badge status-sealed">SEALED</span>
-            </div>
-            <button class="prism-select-btn">INSPECT BLUE</button>
+        <div class="inj-btn-group">
+            <button class="btn-inject" onclick="commitSignalAndEnter()">[ CONFIRM SIGNAL & ENTER UTOPIA ]</button>
+            <button class="btn-skip" onclick="skipSignalAndEnter()">SKIP TO STORE ↗</button>
         </div>
-
-        <!-- 04 YELLOW (SEALED) -->
-        <div class="mirror-prism p-yellow" 
-             onmouseenter="reflectVoice('#e6b800', 'COLOR DROP 04 OF 07 // SEALED', '#0307', 'A temporary blinding light is worth a lifetime of dim shadows.', '#e6b800')" 
-             onclick="selectFaction('YELLOW', '#e6b800')">
-            <div class="prism-top-indicator"></div>
-            <div>
-                <div class="prism-tag">DROP 04</div>
-                <div class="prism-title">YELLOW</div>
-                <span class="prism-status-badge status-sealed">SEALED</span>
-            </div>
-            <button class="prism-select-btn">INSPECT YELLOW</button>
-        </div>
-
-        <!-- 05 BLACK (SEALED) -->
-        <div class="mirror-prism p-black" 
-             onmouseenter="reflectVoice('#111111', 'COLOR DROP 05 OF 07 // SEALED', '#0007', 'True luxury is having nothing to prove and no identity to broadcast.', '#111111')" 
-             onclick="selectFaction('BLACK', '#111111')">
-            <div class="prism-top-indicator"></div>
-            <div>
-                <div class="prism-tag">DROP 05</div>
-                <div class="prism-title">BLACK</div>
-                <span class="prism-status-badge status-sealed">SEALED</span>
-            </div>
-            <button class="prism-select-btn">INSPECT BLACK</button>
-        </div>
-
-        <!-- 06 WHITE (SEALED) -->
-        <div class="mirror-prism p-white" 
-             onmouseenter="reflectVoice('#555555', 'COLOR DROP 06 OF 07 // SEALED', '#0101', 'Clean slate. No history. Pure unconditioned voice.', '#111111')" 
-             onclick="selectFaction('WHITE', '#ffffff')">
-            <div class="prism-top-indicator"></div>
-            <div>
-                <div class="prism-tag">DROP 06</div>
-                <div class="prism-title">WHITE</div>
-                <span class="prism-status-badge status-sealed">SEALED</span>
-            </div>
-            <button class="prism-select-btn">INSPECT WHITE</button>
-        </div>
-
-        <!-- 07 VIOLET (SEALED) -->
-        <div class="mirror-prism p-violet" 
-             onmouseenter="reflectVoice('#a855f7', 'COLOR DROP 07 OF 07 // SEALED', '#0707', 'Vibrate at a frequency only the quiet ones can decode.', '#a855f7')" 
-             onclick="selectFaction('VIOLET', '#a855f7')">
-            <div class="prism-top-indicator"></div>
-            <div>
-                <div class="prism-tag">DROP 07</div>
-                <div class="prism-title">VIOLET</div>
-                <span class="prism-status-badge status-sealed">SEALED</span>
-            </div>
-            <button class="prism-select-btn">INSPECT VIOLET</button>
-        </div>
-    </div>
-
-    <div style="font-family: var(--font-mono); font-size: 0.65rem; color: #737373; letter-spacing: 2.5px; z-index: 10; font-weight: 700;">
-        SELECT A COLOR DROP TO ENTER THE STORE
     </div>
 </div>
 
@@ -554,7 +414,6 @@
         </div>
     </header>
 
-    <!-- 主发售季度横幅 (统一修正层级) -->
     <div class="collection-hero-banner">
         <div>
             <div class="col-badge-title" id="active-drop-badge">COLLECTION 01 // UTOPIA — COLOR DROP 01 OF 07</div>
@@ -572,15 +431,9 @@
                 <img id="stage-image" src="https://withinseven.com/front.png" alt="DROP 01">
             </div>
             <div class="thumbs-row">
-                <button class="thumb-btn active" onclick="updateStage('https://withinseven.com/front.png', this)">
-                    <img src="https://withinseven.com/front.png" alt="Front">
-                </button>
-                <button class="thumb-btn" onclick="updateStage('https://withinseven.com/back.png', this)">
-                    <img src="https://withinseven.com/back.png" alt="Back">
-                </button>
-                <button class="thumb-btn" onclick="updateStage('https://withinseven.com/detail.png', this)">
-                    <img src="https://withinseven.com/detail.png" alt="Detail">
-                </button>
+                <button class="thumb-btn active" onclick="updateStage('https://withinseven.com/front.png', this)"><img src="https://withinseven.com/front.png" alt="Front"></button>
+                <button class="thumb-btn" onclick="updateStage('https://withinseven.com/back.png', this)"><img src="https://withinseven.com/back.png" alt="Back"></button>
+                <button class="thumb-btn" onclick="updateStage('https://withinseven.com/detail.png', this)"><img src="https://withinseven.com/detail.png" alt="Detail"></button>
             </div>
         </div>
 
@@ -629,7 +482,7 @@
         </div>
     </section>
 
-    <!-- Brand Manifesto Block -->
+    <!-- Brand Manifesto -->
     <section class="manifesto-watermark-section">
         <div class="manifesto-content">
             <div class="manifesto-title">// BRAND MANIFESTO</div>
@@ -657,23 +510,15 @@
         </div>
     </section>
 
-    <!-- Screen 2: Interactive Private Preview & Live Ledger Signal Stream -->
+    <!-- Screen 2: Interactive Private Preview -->
     <section class="screen-interactive">
         <div class="section-heading">// SYSTEM INTERACTION & LIVE SIGNAL STREAM</div>
         
         <div class="interactive-grid">
-            <!-- Private Preview Box -->
             <div class="preview-box">
                 <div>
                     <div style="font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 16px; text-transform: uppercase;">PRIVATE PREVIEW</div>
-
-                    <input 
-                        type="text" 
-                        class="preview-input" 
-                        id="guest-sim-input" 
-                        placeholder="Type your statement here to simulate..."
-                        maxlength="140"
-                        oninput="updateSimPreview(this.value)">
+                    <input type="text" class="preview-input" id="guest-sim-input" placeholder="Type your statement here to simulate..." maxlength="140" oninput="updateSimPreview(this.value)">
                     
                     <div class="color-picker-row">
                         <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">SIGNAL COLOR:</span>
@@ -697,41 +542,27 @@
                                 <path id="eye-right" d="M 24 17 L 28 17" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
                                 <path d="M 16 28 C 18 30 24 30 26 28" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
                             </svg>
-                            <div class="preview-statement-text" id="sim-text-target">
-                                "Today, red means becoming a flame."
-                            </div>
+                            <div class="preview-statement-text" id="sim-text-target">"Today, red means becoming a flame."</div>
                         </div>
                     </div>
                 </div>
-                
-                <button class="preview-claim-cta" onclick="jumpToPurchase()">
-                    CLAIM A NUMBER TO PUBLISH FOR 7 DAYS
-                </button>
+                <button class="preview-claim-cta" onclick="jumpToPurchase()">CLAIM A NUMBER TO PUBLISH FOR 7 DAYS</button>
             </div>
 
             <!-- 实时 7 天公开留言画廊 -->
             <div class="ledger-terminal">
-                <div class="terminal-bar">
-                    <span>LIVE LEDGER TERMINAL</span>
-                    <span>EPHEMERALITY: 7-DAYS</span>
-                </div>
-                
-                <div id="terminal-viewport">
-                    <div class="status-dot idle-mode">CONNECTING TO EDGE MESH...</div>
-                </div>
+                <div class="terminal-bar"><span>LIVE LEDGER TERMINAL</span><span>EPHEMERALITY: 7-DAYS</span></div>
+                <div id="terminal-viewport"><div class="status-dot idle-mode">CONNECTING TO EDGE MESH...</div></div>
             </div>
         </div>
 
-        <!-- Garment Number Search Block -->
         <div class="search-section" id="garment-search-block">
             <div class="section-heading" style="margin-bottom: 6px;">SEARCH A GARMENT NUMBER</div>
             <p style="font-size: 0.85rem; color: var(--text-secondary);">Enter a 4-digit serial number (0001 - 0777) to query its current public signal state.</p>
-            
             <div class="search-bar-row">
                 <input type="text" class="search-input" id="search-serial-input" placeholder="#0234" maxlength="4">
                 <button class="search-btn" onclick="executeGarmentSearch()">VIEW SIGNAL</button>
             </div>
-
             <div class="search-result-display" id="search-result-box"></div>
         </div>
     </section>
@@ -757,18 +588,12 @@
                 <p>A 14-day return window applies to unworn garments with unbroken Claim Card physical seals. Unsealing the Claim Card permanently assigns ledger ownership and renders the item final sale.</p>
             </div>
         </div>
-
-        <div style="margin-top: 28px; font-size: 0.75rem; color: var(--text-muted);">
-            © 2026 N7 STUDIO INC. WITHIN SEVEN™. All rights reserved. Richmond, BC, Canada.
-        </div>
+        <div style="margin-top: 28px; font-size: 0.75rem; color: var(--text-muted);">© 2026 N7 STUDIO INC. WITHIN SEVEN™. All rights reserved. Richmond, BC, Canada.</div>
     </footer>
 </div>
 
 <div class="modal-backdrop" id="policy-modal">
-    <div class="modal-card">
-        <button class="modal-close-btn" onclick="closePolicyModal()">✕</button>
-        <div id="modal-content-target"></div>
-    </div>
+    <div class="modal-card"><button class="modal-close-btn" onclick="closePolicyModal()">✕</button><div id="modal-content-target"></div></div>
 </div>
 
 <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
@@ -776,48 +601,28 @@
 
 <script>
     let chosenSize = '';
+    let pendingFaction = '';
+    let pendingHex = '';
 
-    /* 🔒 1. 拱门满屏 Portal (黑夜圣境门界) + Session Storage 记忆 */
+    /* 🔒 1. 拱门满屏 Portal */
     const portalOverlay = document.getElementById('portal-overlay');
     const portalGate = document.getElementById('portal-gate');
     const portalCanvas = document.getElementById('portal-canvas');
     const pCtx = portalCanvas.getContext('2d');
 
-    // 如果在此会话中已经通过了门界，则不强迫重复点击大门
     if (sessionStorage.getItem('w7_entered_portal') === 'true') {
         portalOverlay.style.display = 'none';
     }
 
-    function resizePortalCanvas() {
-        portalCanvas.width = window.innerWidth;
-        portalCanvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizePortalCanvas);
-    resizePortalCanvas();
+    function resizePortalCanvas() { portalCanvas.width = window.innerWidth; portalCanvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizePortalCanvas); resizePortalCanvas();
 
     let portalParticles = [];
     class PortalParticle {
-        constructor() {
-            this.x = Math.random() * portalCanvas.width;
-            this.y = Math.random() * portalCanvas.height;
-            this.vx = (Math.random() - 0.5) * 0.8;
-            this.vy = (Math.random() - 0.5) * 0.8;
-            this.radius = Math.random() * 2 + 0.5;
-            this.alpha = Math.random() * 0.7 + 0.2;
-        }
-        update() {
-            this.x += this.vx; this.y += this.vy;
-            if (this.x < 0 || this.x > portalCanvas.width) this.vx *= -1;
-            if (this.y < 0 || this.y > portalCanvas.height) this.vy *= -1;
-        }
-        draw() {
-            pCtx.beginPath();
-            pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            pCtx.fillStyle = `rgba(0, 85, 255, ${this.alpha})`;
-            pCtx.fill();
-        }
+        constructor() { this.x = Math.random() * portalCanvas.width; this.y = Math.random() * portalCanvas.height; this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8; this.radius = Math.random() * 2 + 0.5; this.alpha = Math.random() * 0.7 + 0.2; }
+        update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > portalCanvas.width) this.vx *= -1; if (this.y < 0 || this.y > portalCanvas.height) this.vy *= -1; }
+        draw() { pCtx.beginPath(); pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); pCtx.fillStyle = `rgba(0, 85, 255, ${this.alpha})`; pCtx.fill(); }
     }
-
     for (let i = 0; i < 60; i++) portalParticles.push(new PortalParticle());
 
     function animatePortalCanvas() {
@@ -826,16 +631,8 @@
         for (let i = 0; i < portalParticles.length; i++) {
             portalParticles[i].update(); portalParticles[i].draw();
             for (let j = i + 1; j < portalParticles.length; j++) {
-                let dx = portalParticles[i].x - portalParticles[j].x;
-                let dy = portalParticles[i].y - portalParticles[j].y;
-                let dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 100) {
-                    pCtx.beginPath();
-                    pCtx.moveTo(portalParticles[i].x, portalParticles[i].y);
-                    pCtx.lineTo(portalParticles[j].x, portalParticles[j].y);
-                    pCtx.strokeStyle = `rgba(0, 85, 255, ${0.18 - dist / 1000})`;
-                    pCtx.stroke();
-                }
+                let dx = portalParticles[i].x - portalParticles[j].x; let dy = portalParticles[i].y - portalParticles[j].y; let dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 100) { pCtx.beginPath(); pCtx.moveTo(portalParticles[i].x, portalParticles[i].y); pCtx.lineTo(portalParticles[j].x, portalParticles[j].y); pCtx.strokeStyle = `rgba(0, 85, 255, ${0.18 - dist / 1000})`; pCtx.stroke(); }
             }
         }
         requestAnimationFrame(animatePortalCanvas);
@@ -843,10 +640,8 @@
     animatePortalCanvas();
 
     portalOverlay.addEventListener('mousemove', (e) => {
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-        const rotateX = ((e.clientY - centerY) / centerY) * -18;
-        const rotateY = ((e.clientX - centerX) / centerX) * 18;
+        const centerX = window.innerWidth / 2; const centerY = window.innerHeight / 2;
+        const rotateX = ((e.clientY - centerY) / centerY) * -18; const rotateY = ((e.clientX - centerX) / centerX) * 18;
         portalGate.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
 
@@ -857,156 +652,146 @@
         setTimeout(() => { portalOverlay.style.display = 'none'; }, 600);
     }
 
-    /* 🪞 2. 纯白透光镜面 Canvas 3D 银晶隧道 */
+    /* 🪞 2. 镜子隧道背景 */
     const mirrorCanvas = document.getElementById('mirror-tunnel-canvas');
     const mCtx = mirrorCanvas.getContext('2d');
-
-    function resizeMirrorCanvas() {
-        mirrorCanvas.width = window.innerWidth;
-        mirrorCanvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeMirrorCanvas);
-    resizeMirrorCanvas();
+    function resizeMirrorCanvas() { mirrorCanvas.width = window.innerWidth; mirrorCanvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizeMirrorCanvas); resizeMirrorCanvas();
 
     let tunnelOffset = 0;
     function animateMirrorTunnel() {
-        if (document.getElementById('faction-overlay').style.display === 'none') {
-            requestAnimationFrame(animateMirrorTunnel);
-            return;
-        }
-
+        if (document.getElementById('faction-overlay').style.display === 'none') { requestAnimationFrame(animateMirrorTunnel); return; }
         mCtx.clearRect(0, 0, mirrorCanvas.width, mirrorCanvas.height);
-        const cx = mirrorCanvas.width / 2;
-        const cy = mirrorCanvas.height / 2;
-        tunnelOffset = (tunnelOffset + 0.3) % 40;
-
+        const cx = mirrorCanvas.width / 2; const cy = mirrorCanvas.height / 2; tunnelOffset = (tunnelOffset + 0.3) % 40;
         for (let i = 14; i >= 1; i--) {
-            let scale = Math.pow(1.32, i) + tunnelOffset * 0.05;
-            let w = cx / scale * 1.85;
-            let h = cy / scale * 1.85;
-            
-            mCtx.strokeStyle = i % 2 === 0 ? 'rgba(0, 0, 0, 0.08)' : 'rgba(0, 0, 0, 0.03)';
-            mCtx.lineWidth = i % 2 === 0 ? 1.5 : 0.8;
-            mCtx.strokeRect(cx - w, cy - h, w * 2, h * 2);
-
-            mCtx.beginPath();
-            mCtx.moveTo(0, 0); mCtx.lineTo(cx - w, cy - h);
-            mCtx.moveTo(mirrorCanvas.width, 0); mCtx.lineTo(cx + w, cy - h);
-            mCtx.moveTo(0, mirrorCanvas.height); mCtx.lineTo(cx - w, cy + h);
-            mCtx.moveTo(mirrorCanvas.width, mirrorCanvas.height); mCtx.lineTo(cx + w, cy + h);
-            mCtx.strokeStyle = 'rgba(0, 0, 0, 0.03)';
-            mCtx.stroke();
+            let scale = Math.pow(1.32, i) + tunnelOffset * 0.05; let w = cx / scale * 1.85; let h = cy / scale * 1.85;
+            mCtx.strokeStyle = i % 2 === 0 ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.03)';
+            mCtx.lineWidth = i % 2 === 0 ? 1.5 : 0.8; mCtx.strokeRect(cx - w, cy - h, w * 2, h * 2);
+            mCtx.beginPath(); mCtx.moveTo(0, 0); mCtx.lineTo(cx - w, cy - h); mCtx.moveTo(mirrorCanvas.width, 0); mCtx.lineTo(cx + w, cy - h); mCtx.moveTo(0, mirrorCanvas.height); mCtx.lineTo(cx - w, cy + h); mCtx.moveTo(mirrorCanvas.width, mirrorCanvas.height); mCtx.lineTo(cx + w, cy + h); mCtx.strokeStyle = 'rgba(255, 255, 255, 0.03)'; mCtx.stroke();
         }
-
         requestAnimationFrame(animateMirrorTunnel);
     }
     animateMirrorTunnel();
 
     function reflectVoice(glowHex, metaText, garmentNum, statementText, activeHex) {
         const metaTarget = document.getElementById('projection-meta-target');
-        metaTarget.textContent = `${metaText} // ${garmentNum}`;
-        metaTarget.style.color = activeHex;
-
+        metaTarget.textContent = `${metaText} // ${garmentNum}`; metaTarget.style.color = activeHex;
         document.getElementById('projection-quote-target').textContent = `"${statementText}"`;
     }
 
-    /* 🎨 3. 核心 Drop 切换与商品/配额/Snipcart 同步逻辑 */
+    /* 🔥 3. 高能信号注入场 (Stage 2) */
     const colorDropsData = {
-        'RED': {
-            dropNum: 'COLOR DROP 01 OF 07',
-            title: 'THE NUMBERED BLANK — RED',
-            units: 'FORM 01 // 420GSM COTTON // UNITS #0001 - #0111',
-            hex: '#ff0033',
-            itemId: 'utopia-blank-red',
-            desc: 'Cut from 420GSM custom heavy loopback cotton in Crimson Red. Issued with a physical NFC access tag and sealed Claim Card. Tap to unlock your private page and publish one anonymous statement for seven days.'
-        },
-        'GREEN': {
-            dropNum: 'COLOR DROP 02 OF 07',
-            title: 'THE NUMBERED BLANK — GREEN',
-            units: 'FORM 01 // 420GSM COTTON // UNITS #0112 - #0222',
-            hex: '#00cc55',
-            itemId: 'utopia-blank-green',
-            desc: 'Cut from 420GSM custom heavy loopback cotton in Emerald Green. Issued with a physical NFC access tag and sealed Claim Card.'
-        },
-        'BLUE': {
-            dropNum: 'COLOR DROP 03 OF 07',
-            title: 'THE NUMBERED BLANK — BLUE',
-            units: 'FORM 01 // 420GSM COTTON // UNITS #0223 - #0333',
-            hex: '#0055ff',
-            itemId: 'utopia-blank-blue',
-            desc: 'Cut from 420GSM custom heavy loopback cotton in Cobalt Blue. Issued with a physical NFC access tag and sealed Claim Card.'
-        },
-        'YELLOW': {
-            dropNum: 'COLOR DROP 04 OF 07',
-            title: 'THE NUMBERED BLANK — YELLOW',
-            units: 'FORM 01 // 420GSM COTTON // UNITS #0334 - #0444',
-            hex: '#e6b800',
-            itemId: 'utopia-blank-yellow',
-            desc: 'Cut from 420GSM custom heavy loopback cotton in Amber Yellow. Issued with a physical NFC access tag and sealed Claim Card.'
-        },
-        'BLACK': {
-            dropNum: 'COLOR DROP 05 OF 07',
-            title: 'THE NUMBERED BLANK — BLACK',
-            units: 'FORM 01 // 420GSM COTTON // UNITS #0445 - #0555',
-            hex: '#111111',
-            itemId: 'utopia-blank-black',
-            desc: 'Cut from 420GSM custom heavy loopback cotton in Obsidian Black. Issued with a physical NFC access tag and sealed Claim Card.'
-        },
-        'WHITE': {
-            dropNum: 'COLOR DROP 06 OF 07',
-            title: 'THE NUMBERED BLANK — WHITE',
-            units: 'FORM 01 // 420GSM COTTON // UNITS #0556 - #0666',
-            hex: '#ffffff',
-            itemId: 'utopia-blank-white',
-            desc: 'Cut from 420GSM custom heavy loopback cotton in Optic White. Issued with a physical NFC access tag and sealed Claim Card.'
-        },
-        'VIOLET': {
-            dropNum: 'COLOR DROP 07 OF 07',
-            title: 'THE NUMBERED BLANK — VIOLET',
-            units: 'FORM 01 // 420GSM COTTON // UNITS #0667 - #0777',
-            hex: '#a855f7',
-            itemId: 'utopia-blank-violet',
-            desc: 'Cut from 420GSM custom heavy loopback cotton in Specular Violet. Issued with a physical NFC access tag and sealed Claim Card.'
-        }
+        'RED': { dropNum: 'COLOR DROP 01 OF 07', title: 'THE NUMBERED BLANK — RED', units: 'FORM 01 // 420GSM COTTON // UNITS #0001 - #0111', hex: '#ff0033', itemId: 'utopia-blank-red', desc: 'Cut from 420GSM custom heavy loopback cotton in Crimson Red. Issued with a physical NFC access tag and sealed Claim Card.' },
+        'GREEN': { dropNum: 'COLOR DROP 02 OF 07', title: 'THE NUMBERED BLANK — GREEN', units: 'FORM 01 // 420GSM COTTON // UNITS #0112 - #0222', hex: '#00cc55', itemId: 'utopia-blank-green', desc: 'Cut from 420GSM custom heavy loopback cotton in Emerald Green. Issued with a physical NFC access tag and sealed Claim Card.' },
+        'BLUE': { dropNum: 'COLOR DROP 03 OF 07', title: 'THE NUMBERED BLANK — BLUE', units: 'FORM 01 // 420GSM COTTON // UNITS #0223 - #0333', hex: '#0055ff', itemId: 'utopia-blank-blue', desc: 'Cut from 420GSM custom heavy loopback cotton in Cobalt Blue. Issued with a physical NFC access tag and sealed Claim Card.' },
+        'YELLOW': { dropNum: 'COLOR DROP 04 OF 07', title: 'THE NUMBERED BLANK — YELLOW', units: 'FORM 01 // 420GSM COTTON // UNITS #0334 - #0444', hex: '#e6b800', itemId: 'utopia-blank-yellow', desc: 'Cut from 420GSM custom heavy loopback cotton in Amber Yellow. Issued with a physical NFC access tag and sealed Claim Card.' },
+        'BLACK': { dropNum: 'COLOR DROP 05 OF 07', title: 'THE NUMBERED BLANK — BLACK', units: 'FORM 01 // 420GSM COTTON // UNITS #0445 - #0555', hex: '#111111', itemId: 'utopia-blank-black', desc: 'Cut from 420GSM custom heavy loopback cotton in Obsidian Black. Issued with a physical NFC access tag and sealed Claim Card.' },
+        'WHITE': { dropNum: 'COLOR DROP 06 OF 07', title: 'THE NUMBERED BLANK — WHITE', units: 'FORM 01 // 420GSM COTTON // UNITS #0556 - #0666', hex: '#ffffff', itemId: 'utopia-blank-white', desc: 'Cut from 420GSM custom heavy loopback cotton in Optic White. Issued with a physical NFC access tag and sealed Claim Card.' },
+        'VIOLET': { dropNum: 'COLOR DROP 07 OF 07', title: 'THE NUMBERED BLANK — VIOLET', units: 'FORM 01 // 420GSM COTTON // UNITS #0667 - #0777', hex: '#a855f7', itemId: 'utopia-blank-violet', desc: 'Cut from 420GSM custom heavy loopback cotton in Specular Violet. Issued with a physical NFC access tag and sealed Claim Card.' }
     };
 
-    function selectFaction(factionName, colorHex, pushState = true) {
-        if (pushState) history.pushState({ stage: 'store' }, '', '#store');
+    function initiateInjection(factionName, colorHex) {
+        pendingFaction = factionName;
+        pendingHex = colorHex;
         
-        const drop = colorDropsData[factionName] || colorDropsData['RED'];
+        // 1. Hide Stage 1
+        document.getElementById('spectrum-selection-stage').style.opacity = '0';
+        document.getElementById('telemetry-stage-title').textContent = `SYSTEM OVERRIDE // ALIGNING FREQUENCY: ${factionName}`;
         
-        // 全局动态染亮色
-        document.documentElement.style.setProperty('--brand-active', drop.hex);
+        setTimeout(() => {
+            document.getElementById('spectrum-selection-stage').style.display = 'none';
+            
+            // 2. Change background to dark void with color radial
+            const factionOverlay = document.getElementById('faction-overlay');
+            factionOverlay.style.background = `radial-gradient(circle at center, ${colorHex}40 0%, #030001 80%)`;
+            factionOverlay.classList.add('in-injection');
 
-        // 同步修改商品区层级与文字
+            // 3. Show Injection Stage
+            const injectionStage = document.getElementById('injection-stage');
+            injectionStage.style.display = 'flex';
+            
+            // 4. Update Colors inside Injection Room
+            document.getElementById('inj-code-label').textContent = `FREQUENCY SELECTED // ${factionName}`;
+            document.getElementById('inj-code-label').style.color = colorHex;
+            document.getElementById('inj-face-svg').style.color = colorHex;
+            
+            const massiveInput = document.getElementById('huge-signal-input');
+            massiveInput.style.borderBottomColor = colorHex;
+            massiveInput.value = ''; // clear previous
+            
+            setTimeout(() => { injectionStage.style.opacity = '1'; massiveInput.focus(); }, 50);
+        }, 500);
+    }
+
+    // 巨大的隐形输入框随打字动态变色发光
+    function liveFaceReact(val) {
+        const massiveInput = document.getElementById('huge-signal-input');
+        if (val.trim().length > 0) {
+            massiveInput.style.color = pendingHex;
+            massiveInput.style.textShadow = `0 0 20px ${pendingHex}80`;
+        } else {
+            massiveInput.style.color = '#ffffff';
+            massiveInput.style.textShadow = 'none';
+        }
+    }
+
+    function commitSignalAndEnter() {
+        const userText = document.getElementById('huge-signal-input').value;
+        // 把注入的字自动填入商城的模拟器中
+        if(userText.trim().length > 0) {
+            const simInput = document.getElementById('guest-sim-input');
+            simInput.value = userText;
+            updateSimPreview(userText);
+        }
+        executeStoreEntry();
+    }
+
+    function skipSignalAndEnter() {
+        executeStoreEntry();
+    }
+
+    function executeStoreEntry() {
+        if (!pendingFaction) { pendingFaction = 'RED'; pendingHex = '#ff0033'; }
+        history.pushState({ stage: 'store' }, '', '#store');
+        
+        document.documentElement.style.setProperty('--brand-active', pendingHex);
+        const drop = colorDropsData[pendingFaction];
+        
         document.getElementById('active-drop-badge').textContent = `COLLECTION 01 // UTOPIA — ${drop.dropNum}`;
         document.getElementById('active-drop-title').textContent = drop.title;
         document.getElementById('product-display-name').textContent = drop.title;
         document.getElementById('product-units-range').textContent = drop.units;
         document.getElementById('product-display-desc').textContent = drop.desc;
 
-        // 同步修改 Snipcart 结算组件数据
         const snipcartBtn = document.getElementById('snipcart-btn');
         snipcartBtn.setAttribute('data-item-id', drop.itemId);
         snipcartBtn.setAttribute('data-item-name', `UTOPIA — ${drop.title}`);
         snipcartBtn.setAttribute('data-item-description', `UTOPIA Collection 01 ${drop.dropNum} — ${drop.title}`);
         snipcartBtn.textContent = `PURCHASE ${drop.dropNum.split(' OF ')[0]}`;
 
-        // Simulator 点按钮跟随选择
-        if (factionName === 'RED') selectSimColor('#ff0033', 'RED', document.getElementById('dot-red'));
-        if (factionName === 'GREEN') selectSimColor('#00cc55', 'GREEN', document.getElementById('dot-green'));
-        if (factionName === 'BLUE') selectSimColor('#0055ff', 'BLUE', document.getElementById('dot-blue'));
-        if (factionName === 'BLACK') selectSimColor('#111111', 'BLACK', document.getElementById('dot-black'));
+        if (pendingFaction === 'RED') selectSimColor('#ff0033', 'RED', document.getElementById('dot-red'));
+        if (pendingFaction === 'GREEN') selectSimColor('#00cc55', 'GREEN', document.getElementById('dot-green'));
+        if (pendingFaction === 'BLUE') selectSimColor('#0055ff', 'BLUE', document.getElementById('dot-blue'));
+        if (pendingFaction === 'BLACK') selectSimColor('#111111', 'BLACK', document.getElementById('dot-black'));
 
         const factionOverlay = document.getElementById('faction-overlay');
         factionOverlay.style.opacity = '0';
-        setTimeout(() => { factionOverlay.style.display = 'none'; }, 600);
+        setTimeout(() => { 
+            factionOverlay.style.display = 'none'; 
+            // 恢复 Stage 1 状态以便用户按返回键时依然正常
+            document.getElementById('injection-stage').style.display = 'none';
+            document.getElementById('injection-stage').style.opacity = '0';
+            document.getElementById('spectrum-selection-stage').style.display = 'flex';
+            document.getElementById('spectrum-selection-stage').style.opacity = '1';
+            factionOverlay.style.background = '#f6f7fa';
+            factionOverlay.classList.remove('in-injection');
+            document.getElementById('telemetry-stage-title').textContent = "COLLECTION 01: UTOPIA // ONE FORM. SEVEN COLORS. RELEASED ONE AT A TIME.";
+        }, 600);
     }
 
     /* 🛠️ 返回键 (Popstate History) 防退 */
     window.addEventListener('popstate', (e) => {
         const stage = e.state ? e.state.stage : 'portal';
-        
         if (stage === 'portal') {
             document.getElementById('portal-overlay').style.display = 'flex';
             document.getElementById('portal-overlay').classList.remove('portal-open');
@@ -1019,91 +804,50 @@
         }
     });
 
-    /* ⏰ 温哥华 PST 实时微型秒动倒计时 */
+    /* ⏰ 温哥华 PST 时钟 */
     function initVancouverClock() {
         const targetTime = new Date("2026-11-11T00:00:00-08:00").getTime();
-
         function updateClock() {
-            const now = new Date().getTime();
-            const diff = targetTime - now;
-
-            if (diff <= 0) {
-                document.getElementById('telemetry-clock-display').textContent = "000D 00H 00M 00S";
-                return;
-            }
-
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById('telemetry-clock-display').textContent = 
-                `${String(d).padStart(3, '0')}D ${String(h).padStart(2, '0')}H ${String(m).padStart(2, '0')}M ${String(s).padStart(2, '0')}S`;
+            const diff = targetTime - new Date().getTime();
+            if (diff <= 0) { document.getElementById('telemetry-clock-display').textContent = "000D 00H 00M 00S"; return; }
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24)); const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)); const s = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('telemetry-clock-display').textContent = `${String(d).padStart(3, '0')}D ${String(h).padStart(2, '0')}H ${String(m).padStart(2, '0')}M ${String(s).padStart(2, '0')}S`;
         }
-
-        updateClock();
-        setInterval(updateClock, 1000);
+        updateClock(); setInterval(updateClock, 1000);
     }
 
-    function updateStage(imgSrc, btnElement) {
-        document.getElementById('stage-image').src = imgSrc;
-        document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
-        btnElement.classList.add('active');
-    }
-
-    function applySize(size, btnElement) {
-        chosenSize = size;
-        document.querySelectorAll('.size-chip').forEach(b => b.classList.remove('active'));
-        btnElement.classList.add('active');
-    }
+    function updateStage(imgSrc, btnElement) { document.getElementById('stage-image').src = imgSrc; document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active')); btnElement.classList.add('active'); }
+    function applySize(size, btnElement) { chosenSize = size; document.querySelectorAll('.size-chip').forEach(b => b.classList.remove('active')); btnElement.classList.add('active'); }
 
     async function handlePurchase(e) {
-        if (!chosenSize) {
-            alert("Please select a size first.");
-            return;
-        }
+        if (!chosenSize) { alert("Please select a size first."); return; }
         if (window.Snipcart && window.Snipcart.api) {
             try {
                 const activeBtn = document.getElementById('snipcart-btn');
                 await window.Snipcart.api.cart.items.add({
                     id: activeBtn.getAttribute('data-item-id'),
                     name: activeBtn.getAttribute('data-item-name'),
-                    price: 180.00,
-                    url: '/',
-                    description: activeBtn.getAttribute('data-item-description'),
-                    image: 'https://withinseven.com/front.png',
-                    customFields: [{ name: 'Size', value: chosenSize }]
+                    price: 180.00, url: '/', description: activeBtn.getAttribute('data-item-description'),
+                    image: 'https://withinseven.com/front.png', customFields: [{ name: 'Size', value: chosenSize }]
                 });
                 window.Snipcart.api.theme.cart.open();
             } catch(err) { console.log(err); }
         }
     }
-
-    function openSnipcartCart() {
-        if (window.Snipcart && window.Snipcart.api) window.Snipcart.api.theme.cart.open();
-    }
-
-    function jumpToPurchase() {
-        document.querySelector('.size-grid').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    function scrollToSearch() {
-        document.getElementById('garment-search-block').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    function openSnipcartCart() { if (window.Snipcart && window.Snipcart.api) window.Snipcart.api.theme.cart.open(); }
+    function jumpToPurchase() { document.querySelector('.size-grid').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    function scrollToSearch() { document.getElementById('garment-search-block').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
 
     function updateSimPreview(val) {
         const target = document.getElementById('sim-text-target');
-        const eyeLeft = document.getElementById('eye-left');
-        const eyeRight = document.getElementById('eye-right');
-
+        const eyeLeft = document.getElementById('eye-left'); const eyeRight = document.getElementById('eye-right');
         if (val.trim().length > 0) {
             target.textContent = `"${val}"`;
-            eyeLeft.setAttribute('d', 'M 16 17 A 1 1 0 1 0 16 17.1');
-            eyeRight.setAttribute('d', 'M 26 17 A 1 1 0 1 0 26 17.1');
+            eyeLeft.setAttribute('d', 'M 16 17 A 1 1 0 1 0 16 17.1'); eyeRight.setAttribute('d', 'M 26 17 A 1 1 0 1 0 26 17.1');
         } else {
             target.textContent = '"Today, red means becoming a flame."';
-            eyeLeft.setAttribute('d', 'M 14 17 L 18 17');
-            eyeRight.setAttribute('d', 'M 24 17 L 28 17');
+            eyeLeft.setAttribute('d', 'M 14 17 L 18 17'); eyeRight.setAttribute('d', 'M 24 17 L 28 17');
         }
     }
 
@@ -1113,169 +857,57 @@
         document.getElementById('face-stroke-circle').setAttribute('stroke', colorHex);
     }
 
-    const colorHexMap = {
-        'BLUE': 'var(--brand-blue)',
-        'RED': 'var(--brand-red)',
-        'GREEN': 'var(--brand-green)',
-        'YELLOW': 'var(--brand-yellow)',
-        'BLACK': '#111111',
-        'WHITE': '#888888',
-        'VIOLET': 'var(--brand-violet)'
-    };
+    const colorHexMap = { 'BLUE': 'var(--brand-blue)', 'RED': 'var(--brand-red)', 'GREEN': 'var(--brand-green)', 'YELLOW': 'var(--brand-yellow)', 'BLACK': '#111111', 'WHITE': '#888888', 'VIOLET': 'var(--brand-violet)' };
 
     async function initTerminalFeed() {
         const viewport = document.getElementById('terminal-viewport');
-        if (!viewport) return;
-        viewport.innerHTML = "";
-
+        if (!viewport) return; viewport.innerHTML = "";
         try {
-            const res = await fetch('https://id.withinseven.com/api/archive');
-            if (!res.ok) throw new Error("API Unreachable");
+            const res = await fetch('https://id.withinseven.com/api/archive'); if (!res.ok) throw new Error("API Unreachable");
             const data = await res.json();
-
             if (Array.isArray(data) && data.length > 0) {
-                const statusRow = document.createElement('div');
-                statusRow.className = 'status-dot live-mode';
-                statusRow.style.marginBottom = '16px';
-                const pulseLed = document.createElement('span');
-                pulseLed.className = 'pulse-led';
-                statusRow.appendChild(pulseLed);
-                statusRow.appendChild(document.createTextNode(` SIGNAL BROADCASTING (${data.length} ACTIVE)`));
-                viewport.appendChild(statusRow);
-
-                const cardsStream = document.createElement('div');
-                cardsStream.className = 'signal-cards-container';
+                const statusRow = document.createElement('div'); statusRow.className = 'status-dot live-mode'; statusRow.style.marginBottom = '16px';
+                const pulseLed = document.createElement('span'); pulseLed.className = 'pulse-led';
+                statusRow.appendChild(pulseLed); statusRow.appendChild(document.createTextNode(` SIGNAL BROADCASTING (${data.length} ACTIVE)`)); viewport.appendChild(statusRow);
+                const cardsStream = document.createElement('div'); cardsStream.className = 'signal-cards-container';
 
                 data.forEach(active => {
-                    const card = document.createElement('div');
-                    card.className = 'signal-card';
-                    
-                    const cardColor = (active.color || 'BLUE').toUpperCase();
-                    card.style.borderLeftColor = colorHexMap[cardColor] || 'var(--brand-blue)';
-
-                    const cardHeader = document.createElement('div');
-                    cardHeader.className = 'signal-card-header';
-
-                    const numSpan = document.createElement('span');
-                    numSpan.className = 'signal-garment-num';
-                    numSpan.textContent = `#${String(active.garment_number).padStart(4, '0')}`;
-
-                    const badgeWrap = document.createElement('div');
-                    badgeWrap.style.display = 'flex';
-                    badgeWrap.style.gap = '6px';
-
-                    const colorBadge = document.createElement('span');
-                    colorBadge.className = 'signal-color-badge';
-                    colorBadge.textContent = cardColor;
-                    badgeWrap.appendChild(colorBadge);
-
-                    if (active.is_demo || active.garment_number === 234) {
-                        const demoBadge = document.createElement('span');
-                        demoBadge.className = 'signal-demo-badge';
-                        demoBadge.textContent = 'DEMO SIGNAL';
-                        badgeWrap.appendChild(demoBadge);
-                    }
-
-                    cardHeader.appendChild(numSpan);
-                    cardHeader.appendChild(badgeWrap);
-
-                    const textBody = document.createElement('div');
-                    textBody.className = 'signal-text-body';
-                    textBody.textContent = `"${active.statement_text}"`;
-
-                    const cardFooter = document.createElement('div');
-                    cardFooter.className = 'signal-time-footer';
-
-                    const vanSpan = document.createElement('span');
-                    vanSpan.textContent = `VANISHES: ${new Date(active.expires_at).toLocaleString()}`;
-                    cardFooter.appendChild(vanSpan);
-
-                    card.appendChild(cardHeader);
-                    card.appendChild(textBody);
-                    card.appendChild(cardFooter);
-
-                    cardsStream.appendChild(card);
+                    const card = document.createElement('div'); card.className = 'signal-card';
+                    const cardColor = (active.color || 'BLUE').toUpperCase(); card.style.borderLeftColor = colorHexMap[cardColor] || 'var(--brand-blue)';
+                    const cardHeader = document.createElement('div'); cardHeader.className = 'signal-card-header';
+                    const numSpan = document.createElement('span'); numSpan.className = 'signal-garment-num'; numSpan.textContent = `#${String(active.garment_number).padStart(4, '0')}`;
+                    const badgeWrap = document.createElement('div'); badgeWrap.style.display = 'flex'; badgeWrap.style.gap = '6px';
+                    const colorBadge = document.createElement('span'); colorBadge.className = 'signal-color-badge'; colorBadge.textContent = cardColor; badgeWrap.appendChild(colorBadge);
+                    if (active.is_demo || active.garment_number === 234) { const demoBadge = document.createElement('span'); demoBadge.className = 'signal-demo-badge'; demoBadge.textContent = 'DEMO SIGNAL'; badgeWrap.appendChild(demoBadge); }
+                    cardHeader.appendChild(numSpan); cardHeader.appendChild(badgeWrap);
+                    const textBody = document.createElement('div'); textBody.className = 'signal-text-body'; textBody.textContent = `"${active.statement_text}"`;
+                    const cardFooter = document.createElement('div'); cardFooter.className = 'signal-time-footer';
+                    const vanSpan = document.createElement('span'); vanSpan.textContent = `VANISHES: ${new Date(active.expires_at).toLocaleString()}`; cardFooter.appendChild(vanSpan);
+                    card.appendChild(cardHeader); card.appendChild(textBody); card.appendChild(cardFooter); cardsStream.appendChild(card);
                 });
-
                 viewport.appendChild(cardsStream);
-            } else {
-                renderUnanchoredTerminal(viewport);
-            }
+            } else { renderUnanchoredTerminal(viewport); }
         } catch (err) { renderUnanchoredTerminal(viewport); }
     }
 
-    function renderUnanchoredTerminal(viewport) {
-        viewport.innerHTML = `
-            <div class="status-dot idle-mode" style="margin-bottom: 12px;">○ UNANCHORED SIGNAL</div>
-            <div class="statement-display" style="color: var(--text-muted); font-size: 0.85rem;">
-                "No active statement recorded in the past 7 days. Be the first to anchor your voice to the ledger."
-            </div>`;
-    }
+    function renderUnanchoredTerminal(viewport) { viewport.innerHTML = `<div class="status-dot idle-mode" style="margin-bottom: 12px;">○ UNANCHORED SIGNAL</div><div class="statement-display" style="color: var(--text-muted); font-size: 0.85rem;">"No active statement recorded in the past 7 days. Be the first to anchor your voice to the ledger."</div>`; }
 
     async function executeGarmentSearch() {
-        const inputVal = document.getElementById('search-serial-input').value.trim();
-        const resultBox = document.getElementById('search-result-box');
-        resultBox.style.display = 'block';
-
-        if (!/^\d{1,4}$/.test(inputVal)) {
-            resultBox.style.color = 'var(--brand-red)';
-            resultBox.textContent = '⚠️ INVALID FORMAT. PLEASE ENTER A NUMBER BETWEEN 0001 AND 0777.';
-            return;
-        }
-
-        const num = Number(inputVal);
-        if (num < 1 || num > 777) {
-            resultBox.style.color = 'var(--brand-red)';
-            resultBox.textContent = 'NUMBER NOT ISSUED';
-            return;
-        }
-
-        const formatted = String(num).padStart(4, '0');
-        resultBox.style.color = 'var(--text-primary)';
-        resultBox.textContent = `SEARCHING LEDGER FOR #${formatted}...`;
-
+        const inputVal = document.getElementById('search-serial-input').value.trim(); const resultBox = document.getElementById('search-result-box'); resultBox.style.display = 'block';
+        if (!/^\d{1,4}$/.test(inputVal)) { resultBox.style.color = 'var(--brand-red)'; resultBox.textContent = '⚠️ INVALID FORMAT.'; return; }
+        const num = Number(inputVal); if (num < 1 || num > 777) { resultBox.style.color = 'var(--brand-red)'; resultBox.textContent = 'NUMBER NOT ISSUED'; return; }
+        const formatted = String(num).padStart(4, '0'); resultBox.style.color = 'var(--text-primary)'; resultBox.textContent = `SEARCHING LEDGER FOR #${formatted}...`;
         try {
             const res = await fetch(`https://id.withinseven.com/api/garment/${formatted}`);
-            if (res.status === 404) {
-                resultBox.style.color = 'var(--brand-red)';
-                resultBox.textContent = 'NUMBER NOT ISSUED';
-                return;
-            }
-
+            if (res.status === 404) { resultBox.style.color = 'var(--brand-red)'; resultBox.textContent = 'NUMBER NOT ISSUED'; return; }
             const data = await res.json();
-            if (data.statement_body) {
-                resultBox.style.color = 'var(--brand-green)';
-                resultBox.innerHTML = `
-                    <div style="font-weight: bold; margin-bottom: 6px;">#${formatted} // COLOR: ${data.color || 'BLUE'}</div>
-                    <div style="font-style: italic; margin-bottom: 6px;">"${data.statement_body}"</div>
-                    <div style="font-size: 0.75rem; color: var(--text-muted);">VANISHES AT: ${new Date(data.expires_at).toLocaleString()}</div>
-                `;
-            } else {
-                resultBox.style.color = 'var(--text-muted)';
-                resultBox.textContent = `#${formatted} IS CURRENTLY SILENT`;
-            }
-        } catch (e) {
-            resultBox.style.color = 'var(--text-muted)';
-            resultBox.textContent = `#${formatted} IS CURRENTLY SILENT`;
-        }
+            if (data.statement_body) { resultBox.style.color = 'var(--brand-green)'; resultBox.innerHTML = `<div style="font-weight: bold; margin-bottom: 6px;">#${formatted} // COLOR: ${data.color || 'BLUE'}</div><div style="font-style: italic; margin-bottom: 6px;">"${data.statement_body}"</div><div style="font-size: 0.75rem; color: var(--text-muted);">VANISHES AT: ${new Date(data.expires_at).toLocaleString()}</div>`; }
+            else { resultBox.style.color = 'var(--text-muted)'; resultBox.textContent = `#${formatted} IS CURRENTLY SILENT`; }
+        } catch (e) { resultBox.style.color = 'var(--text-muted)'; resultBox.textContent = `#${formatted} IS CURRENTLY SILENT`; }
     }
 
-    /* Policy Modal System */
     const policies = {
-        'size-guide': `
-            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">SIZE GUIDE — FORM 01 HEAVYWEIGHT BLANK</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;"><b>FIT PROFILE:</b> Heavyweight Boxy / Oversized Fit. Engineered with dropped shoulders and a thick 1.25" rib collar. Cut from 420GSM custom loopback cotton.</p>
-            <table style="width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.82rem; margin-bottom: 24px;">
-                <thead><tr style="border-bottom: 2px solid var(--text-primary); text-align: left;"><th style="padding: 8px;">SIZE</th><th style="padding: 8px;">CHEST</th><th style="padding: 8px;">LENGTH</th><th style="padding: 8px;">SHOULDER</th><th style="padding: 8px;">SLEEVE</th></tr></thead>
-                <tbody>
-                    <tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">S</td><td>44"</td><td>27"</td><td>21.5"</td><td>8.5"</td></tr>
-                    <tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">M</td><td>46"</td><td>28"</td><td>22.5"</td><td>9.0"</td></tr>
-                    <tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">L</td><td>48"</td><td>29"</td><td>23.5"</td><td>9.5"</td></tr>
-                    <tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">XL</td><td>50"</td><td>30"</td><td>24.5"</td><td>10.0"</td></tr>
-                </tbody>
-            </table>
-            <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 8px;">RECOMMENDATION:</h4>
-            <p style="font-size: 0.85rem; color: var(--text-secondary);">• Order <b>TRUE TO SIZE</b> for an intentional relaxed oversized silhouette.<br>• Order <b>ONE SIZE DOWN</b> for a standard fit.</p>`,
+        'size-guide': `<h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 16px;">SIZE GUIDE — FORM 01 HEAVYWEIGHT BLANK</h3><p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;"><b>FIT PROFILE:</b> Heavyweight Boxy / Oversized Fit. Engineered with dropped shoulders and a thick 1.25" rib collar. Cut from 420GSM custom loopback cotton.</p><table style="width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.82rem; margin-bottom: 24px;"><thead><tr style="border-bottom: 2px solid var(--text-primary); text-align: left;"><th style="padding: 8px;">SIZE</th><th style="padding: 8px;">CHEST</th><th style="padding: 8px;">LENGTH</th><th style="padding: 8px;">SHOULDER</th><th style="padding: 8px;">SLEEVE</th></tr></thead><tbody><tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">S</td><td>44"</td><td>27"</td><td>21.5"</td><td>8.5"</td></tr><tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">M</td><td>46"</td><td>28"</td><td>22.5"</td><td>9.0"</td></tr><tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">L</td><td>48"</td><td>29"</td><td>23.5"</td><td>9.5"</td></tr><tr style="border-bottom: 1px solid var(--border-subtle);"><td style="padding: 10px 8px; font-weight: bold;">XL</td><td>50"</td><td>30"</td><td>24.5"</td><td>10.0"</td></tr></tbody></table><h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 8px;">RECOMMENDATION:</h4><p style="font-size: 0.85rem; color: var(--text-secondary);">• Order <b>TRUE TO SIZE</b> for an intentional relaxed oversized silhouette.<br>• Order <b>ONE SIZE DOWN</b> for a standard fit.</p>`,
         'shipping': `<h3>SHIPPING POLICY</h3><br><p>Canada Only Launch. Tracked express shipping across all Canadian provinces (3-5 business days). Ships directly from Richmond, BC.</p>`,
         'returns': `<h3>RETURN POLICY</h3><br><p>14-day return window. Garments must be unworn with unbroken Claim Card scratch seals. Unsealing the Claim Card permanently assigns ledger ownership and renders the garment final sale.</p>`,
         'privacy': `<h3>PRIVACY POLICY</h3><br><p>Operated by N7 STUDIO INC. Email addresses are strictly used for Magic Link authentication and transactional receipts. Personal identity is NEVER broadcast on the public ledger.</p>`,
@@ -1283,16 +915,10 @@
         'contact': `<h3>CONTACT</h3><br><p>Legal Entity: N7 STUDIO INC.<br>Email: support@withinseven.com<br>Richmond, British Columbia, Canada</p>`
     };
 
-    function openPolicyModal(key) {
-        document.getElementById('modal-content-target').innerHTML = policies[key] || '';
-        document.getElementById('policy-modal').style.display = 'flex';
-    }
+    function openPolicyModal(key) { document.getElementById('modal-content-target').innerHTML = policies[key] || ''; document.getElementById('policy-modal').style.display = 'flex'; }
     function closePolicyModal() { document.getElementById('policy-modal').style.display = 'none'; }
 
-    document.addEventListener('DOMContentLoaded', () => { 
-        initTerminalFeed(); 
-        initVancouverClock();
-    });
+    document.addEventListener('DOMContentLoaded', () => { initTerminalFeed(); initVancouverClock(); });
 </script>
 
 </body>
